@@ -1,0 +1,12 @@
+role_category_list: ["Backoffice", "Development"]
+role_category:
+  backoffice: "Backoffice"
+  development: "Development"
+
+role_list: ["Admin", "HR", "Manager", "Leader", "Member"]
+role:
+  admin: "Admin"
+  hr: "HR"
+  manager: "Manager"
+  leader: "Leader"
+  member: "Member"
