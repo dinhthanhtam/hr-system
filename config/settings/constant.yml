@@ -1,0 +1,9 @@
+role_category:
+  backoffice: Backoffice
+  development: Development
+role:
+  admin: Admin
+  hr: HR
+  manager: Manager
+  leader: Leader
+  member: Member

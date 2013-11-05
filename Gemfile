@@ -40,6 +40,12 @@ gem 'kaminari', '0.13.0'
 gem 'meta_search', '~>1.1.0'
 gem 'carrierwave', '~>0.6.2'
 
+# cancan
+gem 'cancan', '~>1.6.0'
+
+# rails_config
+gem "rails_config"
+
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
