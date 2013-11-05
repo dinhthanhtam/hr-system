@@ -44,9 +44,6 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 
-# cancan
-gem 'cancan', '~>1.6.0'
-
 # rails_config
 gem "rails_config"
 
