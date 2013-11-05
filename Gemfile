@@ -40,6 +40,10 @@ gem 'kaminari', '0.13.0'
 gem 'meta_search', '~>1.1.0'
 gem 'carrierwave', '~>0.6.2'
 
+gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
+
 # cancan
 gem 'cancan', '~>1.6.0'
 
