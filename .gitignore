@@ -13,3 +13,15 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+config/database.yml
+.project
+# Ignore uploaded contents.
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
+
+# Ignore .DS_Store
+.DS_Store
+
+# Ignore Upload_file
+/data/upload_files/

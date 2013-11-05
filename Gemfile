@@ -5,7 +5,7 @@ gem 'rails', '3.2.14'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'mysql2'
 
 
 # Gems used only for assets and not required
@@ -21,9 +21,27 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'devise', '~>2.0.0'
+gem 'cancan', '~>1.6.0'
+
+group :test do
+  gem 'factory_girl_rails'
+end
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'binding_of_caller'
+  gem 'better_errors'
+end
+
+gem 'kaminari', '0.13.0'
+gem 'meta_search', '~>1.1.0'
+gem 'carrierwave', '~>0.6.2'
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
@@ -35,4 +53,4 @@ gem 'jquery-rails'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'
