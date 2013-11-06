@@ -3,3 +3,44 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    models:
+      groups: "Group"
+    attributes:
+      common_attr: &common_attr
+        created_at: "Created at"
+        updated_at: "Updated at"
+      group: &group
+        <<: *common_attr
+        name: "Group Name"
+      team: &team
+        <<: *common_attr
+        name: "Team Name"
+  views:
+    labels:
+      button_create: "Create"
+      button_edit: "Edit"
+      button_detail: "Detail"
+      button_delete: "Delete"
+      button_clear: "Clear"
+      button_search: "Search"
+      button_index: "Index"
+      confirm_delete: "Do you want to delete it ?"
+    pages:
+      group:
+        index: "Group Index"
+        show: "Group Detail"
+        edit: "Group Edit"
+        new: "Group New"
+      team:
+        index: "Team Index"
+        show: "Team Detail"
+        edit: "Team Edit"
+        new: "Team New"
+  meta_search:
+    attributes:
+      group:
+        <<: *group
+      team:
+        <<: *team
+
