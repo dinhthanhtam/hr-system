@@ -1,0 +1,50 @@
+<%= form_for @user do |f| %>
+
+  <%= render partial: "errors", locals: {object: @user} %>
+
+  <table class="formTbl contents">
+    <tr>
+      <th width="15%"><%= f.label :email %></th>
+      <td><%= f.text_field :email %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :display_name %></th>
+      <td><%= f.text_field :display_name %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :cardID %></th>
+      <td><%= f.text_field :cardID %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :position %></th>
+      <td>
+        <%= f.select :position, Settings.positions %>
+        <div id="group" <%= 'style=display:none' unless ["Manager", "Submanager"].include? @user.position %>>
+          <br>
+          <% Group.all.each do |group| %>
+            <% group_user = 
+               @user.group_users.detect { |group_user| group_user.group == group } ||
+               @user.group_users.build(group_id: group.id).tap { |c| c.mark_for_destruction }
+            %>
+            <%= f.fields_for :group_users, group_user do |group_fields| %>
+              <%= group_fields.hidden_field :group_id %>
+              <%= group_fields.check_box :_destroy, {checked: !group_user.marked_for_destruction?}, 0, 1 %>
+              <%= group.name %><br>
+              <%= group.teams.map{ |team| team.name }.join(", ") %><br>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div id="team" <%= "style=display:none;" unless ["Leader", "Subleader", "Staff"].include? @user.position %>>
+          <br>
+          <%= select_tag :group_select, options_for_select(Group.all.map { |group| [group.name, group.id] }, @user.team.try(:group).try(:id)) %>
+          <%= f.select :team_id, @user.team.nil? ? Group.first.teams.map { |team| [team.name, team.id ] } : @user.team.group.teams.map { |team| [team.name, team.id ] } %>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <div class="form-actions">
+    <%= link_to t(:button_index, scope: [:views, :labels]), url_for(action: :index), class: "btn" %>
+    <%= f.submit t((@user.new_record? ? :button_create : :button_update), scope: [:views, :labels]), class:"btn #{action_name=='edit' ? 'btn-primary' : 'btn-warning'}" %>
+  </div>
+<% end %>
