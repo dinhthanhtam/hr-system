@@ -1,0 +1,65 @@
+<selection id="groups_index">
+  <div class="ctsTit">
+    <h2><%= h2_label %></h2>
+    <nav>
+      <%= link_to t(:button_report, scope: [:views, :labels]), url_for(action: :new), class: "btn btn-small btn-warning" %>
+    </nav>
+  </div>
+
+  <%= render partial: "search" %>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th><%= model.human_attribute_name :month %></th>
+        <th><%= model.human_attribute_name :week %></th>
+        <th><%= model.human_attribute_name :report_date %></th>
+        <th><%= model.human_attribute_name :report_category_id %></th>
+        <th><%= model.human_attribute_name :description %></th>
+        <th width = "20%"></th>
+      </tr>
+    </thead>
+    <% current_year = nil %>
+    <% current_month = nil %>
+    <% current_week = nil %>
+    <% current_day = nil %>
+    <% @reports.each do |report| %>
+      <% is_change_year = current_year != report.year ? true : false %>
+      <% current_year = report.year if is_change_year %>
+      <% is_change_month = current_month != report.month ? true : false %>
+      <% current_month = report.month if is_change_month %>
+      <% is_change_week = current_week != report.week ? true : false %>
+      <% current_week = report.week if is_change_week %>
+      <% is_change_day = current_day != report.report_date ? true : false %>
+      <% current_day = report.report_date if is_change_day %>      
+      <tr <%= "style=color:orange" if report.in_current_week? %>>
+        <% if is_change_year || is_change_month %>
+          <td <%= "rowspan=#{@reports.select { |r| r.year == current_year && r.month == current_month }.length}" %>>
+            <%= "#{Date::MONTHNAMES[report.month]} #{report.year}" %>
+          </td>
+        <% end %>
+        <% if is_change_week %>
+          <td <%= "rowspan=#{@reports.select { |r| r.year == current_year && r.month == current_month && r.week == current_week }.length}"%>>
+            <%= cweek_to_date report.week, report.year %></td>
+        <% end %>
+        <% if is_change_day %>
+          <td <%= "rowspan=#{@reports.select { |r| r.report_date == current_day }.length}"%>>
+            <%= report.report_date.strftime("%a") %>
+          </td>
+        <% end %>
+        <td><%= report.report_category.name %></td>
+        <td><%= report.description %></td>
+        <td>
+          <%= link_to t(:button_detail, scope: [:views, :labels]), url_for(action: :show, id: report.id), class: "btn btn-mini" %>
+          <%= link_to t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: report.id), class: "btn btn-primary btn-mini" %>
+          <%= link_to t(:button_delete, scope: [:views, :labels]), url_for(action: :destroy, id: report.id), confirm: I18n.t(:delete_confirm, scope: [:views, :messages]), method: :delete, class: "btn btn-danger"%>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+  <div class="pagination">
+    <div class="paginate-box no_print"><%= paginate @reports %></div>
+  </div>
+</selection>
+

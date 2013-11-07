@@ -1,0 +1,29 @@
+<div>
+  <table class="formTbl contents">
+    <tbody>
+      <tr>
+        <th><%= f.label :report_category %></th>
+        <td><%= f.collection_select :report_category_id_eq, ReportCategory.all, :id, :name, include_blank: true %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :created_at %></th>
+        <td>
+          <%= f.text_field :created_at_gte %>
+          <%= f.text_field :created_at_lte %>
+        </td>
+      </tr>
+      <tr>
+        <th><%= f.label :month %></th>
+        <td>
+          <%= f.select :month_eq, (1..12).to_a, include_blank: true %>
+        </td>
+      </tr>
+      <tr>
+        <th><%= f.label :year %></th>
+        <td>
+          <%= f.select :year_eq, (2012..3000).to_a, include_blank: true %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

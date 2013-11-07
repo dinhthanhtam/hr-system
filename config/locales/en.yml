@@ -16,6 +16,18 @@ en:
       team: &team
         <<: *common_attr
         name: "Team Name"
+      report_category: &report_category
+        <<: *common_attr
+        name: "Report Category Name"
+      reports: &report
+        <<: *common_attr
+        category_id: "Category"
+        user_id: "User"
+        description: "Content"
+        report_date: "Date"
+        week: "Week"
+        month: "Month"
+        year: "Year"
   views:
     labels:
       button_create: "Create"
@@ -26,22 +38,52 @@ en:
       button_search: "Search"
       button_index: "Index"
       button_list_teams: "List Teams"
+      button_report: "Report"
       confirm_delete: "Do you want to delete it ?"
+    messages:
+      delete_confirm: Do you want to delete it?
+      create_success: Create %{model} successfully!
+      create_failed: Create %{model} failed!
+      update_success: Update %{model} successfully!
+      update_failed: Update %{model} failed!
+      delete_success: Delete %{model} successfully!
+      delete_failed: Delete %{model} failed!
     pages:
       group:
         index: "Group Index"
         show: "Group Detail"
         edit: "Group Edit"
         new: "Group New"
+        update: "Group Update"
+        create: "Group Create"
       team:
         index: "Team Index"
         show: "Team Detail"
         edit: "Team Edit"
         new: "Team New"
+        update: "Team Update"
+        create: "Team Create"
+      report_category:
+        index: "Report Category Index"
+        show: "Report Category Detail"
+        edit: "Report Category Edit"
+        new: "Report Category New"
+        update: "Report Category Update"
+        create: "Report Category Create"
+      report:
+        index: "Report Index"
+        show: "Report Detail"
+        edit: "Report Edit"
+        new: "Report New"
+        update: "Report Update"
+        create: "Report Create"
+       
   meta_search:
     attributes:
       group:
         <<: *group
       team:
         <<: *team
+      report:
+        <<: *report
 

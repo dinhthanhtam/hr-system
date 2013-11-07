@@ -25,3 +25,4 @@ config/environments/*.local.yml
 
 # Ignore Upload_file
 /data/upload_files/
+*~
