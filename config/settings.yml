@@ -3,10 +3,12 @@ role_category:
   backoffice: "Backoffice"
   development: "Development"
 
-role_list: ["Admin", "HR", "Manager", "Leader", "Member"]
+role_list: ["HR", "Manager", "Leader", "Member"]
 role:
   admin: "Admin"
   hr: "HR"
   manager: "Manager"
   leader: "Leader"
   member: "Member"
+
+positions: ["Chief", "Manager", "Submanager", "Leader", "Subleader", "Staff"]

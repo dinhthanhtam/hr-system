@@ -28,10 +28,18 @@ en:
         week: "Week"
         month: "Month"
         year: "Year"
+      user: &user
+        email: "Email"
+        display_name: "User name"
+        cardID: "Card Id"
+        position: "Position"
+        team: "Team name"
+        group: "Group name"
   views:
     labels:
       button_create: "Create"
       button_edit: "Edit"
+      button_update: "Update"
       button_detail: "Detail"
       button_delete: "Delete"
       button_clear: "Clear"
@@ -40,9 +48,11 @@ en:
       button_list_teams: "List Teams"
       button_report: "Report"
       confirm_delete: "Do you want to delete it ?"
+      welcome_subject: "Welcome to Hr-System"
     messages:
       delete_confirm: Do you want to delete it?
       create_success: Create %{model} successfully!
+      create_user_success: Create user successfully! Password auto sent to email!
       create_failed: Create %{model} failed!
       update_success: Update %{model} successfully!
       update_failed: Update %{model} failed!
@@ -77,7 +87,13 @@ en:
         new: "Report New"
         update: "Report Update"
         create: "Report Create"
-       
+      user:
+        index: "User Index"
+        show: "User Detail"
+        edit: "User Edit"
+        new: "User New"
+        update: "User Update"
+        create: "User Create"
   meta_search:
     attributes:
       group:
@@ -86,4 +102,5 @@ en:
         <<: *team
       report:
         <<: *report
-
+      user:
+        <<: *user

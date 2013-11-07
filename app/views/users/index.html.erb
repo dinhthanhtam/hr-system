@@ -1,2 +1,39 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+
+<%= render partial: "search" %>
+
+<div class="ctsTit">
+  <h2><%= h2_label %></h2>
+  <nav>
+    <%= link_to t(:button_create, scope: [:views, :labels]), url_for(action: :new), class: "btn btn-small btn-warning" %>
+  </nav>
+</div>
+
+<table class="itemList contents">
+  <thead>
+    <tr>
+      <th><%= model.human_attribute_name :email %></th>
+      <th><%= model.human_attribute_name :display_name %></th>
+      <th><%= model.human_attribute_name :cardID %></th>
+      <th><%= model.human_attribute_name :role %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <% @users.each do |user| %>
+    <tbody>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.display_name %></td>
+        <td><%= user.cardID %></td>
+        <td><%= user.roles.map { |role| role.name }.join(",") %></td>
+        <td>
+          <%= link_to t(:button_detail, scope: [:views, :labels]), url_for(action: :show, id: user.id), class: "btn btn-mini" %>
+          <%= link_to t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: user.id), class: "btn btn-primary btn-mini" %>
+        </td>
+      </tr>
+    </tbody>
+  <% end %>
+</table>
+  
+<div class="pagination">
+  <div class="paginate-box no_print"><%= paginate @users %></div>
+</div>
