@@ -13,7 +13,7 @@
       <tr>
         <th><%= model.human_attribute_name :name %></th>
         <th><%= model.human_attribute_name :created_at %></th>
-        <th width = "11%"></th>
+        <th width = "20%"></th>
       </tr>
     </thead>
     <% @groups.each do |group| %>
@@ -21,6 +21,7 @@
         <td><%= group.name %></td>
         <td><%= group.created_at %></td>
         <td>
+          <%= link_to t(:button_list_teams, scope: [:views, :labels]), url_for(controller: "teams", action: :index, group_id: group.id), class: "btn btn-mini" %>
           <%= link_to t(:button_detail, scope: [:views, :labels]), url_for(action: :show, id: group.id), class: "btn btn-mini" %>
           <%= link_to t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: group.id), class: "btn btn-primary btn-mini" %>
         </td>

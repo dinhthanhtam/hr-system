@@ -20,7 +20,7 @@ class TeamsController < BaseController
   def create
     respond_to do |format|
       if @team.save
-        format.html { redirect_to teams_path, notice: "Create team successfully!" }
+        format.html { redirect_to group_teams_path, notice: "Create team successfully!" }
       else
         format.html { render action: "new" }
       end
@@ -45,5 +45,15 @@ class TeamsController < BaseController
         format { redirect_to action: :show }
       end
     end
+  end
+
+private
+  def ordering(search)
+    @group.teams
+  end
+
+  def create_object
+    super
+    @team = @group.teams.build(params[model_symbol])
   end
 end
