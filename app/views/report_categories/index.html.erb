@@ -1,0 +1,30 @@
+<selection id="report_category_index">
+  <div class="ctsTit">
+    <h2><%= h2_label %></h2>
+    <nav>
+      <%= link_to t(:new, scope: [:views, :pages]), url_for(action: :new), class: "btn btn-small btn-warning" %>
+    </nav>
+  </div>
+
+  <%= render partial: "search" %>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th><%= model.human_attribute_name :name %></th>
+        <th><%= model.human_attribute_name :created_at %></th>
+        <th width = "20%"></th>
+      </tr>
+    </thead>
+    <% @report_categories.each do |report_category| %>
+      <tr>
+        <td><%= report_category.name %></td>
+        <td><%= report_category.created_at %></td>
+        <td>
+          <%= link_to t(:button_detail, scope: [:views, :labels]), url_for(action: :show, id: report_category.id), class: "btn btn-mini" %>
+          <%= link_to t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: report_category.id), class: "btn btn-primary btn-mini" %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</selection>
