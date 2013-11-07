@@ -44,6 +44,9 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 
+gem 'whenever'
+gem 'delayed_job_active_record'
+
 # rails_config
 gem "rails_config"
 

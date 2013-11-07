@@ -18,6 +18,8 @@ class Report < ActiveRecord::Base
   scope :group_by_years, -> { group(:year) }
   scope :group_by_months, ->(year) { in_year(year).group(:month) }
   scope :group_by_weeks, ->(month, year) { in_month_year(month, year).group(:week) }
+  
+  scope :current_week_reports, -> { in_year(Date.today.year).in_week(Date.today.cweek) }
 
   def in_current_week?
     Date.today.cweek == week && Date.today.year == year

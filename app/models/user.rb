@@ -18,4 +18,19 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :user_roles, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :group_users, allow_destroy: true, reject_if: :all_blank
+
+  def reported?
+    reports.current_week_reports.any?
+  end
+
+  private
+  class << self
+    def notice_report
+      all.each do |user|
+        unless user.reported?
+          UserMailer.delay.notice_write_report(user)       
+        end
+      end
+    end
+  end
 end
