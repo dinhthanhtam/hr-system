@@ -5,7 +5,6 @@ role_category:
 
 role_list: ["HR", "Manager", "Leader", "Member"]
 role:
-  admin: "Admin"
   hr: "HR"
   manager: "Manager"
   leader: "Leader"
@@ -13,4 +12,4 @@ role:
 
 positions: ["Chief", "Manager", "Submanager", "Leader", "Subleader", "Staff"]
 
-master_datas: ["users", "groups", "report_categories", "reports"]
+master_datas: ["groups", "report_categories"]

@@ -51,8 +51,8 @@
         <td><%= report.description %></td>
         <td>
           <%= link_to t(:button_detail, scope: [:views, :labels]), url_for(action: :show, id: report.id), class: "btn btn-mini" %>
-          <%= link_to t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: report.id), class: "btn btn-primary btn-mini" %>
-          <%= link_to t(:button_delete, scope: [:views, :labels]), url_for(action: :destroy, id: report.id), confirm: I18n.t(:delete_confirm, scope: [:views, :messages]), method: :delete, class: "btn btn-danger"%>
+          <%= link_to_if(report.in_current_week?, t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: report.id), class: "btn btn-primary btn-mini") {} %>
+          <%= link_to_if(report.in_current_week?, t(:button_delete, scope: [:views, :labels]), url_for(action: :destroy, id: report.id), confirm: I18n.t(:delete_confirm, scope: [:views, :messages]), method: :delete, class: "btn btn-danger btn-mini") {} %>
         </td>
       </tr>
     <% end %>
