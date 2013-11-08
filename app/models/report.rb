@@ -20,6 +20,7 @@ class Report < ActiveRecord::Base
   scope :group_by_weeks, ->(month, year) { in_month_year(month, year).group(:week) }
   
   scope :current_week_reports, -> { in_year(Date.today.year).in_week(Date.today.cweek) }
+  scope :last_week_reports, -> { in_year(Date.today.year).in_week(Date.today.cweek - 1) }
 
   def in_current_week?
     Date.today.cweek == week && Date.today.year == year
