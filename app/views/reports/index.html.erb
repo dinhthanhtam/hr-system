@@ -8,7 +8,7 @@
 
   <%= render partial: "search" %>
 
-  <table class="table table-bordered">
+  <table class="table table-bordered" id="list_report">
     <thead>
       <tr>
         <th><%= model.human_attribute_name :month %></th>
@@ -32,7 +32,7 @@
       <% current_week = report.week if is_change_week %>
       <% is_change_day = current_day != report.report_date ? true : false %>
       <% current_day = report.report_date if is_change_day %>      
-      <tr <%= "style=color:orange" if report.in_current_week? %>>
+      <tr data-id = "<%= report.id %>" <%= "style=color:orange" if report.in_current_week? %>>
         <% if is_change_year || is_change_month %>
           <td <%= "rowspan=#{@reports.select { |r| r.year == current_year && r.month == current_month }.length}" %>>
             <%= "#{Date::MONTHNAMES[report.month]} #{report.year}" %>
@@ -53,11 +53,12 @@
           <%= link_to t(:button_detail, scope: [:views, :labels]), url_for(action: :show, id: report.id), class: "btn btn-mini" %>
           <%= link_to_if(report.in_current_week?, t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: report.id), class: "btn btn-primary btn-mini") {} %>
           <%= link_to_if(report.in_current_week?, t(:button_delete, scope: [:views, :labels]), url_for(action: :destroy, id: report.id), confirm: I18n.t(:delete_confirm, scope: [:views, :messages]), method: :delete, class: "btn btn-danger btn-mini") {} %>
+          <%= link_to_if(!report.is_favourited?(current_user.id) && current_user.position == "Leader", t(:button_favourites, scope: [:views, :labels]), url_for(controller: "favourites", action: :create, report_id: report.id ), class: "btn btn-primary btn-mini add_favourite", remote: true , method: :post, id: "add_favourite_#{report.id}" ) {} %>
         </td>
       </tr>
     <% end %>
   </table>
-
+  
   <div class="pagination">
     <div class="paginate-box no_print"><%= will_paginate @reports %></div>
   </div>

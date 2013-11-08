@@ -48,6 +48,7 @@ en:
       button_index: "Index"
       button_list_teams: "List Teams"
       button_report: "Report"
+      button_favourites: "Favourite"
       confirm_delete: "Do you want to delete it ?"
     messages:
       delete_confirm: Do you want to delete it?
