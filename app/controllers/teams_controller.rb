@@ -29,7 +29,7 @@ class TeamsController < BaseController
 
   def update
     respond_to do |format|
-      if @team.update_attributes(params[:team])
+      if @team.update_attributes(model_params)
         format.html { redirect_to url_for(action: :show), notice: "Update team successfully!" }
       else
         format.html { render action: "edit" }

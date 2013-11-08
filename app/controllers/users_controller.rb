@@ -33,7 +33,7 @@ class UsersController < BaseController
 
   def update
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(model_params)
         format.html { redirect_to url_for(action: :show), notice: I18n.t(:update_success, model: model.model_name.human, scope: [:views, :messages]) }
       else
         format.html { render action: "edit" }
@@ -59,6 +59,6 @@ class UsersController < BaseController
 
 private
   def model_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :remember_me, :cardID, :display_name, :team_id, :position, :user_roles_attributes, :group_users_attributes) if params[:user]
+    params.require(:user).permit(:email, :password, :password_confirmation, :remember_me, :cardID, :display_name, :team_id, :position, :user_roles_attributes, :group_users_attributes, :avatar) if params[:user]
   end
 end

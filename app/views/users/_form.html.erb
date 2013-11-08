@@ -16,6 +16,10 @@
       <td><%= f.text_field :cardID %></td>
     </tr>
     <tr>
+      <th><%= f.label :avatar %></th>
+      <td><%= f.file_field :avatar %></td>
+    </tr>
+    <tr>
       <th><%= f.label :position %></th>
       <td>
         <%= f.select :position, Settings.positions %>

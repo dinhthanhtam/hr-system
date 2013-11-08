@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :roles, through: :user_roles
   has_many :group_users
   has_many :group, through: :group_users
+  mount_uploader :avatar, AvatarUploader
 
   belongs_to :team
 
