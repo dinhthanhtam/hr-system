@@ -1,39 +1,50 @@
+<selection class="margintop_20px">
+  <div class="margintop_20px">
+    <div class="left_menu" style="">
+      <div class="border">
+        <div class="user_info">
+          <%= image_tag current_user.avatar_url, width: "100px", height:  "100px", alt: "No image" %><br>
+          <div class="information">
+            <p><%= current_user.display_name %></p>
+            <p><%= current_user.position %></p>
+            <p><%= "#{current_user.team.group.name}-#{current_user.team.try(:name)}" if current_user.team.try(:name) %></p>
+          </div>
+        </div>
+      </div>
+      <% if current_user.position == "Leader" %>
+        <div class="border margintop_20px">
+          <h2 class="title_div">Team member</h2><br>
+          <div class="team">
+            <div style="margin-top: 10px">
+              <% current_user.team && current_user.team.users.each do |tem_member| %>
+                <div style="display: inline-block">
+                  <%= image_tag tem_member.avatar_url, width: "40px", height: "40px", alt: "No image" %><br>
+                  <%= link_to tem_member.display_name, "#" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
 
-<%= render partial: "search" %>
-
-<div class="ctsTit">
-  <h2><%= h2_label %></h2>
-  <nav>
-    <%= link_to t(:button_create, scope: [:views, :labels]), url_for(action: :new), class: "btn btn-small btn-warning" %>
-  </nav>
-</div>
-
-<table class="itemList contents">
-  <thead>
-    <tr>
-      <th><%= model.human_attribute_name :email %></th>
-      <th><%= model.human_attribute_name :display_name %></th>
-      <th><%= model.human_attribute_name :cardID %></th>
-      <th><%= model.human_attribute_name :role %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <% @users.each do |user| %>
-    <tbody>
-      <tr>
-        <td><%= user.email %></td>
-        <td><%= user.display_name %></td>
-        <td><%= user.cardID %></td>
-        <td><%= user.roles.map { |role| role.name }.join(",") %></td>
-        <td>
-          <%= link_to t(:button_detail, scope: [:views, :labels]), url_for(action: :show, id: user.id), class: "btn btn-mini" %>
-          <%= link_to t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: user.id), class: "btn btn-primary btn-mini" %>
-        </td>
-      </tr>
-    </tbody>
-  <% end %>
-</table>
-  
-<div class="pagination">
-  <div class="paginate-box no_print"><%= will_paginate @users %></div>
-</div>
+    <div class="right_body">
+      <div class="text border">
+        <h2 class="title_div">Notice from HR</h2><br>
+        <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
+        <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
+        <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
+        <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
+      </div>
+      <div class="text margintop_20px border">
+        <h2 class="title_div">Last week didn't write report</h2><br>
+        <% current_user.team && current_user.team.users.not_report_last_week.each do |tem_member| %>
+          <div style="display: inline-block; margin: 5px 5px;">
+            <%= image_tag tem_member.avatar_url, width: "40px", height: "40px", alt: "No image" %> 
+            <%= link_to tem_member.display_name, "#" %>
+          </div><br><br>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</selection>

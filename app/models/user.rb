@@ -12,13 +12,15 @@ class User < ActiveRecord::Base
   has_many :user_roles
   has_many :roles, through: :user_roles
   has_many :group_users
-  has_many :group, through: :group_users
+  has_many :groups, through: :group_users
   mount_uploader :avatar, AvatarUploader
 
   belongs_to :team
 
   accepts_nested_attributes_for :user_roles, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :group_users, allow_destroy: true, reject_if: :all_blank
+
+  scope :not_report_last_week, -> { where("id not in (?)", Report.last_week_reports.select("user_id").to_sql) }
 
   def reported?
     reports.current_week_reports.any?

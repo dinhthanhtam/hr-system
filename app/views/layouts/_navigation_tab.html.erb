@@ -1,0 +1,12 @@
+<div class="navbar-inner">
+  <a href="<%= root_path %>">
+    <div class="menu <%= 'active' if model_name == 'User'%>">
+      Home
+    </div>
+  </a>
+  <a href="<%= url_for(controller: :reports, action: :index) %>">
+    <div class="menu <%= 'active' if model_name == 'Report'%> %>">
+      Daily report
+    </div>
+  </a>
+</div>

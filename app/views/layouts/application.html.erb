@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <header id="pageHeader" class="navbar navbar-fixed-top">
+  <header id="pageHeader" class="navbar navbar-fixed-top" style="box-shadow: none; -webkit-box-shadow: none;">
     <div class="navbar-inner">
       <div class="logo">
         <%= link_to "HR System", root_path %>
@@ -34,10 +34,16 @@
          </ul>
         </div>
       <% end %>
+       
     </div>
   </header>
-
+  <% if current_user %>
+    <header style="box-shadow: none; -webkit-box-shadow: none;" id="pageHeader" class="navbar">
+      <%= render partial: "layouts/navigation_tab" %>
+    </header>
+  <% end %>
   <div id="pageBody" >
+
     <% if flash[:error] %>
       <p class="alert alert-error fade in"><a class="close" data-dismiss="alert" href="javascript:void(0)">×</a><%= flash[:error] %></p>
     <% end %>

@@ -1,3 +1,73 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.left_menu{
+  width: 25%;
+  display: inline-block;
+}
+.right_body{
+  width: 70%;
+  margin-left: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+.border{
+  border: 2px solid #eeeeee;
+  border-collapse: separate;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+.user_info{
+  margin: 5px 5px;
+  height: 250px;
+  img{
+    display:block;
+    margin:auto;
+    align: middle;
+  }
+  .information{
+    font-size: 14px;
+    display: table;
+    margin-left: 5px;
+    p{
+      padding-top: 5px;
+    }
+  }
+}
+.team{
+  margin: 5px 5px;
+}
+.title_div{
+  font-size: 16px;
+  padding: 2px 4px;
+  font-weight: bold;
+  background-color: #eeeeee;
+  line-height: 2em;
+}
+.text{
+  word-break: break-word;
+}
+.margintop_20px{
+  margin-top: 50px;
+}
+.menu{
+  float: left;
+  margin-right: 8px;
+  display: block;
+  padding: 18px 12px 12px;
+  -webkit-border-top-left-radius: 8px;
+  -moz-border-top-left-radius: 8px;
+  -webkit-border-top-right-radius: 8px;
+  -moz-border-top-right-radius: 8px;
+  line-height: 1;
+  color: white;
+  font-size: 15px;
+  font-weight: 2px;
+  background: grey;
+  color: white;
+}
+a:hover{
+  text-decoration: none;
+}
+.active{
+  background: white;
+  color: black;
+}
