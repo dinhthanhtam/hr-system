@@ -56,4 +56,8 @@ private
     super
     @team = @group.teams.build(params[model_symbol])
   end
+  
+  def model_params
+    params.require(:team).permit(:name) if params[:team]
+  end
 end

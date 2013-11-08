@@ -74,4 +74,8 @@ private
   def check_editable?
     redirect_to url_for(action: :index) unless @report.in_current_week?
   end
+
+  def model_params
+     params.require(:report).permit(:report_category_id, :report_date, :description, :month, :user_id, :week, :year) if params[:report]
+  end
 end

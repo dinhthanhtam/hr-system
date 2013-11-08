@@ -13,3 +13,5 @@
 # ActiveSupport::Inflector.inflections do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+
+ActiveRecord::Base.send(:include, ActiveModel::ForbiddenAttributesProtection)

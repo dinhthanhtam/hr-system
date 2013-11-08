@@ -34,6 +34,9 @@ class BaseController < ApplicationController
     session[:locale] = :en
   end
 
+  def model_params
+  end
+
 protected
   def initialize_search
     if params[:clear]
@@ -50,7 +53,7 @@ protected
   end
 
   def load_objects
-    instance_variable_set("@#{model_name.underscore.pluralize}", (@instances = (@search = ordering(params[:search]).search(params[:search])).page(params[:page]).per(params[:per_page])))
+    instance_variable_set("@#{model_name.underscore.pluralize}", (@instances = (@search = ordering(params[:search]).search(params[:q])).result.paginate(page: params[:page],per_page: params[:per_page])))
   end
 
   def save_search
@@ -58,7 +61,7 @@ protected
   end
 
   def create_object
-    @instance = model.new(params[model_symbol]||{}) rescue nil
+    @instance = model.new(model_params) rescue nil
     instance_variable_set("@#{model_name.underscore}", @instance)
   end
 

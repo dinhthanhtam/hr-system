@@ -52,4 +52,8 @@ class ReportCategoriesController < BaseController
       end
     end
   end
+private
+  def model_params
+    params.require(:report_category).permit(:name) if params[:report_category]
+  end
 end

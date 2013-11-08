@@ -1,5 +1,5 @@
 class Report < ActiveRecord::Base
-  attr_accessible :report_category_id, :report_date, :description, :month, :user_id, :week, :year
+  #attr_accessible :report_category_id, :report_date, :description, :month, :user_id, :week, :year
 
   belongs_to :report_category
   belongs_to :user

@@ -2,7 +2,7 @@
   <h2><%= t :error_title, scope: [:views, :labels, :search] %></h2>
 </div>
 
-<%= form_for @search, url: request.path_info, html: {method: :get, id:'searchForm'} do |f| %>
+<%= search_form_for @search, url: request.path_info, html: {method: :get, id:'searchForm'} do |f| %>
   <% if params[:per_page] %>
     <%= hidden_field_tag :per_page, params[:per_page] %>
   <% end %>

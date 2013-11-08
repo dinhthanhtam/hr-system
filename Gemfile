@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.14'
+gem 'rails', '4.0.1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -11,8 +11,8 @@ gem 'mysql2'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails'
+  gem 'coffee-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -21,8 +21,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'devise', '~>2.0.0'
-gem 'cancan', '~>1.6.0'
+gem 'devise', '3.0.0.rc'
+gem 'cancan'
 
 group :test do
   gem 'factory_girl_rails'
@@ -36,9 +36,10 @@ group :development, :test do
   gem 'better_errors'
 end
 
-gem 'kaminari', '0.13.0'
-gem 'meta_search', '~>1.1.0'
+gem 'will_paginate'
+gem 'ransack'
 gem 'carrierwave', '~>0.6.2'
+#gem 'strong_parameters'
 
 gem 'therubyracer'
 gem 'less-rails'

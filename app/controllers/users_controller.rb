@@ -56,4 +56,9 @@ class UsersController < BaseController
       format.json { render json: Group.find(params[:group_id]).teams.map { |team| [team.name, team.id] } }
     end
   end
+
+private
+  def model_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :remember_me, :cardID, :display_name, :team_id, :position, :user_roles_attributes, :group_users_attributes) if params[:user]
+  end
 end
