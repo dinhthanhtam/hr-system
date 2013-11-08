@@ -29,7 +29,7 @@ class GroupsController < BaseController
 
   def update
     respond_to do |format|
-      if @group.update_attributes(params[:group])
+      if @group.update_attributes(model_params)
         format.html { redirect_to url_for(action: :show), notice: "Update group successfully!" }
       else
         format.html { render action: "edit" }

@@ -35,7 +35,7 @@ class ReportCategoriesController < BaseController
 
   def update
     respond_to do |format|
-      if @report_category.update_attributes(params[:report_category])
+      if @report_category.update_attributes(model_params)
         format.html { redirect_to url_for(action: :show), notice: I18n.t(:update_success, scope: [:views, :messages], model: model_name) }
       else
         format.html { render action: "edit" }
