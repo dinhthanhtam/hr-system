@@ -12,7 +12,9 @@
       <div class="logo">
         <%= link_to "HR System", root_path %>
       </div>
-      
+
+      <%= render partial: "layouts/navigation" %>
+
       <% if current_user %>
         <div id="account" class="nav-collapse">
           <ul class="nav">

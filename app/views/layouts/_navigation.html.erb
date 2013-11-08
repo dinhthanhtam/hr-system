@@ -1,9 +1,14 @@
-<div class="nav-collapse">
+<div style="margin-left:200px"class="nav-collapse">
   <ul class="nav">
-    <li>
-      <a class="dropdown-toggle" data-toggle="dropdown">Menu</a>
+    <li class="dropdown">
+      <a class="dropdown-toggle logo" data-toggle="dropdown">
+        <label><%= t(:menu, scope: [:views, :labels]) %></label>
+        <b class="caret"></b>
+      </a>
       <ul class="dropdown-menu">
-        <li></li>
+        <% Settings.master_datas.each do |master_data| %>
+        <li><%= link_to master_data.capitalize, url_for(controller: master_data.to_sym, action: :index) %></li>
+        <% end %>
       </ul>
     </li>
   </ul>

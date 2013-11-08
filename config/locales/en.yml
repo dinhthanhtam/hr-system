@@ -37,6 +37,7 @@ en:
         group: "Group name"
   views:
     labels:
+      menu: "Menu"
       button_create: "Create"
       button_edit: "Edit"
       button_update: "Update"

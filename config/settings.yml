@@ -12,3 +12,5 @@ role:
   member: "Member"
 
 positions: ["Chief", "Manager", "Submanager", "Leader", "Subleader", "Staff"]
+
+master_datas: ["users", "groups", "report_categories", "reports"]
