@@ -46,4 +46,8 @@ class GroupsController < BaseController
       end
     end
   end
+private
+  def model_params
+    params.require(:group).permit(:name) if params[:group]
+  end
 end

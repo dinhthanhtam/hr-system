@@ -8,7 +8,7 @@
       </a>
       <ul class="dropdown-menu">
         <% Settings.master_datas.each do |master_data| %>
-        <li><%= link_to master_data.capitalize, url_for(controller: master_data.to_sym, action: :index) %></li>
+        <li><%#= link_to master_data.capitalize, url_for(controller: master_data.to_sym, action: :index) %></li>
         <% end %>
       </ul>
     </li>
