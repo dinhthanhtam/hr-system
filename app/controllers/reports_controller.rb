@@ -1,4 +1,7 @@
 class ReportsController < BaseController
+
+  before_filter :check_editable?, only: [:edit, :update, :destroy]
+
   def index
     respond_to do |format|
       format.html
@@ -66,5 +69,9 @@ private
     @report.week = today.cweek
     @report.month = today.month
     @report.year = today.year
+  end
+
+  def check_editable?
+    redirect_to url_for(action: :index) unless @report.in_current_week?
   end
 end

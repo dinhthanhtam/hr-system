@@ -22,6 +22,11 @@ class User < ActiveRecord::Base
   def reported?
     reports.current_week_reports.any?
   end
+  
+  def method_missing(name, *args)
+    return super unless name =~ /\A(.+)_role\?\z/
+    roles.map{ |r| r.name.downcase }.include?($1.downcase)
+  end
 
   private
   class << self
