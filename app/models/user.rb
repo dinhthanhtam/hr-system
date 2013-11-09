@@ -12,7 +12,8 @@ class User < ActiveRecord::Base
   has_many :user_roles
   has_many :roles, through: :user_roles
   has_many :group_users
-  has_many :groups, through: :group_users
+  has_many :group, through: :group_users
+  has_many :favourites
   mount_uploader :avatar, AvatarUploader
 
   belongs_to :team

@@ -3,6 +3,7 @@ class Report < ActiveRecord::Base
 
   belongs_to :report_category
   belongs_to :user
+  has_many :favourites
 
   validates :user, :report_category, presence: true
   validates :week, length: { maximum: 53, minimum: 0 }
@@ -24,5 +25,9 @@ class Report < ActiveRecord::Base
 
   def in_current_week?
     Date.today.cweek == week && Date.today.year == year
+  end
+
+  def is_favourited? user_id
+    self.favourites.where(user_id: user_id).any?
   end
 end
