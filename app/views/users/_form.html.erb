@@ -20,6 +20,26 @@
       <td><%= f.file_field :avatar %></td>
     </tr>
     <tr>
+      <th><%= f.label :role %></th>
+      <td>
+        <% RoleCategory.all .each do |role_category|%>
+          <%= role_category.name %>:
+          <% role_category.roles.each do |role| %>
+            <% user_role = 
+               @user.user_roles.detect { |group_user| group_user.role == role } ||
+               @user.user_roles.build(role_id: role.id).tap { |c| c.mark_for_destruction }
+            %>
+            <%= f.fields_for :user_roles, user_role do |user_roles_fields| %>
+              <%= user_roles_fields.hidden_field :role_id %>
+              <%= user_roles_fields.check_box :_destroy, {checked: !user_role.marked_for_destruction?}, 0, 1 %>
+              <%= role.name %>
+            <% end %>
+          <% end %>
+          <br>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
       <th><%= f.label :position %></th>
       <td>
         <%= f.select :position, Settings.positions %>

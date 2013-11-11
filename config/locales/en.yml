@@ -35,6 +35,7 @@ en:
         position: "Position"
         team: "Team name"
         group: "Group name"
+        role: "Role"
   views:
     labels:
       manager: "Manager"
