@@ -17,7 +17,7 @@ class UsersController < BaseController
     @user.update_attributes(password: password, password_confirmation: password)
     respond_to do |format|
       if @user.save
-        UserMailer.sent_password(@user, password).deliver
+        UserMailer.delay.sent_password(@user, password)
         format.html { redirect_to @user, notice: t(:create_user_success, scope: [:views, :messages]) }
       else
         format.html { render action: "new" }
@@ -59,6 +59,9 @@ class UsersController < BaseController
 
 private
   def model_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :remember_me, :cardID, :display_name, :team_id, :position, :user_roles_attributes, :group_users_attributes, :avatar) if params[:user]
+    params.require(:user).permit(:email, :password, :password_confirmation, :remember_me,
+                                 :cardID, :display_name, :team_id, :position, :avatar,
+                                 user_roles_attributes: [:id, :user_id, :role_id, :_destroy],
+                                 group_users_attributes: [:id, :user_id, :group_id, :_destroy]) if params[:user]
   end
 end
