@@ -1,4 +1,21 @@
 <selection id="groups_index">
+  <% if ["Leader", "Subleader"].include? current_user.position %>
+    <table class="table itemList">
+      <tr>
+        <th width="15%" style="font-size: 15px"><%= t(:report_of, scope: [:views, :labels]) %></th>
+        <td>
+          <a data="<%= current_user.display_name %>" href="<%= url_for(action: :index) %>">
+            <%= image_tag(current_user.avatar_url, alt: "Errors", width: "50px", height: "50px", class: "avatar #{ 'border_blue' unless params[:member_id].present? }") %>
+          </a>&nbsp;
+          <% current_user.team && (current_user.team.users - [current_user]).each do |user| %>
+            <a data="<%= user.display_name %>" href="<%= url_for(action: :index, member_id: user.id) %>">
+              <%= image_tag(user.avatar_url, alt: "Errors", title: "#{ user.display_name }", width: "50px", height: "50px", class: "avatar #{ 'border_blue' if params[:member_id].to_i == user.id }") %>
+            </a> &nbsp;
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  <% end %>
   <div class="ctsTit">
     <h2><%= h2_label %></h2>
     <nav>
