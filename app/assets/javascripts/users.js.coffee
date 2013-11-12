@@ -25,3 +25,8 @@ $ ->
           $.each data, (key, value) ->
             option = "<option value =#{value[1]}>#{value[0]}</option>"
             select_team.append(option)
+  $.each $(".datepicker"), (index, value) ->
+    date_string = $(value).val().substring(0,10)
+    date = new Date(date_string)
+    $(value).datepicker format: "dd/mm/yyyy"
+    $(value).datepicker("setDate", date) if date_string != ""
