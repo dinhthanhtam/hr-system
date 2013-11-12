@@ -57,6 +57,12 @@ class UsersController < BaseController
     end
   end
 
+  def get_all_user
+    respond_to do |format|
+      format.json { render json: User.all }
+    end
+  end
+
 private
   def model_params
     params.require(:user).permit(:email, :password, :password_confirmation, :remember_me,

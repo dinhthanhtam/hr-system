@@ -3,7 +3,7 @@ class Report < ActiveRecord::Base
 
   belongs_to :report_category
   belongs_to :user
-  has_many :favourites
+  has_many :stickies
 
   validates :user, :report_category, presence: true
   validates :week, length: { maximum: 53, minimum: 0 }
@@ -27,7 +27,8 @@ class Report < ActiveRecord::Base
     Date.today.cweek == week && Date.today.year == year
   end
 
-  def is_favourited? user_id
-    self.favourites.where(user_id: user_id).any?
+  def is_stickied? user_id
+    self.stickies.where(user_id: user_id).any?
   end
+
 end

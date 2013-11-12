@@ -3,9 +3,10 @@ HrSystem::Application.routes.draw do
 
   resources :reports
   resources :report_categories
-  resources :favourites
+  resources :stickies
   resources :users do
     get :get_team, on: :collection
+    get :get_all_user, on: :collection
   end
   
   resources :groups do

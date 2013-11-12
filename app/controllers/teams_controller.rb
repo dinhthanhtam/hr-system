@@ -54,10 +54,10 @@ private
 
   def create_object
     super
-    @team = @group.teams.build(params[model_symbol])
+    @team = @group.teams.build(model_params)
   end
   
   def model_params
-    params.require(:team).permit(:name) if params[:team]
+    params.require(:team).permit(:name, :group_id) if params[:team]
   end
 end

@@ -3,12 +3,13 @@ class CreateReports < ActiveRecord::Migration
     create_table :reports do |t|
       t.integer :report_category_id
       t.integer :user_id
+      t.text :title
       t.text :description
       t.date :report_date
       t.integer :week
       t.integer :month
       t.integer :year
-
+      t.string :support_users
       t.timestamps
     end
   end

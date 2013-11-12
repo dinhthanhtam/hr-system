@@ -10,7 +10,11 @@
         <td><%= @report.report_category.name %></td>
       </tr>
       <tr>
-        <th width="15%"><%= model.human_attribute_name :description %></th>
+        <th><%= model.human_attribute_name :title %></th>
+        <td><%= @report.title %></td>
+      </tr>
+      <tr>
+        <th><%= model.human_attribute_name :description %></th>
         <td><%= @report.description %></td>
       </tr>
       <tr>

@@ -1,9 +1,10 @@
 class ReportsController < BaseController
 
   before_filter :check_editable?, only: [:edit, :update, :destroy]
-
+  
   def index
     respond_to do |format|
+      @report = Report.new
       format.html
     end
   end
@@ -74,8 +75,8 @@ private
   def check_editable?
     redirect_to url_for(action: :index) unless @report.in_current_week?
   end
-
+    
   def model_params
-     params.require(:report).permit(:report_category_id, :description) if params[:report]
+     params.require(:report).permit(:report_category_id, :title, :description, :support_users) if params[:report]
   end
 end
