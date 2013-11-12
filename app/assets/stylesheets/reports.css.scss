@@ -1,3 +1,25 @@
-// Place all the styles related to the Reports controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.border_blue{
+  border: 2px solid blue;
+}
+.avatar{
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+}
+a:hover {
+  color: red;
+  position: relative;
+}
+a[data]:hover:after {
+  content: attr(data);
+  font-size: 15px;
+  padding: 5px 5px;
+  color: #FFF;
+  position: absolute;
+  left: 0;
+  top: -45px;
+  white-space: nowrap;
+  z-index: 2;
+  border-radius: 5px;
+  background: #000;
+}

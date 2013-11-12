@@ -58,7 +58,7 @@ class ReportsController < BaseController
 
 private
   def ordering(search)
-    current_user.reports.order("report_date DESC")
+    (params[:member_id].present? ? User.find(params[:member_id]) : current_user).reports.order("report_date DESC")
   end
 
   def create_object
