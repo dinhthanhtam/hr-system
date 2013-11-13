@@ -9,6 +9,12 @@
         <th width="15%"><%= model.human_attribute_name :name %></th>
         <td><%= @group.name %></td>
       </tr>
+      <% if @group.parent %>
+        <tr>
+          <th><%= model.human_attribute_name :parent %></th>
+          <td><%= @group.parent.name %></td>
+        </tr>
+      <% end %>
       <tr>
         <th><%= model.human_attribute_name :created_at %></th>
         <td><%= @group.created_at %></td>

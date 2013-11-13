@@ -13,6 +13,7 @@ en:
       group: &group
         <<: *common_attr
         name: "Group Name"
+        parent: "Group parent"
       team: &team
         <<: *common_attr
         name: "Team Name"
@@ -53,6 +54,7 @@ en:
       confirm_delete: "Do you want to delete it ?"
       me: "Me"
       report_of: "Report of"
+      not_select: "Not select"
     messages:
       delete_confirm: Do you want to delete it?
       create_success: Create %{model} successfully!
