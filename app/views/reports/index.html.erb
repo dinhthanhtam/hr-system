@@ -25,17 +25,8 @@
 
   <%= render partial: "search" %>
 
-  <table class="table table-bordered" id="list_report">
-    <thead>
-      <tr>
-        <th><%= model.human_attribute_name :month %></th>
-        <th><%= model.human_attribute_name :week %></th>
-        <th><%= model.human_attribute_name :report_date %></th>
-        <th><%= model.human_attribute_name :report_category_id %></th>
-        <th><%= model.human_attribute_name :description %></th>
-        <th width = "20%"></th>
-      </tr>
-    </thead>
+  <table class="itemList table-bordered" id="list_report">
+    
     <% current_year = nil %>
     <% current_month = nil %>
     <% current_week = nil %>
@@ -48,17 +39,31 @@
       <% is_change_week = current_week != report.week ? true : false %>
       <% current_week = report.week if is_change_week %>
       <% is_change_day = current_day != report.report_date ? true : false %>
-      <% current_day = report.report_date if is_change_day %>      
+      <% current_day = report.report_date if is_change_day %>
+      <% if is_change_year || is_change_month %>
+        <tr>
+          <td class="month_div" colspan="7" style="text-align: left;">
+          <%= "#{Date::MONTHNAMES[report.month]} #{report.year}" %></td>
+        </tr>
+      <% end %>
+      <% if is_change_week %>
+        <tr>
+          <td style="border-bottom: none;"></td>
+          <td class="week_div" colspan="4" style="text-align: left;">
+          <%= cweek_to_date report.week, report.year %></td>
+          <td style="border-bottom: none;"></td>
+        </tr>
+        <tr>
+          <td style="border-bottom: none;" width="4%"></td>
+          <th style="border-left: 1px solid #DDDDDD;"><%= model.human_attribute_name :report_date %></th>
+          <th><%= model.human_attribute_name :report_category_id %></th>
+          <th><%= model.human_attribute_name :description %></th>
+          <th width = "20%"></th>
+          <td style="border-bottom: none;"></td>
+        </tr>
+      <% end %>
       <tr data-id = "<%= report.id %>" <%= "style=color:orange" if report.in_current_week? %>>
-        <% if is_change_year || is_change_month %>
-          <td <%= "rowspan=#{@reports.select { |r| r.year == current_year && r.month == current_month }.length}" %>>
-            <%= "#{Date::MONTHNAMES[report.month]} #{report.year}" %>
-          </td>
-        <% end %>
-        <% if is_change_week %>
-          <td <%= "rowspan=#{@reports.select { |r| r.year == current_year && r.month == current_month && r.week == current_week }.length}"%>>
-            <%= cweek_to_date report.week, report.year %></td>
-        <% end %>
+        <td style="border-bottom: none; border-top: none;"></td>
         <% if is_change_day %>
           <td <%= "rowspan=#{@reports.select { |r| r.report_date == current_day }.length}"%>>
             <%= report.report_date.strftime("%a") %>
@@ -72,6 +77,7 @@
           <%= link_to_if(report.in_current_week?, t(:button_delete, scope: [:views, :labels]), url_for(action: :destroy, id: report.id), confirm: I18n.t(:delete_confirm, scope: [:views, :messages]), method: :delete, class: "btn btn-danger btn-mini") {} %>
           <%= link_to_if(!report.is_favourited?(current_user.id) && current_user.position == "Leader", t(:button_favourites, scope: [:views, :labels]), url_for(controller: "favourites", action: :create, report_id: report.id ), class: "btn btn-primary btn-mini add_favourite", remote: true , method: :post, id: "add_favourite_#{report.id}" ) {} %>
         </td>
+        <td style="border-left: 1px solid #DDDDDD; border-bottom: none; border-top: none;" width="4%"></td>
       </tr>
     <% end %>
   </table>

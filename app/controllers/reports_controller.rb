@@ -76,6 +76,6 @@ private
   end
 
   def model_params
-     params.require(:report).permit(:report_category_id, :report_date, :description, :month, :user_id, :week, :year) if params[:report]
+     params.require(:report).permit(:report_category_id, :description) if params[:report]
   end
 end

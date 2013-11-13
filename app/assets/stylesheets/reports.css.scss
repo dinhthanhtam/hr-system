@@ -23,3 +23,27 @@ a[data]:hover:after {
   border-radius: 5px;
   background: #000;
 }
+.month_div{
+  padding: 5px 5px;
+  font-weight: bold;
+  font-size: 15px;
+  color: white;
+  border: 1px solid #DDDDDD;
+  border-collapse: separate;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  background-color: #1d90ad;
+}
+.week_div{
+  padding: 5px 5px;
+  font-weight: bold;
+  font-size: 15px;
+  border: 1px solid #DDDDDD;
+  border-collapse: separate;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  background-color: #BDE7E0;
+}
+.report_week{
+  margin-left: 15px;
+}
