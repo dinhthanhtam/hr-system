@@ -85,3 +85,61 @@ a:hover{
   right: 0;
   top: 45px;
 }
+
+a.profile_link {
+  color: #000000;
+}
+  
+a.profile_link:hover {
+  color: #000000;
+}
+  
+a.profile_link:active {
+  color: #000000;
+}
+
+.search {
+  height: 40px;
+  input {
+    margin: auto;
+    margin-left: 5px;
+    width: 50%;
+  }
+}
+
+.users {
+   display: inline-table;
+   background-color: rgba(178, 201, 224, 0.3);
+   border-radius: 6px;
+   webkit-border-radius: 6px;
+   width: 100%;
+}
+
+.profile {
+  width: 120px;
+  height: 140px;
+  margin: 10px 23px;
+  float: left;
+  display: inline;
+  position: relative;
+  text-align: center;
+  .avatar {
+    width: 100%;
+    height: 140px;
+    img {
+      width: 120px;
+      height: 140px;
+    }
+  }
+
+  .display_name {
+    text-align: center;
+    font-size: 16px;
+    position: absolute;
+    bottom: 0px;
+    margin: auto;
+    width: 100%;
+    height: 20px;
+    background: rgba(128, 176, 185, 0.5);
+  }
+}

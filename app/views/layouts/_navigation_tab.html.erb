@@ -1,6 +1,6 @@
 <div class="navbar-inner">
-  <a href="<%= root_path %>">
-    <div class="menu <%= 'active' if model_name == 'User'%>">
+  <a href="<%= user_path(current_user) %>">
+    <div class="menu <%= 'active' if model_name == 'User' && action_name == 'show' %>">
       Home
     </div>
   </a>
