@@ -48,6 +48,6 @@ class GroupsController < BaseController
   end
 private
   def model_params
-    params.require(:group).permit(:name) if params[:group]
+    params.require(:group).permit(:name, :parent_id) if params[:group]
   end
 end

@@ -5,6 +5,10 @@
       <th><%= f.label :name %></th>
       <td><%= f.text_field :name %></td>
     </tr>
+    <tr>
+      <th><%= f.label :parent %></th>
+      <td><%= f.select :parent_id, include_not_select + Group.all.map { |group| [group.name, group.id] } %></td>
+    </tr>
     
   </table>
   <div class="form-actions">
