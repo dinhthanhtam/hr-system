@@ -33,6 +33,9 @@ a[data]:hover:after {
   border-radius: 4px;
   -webkit-border-radius: 4px;
   background-color: #1d90ad;
+  &:hover{
+    color: black;
+  }
 }
 .week_div{
   padding: 5px 5px;

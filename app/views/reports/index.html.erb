@@ -1,4 +1,26 @@
 <selection id="groups_index">
+  <% if ["Manager", "Submanager"].include? current_user.position %>
+    <table class="table itemList">
+      <% current_user.groups.each do |group| %>
+        <% group.teams.each do |team| %>
+          <tr>
+            <% if team == group.teams.first %>
+              <th rowspan="<%= group.teams.count %>"><%= group.name %></th>
+            <% end %>
+            <td><%= team.name %></td>
+            <td>
+              <% team.users.each do |user| %>
+                <a data="<%= user.display_name %>" href="<%= url_for(action: :index, member_id: user.id) %>">
+                  <%= image_tag(user.avatar_url, alt: "Errors", title: "#{ user.display_name }", width: "50px", height: "50px", class: "avatar #{ 'border_blue' if params[:member_id].to_i == user.id }") %>
+                </a> &nbsp;
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  <% end %>
+
   <% if ["Leader", "Subleader"].include? current_user.position %>
     <table class="table itemList">
       <tr>
@@ -55,8 +77,8 @@
         </tr>
         <tr>
           <td style="border-bottom: none;" width="4%"></td>
-          <th style="border-left: 1px solid #DDDDDD;"><%= model.human_attribute_name :report_date %></th>
-          <th><%= model.human_attribute_name :report_category_id %></th>
+          <th style="border-left: 1px solid #DDDDDD;" width="4%"></th>
+          <th width="12%"><%= model.human_attribute_name :report_category_id %></th>
           <th><%= model.human_attribute_name :description %></th>
           <th width = "20%"></th>
           <td style="border-bottom: none;"></td>
@@ -70,9 +92,8 @@
           </td>
         <% end %>
         <td><%= report.report_category.name %></td>
-        <td><%= report.description %></td>
+        <td><a style="color: <%= report.in_current_week? ? :orange : :black %>" href="<%= url_for(action: :show, id: report.id) %>"><%= report.description %></a></td>
         <td>
-          <%= link_to t(:button_detail, scope: [:views, :labels]), url_for(action: :show, id: report.id), class: "btn btn-mini" %>
           <%= link_to_if(report.in_current_week?, t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: report.id), class: "btn btn-primary btn-mini") {} %>
           <%= link_to_if(report.in_current_week?, t(:button_delete, scope: [:views, :labels]), url_for(action: :destroy, id: report.id), confirm: I18n.t(:delete_confirm, scope: [:views, :messages]), method: :delete, class: "btn btn-danger btn-mini") {} %>
           <%= link_to_if(!report.is_favourited?(current_user.id) && current_user.position == "Leader", t(:button_favourites, scope: [:views, :labels]), url_for(controller: "favourites", action: :create, report_id: report.id ), class: "btn btn-primary btn-mini add_favourite", remote: true , method: :post, id: "add_favourite_#{report.id}" ) {} %>
