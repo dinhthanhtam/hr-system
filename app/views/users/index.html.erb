@@ -2,49 +2,21 @@
   <div class="margintop_20px">
     <div class="left_menu" style="">
       <div class="border">
-        <div class="user_info">
-          <%= image_tag current_user.avatar_url, class: "avatar_main", alt: "No image" %><br>
-          <div class="information">
-            <p><%= current_user.display_name %></p>
-            <p><%= current_user.position %></p>
-            <p><%= "#{current_user.team.group.name}-#{current_user.team.try(:name)}" if current_user.team.try(:name) %></p>
-          </div>
-        </div>
       </div>
-      <% if current_user.position == "Leader" %>
-        <div class="border margintop_20px">
-          <h2 class="title_div">Team member</h2><br>
-          <div class="team">
-            <div style="margin-top: 10px">
-              <% current_user.team && current_user.team.users.each do |tem_member| %>
-                <div style="display: inline-block">
-                  <%= image_tag tem_member.avatar_url, class: "avatar", alt: "No image" %><br>
-                  <%= link_to tem_member.display_name, "#" %>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      <% end %>
     </div>
 
     <div class="right_body">
-      <div class="text border">
-        <h2 class="title_div">Notice from HR</h2><br>
-        <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
-        <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
-        <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
-        <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
+      <div class="search ctsTit">
+        <%= form_for @search, url: users_path, html: {method: :get, id: 'search_by_name_form'} do |f| %>
+          <%= f.text_field :display_name_cont, placeholder: "Input name to search" %>
+        <% end %>
       </div>
-      <div class="text margintop_20px border">
-        <h2 class="title_div">Last week didn't write report</h2><br>
-        <% current_user.team && current_user.team.users.not_report_last_week.each do |tem_member| %>
-          <div style="display: inline-block; margin: 5px 5px;">
-            <%= image_tag tem_member.avatar_url, class: "avatar", alt: "No image" %> 
-            <%= link_to tem_member.display_name, "#" %>
-          </div><br><br>
+      <div class="block users">
+        <% @users.each do |user| %>
+          <%= render "user_box", user: user %>
         <% end %>
       </div>
     </div>
+    <%= will_paginate @users %>
   </div>
 </selection>
