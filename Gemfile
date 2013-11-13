@@ -47,6 +47,7 @@ gem 'twitter-bootstrap-rails'
 
 gem 'whenever'
 gem 'delayed_job_active_record'
+gem 'daemons'
 
 # rails_config
 gem "rails_config"

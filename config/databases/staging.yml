@@ -1,0 +1,24 @@
+common: &common
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  pool: 5
+  host: localhost
+  username: root
+  password: 
+
+development:
+  <<: *common
+  database: hr_development
+
+test:
+  <<: *common
+  database: hr_test
+
+staging:
+  <<: *common
+  database: hr_staging
+
+production:
+  <<: *common
+  database: hr

@@ -52,6 +52,35 @@ task :symlink, :roles => :app do
   run "ln -s #{current_path}/config/databases/#{rails_env}.yml #{current_path}/config/database.yml"
 end
 
+namespace :delayed_job do
+  desc "start delayed_job process"  
+  task :start, roles: :app do
+    run "cd #{current_path}; RAILS_ENV=#{rails_env} script/delayed_job --pid-dir=/usr/local/rails_apps/#{application}/shared/pids start"
+  end
+
+  desc "stop delayed_job process"
+  task :stop, roles: :app do
+    run "cd #{current_path}; RAILS_ENV=#{rails_env} script/delayed_job --pid-dir=/usr/local/rails_apps/#{application}/shared/pids stop"
+  end
+
+  desc "restart delayed_job process"
+    task :restart, roles: :app do
+    run "cd #{current_path}; RAILS_ENV=#{rails_env} script/delayed_job --pid-dir=/usr/local/rails_apps/#{application}/shared/pids restart"
+  end
+end
+
+namespace :whenever do
+  desc "update crontab"
+  task :update, roles: :app do
+    run "cd #{current_path}; RAILS_ENV=#{rails_env} whenever --update-crontab"
+  end
+end
+
+after 'deploy:update', 'symlink', 'deploy:cleanup'
+after 'deploy:stop', 'delayed_job:stop'
+after 'deploy:start', 'whenever:update', 'delayed_job:start'
+after 'deploy:restart', 'whenever:update', 'delayed_job:restart'
+
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 #role :web, "your web-server here"                          # Your HTTP server, Apache/etc
