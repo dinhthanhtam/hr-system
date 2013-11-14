@@ -81,6 +81,19 @@ after 'deploy:stop', 'delayed_job:stop'
 after 'deploy:start', 'whenever:update', 'delayed_job:start'
 after 'deploy:restart', 'whenever:update', 'delayed_job:restart'
 
+# for staging
+# backup data
+namespace :backup do
+  task :copy_data, :roles => :app do
+    run "cp -rf #{current_path}/public/uploads ~/backup"
+  end
+  task :restore_data, :roles => :app do
+    run "cp -rf ~/backup/uploads #{current_path}/public"
+  end
+end
+before 'deploy', 'backup:copy_data'
+after 'deploy:update', 'backup:restore_data'
+
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 #role :web, "your web-server here"                          # Your HTTP server, Apache/etc

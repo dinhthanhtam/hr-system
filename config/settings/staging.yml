@@ -1,0 +1,3 @@
+carrierwave:
+  storage: :file
+  store_dir: uploads
