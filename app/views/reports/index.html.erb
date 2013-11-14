@@ -42,9 +42,16 @@
     <h2><%= h2_label %></h2>
   </div>
 
-  <div>
-    <%= render partial: "form" %>
+  <ul id = "head_nav" class="nav nav-tabs">
+    <li class="<%= params["commit"].present? ? '' : 'active' %>" ><a href="#create_report" data-toggle="tab">New Report</a></li>
+    <li class="<%= params["commit"].present? ? 'active' : '' %>"><a href="#search_report" data-toggle="tab">Search</a></li>
+  </ul>
+
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane <%= params["commit"].present? ? '' : 'active' %>" id="create_report"><%= render partial: "form" %></div>
+    <div class="tab-pane <%= params["commit"].present? ? 'active' : '' %>" id="search_report"><%= render partial: "search" %></div>
   </div>
+  
   <table class="itemList table-bordered" id="list_report">
     <% current_year = nil %>
     <% current_month = nil %>
@@ -92,7 +99,7 @@
         <% end %>
         <td>
           <div id = "image_baget_<%= report.id %>" class = "special">
-            <% if report.is_stickied?(current_user.id) && params[:member_id].present? %>
+            <% if report.is_stickied?(params[:member_id]) %>
               <%= image_tag("/assets/ico_new.png", width: "30px") %>
             <% end %>
           </div>
@@ -103,14 +110,14 @@
         <td>
           <%= link_to_if(report.in_current_week?, t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: report.id), class: "btn btn-primary btn-mini") {} %>
           <%= link_to_if(report.in_current_week?, t(:button_delete, scope: [:views, :labels]), url_for(action: :destroy, id: report.id), confirm: I18n.t(:delete_confirm, scope: [:views, :messages]), method: :delete, class: "btn btn-danger btn-mini") {} %>
-          <% if report.is_stickied?(params[:member_id]) || report.is_stickied?(current_user.id) %>
+          <% if report.is_stickied?(current_user.id) %>
             <%= link_to(image_tag("/assets/ico_fav.png", id: "add_sticky_#{report.id}"),
               url_for(controller: "stickies", action: :destroy, id: report.stickies.try(:first).try(:id)), class: "btn btn-mini" ,
-              method: :delete , remote: true, confirm: t(:unsticky,scope: [:views, :labels])) %>
+              method: :delete , remote: true) %>
           <% else %>
             <%= link_to(image_tag("/assets/ico_hurt.png", id: "add_sticky_#{report.id}"),
               url_for(controller: "stickies", action: :create, report_id: report.id, user_id: current_user.id ),
-              class: "btn btn-mini" , method: :post, remote: true, confirm: t(:sticky,scope: [:views, :labels])) %>
+              class: "btn btn-mini" , method: :post, remote: true) %>
           <%end %>
         </td>
         <td style="border-left: 1px solid #DDDDDD; border-bottom: none; border-top: none;" width="4%"></td>
