@@ -23,6 +23,7 @@ a[data]:hover:after {
   border-radius: 5px;
   background: #000;
 }
+
 .month_div{
   padding: 5px 5px;
   font-weight: bold;
@@ -50,3 +51,59 @@ a[data]:hover:after {
 .report_week{
   margin-left: 15px;
 }
+
+.tag-badge {
+  border-radius: 11px 11px 11px 11px;
+  color: #007AB3;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 11px;
+  margin: 3px 4px 3px 0;
+}
+
+.ui-tag-container .tag-badge .tag-name {
+    background: none repeat scroll 0 0 #F2F2F2;
+    border-radius: 11px 0 0 11px;
+}
+
+.tag-badge .tag-name {
+    background-color: #F2F2F2;
+    border-radius: 11px 11px 11px 11px;
+    color: #007AB3;
+    display: inline-block;
+    font-size: 11px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 6px;
+}
+
+.ui-tag-container .tag-badge .ico-area.cancel {
+    background-color: #F2F2F2;
+    border-radius: 0 11px 11px 0;
+    padding: 4px 5px 0 0;
+}
+.tag-badge .ico-area {
+    border-radius: 11px 11px 11px 11px;
+    cursor: pointer;
+    height: 16px;
+    padding: 5px 0 0 5px;
+}
+.ico-area {
+    display: block;
+    font-size: 0;
+    line-height: 0;
+    vertical-align: middle;
+}
+
+i.cancel_tag {
+    background: url("/assets/ico_tag_delete.png");
+    display: inline-block;
+    text-indent: -9999pt;
+    vertical-align: middle;
+}
+
+.special {
+    position: relative;
+    width: 40px;
+}
+

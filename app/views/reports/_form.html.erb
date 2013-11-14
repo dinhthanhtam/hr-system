@@ -1,13 +1,31 @@
 <%= form_for @report, url: {action: @report.new_record? ? :create : :update} do |f| %>
-
   <table class="formTbl contents">
     <tr>
-      <th><%= f.label :report_categoty_id %></th>
+      <th width= "15%"><%= f.label :categoty_id %></th>
       <td><%= f.collection_select :report_category_id, ReportCategory.all, :id, :name %></td>
+    </tr>
+    <tr style= "display:none;" id = "tr_user_support">
+      <th><%= f.label :user_name %></th>
+      <td><%= text_field_tag :tags %>
+        <div class="tag-badge">
+          <% if @report.support_users.present? %>
+            <% users = @report.support_users.split(",") %>
+            <% users.each do |user| %>
+              <span class="tag-name"><%= user %>&nbsp;<img class="clear_support" src="/assets/ico_tag_delete.png" data-id = "<%= user %>"></span>
+            <% end %>
+          <% end %>
+        </div>
+        <%= f.hidden_field :support_users %>
+        
+      </td>
+    </tr>
+    <tr>
+      <th><%= f.label :title %></th>
+      <td><%= f.text_field :title %></td>
     </tr>
     <tr>
       <th><%= f.label :description %></th>
-      <td><%= f.text_area :description %></td>
+      <td><%= f.text_area :description, style: "width:650px; height:100px;"  %></td>
     </tr>
     
   </table>

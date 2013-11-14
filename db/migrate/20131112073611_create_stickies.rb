@@ -1,6 +1,6 @@
-class CreateFavourites < ActiveRecord::Migration
+class CreateStickies < ActiveRecord::Migration
   def change
-    create_table :favourites do |t|
+    create_table :stickies do |t|
       t.integer :report_id
       t.integer :user_id
       t.timestamps

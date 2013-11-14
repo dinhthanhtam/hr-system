@@ -1,0 +1,10 @@
+<% if current_user.id != @sticky.report.user_id %>
+  $('#image_baget_<%= @sticky.report_id %>').append('<img width="30px" src="/assets/ico_new.png" alt="Ico new">')
+<% end %>
+<% if @sticky %>
+  $('#add_sticky_<%= @sticky.report_id %>').attr("src","/assets/ico_fav.png")
+  var link_a = $('img#add_sticky_<%= @sticky.report_id %>').parents("a")
+  $(link_a).attr("href", "<%= url_for(controller: "stickies", action: :destroy, id: @sticky.id) %>")
+  $(link_a).data("method","delete")
+  $(link_a).data("confirm","<%= t(:unsticky,scope: [:views, :labels]) %>")
+<% end %>

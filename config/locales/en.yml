@@ -29,6 +29,7 @@ en:
         week: "Week"
         month: "Month"
         year: "Year"
+        title: "Title"
       user: &user
         email: "Email"
         display_name: "User name"
@@ -52,6 +53,8 @@ en:
       button_report: "Report"
       button_favourites: "Favourite"
       confirm_delete: "Do you want to delete it ?"
+      sticky: "Do you want to sticky it ?"
+      unsticky: "Do you want to unsticky it ?"
       me: "Me"
       report_of: "Report of"
       not_select: "Not select"
