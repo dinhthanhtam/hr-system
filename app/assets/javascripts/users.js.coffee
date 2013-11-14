@@ -30,3 +30,9 @@ $ ->
     date = new Date(date_string)
     $(value).datepicker format: "dd/mm/yyyy"
     $(value).datepicker("setDate", date) if date_string != ""
+  $("li.group").click ->
+    id = $(this).data("id")
+    $(this).siblings().attr("class", "group")
+    $(this).addClass("active")
+    $(".group_table").hide()
+    $("#"+id).show()

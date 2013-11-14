@@ -7,12 +7,14 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :email, :password, :password_confirmation, :remember_me, :cardID, :display_name, :team_id, :position, :user_roles_attributes, :group_users_attributes
   # attr_accessible :title, :body
+  validates :position, presence: true
 
   has_many :reports
   has_many :user_roles
   has_many :roles, through: :user_roles
   has_many :group_users
   has_many :groups, through: :group_users
+  has_many :teams, through: :groups
   has_many :favourites
   mount_uploader :avatar, AvatarUploader
 
@@ -30,6 +32,18 @@ class User < ActiveRecord::Base
   def method_missing(name, *args)
     return super unless name =~ /\A(.+)_role\?\z/
     roles.map{ |r| r.name.downcase }.include?($1.downcase)
+  end
+
+  def is_staff?
+    ["Staff"].include? position
+  end
+
+  def is_leader?
+    ["Leader", "Subleader"].include? position
+  end
+
+  def is_manager?
+    ["Manager", "Submanager"].include? position
   end
 
   private
