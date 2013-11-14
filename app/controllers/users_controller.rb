@@ -66,6 +66,15 @@ class UsersController < BaseController
   end
 
 private
+  def ordering(search)
+    if params[:group] && !params[:group].empty?
+      return User.in_teams(Team.in_groups(Group.find(params[:group]).descendant_groups.map(&:id)).map(&:id))
+    elsif params[:team] && !params[:team].empty?
+      return Team.find(params[:team]).users
+    else
+      return User.all
+    end
+  end
   def model_params
     params.require(:user).permit(:email, :password, :password_confirmation, :remember_me,
                                  :cardID, :display_name, :team_id, :position, :avatar,
