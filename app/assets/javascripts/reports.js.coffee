@@ -88,5 +88,9 @@ $ ->
       ids = ids.substring(1);
     $("#report_support_users").val(ids)
 
+  $(document).on "click", "#head_nav a", (e)->
+    e.preventDefault()
+    $(this).tab "show"
+
 
 
