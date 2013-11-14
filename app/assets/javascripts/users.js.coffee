@@ -28,7 +28,7 @@ $ ->
   $.each $(".datepicker"), (index, value) ->
     date_string = $(value).val().substring(0,10)
     date = new Date(date_string)
-    $(value).datepicker format: "dd/mm/yyyy"
+    $(value).datepicker format: "yyyy/mm/dd"
     $(value).datepicker("setDate", date) if date_string != ""
   $("li.group").click ->
     id = $(this).data("id")
