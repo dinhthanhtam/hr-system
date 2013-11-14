@@ -230,29 +230,24 @@ select.word{
 
 body{
 	min-width:980px;
-	padding-top:45px;
 }
 
 /* header */
 #pageHeader {
-  background:none #1d90ad;
 
   box-shadow:0 1px 2px rgba(0, 0, 0, 0.6);
   -webkit-box-shadow:0 1px 2px rgba(0, 0, 0, 0.6);
-
+  background-color: #FFFFFF;
   .logo{
     float: left;
     display: block;
     padding: 12px 12px 12px;
     line-height: 1;
-    color: #ffffff;
     font-size: 20px;
     font-weight: 2px;
-    a:visited{
-      color: #FFFFFF
-    }
-    a:hover{
-      text-decoration:none;
+    img {
+      max-width: none !important;
+      max-height: none !important;
     }
   }
 
@@ -267,7 +262,7 @@ body{
       font-size: 20px;
       font-weight: 200;
       line-height: 1;
-      color: #ffffff;
+      color: #000000;
     }
     .brand-mage {
       float: left;
@@ -275,11 +270,13 @@ body{
       line-height: 1;
     }
     .nav {
+      float: right;
       .active {
         > a {
-        color: #ffffff;
+        color: #000000;
         text-decoration: none;
-        background-color: #3470A6;
+        background-color: rgba(139, 177, 197, 0.54);
+        border-radius: 5px;
         }
       }
 
@@ -289,12 +286,12 @@ body{
           padding: 13px 12px 12px;
           line-height: 19px;
           font-size: 11px;
-          color: #ffffff;
+          color: #000000;
           text-decoration: none;
           text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
           &:hover {
             background-color: transparent;
-            color: #ffffff !important;
+            color: #000000 !important;
             text-decoration: none;
           }
         }
@@ -302,14 +299,15 @@ body{
       li.dropdown {
       	> .dropdown-toggle {
           .caret {
-            border-top-color: #ffffff;
-            border-bottom-color: #ffffff;
+            border-top-color: #000000;
+            border-bottom-color: #000000;
           }
         }
         &.open, &.active {
           > .dropdown-toggle {
-            color: #ffffff;
-            background-color: #005580;
+            color: #000000;
+            background-color: rgba(139, 177, 197, 0.54);
+            border-radius: 5px;
           }
         }
       }
@@ -317,7 +315,6 @@ body{
   }
 
   .navbar-inner{
-    height:45px;
     width:980px;
     margin:0 auto;
     background:none transparent;
@@ -408,8 +405,7 @@ body{
 	background-color:#FFF;
 	width:950px;
 	margin:0 auto;
-	padding:55px 15px 1px;
-	border: 1px solid #DDDDDD;
+	padding:20px 15px 1px;
 }
 
 
