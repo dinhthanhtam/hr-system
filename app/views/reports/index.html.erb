@@ -1,18 +1,18 @@
 <selection id="groups_index">
-  <% if ["Manager", "Submanager"].include? current_user.position %>
+  <% if current_user.is_manager? %>
     <table class="table itemList">
       <% current_user.groups.each do |group| %>
         <% group.teams.each do |team| %>
           <tr>
             <% if team == group.teams.first %>
-              <th rowspan="<%= group.teams.count %>"><%= group.name %></th>
+              <th width="15%" rowspan="<%= group.teams.count %>"><%= group.name %></th>
             <% end %>
-            <td><%= team.name %></td>
+            <td width="10%"><%= team.name %></td>
             <td>
               <% team.users.each do |user| %>
                 <a data="<%= user.display_name %>" href="<%= url_for(action: :index, member_id: user.id) %>">
-                  <%= image_tag(user.avatar_url, alt: "Errors", title: "#{ user.display_name }", width: "50px", height: "50px", class: "avatar #{ 'border_blue' if params[:member_id].to_i == user.id }") %>
-                </a> &nbsp;
+                  <%= image_tag(user.avatar_url, alt: "Errors", width: "50px", height: "50px", class: "avatar #{ 'border_blue' if params[:member_id].to_i == user.id }") %>
+                </a>
               <% end %>
             </td>
           </tr>
@@ -21,18 +21,18 @@
     </table>
   <% end %>
 
-  <% if ["Leader", "Subleader"].include? current_user.position %>
+  <% if current_user.is_leader? %>
     <table class="table itemList">
       <tr>
         <th width="15%" style="font-size: 15px"><%= t(:report_of, scope: [:views, :labels]) %></th>
         <td>
           <a data="<%= current_user.display_name %>" href="<%= url_for(action: :index) %>">
             <%= image_tag(current_user.avatar_url, alt: "Errors", width: "50px", height: "50px", class: "avatar #{ 'border_blue' unless params[:member_id].present? }") %>
-          </a>&nbsp;
+          </a>
           <% current_user.team && (current_user.team.users - [current_user]).each do |user| %>
             <a data="<%= user.display_name %>" href="<%= url_for(action: :index, member_id: user.id) %>">
-              <%= image_tag(user.avatar_url, alt: "Errors", title: "#{ user.display_name }", width: "50px", height: "50px", class: "avatar #{ 'border_blue' if params[:member_id].to_i == user.id }") %>
-            </a> &nbsp;
+              <%= image_tag(user.avatar_url, alt: "Errors", width: "50px", height: "50px", class: "avatar #{ 'border_blue' if params[:member_id].to_i == user.id }") %>
+            </a>
           <% end %>
         </td>
       </tr>
