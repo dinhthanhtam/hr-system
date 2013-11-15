@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
 
   scope :not_report_last_week, -> { where("id not in (?)", Report.last_week_reports.select("user_id").to_sql) }
   scope :in_teams, ->(team_ids) { where("team_id in (?)", team_ids) unless team_ids.nil? }
+  scope :reporters, -> { joins(:user_roles => :role).where("roles.name in (?)", ["Leader", "Member"]).uniq }
 
   def reported?
     reports.current_week_reports.any?
@@ -50,9 +51,9 @@ class User < ActiveRecord::Base
   private
   class << self
     def notice_report
-      all.each do |user|
+      reporters.each do |user|
         unless user.reported?
-          UserMailer.delay.notice_write_report(user)       
+          UserMailer.delay.notice_write_report(user)
         end
       end
     end

@@ -120,8 +120,13 @@
         <td><%= report.title %></td>
         <td><a style="color: <%= report.in_current_week? ? :orange : :black %>" href="<%= url_for(action: :show, id: report.id) %>"><%= report.description %></a></td>
         <td>
-          <%= link_to_if(report.in_current_week?, t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: report.id), class: "btn btn-primary btn-mini") {} %>
-          <%= link_to_if(report.in_current_week?, t(:button_delete, scope: [:views, :labels]), url_for(action: :destroy, id: report.id), confirm: I18n.t(:delete_confirm, scope: [:views, :messages]), method: :delete, class: "btn btn-danger btn-mini") {} %>
+          <% if can? :update, report %>
+            <%= link_to_if(report.in_current_week?, t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: report.id), class: "btn btn-primary btn-mini") {} %>
+          <% end %>
+          <% if can? :update, report %>
+            <%= link_to_if(report.in_current_week?, t(:button_delete, scope: [:views, :labels]), url_for(action: :destroy, id: report.id), confirm: I18n.t(:delete_confirm, scope: [:views, :messages]), method: :delete, class: "btn btn-danger btn-mini") {} %>
+          <% end %>
+          
           <% if report.is_stickied?(current_user.id) %>
             <%= link_to(image_tag("/assets/ico_fav.png", id: "add_sticky_#{report.id}"),
               url_for(controller: "stickies", action: :destroy, id: report.stickies.try(:first).try(:id)), class: "btn btn-mini" ,
