@@ -1,14 +1,19 @@
 <selection>
   <div>
     <div class="left_menu" style="">
-      <div class="border">
+      <div class="border" style="padding: 5px 10px;font-size: 15px;">
+        <% Group.root_groups.each do |group| %>
+          <%= raw puts_name(group, 0) %><br>
+        <% end %>
       </div>
     </div>
-
+    
     <div class="right_body">
       <div class="search ctsTit">
         <%= form_for @search, url: users_path, html: {method: :get, id: 'search_by_name_form'} do |f| %>
           <%= f.text_field :display_name_cont, placeholder: "Input name to search" %>
+          <%= hidden_field_tag :group, params[:group] %>
+          <%= hidden_field_tag :team, params[:team] %>
         <% end %>
       </div>
       <div class="block users">

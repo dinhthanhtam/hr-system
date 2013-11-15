@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :group_users, allow_destroy: true, reject_if: :all_blank
 
   scope :not_report_last_week, -> { where("id not in (?)", Report.last_week_reports.select("user_id").to_sql) }
+  scope :in_teams, ->(team_ids) { where("team_id in (?)", team_ids) unless team_ids.nil? }
 
   def reported?
     reports.current_week_reports.any?

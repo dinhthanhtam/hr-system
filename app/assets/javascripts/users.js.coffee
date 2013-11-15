@@ -36,3 +36,25 @@ $ ->
     $(this).addClass("active")
     $(".group_table").hide()
     $("#"+id).show()
+  $(".item_left_menu a").click ->
+    id_element = $(this).attr("id").split("_")[0]
+    id = $(this).attr("id").split("_")[1]
+    if id_element == "group"
+      id_diff = "#team"
+    else
+      id_diff = "#group"
+    $("#" + id_element).val(id)
+    $(id_diff).val("")
+    $("#search_by_name_form").submit()
+  
+  mark_left_menu = ->
+    $all_link = $(".item_left_menu").find("a")
+    $all_link.attr("class", "item_left_menu")
+    val_g = $("#group").val()
+    val_t = $("#team").val()
+    if (val_g != "")
+      $("#group_" + val_g).addClass("active")
+    if (val_t != "")
+      $("#team_" + val_t).addClass("active")
+
+  mark_left_menu()
