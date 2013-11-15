@@ -2,7 +2,12 @@
   <table class="formTbl contents">
     <tr>
       <th width= "15%"><%= f.label :categoty_id %></th>
-      <td><%= f.collection_select :report_category_id, ReportCategory.all, :id, :name %></td>
+      
+      <td>
+        <% ReportCategory.all.each do |category| %>
+          <%= f.radio_button :report_category_id, category.id %> &nbsp; <%= category.name %>
+        <% end %>
+      </td>
     </tr>
     <tr style= "display:none;" id = "tr_user_support">
       <th><%= f.label :user_name %></th>

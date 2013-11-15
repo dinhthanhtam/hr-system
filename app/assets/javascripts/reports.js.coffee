@@ -26,7 +26,7 @@ $ ->
   extractLast = (term) ->
     split(term).pop()
 
-  $(document).on "change", "#report_report_category_id", ->
+  $(document).on "change", "input[name='report[report_category_id]']", ->
     categoty_type = $(this).val()
     if(categoty_type == "4")
       $("#tr_user_support").show()
