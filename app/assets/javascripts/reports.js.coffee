@@ -15,7 +15,7 @@ $ ->
         all_users.push([data[index].id, data[index].display_name])
       )
 
-  categoty_type = $("#report_report_category_id").val()
+  categoty_type = $('input[name="report[report_category_id]"]:checked').val()
   if(categoty_type == "4")
     $("#tr_user_support").show()
   else
