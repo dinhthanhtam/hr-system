@@ -19,53 +19,56 @@
       <th><%= f.label :avatar %></th>
       <td><%= f.file_field :avatar %></td>
     </tr>
-    <tr>
-      <th><%= f.label :role %></th>
-      <td>
-        <% RoleCategory.all .each do |role_category|%>
-          <%= role_category.name %>:
-          <% role_category.roles.each do |role| %>
-            <% user_role = 
-               @user.user_roles.detect { |group_user| group_user.role == role } ||
-               @user.user_roles.build(role_id: role.id).tap { |c| c.mark_for_destruction }
-            %>
-            <%= f.fields_for :user_roles, user_role do |user_roles_fields| %>
-              <%= user_roles_fields.hidden_field :role_id %>
-              <%= user_roles_fields.check_box :_destroy, {checked: !user_role.marked_for_destruction?}, 0, 1 %>
-              <%= role.name %>
+    <% if current_user.roles.detect{|x|x.name == "HR"} %>
+    
+      <tr>
+        <th><%= f.label :role %></th>
+        <td>
+          <% RoleCategory.all .each do |role_category|%>
+            <%= role_category.name %>:
+            <% role_category.roles.each do |role| %>
+              <% user_role = 
+                 @user.user_roles.detect { |group_user| group_user.role == role } ||
+                 @user.user_roles.build(role_id: role.id).tap { |c| c.mark_for_destruction }
+              %>
+              <%= f.fields_for :user_roles, user_role do |user_roles_fields| %>
+                <%= user_roles_fields.hidden_field :role_id %>
+                <%= user_roles_fields.check_box :_destroy, {checked: !user_role.marked_for_destruction?}, 0, 1 %>
+                <%= role.name %>
+              <% end %>
             <% end %>
+            <br>
           <% end %>
-          <br>
-        <% end %>
-      </td>
-    </tr>
-    <tr>
-      <th><%= f.label :position %></th>
-      <td>
-        <%= f.select :position, Settings.positions %>
-        <div id="group" <%= 'style=display:none' unless ["Manager", "Submanager"].include? @user.position %>>
-          <br>
-          <% Group.all.each do |group| %>
-            <% group_user = 
-               @user.group_users.detect { |group_user| group_user.group == group } ||
-               @user.group_users.build(group_id: group.id).tap { |c| c.mark_for_destruction }
-            %>
-            <%= f.fields_for :group_users, group_user do |group_fields| %>
-              <%= group_fields.hidden_field :group_id %>
-              <%= group_fields.check_box :_destroy, {checked: !group_user.marked_for_destruction?}, 0, 1 %>
-              <%= group.name %><br>
-              <%= group.teams.map{ |team| team.name }.join(", ") %><br>
+        </td>
+      </tr>
+      <tr>
+        <th><%= f.label :position %></th>
+        <td>
+          <%= f.select :position, Settings.positions %>
+          <div id="group" <%= 'style=display:none' unless ["Manager", "Submanager"].include? @user.position %>>
+            <br>
+            <% Group.all.each do |group| %>
+              <% group_user = 
+                 @user.group_users.detect { |group_user| group_user.group == group } ||
+                 @user.group_users.build(group_id: group.id).tap { |c| c.mark_for_destruction }
+              %>
+              <%= f.fields_for :group_users, group_user do |group_fields| %>
+                <%= group_fields.hidden_field :group_id %>
+                <%= group_fields.check_box :_destroy, {checked: !group_user.marked_for_destruction?}, 0, 1 %>
+                <%= group.name %><br>
+                <%= group.teams.map{ |team| team.name }.join(", ") %><br>
+              <% end %>
             <% end %>
-          <% end %>
-        </div>
+          </div>
 
-        <div id="team" <%= "style=display:none;" unless ["Leader", "Subleader", "Staff"].include? @user.position %>>
-          <br>
-          <%= select_tag :group_select, options_for_select(Group.all.map { |group| [group.name, group.id] }, @user.team.try(:group).try(:id)) %>
-          <%= f.select :team_id, @user.team.nil? ? (Group.first.nil? ? [] : Group.first.teams.map { |team| [team.name, team.id ] }) : @user.team.group.teams.map { |team| [team.name, team.id ] } %>
-        </div>
-      </td>
-    </tr>
+          <div id="team" <%= "style=display:none;" unless ["Leader", "Subleader", "Staff"].include? @user.position %>>
+            <br>
+            <%= select_tag :group_select, options_for_select(Group.all.map { |group| [group.name, group.id] }, @user.team.try(:group).try(:id)) %>
+            <%= f.select :team_id, @user.team.nil? ? (Group.first.nil? ? [] : Group.first.teams.map { |team| [team.name, team.id ] }) : @user.team.group.teams.map { |team| [team.name, team.id ] } %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
   </table>
   <div class="form-actions">
     <%= link_to t(:button_index, scope: [:views, :labels]), url_for(action: :index), class: "btn" %>

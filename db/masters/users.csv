@@ -15,3 +15,5 @@ id,email,display_name,password,position,team_id
 14,nguyen.van.tan@framgia.com,Nguyen Van Tan,123456,Subleader,6
 15,tran.thi.ngoc.bich@framgia.com,Tran Thi Ngoc Bich,123456,Leader,7
 16,do.trung.kien@framgia.com,Do Trung Kien,123456,Leader,8
+17,vu.xuan.dung@framgia.com,Vu Xuan Dung,123456,Manager,
+18,nguyen.thi.minh.ngoc@framgia.com,Nguyen Thi Minh Ngoc,123456,Manager,

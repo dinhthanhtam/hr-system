@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   #attr_accessible :email, :password, :password_confirmation, :remember_me, :cardID, :display_name, :team_id, :position, :user_roles_attributes, :group_users_attributes
   # attr_accessible :title, :body
   validates :position, presence: true
+  validates :user_roles, presence: true
 
   has_many :reports
   has_many :user_roles
