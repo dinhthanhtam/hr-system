@@ -4,7 +4,7 @@ class ReportsController < BaseController
   
   def index
     respond_to do |format|
-      @report = Report.new
+      create_object
       format.html
     end
   end
@@ -67,7 +67,8 @@ private
   def create_object
     super
     @report.user = current_user
-    report_date = params[:report][:report_date].to_date || Date.today
+    report_date = params[:report][:report_date].to_date if params[:report]
+    report_date ||= Date.today
     @report.report_date = report_date
     @report.week = report_date.cweek
     @report.month = report_date.month
@@ -79,6 +80,6 @@ private
   end
     
   def model_params
-     params.require(:report).permit(:report_category_id, :title, :description, :support_users) if params[:report]
+     params.require(:report).permit(:report_category_id, :title, :description, :support_users, :report_date) if params[:report]
   end
 end
