@@ -117,3 +117,6 @@ en:
         <<: *report
       user:
         <<: *user
+  errors:
+    messages:
+      in_valid: "Invalid"

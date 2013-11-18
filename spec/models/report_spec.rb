@@ -5,10 +5,11 @@ describe Report do
     User.destroy_all
     Report.destroy_all
   end
-
-  let(:user) { FactoryGirl.create :user }
+  let(:role) { FactoryGirl.create :role }
+  let(:user) { FactoryGirl.create(:user, user_roles_attributes: [{ role_id: role.id }]) }
   let(:report_category) { FactoryGirl.create :report_category }
-  let(:report) { FactoryGirl.create(:report, user_id: user.id, report_category_id: report_category.id) }
+  let(:report) { FactoryGirl.create(:report, user_id: user.id, report_category_id: report_category.id,
+                                    title: "Title", description: "Description", report_date: Date.today) }
 
   subject { report }
 
@@ -37,10 +38,33 @@ describe Report do
     end
     context "Report hasn't add sticky" do
       before do
-        user_2 = FactoryGirl.create(:user, email: "test@test.com")
+        user_2 = FactoryGirl.create(:user, email: "test@test.com", user_roles_attributes: [{ role_id: 1 }])
         FactoryGirl.create(:sticky, user_id: user_2.id, report_id: report.id)
       end
       it { report.is_stickied?(user.id).should be_false }
+    end
+  end
+
+  describe "#valid_report_date" do
+    context "When report_date valid" do
+      before do
+        report.update_attributes(report_date: Date.today, week: Date.today.cweek - 1, year: Date.today.year)
+      end
+      it { should be_valid }
+    end
+    context "When report invalid" do
+      context "Not in current_week" do
+        before do
+          report.update_attributes(report_date: Date.today - 6, week: Date.today.cweek - 1, year: Date.today.year)
+        end
+        it { should_not be_valid }
+      end
+      context "Report_date out of date" do
+        before do
+          report.update_attributes(report_date: Date.today + 1, week: (Date.today + 1).cweek, year: Date.today.year)
+        end
+        it { should_not be_valid }
+      end
     end
   end
 end

@@ -10,6 +10,8 @@ class Report < ActiveRecord::Base
   validates :month, length: { maximum: 12, minimum: 1 }
   validates :title, presence: true
   validates :description, presence: true
+  validate :report_date, presence: true
+  validate :valid_report_date
 
   scope :in_week, ->(week) { where(week: week) }
   scope :in_month, ->(month) { where(month: month) }
@@ -33,4 +35,9 @@ class Report < ActiveRecord::Base
     self.stickies.where(user_id: user_id).any?
   end
 
+  def valid_report_date
+    errors.add(:report_date, I18n.t(:in_valid, scope: [:errors, :messages])) if
+      (DateTime.now().cweek != report_date.cweek || !((1..5).include? report_date.wday) ||
+      report_date > DateTime.now())
+  end
 end

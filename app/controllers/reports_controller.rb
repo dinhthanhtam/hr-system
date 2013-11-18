@@ -26,7 +26,9 @@ class ReportsController < BaseController
       if @report.save
         format.html { redirect_to reports_path, notice: I18n.t(:create_success, scope: [:views, :messages], model: model_name) }
       else
-        format.html { redirect_to reports_path, error: I18n.t(:create_failed, scope: [:views, :messages], model: model_name) }
+        @search = Report.search(params[:q])
+        @reports = @search.result.paginate(page: params[:page],per_page: params[:per_page])
+        format.html { render "index" }
       end
     end
   end
@@ -65,11 +67,11 @@ private
   def create_object
     super
     @report.user = current_user
-    today = Date.today
-    @report.report_date = today
-    @report.week = today.cweek
-    @report.month = today.month
-    @report.year = today.year
+    report_date = params[:report][:report_date].to_date || Date.today
+    @report.report_date = report_date
+    @report.week = report_date.cweek
+    @report.month = report_date.month
+    @report.year = report_date.year
   end
 
   def check_editable?
