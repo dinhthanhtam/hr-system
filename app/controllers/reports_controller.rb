@@ -26,7 +26,7 @@ class ReportsController < BaseController
       if @report.save
         format.html { redirect_to reports_path, notice: I18n.t(:create_success, scope: [:views, :messages], model: model_name) }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to reports_path, error: I18n.t(:create_failed, scope: [:views, :messages], model: model_name) }
       end
     end
   end

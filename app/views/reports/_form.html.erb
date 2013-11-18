@@ -4,8 +4,12 @@
       <th width= "15%"><%= f.label :categoty_id %></th>
       
       <td>
-        <% ReportCategory.all.each do |category| %>
-          <%= f.radio_button :report_category_id, category.id %> &nbsp; <%= category.name %>
+        <% ReportCategory.all.each_with_index do |category, index| %>
+          <% if @report.report_category_id.blank? && index ==0 %>
+            <%= f.radio_button :report_category_id, category.id ,checked: true %> &nbsp; <%= f.label "report_category_id_#{category.id}", category.name %>
+          <% else %>
+            <%= f.radio_button :report_category_id, category.id %> &nbsp; <%= f.label "report_category_id_#{category.id}", category.name %>
+          <% end %>
         <% end %>
       </td>
     </tr>

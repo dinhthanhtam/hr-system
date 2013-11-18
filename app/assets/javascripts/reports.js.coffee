@@ -4,9 +4,6 @@ $ ->
   mapping = {}
   i = 0
 
-
-
-
   $.ajax "/users/get_all_user",
     type: "GET",
     dataType: "json"

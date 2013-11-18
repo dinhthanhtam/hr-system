@@ -53,16 +53,15 @@
 
   <% else %>
     <ul id = "head_nav" class="nav nav-tabs">
-      <li class="<%= params["commit"].present? ? '' : 'active' %>" ><a href="#create_report" data-toggle="tab">New Report</a></li>
-      <li class="<%= params["commit"].present? ? 'active' : '' %>"><a href="#search_report" data-toggle="tab">Search</a></li>
+      <li class="<%= (params["commit"].present? || params["clear"].present?) ? '' : 'active' %>" ><a href="#create_report" data-toggle="tab">New Report</a></li>
+      <li class="<%= (params["commit"].present? || params["clear"].present?) ? 'active' : '' %>"><a href="#search_report" data-toggle="tab">Search</a></li>
     </ul>
 
     <div id="myTabContent" class="tab-content">
-      <div class="tab-pane <%= params["commit"].present? ? '' : 'active' %>" id="create_report"><%= render partial: "form" %></div>
-      <div class="tab-pane <%= params["commit"].present? ? 'active' : '' %>" id="search_report"><%= render partial: "search" %></div>
+      <div class="tab-pane <%= (params["commit"].present? || params["clear"].present?) ? '' : 'active' %>" id="create_report"><%= render partial: "form" %></div>
+      <div class="tab-pane <%= (params["commit"].present? || params["clear"].present?) ? 'active' : '' %>" id="search_report"><%= render partial: "search" %></div>
     </div>
   <% end %>
-  
   
   <table class="itemList table-bordered" id="list_report">
     <% current_year = nil %>
