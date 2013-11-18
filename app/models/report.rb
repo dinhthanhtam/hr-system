@@ -8,6 +8,8 @@ class Report < ActiveRecord::Base
   validates :user, :report_category, presence: true
   validates :week, length: { maximum: 53, minimum: 0 }
   validates :month, length: { maximum: 12, minimum: 1 }
+  validates :title, presence: true
+  validates :description, presence: true
 
   scope :in_week, ->(week) { where(week: week) }
   scope :in_month, ->(month) { where(month: month) }
