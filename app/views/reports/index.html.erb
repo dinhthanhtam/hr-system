@@ -46,20 +46,19 @@
     <ul id = "head_nav" class="nav nav-tabs">
       <li class="active"><a href="#search_report" data-toggle="tab">Search</a></li>
     </ul>
-
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active" id="search_report"><%= render partial: "search" %></div>
     </div>
 
   <% else %>
     <ul id = "head_nav" class="nav nav-tabs">
-      <li class="<%= (params["commit"].present? || params["clear"].present?) ? '' : 'active' %>" ><a href="#create_report" data-toggle="tab">New Report</a></li>
-      <li class="<%= (params["commit"].present? || params["clear"].present?) ? 'active' : '' %>"><a href="#search_report" data-toggle="tab">Search</a></li>
+      <li class="<%= 'active' if (params[:commit] == 'Create' || !(params[:clear] || params[:commit])) %>" ><a href="#create_report" data-toggle="tab">New Report</a></li>
+      <li class="<%= 'active' if params[:clear] || params[:commit] == 'Search' %>"><a href="#search_report" data-toggle="tab">Search</a></li>
     </ul>
 
     <div id="myTabContent" class="tab-content">
-      <div class="tab-pane <%= (params["commit"].present? || params["clear"].present?) ? '' : 'active' %>" id="create_report"><%= render partial: "form" %></div>
-      <div class="tab-pane <%= (params["commit"].present? || params["clear"].present?) ? 'active' : '' %>" id="search_report"><%= render partial: "search" %></div>
+      <div class="tab-pane  <%= 'active'if (params[:commit] == 'Create' || !(params[:clear] || params[:commit])) %>" id="create_report"><%= render partial: "form" %></div>
+      <div class="tab-pane <%= 'active' if params[:clear] || params[:commit] == 'Search' %>" id="search_report"><%= render partial: "search" %></div>
     </div>
   <% end %>
   
@@ -101,7 +100,7 @@
           <td style="border-bottom: none;"></td>
         </tr>
       <% end %>
-      <tr data-id = "<%= report.id %>" <%= "style=color:orange" if report.in_current_week? %>>
+      <tr data-id = "<%= report.id %>" <%= "style=color:blue" if report.in_current_week? %>>
         <td style="border-bottom: none; border-top: none;"></td>
         <% if is_change_day %>
           <td <%= "rowspan=#{@reports.select { |r| r.report_date == current_day }.length}"%>>
@@ -117,7 +116,7 @@
           <%= report.report_category.name %>
         </td>
         <td><%= report.title %></td>
-        <td><a style="color: <%= report.in_current_week? ? :orange : :black %>" href="<%= url_for(action: :show, id: report.id) %>"><%= report.description %></a></td>
+        <td><a style="color: <%= report.in_current_week? ? :blue : :black %>" href="<%= url_for(action: :show, id: report.id) %>"><%= truncate(report.description, length: 90) %></a></td>
         <td>
           <% if can? :update, report %>
             <%= link_to_if(report.in_current_week?, t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: report.id), class: "btn btn-primary btn-mini") {} %>

@@ -1,5 +1,7 @@
 <%= form_for @report_category, url: {action: @report_category.new_record? ? :create : :update} do |f| %>
 
+  <%= render partial: "errors", locals: {object: @report_category} %>
+
   <table class="formTbl contents">
     <tr>
       <th><%= f.label :name %></th>

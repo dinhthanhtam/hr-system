@@ -14,6 +14,9 @@ FactoryGirl.define do
     name "Member"
   end
 
+  factory :user_role do
+  end
+
   factory :group do
     name "Group"
   end
@@ -28,8 +31,12 @@ FactoryGirl.define do
 
   factory :report do
     user_id 1
-    week 1
-    month 1
+    title "Title"
+    description "Description"
+    report_date Date.today
+    week Date.today.cweek
+    month Date.today.month
+    year Date.today.year
   end
 
   factory :sticky do

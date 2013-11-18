@@ -89,5 +89,13 @@ $ ->
     e.preventDefault()
     $(this).tab "show"
 
+  $("#report_report_date").datepicker()
 
-
+  $(document).on "click", "#report_report_date", ->
+    currDay = new Date
+    firstDiff = currDay.getDate() - currDay.getDay() + 1
+    mon = new Date(currDay.setDate(firstDiff))
+    fri = new Date(currDay.setDate(firstDiff + 4))
+    $(this).datepicker format: "yyyy-mm-dd"
+    $(this).datepicker("setStartDate", mon)
+    $(this).datepicker("setEndDate", fri)

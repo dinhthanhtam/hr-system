@@ -4,8 +4,8 @@ describe User do
   before do
     User.destroy_all
   end
-
-  let(:user) { FactoryGirl.create :user }
+  let(:role) { FactoryGirl.create :role }
+  let(:user) { FactoryGirl.create(:user, user_roles_attributes: [{ role_id: role.id }]) }
 
   describe "reported?" do
     context "Had been write report in week" do

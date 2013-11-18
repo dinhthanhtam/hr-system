@@ -9,6 +9,7 @@
 User.where("position in (?)", ["Leader", "Subleader", "Member"]).each do |user|
   50.times do |i|
     date = Date.new(rand(2) + 2012, rand(12) + 1, rand(28) + 1)
-    user.reports.create(title: "Report for some thing", description: "Let wirte some thing here", report_category_id: ReportCategory.all[rand(ReportCategory.count)].id, year: date.year, week: date.cweek, month: date.month, report_date: date) if date < Date.today
+    report = user.reports.new(title: "Report for some thing", description: "Let wirte some thing here", report_category_id: ReportCategory.all[rand(ReportCategory.count)].id, year: date.year, week: date.cweek, month: date.month, report_date: date)
+    report.save(validate: false) if date < Date.today
   end 
 end

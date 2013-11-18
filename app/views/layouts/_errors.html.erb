@@ -1,0 +1,11 @@
+<% if object && object.errors.any? %>
+  <div id="error_explanation" class="alert alert-error">
+    <h2><%= t :header, model: object.class.model_name.human, count: object.errors.count, scope: [:errors, :template] %></h2>
+    <p><%= t :body, scope: [:errors, :template] %></p>
+    <ul>
+      <% object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
