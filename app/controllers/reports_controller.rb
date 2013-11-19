@@ -59,6 +59,33 @@ class ReportsController < BaseController
     end
   end
 
+  def get_reports_by_user
+    if params[:from].present? || params[:to].present?
+      @report = Report.where(user_id: params[:user_id]).group_by_years.range_of_report(params[:from], params[:to]).count(group: params[:report_type])
+    else
+      @report = Report.where(user_id: params[:user_id], year: Date.today.year).group_by_years.count(group: params[:report_type])
+    end
+
+    date = []
+    if @report.present? && params[:report_type] == "month"
+      @report.each do |r|
+        date<< [Date::MONTHNAMES[r[0][1]].to_s + "," + r[0][0].to_s, r[1]]
+      end
+    elsif params[:report_type] == "week"
+      @report.each do |r|
+        date<< [ Date.commercial(r[0][0], r[0][1], 1) , r[1]]
+      end
+    end
+    
+    respond_to do |format|
+      format.json { render json: date }
+    end
+  end
+
+  def charts
+    @report = Report.new
+  end
+
 private
   def ordering(search)
     (params[:member_id].present? ? User.find(params[:member_id]) : current_user).reports.order("report_date DESC")
