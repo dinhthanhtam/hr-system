@@ -24,8 +24,9 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :user_roles, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :group_users, allow_destroy: true, reject_if: :all_blank
 
-  scope :not_report_last_week, -> { where("id not in (?)", Report.last_week_reports.select("user_id").to_sql) }
-  scope :in_teams, ->(team_ids) { where("team_id in (?)", team_ids) unless team_ids.nil? }
+  scope :not_report_last_week, -> { where("users.id not in (#{Report.last_week_reports.select('user_id').to_sql})") }
+  scope :not_report_current_week, -> { where("users.id not in (#{Report.current_week_reports.select('user_id').to_sql})") }
+  scope :in_teams, ->(team_ids) { where("users.team_id in (?)", team_ids) unless team_ids.nil? }
   scope :reporters, -> { joins(:user_roles => :role).where("roles.name in (?)", ["Leader", "Member"]).uniq }
 
   def reported?
@@ -47,6 +48,10 @@ class User < ActiveRecord::Base
 
   def is_manager?
     ["Manager", "Submanager"].include? position
+  end
+
+  def is_hr?
+    roles.map(&:name).include? Settings.role.hr
   end
 
   private
