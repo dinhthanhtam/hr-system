@@ -40,6 +40,7 @@
   <% end %>
   <div class="ctsTit">
     <h2><%= h2_label %></h2>
+    <nav><%= link_to t(:button_charts, scope: [:views, :labels]), url_for(action: :charts), class: "btn btn-warning" %></nav>
   </div>
 
   <% if current_user.position == "Manager" %>
