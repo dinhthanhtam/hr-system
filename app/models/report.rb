@@ -26,6 +26,7 @@ class Report < ActiveRecord::Base
   
   scope :current_week_reports, -> { in_year(Date.today.year).in_week(Date.today.cweek) }
   scope :last_week_reports, -> { in_year(Date.today.year).in_week(Date.today.cweek - 1) }
+  scope :range_of_report, ->(from,to) { where("report_date BETWEEN ? and ?", from, to) }
 
   def in_current_week?
     Date.today.cweek == week && Date.today.year == year

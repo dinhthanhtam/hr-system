@@ -91,6 +91,53 @@ $ ->
 
   $("#report_report_date").datepicker format: "yyyy-mm-dd"
 
+  $(document).on "click", "#view_charts", ->
+    $.ajax "/reports/get_reports_by_user",
+    type: "POST",
+    data: {user_id: $("#user_id").val(),report_type: $("#report_type").val(),from: $("#report_from").val(),to: $("#report_to").val()},
+    dataType: "json"
+    success: (data) ->
+      x_values = []
+      y_values = []
+      $.each data,(index) ->
+        x_values.push data[index][0]
+        y_values.push data[index][1]
+      $("#container").highcharts
+        title:
+          text: "Daily Report"
+          x: -20 #center
+
+        subtitle:
+          text: "Framgia.com"
+          x: -20
+
+        xAxis:
+          categories: x_values
+
+        yAxis:
+          title:
+            text: "Report (times)"
+
+          plotLines: [
+            value: 0
+            width: 1
+            color: "#808080"
+          ]
+
+        tooltip:
+          valueSuffix: " times"
+
+        legend:
+          layout: "vertical"
+          align: "right"
+          verticalAlign: "middle"
+          borderWidth: 0
+
+        series: [
+          name: "Report"
+          data: y_values
+        ]
+
   $(document).on "click", "#report_report_date", ->
     currDay = new Date
     firstDiff = currDay.getDate() - currDay.getDay() + 1
