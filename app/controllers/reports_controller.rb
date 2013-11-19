@@ -80,6 +80,6 @@ private
   end
     
   def model_params
-     params.require(:report).permit(:report_category_id, :title, :description, :support_users, :report_date) if params[:report]
+     params.require(:report).permit(:report_category_id, :title, :description, :report_date, support_users_attributes: [:id, :user_id, :report_id, :_destroy]) if params[:report]
   end
 end
