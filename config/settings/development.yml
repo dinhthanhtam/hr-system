@@ -1,3 +1,10 @@
 carrierwave:
   storage: :file
   store_dir: uploads
+links:
+  home: http://192.168.1.89
+  framgia: https://framgia.com
+  facebook: https://www.facebook.com/FramgiaVietnam?ref=hl
+mails:
+  hr: framgiatest@gmail.com
+
