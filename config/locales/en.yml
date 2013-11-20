@@ -38,6 +38,16 @@ en:
         team: "Team name"
         group: "Group name"
         role: "Role"
+      project: &project
+        name: "Project name"
+        description: "Project description"
+        member: "Project member"
+        url: "Project url"
+        is_publish: "Publish"
+        state: "Project state"
+        start_date: "Start date"
+        due_date: "Due date"
+        end_date: "End date"
   views:
     labels:
       manager: "Manager"
@@ -53,6 +63,9 @@ en:
       button_report: "Report"
       button_favourites: "Favourite"
       button_charts: "Charts"
+      button_prepare: "Prepare"
+      button_active: "Active"
+      button_finish: "Finish"
       confirm_delete: "Do you want to delete it ?"
       sticky: "Do you want to sticky it ?"
       unsticky: "Do you want to unsticky it ?"
@@ -104,6 +117,13 @@ en:
         new: "User New"
         update: "User Update"
         create: "User Create"
+      project:
+        index: "Project Index"
+        show: "Project Detail"
+        edit: "Project Edit"
+        new: "Project New"
+        update: "Project Update"
+        create: "Project Create"
   mailers:
     subjects:
       notice_write_report: "Notice for writing report at current week"

@@ -1,0 +1,66 @@
+<%= form_for @project, url: {action: @project.new_record? ? :create : :update} do |f| %>
+
+  <%= render partial: "errors", locals: {object: @project} %>
+
+  <table class="formTbl contents">
+    <tr>
+      <th width="15%"><%= f.label :name %></th>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :description %></th>
+      <td><%= f.text_area :description, cols: 100, rows: 5 %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :url %></th>
+      <td><%= f.text_field :url %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :member %></th>
+      <td>
+        <%= text_field_tag :tags %>
+        <div class="tag-badge">
+          <% if @project.project_users.present? %>
+            <% @project.project_users.each do |user| %>
+              <span class="tag-name"><%= User.find(user.user_id).display_name %>&nbsp;<img class="clear_support" src="/assets/ico_tag_delete.png" data-id = "<%= user.user_id %>"></span>
+            <% end %>
+          <% end %>
+        </div>
+        <input id="support_users" data-name_nested_attributes="project[project_users_attributes]" name="project_users" style="display:none;" value="<%= @project.users.map(&:id).join(",") %>">
+        <div id = "div_support_users">
+          <% @project.project_users && @project.project_users.each_with_index do |project_user, i| %>
+            <%= render "project_user_fields", {project_user: project_user, f: f , id: project_user.user_id, time: Time.now.to_i} %>
+          <% end %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th></th>
+      <td><%= f.check_box :is_publish %> <%= f.label :is_publish %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :start_date %></th>
+      <td><%= f.text_field :start_date, class: "datepicker" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :due_date %></th>
+      <td><%= f.text_field :due_date, class: "datepicker" %></td>
+    </tr>
+  </table>
+  <div class="form-actions">
+    <% if @project.preparable? %>
+      <%= f.button t(:button_prepare, scope: [:views, :labels]), class: "btn btn-primary" %>
+    <% end %>
+    <% if @project.activatable? %>
+      <%= f.button t(:button_active, scope: [:views, :labels]), class: "btn btn-warning", name: "#{model_name.underscore}[state_event]", value: "activate" %>
+    <% end %>
+    <% if @project.finishable? %>
+      <%= f.button t(:button_finish, scope: [:views, :labels]), class: "btn btn-primary", name: "#{model_name.underscore}[state_event]", value: "finish" %>
+    <% end %>
+    <% unless @project.new_record? %>
+      <%= link_to_if(@project.deletable?, t(:button_delete, scope: [:views, :labels]),
+          url_for(action: :destroy, id: @project.id), confirm: t(:delete_confirm, scope: [:views, :messages]),
+          method: :delete, class: "btn btn-danger") {} %>
+    <% end %>
+  </div>
+<% end %>
