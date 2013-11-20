@@ -1,0 +1,35 @@
+<selection id="cost_index">
+  <div class="ctsTit">
+    <h2><%= h2_label %></h2>
+    <nav>
+      <%= link_to t(:new, scope: [:views, :pages]), url_for(action: :new), class: "btn btn-small btn-warning" %>
+    </nav>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th><%= model.human_attribute_name :project %></th>
+        <th><%= model.human_attribute_name :week %></th>
+        <th><%= model.human_attribute_name :year %></th>
+        <th><%= model.human_attribute_name :cost %></th>
+        <th width = "11%"></th>
+      </tr>
+    </thead>
+    <% @costs.each do |cost| %>
+      <tr>
+        <td><%= cost.project.name %></td>
+        <td><%= cost.week %></td>
+        <td><%= cost.year %></td>
+        <td><%= cost.cost %></td>
+        <td>
+          <%= link_to t(:button_detail, scope: [:views, :labels]), url_for(action: :show, id: cost.id), class: "btn btn-mini" %>
+          <%= link_to t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: cost.id), class: "btn btn-primary btn-mini" %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <div class="pagination">
+    <div class="paginate-box no_print"><%= will_paginate @costs %></div>
+  </div>
+</selection>

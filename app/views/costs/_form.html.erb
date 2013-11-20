@@ -1,0 +1,19 @@
+<%= form_for @cost, url: {action: @cost.new_record? ? :create : :update} do |f| %>
+
+  <%= render partial: "errors", locals: {object: @cost} %>
+
+  <table class="formTbl contents">
+    <tr>
+      <th><%= f.label :week %></th>
+      <td><%= text_field_tag :week , "", class: "datepicker"%></td>
+    </tr>
+    <tr>
+      <th><%= f.label :cost %></th>
+      <td><%= f.text_field :cost %></td>
+    </tr>
+    
+  </table>
+  <div class="form-actions">
+    <%= f.submit @cost.new_record? ? "Create" : "Edit", class:"btn btn-primary" %>
+  </div>
+<% end %>

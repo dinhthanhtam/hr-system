@@ -33,7 +33,10 @@ class Ability
       can [:index], User do |current|
         user.team_id == current.team.id
       end
-
+      can [:index, :new, :create], Cost
+      can [:edit, :update, :destroy, :show], Cost do |cost|
+        user.id == cost.user_id
+      end
       can :manage, Sticky
     else
       can :manage, Sticky
@@ -42,6 +45,10 @@ class Ability
       end
       can :manage, Report do |report|
         user.id == report.user_id
+      end
+      can [:index, :new, :create], Cost
+      can [:edit, :update, :destroy], Cost do |cost|
+        user.id == cost.user_id
       end
     end
   end
