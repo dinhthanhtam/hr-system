@@ -2,7 +2,7 @@ class CreateProjects < ActiveRecord::Migration
   def change
     create_table :projects do |t|
       t.string :name
-      t.string :description
+      t.text :description
       t.integer :parent_id
       t.string :url
       t.boolean :is_publish

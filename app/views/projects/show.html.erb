@@ -1,0 +1,58 @@
+<selection id="project_show">
+  <div class="ctsTit">
+    <h2><%= h2_label %></h2>
+  </div>
+
+  <table class="formTbl contents">
+    <tbody>
+      <tr>
+        <th width="15%"><%= model.human_attribute_name :name %></th>
+        <td><%= @project.name %></td>
+      </tr>
+      <tr>
+        <th><%= model.human_attribute_name :member %></th>
+        <td>
+          <% @project.users.each do |user| %>
+            <div style="display: inline-block;">
+              <%= link_to image_tag(user.avatar_url, class: "avatar", alt: "No image"), url_for(action: :show, id: user.id), data: user.display_name %>
+            </div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <th><%= model.human_attribute_name :description %></th>
+        <td><%= @project.description %></td>
+      </tr>
+      <tr>
+        <th><%= model.human_attribute_name :url %></th>
+        <td><%= @project.url %></td>
+      </tr>
+      <tr>
+        <th><%= model.human_attribute_name :is_publish %></th>
+        <td><%= @project.is_publish %></td>
+      </tr>
+      <tr>
+        <th><%= model.human_attribute_name :state %></th>
+        <td><%= @project.state %></td>
+      </tr>
+      <tr>
+        <th><%= model.human_attribute_name :start_date %></th>
+        <td><%= @project.start_date %></td>
+      </tr>
+      <tr>
+        <th><%= model.human_attribute_name :due_date %></th>
+        <td><%= @project.due_date %></td>
+      </tr>
+      <tr>
+        <th><%= model.human_attribute_name :end_date %></th>
+        <td><%= @project.end_date %></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="form-actions">
+    <%= link_to t(:button_index, scope: [:views, :labels]), url_for(action: :index), class: "btn" %>
+    <%= link_to_if(@project.editable?, t(:button_edit, scope: [:views, :labels]), url_for(action: :edit), class: "btn btn-primary") {} %>
+    <%= link_to_if(@project.deletable?, t(:button_delete, scope: [:views, :labels]), url_for(action: :destroy), confirm: t(:delete_confirm, scope: [:views, :messages]), method: :delete, class: "btn btn-danger") {} %>
+  </div>
+
+</section>

@@ -55,10 +55,11 @@ $ ->
       ids = $("#support_users").val().replace("[","").replace("]","").split(',')
       id = mapping[ui.item.value]
       times = new Date().getTime()
+      name_nested_attributes = $("#support_users").data("name_nested_attributes")
       if $.inArray(id.toString(), ids) < 0
         ids.push id
         $("div.tag-badge").append('<span class="tag-name">' + ui.item.value + '&nbsp;<img class="clear_support" src="/assets/ico_tag_delete.png" data-id = "' + id + '"></span>')
-        $("#div_support_users").append('<input type = "hidden" id ="support_' + id + '" name="report[support_users_attributes][' + id + '][user_id]" value="' + id + '">')
+        $("#div_support_users").append('<input type = "hidden" id ="support_' + id + '" name="' + name_nested_attributes + '[' + id + '][user_id]" value="' + id + '">')
       terms = split(@value)
       # remove the current input
       terms.pop()

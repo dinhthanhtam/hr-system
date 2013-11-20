@@ -72,3 +72,6 @@ gem 'unicorn'
 
 # To use debugger
 gem 'debugger'
+
+# state machine
+gem 'state_machine'

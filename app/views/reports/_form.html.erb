@@ -18,7 +18,8 @@
     </tr>
     <tr style= "display:none;" id = "tr_user_support">
       <th><%= f.label :user_name %></th>
-      <td><%= text_field_tag :tags %>
+      <td>
+        <%= text_field_tag :tags %>
         <div class="tag-badge">
           <% if @report.support_users.present? %>
             <% @report.support_users.each do |user| %>
@@ -26,13 +27,12 @@
             <% end %>
           <% end %>
         </div>
-        <%= hidden_field_tag :support_users,@report.support_users.present? ? @report.support_users.pluck(:user_id).join(',') : "" %>
+        <%= hidden_field_tag :support_users, @report.support_users.present? ? @report.support_users.pluck(:user_id).join(',') : "", "data-name_nested_attributes" => "report[support_users_attributes]" %>
         <div id = "div_support_users">
           <% @report.support_users && @report.support_users.each_with_index do |support_user, i| %>
             <%= render "support_users_fields", {support_user: support_user, f: f , id: support_user.user_id, time: Time.now.to_i} %>
           <% end %>
         </div>
-        
       </td>
     </tr>
     <tr>

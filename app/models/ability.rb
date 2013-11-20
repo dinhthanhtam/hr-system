@@ -5,6 +5,7 @@ class Ability
     user ||= User.new
 
     if user.roles.detect{|r|r.name == "Manager"}
+      can :manage, Project
       can :manage, User
       can :manage, ReportCategory
       can :manage, Group
