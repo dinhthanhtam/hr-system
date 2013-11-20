@@ -21,13 +21,17 @@
       <td><%= text_field_tag :tags %>
         <div class="tag-badge">
           <% if @report.support_users.present? %>
-            <% users = @report.support_users.split(",") %>
-            <% users.each do |user| %>
-              <span class="tag-name"><%= user %>&nbsp;<img class="clear_support" src="/assets/ico_tag_delete.png" data-id = "<%= user %>"></span>
+            <% @report.support_users.each do |user| %>
+              <span class="tag-name"><%= User.find(user.user_id).display_name %>&nbsp;<img class="clear_support" src="/assets/ico_tag_delete.png" data-id = "<%= user.user_id %>"></span>
             <% end %>
           <% end %>
         </div>
-        <%= f.hidden_field :support_users %>
+        <%= hidden_field_tag :support_users,@report.support_users.present? ? @report.support_users.pluck(:user_id).join(',') : "" %>
+        <div id = "div_support_users">
+          <% @report.support_users && @report.support_users.each_with_index do |support_user, i| %>
+            <%= render "support_users_fields", {support_user: support_user, f: f , id: support_user.user_id, time: Time.now.to_i} %>
+          <% end %>
+        </div>
         
       </td>
     </tr>

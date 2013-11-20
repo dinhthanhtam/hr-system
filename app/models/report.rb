@@ -4,6 +4,7 @@ class Report < ActiveRecord::Base
   belongs_to :report_category
   belongs_to :user
   has_many :stickies
+  has_many :support_users
 
   validates :user, :report_category, presence: true
   validates :week, length: { maximum: 53, minimum: 0 }
@@ -27,6 +28,8 @@ class Report < ActiveRecord::Base
   scope :current_week_reports, -> { in_year(Date.today.year).in_week(Date.today.cweek) }
   scope :last_week_reports, -> { in_year(Date.today.year).in_week(Date.today.cweek - 1) }
   scope :range_of_report, ->(from,to) { where("report_date BETWEEN ? and ?", from, to) }
+
+  accepts_nested_attributes_for :support_users, allow_destroy: true, reject_if: :all_blank
 
   def in_current_week?
     Date.today.cweek == week && Date.today.year == year

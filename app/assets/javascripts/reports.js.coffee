@@ -52,12 +52,13 @@ $ ->
       false
 
     select: (event, ui) ->
-      ids = $("#report_support_users").val().replace("[","").replace("]","").split(',')
-      id = ui.item.value
-
+      ids = $("#support_users").val().replace("[","").replace("]","").split(',')
+      id = mapping[ui.item.value]
+      times = new Date().getTime()
       if $.inArray(id.toString(), ids) < 0
         ids.push id
-        $("div.tag-badge").append('<span class="tag-name">' + id + '&nbsp;<img class="clear_support" src="/assets/ico_tag_delete.png" data-id = "' + id + '"></span>')
+        $("div.tag-badge").append('<span class="tag-name">' + ui.item.value + '&nbsp;<img class="clear_support" src="/assets/ico_tag_delete.png" data-id = "' + id + '"></span>')
+        $("#div_support_users").append('<input type = "hidden" id ="support_' + id + '" name="report[support_users_attributes][' + id + '][user_id]" value="' + id + '">')
       terms = split(@value)
       # remove the current input
       terms.pop()
@@ -68,22 +69,24 @@ $ ->
       ids = ids.join(",")
       if ids.match("^,")
         ids = ids.substring(1);
-      $("#report_support_users").val(ids)
+      $("#support_users").val(ids)
       terms.push ""
       
       @value = ""
       false
   $(document).on "click", ".clear_support", ->
-    ids = $("#report_support_users").val().replace("[","").replace("]","").split(',')
+    ids = $("#support_users").val().replace("[","").replace("]","").split(',')
     id = $(this).data("id")
     index = $.inArray(id.toString(), ids);
     if index >= 0
       ids.splice(index, 1)
       $(this).closest("span.tag-name").remove()
+      $("#div_support_users").find("input[id = 'support_#{id}']").remove()
+      $("#div_support_users").find("div[id = 'div_#{id}']").find("input[name *= '_destroy']").val("1")
     ids = ids.join(",")
     if ids.match("^,")
       ids = ids.substring(1);
-    $("#report_support_users").val(ids)
+    $("#support_users").val(ids)
 
   $(document).on "click", "#head_nav a", (e)->
     e.preventDefault()
