@@ -70,6 +70,11 @@ namespace :delayed_job do
 end
 
 namespace :whenever do
+  desc "clear crontab"
+  task :clear, roles: :app do
+    run "cd #{current_path}; RAILS_ENV=#{rails_env} whenever --clear-crontab"
+  end
+
   desc "update crontab"
   task :update, roles: :app do
     run "cd #{current_path}; RAILS_ENV=#{rails_env} whenever --update-crontab"
@@ -78,8 +83,9 @@ end
 
 after 'deploy:update', 'symlink', 'deploy:cleanup'
 after 'deploy:stop', 'delayed_job:stop'
-after 'deploy:start', 'whenever:update', 'delayed_job:start'
-after 'deploy:restart', 'whenever:update', 'delayed_job:restart'
+after 'deploy:start', 'whenever:clear', 'delayed_job:start'
+after 'deploy:restart', 'whenever:clear', 'delayed_job:restart'
+after 'whenever:clear', 'whenever:update'
 
 # for staging
 # backup data
