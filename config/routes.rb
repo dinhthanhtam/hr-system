@@ -6,6 +6,7 @@ HrSystem::Application.routes.draw do
     post :get_reports_by_user, on: :collection
   end
   resources :report_categories
+  
   resources :stickies
   resources :users do
     get :get_team, on: :collection
@@ -16,7 +17,9 @@ HrSystem::Application.routes.draw do
     resources :teams
   end
 
-  resources :projects
+  resources :projects do
+    resources :costs
+  end
 
   root to: "users#index"
   # The priority is based upon order of creation:
