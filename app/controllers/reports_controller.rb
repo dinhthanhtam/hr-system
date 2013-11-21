@@ -88,6 +88,7 @@ class ReportsController < BaseController
 
 private
   def ordering(search)
+    params[:member_id] = nil if current_user.is_staff? || current_user.is_hr?
     (params[:member_id].present? ? User.find(params[:member_id]) : current_user).reports.order("report_date DESC")
   end
 

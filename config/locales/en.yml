@@ -20,7 +20,7 @@ en:
       report_category: &report_category
         <<: *common_attr
         name: "Report Category Name"
-      reports: &report
+      report: &report
         <<: *common_attr
         category_id: "Category"
         user_id: "User"

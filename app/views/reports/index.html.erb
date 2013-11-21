@@ -39,21 +39,22 @@
     </table>
   <% end %>
 
-  <% unless current_user.is_hr? %>
+  <% unless current_user.is_hr? || @reports.empty? %>
     <div class="ctsTit">
       <h2><%= h2_label %></h2>
       <nav><%= link_to t(:button_charts, scope: [:views, :labels]), url_for(action: :charts), class: "btn btn-warning" %></nav>
     </div>
   <% end %>
 
-  <% if current_user.is_manager? && !current_user.is_hr? %>
+  <% if !current_user.is_reporter? && @reports.any? %>
     <ul id = "head_nav" class="nav nav-tabs">
       <li class="active"><a href="#search_report" data-toggle="tab">Search</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active" id="search_report"><%= render partial: "search" %></div>
     </div>
-  <% elsif !current_user.is_hr? %>
+  <% end %>
+  <% if current_user.is_reporter? %>
     <ul id = "head_nav" class="nav nav-tabs">
       <li class="<%= 'active' if (params[:commit] == 'Create' || !(params[:clear] || params[:commit])) %>" ><a href="#create_report" data-toggle="tab">New Report</a></li>
       <li class="<%= 'active' if params[:clear] || params[:commit] == 'Search' %>"><a href="#search_report" data-toggle="tab">Search</a></li>

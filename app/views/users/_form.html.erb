@@ -61,7 +61,7 @@
             <% end %>
           </div>
 
-          <div id="team" <%= "style=display:none;" unless ["Leader", "Subleader", "Staff"].include? @user.position %>>
+          <div id="team" <%= "style=display:none;" unless ["Leader", "Subleader", "Member"].include? @user.position %>>
             <br>
             <%= select_tag :group_select, options_for_select(Group.all.map { |group| [group.name, group.id] }, @user.team.try(:group).try(:id)) %>
             <%= f.select :team_id, @user.team.nil? ? (Group.first.nil? ? [] : Group.first.teams.map { |team| [team.name, team.id ] }) : @user.team.group.teams.map { |team| [team.name, team.id ] } %>
