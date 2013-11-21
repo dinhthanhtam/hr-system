@@ -91,7 +91,7 @@
           <tr>
             <td style="border-bottom: none;"></td>
             <td class="week_div" colspan="5" style="text-align: left;">
-            <%= cweek_to_date report.week, report.year %></td>
+            <%= DateUtils::Week.new(report.report_date).to_string %></td>
             <td style="border-bottom: none;"></td>
           </tr>
           <tr>

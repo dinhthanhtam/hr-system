@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
   scope :not_report_current_week, -> { where("users.id not in (#{Report.current_week_reports.select('user_id').to_sql})") }
   scope :in_teams, ->(team_ids) { where("users.team_id in (?)", team_ids) unless team_ids.nil? }
   scope :reporters, -> { joins(:user_roles => :role).where("roles.name in (?)", ["Leader", "Member"]).uniq }
+  scope :filter_leaders, -> { joins(:user_roles => :role).where("roles.name = ?", "Leader").uniq }
 
   def reported?
     reports.current_week_reports.any?
@@ -67,6 +68,14 @@ class User < ActiveRecord::Base
         unless user.reported?
           UserMailer.delay.notice_write_report(user)
         end
+      end
+    end
+
+    def notice_users_not_report
+      filter_leaders.each do |user|
+        user_not_reports = in_teams([user.team_id]).not_report_last_week.to_a
+        UserMailer.delay.notice_list_users_not_write_report(user, user_not_reports,
+          DateUtils::Week.new.prev.to_string) if user_not_reports.any?
       end
     end
   end

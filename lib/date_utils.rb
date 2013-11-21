@@ -21,5 +21,9 @@ module DateUtils
     def next
       Week.new(@date + 1.week)
     end
+
+    def to_string
+      "#{start_day} ~ #{end_day}"
+    end
   end
 end

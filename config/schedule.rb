@@ -23,3 +23,7 @@ set :environment, ENV['RAILS_ENV']
 every :friday, at: "11am" do
   runner "User.notice_report"
 end
+
+every :monday, at: "8:30am" do
+  runner "User.notice_users_not_report"
+end
