@@ -7,29 +7,49 @@ class Report < ActiveRecord::Base
   has_many :support_users
 
   validates :user, :report_category, presence: true
-  validates :week, length: { maximum: 53, minimum: 0 }
-  validates :month, length: { maximum: 12, minimum: 1 }
   validates :title, presence: true
   validates :description, presence: true
   validate :report_date, presence: true
   validate :valid_report_date
 
-  scope :in_week, ->(week) { where(week: week) }
-  scope :in_month, ->(month) { where(month: month) }
-  scope :in_year, ->(year) { where(year: year) }
-
+  scope :in_week, ->(from, to) { where("reports.report_date BETWEEN ? AND ?", from, to) }
+  scope :in_month, ->(month) { where("MONTH(reports.report_date) = ?", month) }
+  scope :in_year, ->(year) { where("YEAR(reports.report_date) = ?",year) }
   scope :in_month_year, ->(month, year) { in_year(year).in_month(month) }
-  scope :in_week_month_year, ->(week, month, year) { in_month_year(month, year).in_week(week) }
 
   scope :group_by_years, -> { group(:year) }
   scope :group_by_months, ->(year) { in_year(year).group(:month) }
-  scope :group_by_weeks, ->(month, year) { in_month_year(month, year).group(:week) }
+  scope :group_by_weeks, ->(month, year) { in_month_year(month, year).group("WEEK(report_date)") }
   
-  scope :current_week_reports, -> { in_year(Date.today.year).in_week(Date.today.cweek) }
-  scope :last_week_reports, -> { in_year(Date.today.year).in_week(Date.today.cweek - 1) }
-  scope :range_of_report, ->(from,to) { where("report_date BETWEEN ? and ?", from, to) }
+  scope :current_week_reports, -> {
+    in_week((week = DateUtils::Week.new).start_day, week.end_day) 
+  }
+  scope :last_week_reports, -> {
+    in_week((lastweek = DateUtils::Week.new.prev).start_day, lastweek.end_day) 
+  }
+  scope :range_of_report, ->(from,to) { where("reports.report_date BETWEEN ? and ?", from, to) }
 
   accepts_nested_attributes_for :support_users, allow_destroy: true, reject_if: :all_blank
+
+  ransacker :report_date_month do |parent|
+    Arel::Nodes::SqlLiteral.new("MONTH(reports.report_date)")
+  end
+
+  ransacker :report_date_year do |parent|
+    Arel::Nodes::SqlLiteral.new("YEAR(reports.report_date)")
+  end
+
+  def week
+    report_date.cweek
+  end
+
+  def month
+    report_date.month
+  end
+
+  def year
+    report_date.year
+  end
 
   def in_current_week?
     Date.today.cweek == week && Date.today.year == year

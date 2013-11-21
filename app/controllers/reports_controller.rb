@@ -98,9 +98,6 @@ private
     report_date = params[:report][:report_date].to_date if params[:report]
     report_date ||= Date.today
     @report.report_date = report_date
-    @report.week = report_date.cweek
-    @report.month = report_date.month
-    @report.year = report_date.year
   end
 
   def check_editable?

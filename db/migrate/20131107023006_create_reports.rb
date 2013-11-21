@@ -6,9 +6,6 @@ class CreateReports < ActiveRecord::Migration
       t.text :title
       t.text :description
       t.date :report_date
-      t.integer :week
-      t.integer :month
-      t.integer :year
       t.string :support_users
       t.timestamps
     end
