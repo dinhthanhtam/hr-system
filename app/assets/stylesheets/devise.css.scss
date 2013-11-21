@@ -1,0 +1,19 @@
+// CSS for Devise
+.contents {
+  width: 100%;
+  .login-form {
+    width: 60%;
+    margin: 0 auto;
+    tr {
+      border: none !important;
+      .text-field {
+        width: 97%;
+	margin: 0 auto;
+	height: 30px;
+      }
+      td {
+        border-bottom: none;
+      }
+    }
+  }
+}
