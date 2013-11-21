@@ -18,7 +18,7 @@ class Ability
       can :manage, Group
       can :manage, Team
       can :manage, Sticky
-      can :manage, Report
+      can :index, Report
     elsif user.roles.detect{|r|r.name == "Leader"}
       can [:index, :show], Report do |report|
         user.team_id == report.user.team.id

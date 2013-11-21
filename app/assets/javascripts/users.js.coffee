@@ -7,7 +7,7 @@ $ ->
       when "Manager", "Submanager"
         $("#team").hide()
         $("#group").show()
-      when "Leader", "Subleader", "Staff"
+      when "Leader", "Subleader", "Member"
         $("#team").show()
         $("#group").hide()
       else

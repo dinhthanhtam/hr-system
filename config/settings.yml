@@ -10,6 +10,6 @@ role:
   leader: "Leader"
   member: "Member"
 
-positions: ["Chief", "Manager", "Submanager", "Leader", "Subleader", "Staff"]
+positions: ["Chief", "Manager", "Submanager", "Leader", "Subleader", "Member"]
 
 master_datas: ["groups", "report_categories"]

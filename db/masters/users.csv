@@ -17,3 +17,4 @@ id,email,display_name,password,position,team_id
 16,do.trung.kien@framgia.com,Do Trung Kien,123456,Leader,8
 17,vu.xuan.dung@framgia.com,Vu Xuan Dung,123456,Manager,
 18,nguyen.thi.minh.ngoc@framgia.com,Nguyen Thi Minh Ngoc,123456,Manager,
+19,taihei.kobayashi@framgia.com,Kobayashi Taihei,123456,Manager,

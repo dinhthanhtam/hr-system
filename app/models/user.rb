@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   end
 
   def is_staff?
-    ["Staff"].include? position
+    ["Member"].include? position
   end
 
   def is_leader?
@@ -54,6 +54,10 @@ class User < ActiveRecord::Base
 
   def is_hr?
     roles.map(&:name).include? Settings.role.hr
+  end
+
+  def is_reporter?
+    is_staff? || is_leader?
   end
 
   private
