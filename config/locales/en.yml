@@ -122,7 +122,6 @@ en:
         new: "User New"
         update: "User Update"
         create: "User Create"
-<<<<<<< HEAD
       project:
         index: "Project Index"
         show: "Project Detail"
@@ -130,7 +129,6 @@ en:
         new: "Project New"
         update: "Project Update"
         create: "Project Create"
-=======
       cost:
         index: "Cost Index"
         show: "Cost Detail"
@@ -138,7 +136,6 @@ en:
         new: "Cost New"
         update: "Cost Update"
         create: "Cost Create"
->>>>>>> ref #9109 management cost
   mailers:
     subjects:
       notice_write_report: "Notice for writing report at current week"
