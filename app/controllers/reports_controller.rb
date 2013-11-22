@@ -59,31 +59,19 @@ class ReportsController < BaseController
     end
   end
 
-  def get_reports_by_user
-    if params[:from].present? || params[:to].present?
-      @report = Report.where(user_id: params[:user_id]).group_by_years.range_of_report(params[:from], params[:to]).count(group: params[:report_type])
-    else
-      @report = Report.where(user_id: params[:user_id], year: Date.today.year).group_by_years.count(group: params[:report_type])
-    end
-
-    date = []
-    if @report.present? && params[:report_type] == "month"
-      @report.each do |r|
-        date<< [Date::MONTHNAMES[r[0][1]].to_s + "," + r[0][0].to_s, r[1]]
-      end
-    elsif params[:report_type] == "week"
-      @report.each do |r|
-        date<< [ Date.commercial(r[0][0], r[0][1], 1) , r[1]]
-      end
+  def summary
+    @users = current_user.is_manager? ? User.in_groups(current_user.groups.map(&:id)) : User.in_teams(current_user.team.id)
+    @list_sumary = @users.map do |user|
+      reports = user.reports.range_of_report(params[:report_from], params[:report_to])
+      stickies = reports.sticked_by(user.id).count
+      stickies_by_leader = reports.not_sticked_by(user.id).count
+      number_of_stikies = reports.sticked_reports.count
+      [user.display_name, reports.count, stickies, stickies_by_leader, number_of_stikies]
     end
     
     respond_to do |format|
-      format.json { render json: date }
+      format.html
     end
-  end
-
-  def charts
-    @report = Report.new
   end
 
 private
