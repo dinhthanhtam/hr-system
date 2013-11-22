@@ -13,3 +13,8 @@ role:
 positions: ["Chief", "Manager", "Submanager", "Leader", "Subleader", "Member"]
 
 master_datas: ["groups", "report_categories"]
+
+project:
+  states: [["Prepared", "prepared"], ["Actived", "active"], ["Finished", "finish"]]
+
+select_boolean: [["True", 1], ["False", 0]]

@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def include_not_select
-    [[t(:not_select, scope: [:views, :labels])]]
+    [[t(:not_select, scope: [:views, :labels]), nil]]
   end
 
   def puts_name group, count

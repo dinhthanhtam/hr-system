@@ -1,0 +1,18 @@
+<div>
+  <table class="formTbl contents">
+    <tbody>
+      <tr>
+        <th><%= f.label :name %></th>
+        <td><%= f.text_field :name_cont %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :is_publish %></th>
+        <td><%= f.select :is_publish_eq, include_not_select + Settings.select_boolean %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :state %></th>
+        <td><%= f.select :state_eq, include_not_select + Settings.project.states %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

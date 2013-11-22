@@ -1,0 +1,40 @@
+<selection id="projects_index">
+  <div class="ctsTit">
+    <h2><%= h2_label %></h2>
+    <nav>
+      <%= link_to t(:new, scope: [:views, :pages]), url_for(action: :new), class: "btn btn-small btn-warning" %>
+    </nav>
+  </div>
+
+  <%= render partial: "search" %>
+
+  <table class="itemList table table-bordered">
+    <thead>
+        <th><%= model.human_attribute_name :name %></th>
+        <th><%= model.human_attribute_name :state %></th>
+        <th><%= model.human_attribute_name :is_publish %></th>
+        <th><%= model.human_attribute_name :start_date %></th>
+        <th><%= model.human_attribute_name :end_date %></th>
+        <th width = "20%"></th>
+    </thead>
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td><%= project.name %></td>
+          <td><%= project.state %></td>
+          <td><%= project.is_publish %></td>
+          <td><%= project.start_date %></td>
+          <td><%= project.end_date || project.due_date %></td>
+          <td>
+            <%= link_to t(:button_detail, scope: [:views, :labels]), url_for(action: :show, id: project.id), class: "btn btn-mini" %>
+            <%= link_to t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: project.id), class: "btn btn-primary btn-mini" %>
+            <%= link_to_if(project.deletable?, t(:button_delete, scope: [:views, :labels]), url_for(action: :destroy, id: project.id), confirm: t(:delete_confirm, scope: [:views, :messages]), method: :delete, class: "btn btn-danger btn-mini") {} %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="pagination">
+    <div class="paginate-box no_print"><%= will_paginate @projects %></div>
+  </div>
+</selection>
