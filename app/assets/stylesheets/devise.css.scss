@@ -17,3 +17,53 @@
     }
   }
 }
+
+.block_signin{
+  width: 300px;
+  float: right;
+  margin-top: 5%;
+  margin-right: 5%;
+}
+
+.head_signin{
+  text-align: center;
+  height: 80px;
+  display: block;
+  background-color: white;
+}
+
+.block_signin_form{
+  display: block;
+  padding: 20px;
+  background-color: #ef4423;
+}
+
+.icon_user{
+  background-image:url("/assets/icon_user.png");
+}
+
+.input_form{
+  display:inline-block;
+  background-color: white;
+  margin: 15px 15px;
+  input[type="password"], input[type="password"]:focus {
+    border-color: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
+.remember_me{
+  padding-left: 15px;
+}
+
+.margin{
+  margin: 15px 15px;
+  font-size: 13px;
+}
+
+#signin_body{
+  background-image: url(/assets/bg.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
