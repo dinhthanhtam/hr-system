@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :email, :password, :password_confirmation, :remember_me, :cardID, :display_name, :team_id, :position, :user_roles_attributes, :group_users_attributes
   # attr_accessible :title, :body
-  validates :position, presence: true
   validates :user_roles, presence: true
 
   has_many :reports
@@ -31,6 +30,48 @@ class User < ActiveRecord::Base
   scope :in_teams, ->(team_ids) { where("users.team_id in (?)", team_ids) unless team_ids.nil? }
   scope :reporters, -> { joins(:user_roles => :role).where("roles.name in (?)", ["Leader", "Member"]).uniq }
   scope :filter_leaders, -> { joins(:user_roles => :role).where("roles.name = ?", "Leader").uniq }
+
+  state_machine :position, initial: :member do
+    after_transition [:manager, :submanager] => any - [:manager, :submanager] do |user, transition|
+      user.group_users.try(:destroy_all)
+    end
+
+    after_transition any => [:manager, :submanager] do |user, transition|
+      user.team_id = nil
+      user.save
+    end
+
+    event :member do
+      transition all => :member
+    end
+
+    event :subleader do
+      transition all => :subleader
+    end
+
+    event :leader do
+      transition all => :leader
+    end
+
+    event :submanager do
+      transition all => :submanager
+    end
+
+    event :manager do
+      transition all => :manager
+    end
+
+    event :chief do
+      transition all => :chief
+    end
+
+    state :member
+    state :subleader
+    state :leader
+    state :submanager
+    state :manager
+    state :chief
+  end
 
   def reported?
     reports.current_week_reports.any?

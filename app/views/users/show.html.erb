@@ -6,7 +6,7 @@
           <%= link_to image_tag(@user.avatar_url, class: "avatar_main", alt: "No image"), url_for(action: :show) %><br>
           <div class="information">
             <p><%= @user.display_name %></p>
-            <p><%= @user.position %></p>
+            <p><%= @user.position.humanize %></p>
             <p><%= "#{@user.team.group.name}-#{@user.team.try(:name)}" if @user.team.try(:name) %></p>
           </div>
         </div>

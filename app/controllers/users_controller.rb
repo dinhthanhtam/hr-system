@@ -77,7 +77,7 @@ private
   end
   def model_params
     params.require(:user).permit(:email, :password, :password_confirmation, :remember_me,
-                                 :cardID, :display_name, :team_id, :position, :avatar,
+                                 :cardID, :display_name, :team_id, :position_event, :avatar,
                                  user_roles_attributes: [:id, :user_id, :role_id, :_destroy],
                                  group_users_attributes: [:id, :user_id, :group_id, :_destroy]) if params[:user]
   end

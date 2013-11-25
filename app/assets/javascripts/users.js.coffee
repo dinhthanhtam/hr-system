@@ -3,11 +3,12 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
   $("form").on "change", "#user_position", ->
+    $("#user_position_event").val($(this).val())
     switch $(this).val()
-      when "Manager", "Submanager"
+      when "manager", "submanager"
         $("#team").hide()
         $("#group").show()
-      when "Leader", "Subleader", "Member"
+      when "leader", "subleader", "member"
         $("#team").show()
         $("#group").hide()
       else
