@@ -141,16 +141,6 @@ en:
       notice_write_report_for_leader: "Notice for member didn't write report last week"
       notice_write_report: "Notice for writing report at current week"
       welcome_subject: "Welcome to Hr-System"
-  meta_search:
-    attributes:
-      group:
-        <<: *group
-      team:
-        <<: *team
-      report:
-        <<: *report
-      user:
-        <<: *user
   errors:
     messages:
       in_valid: "Invalid"
