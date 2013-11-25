@@ -44,8 +44,9 @@
       <tr>
         <th><%= f.label :position %></th>
         <td>
+          <%= f.hidden_field :position_event %>
           <%= f.select :position, Settings.positions %>
-          <div id="group" <%= 'style=display:none' unless ["Manager", "Submanager"].include? @user.position %>>
+          <div id="group" <%= 'style=display:none' unless ["manager", "submanager"].include? @user.position %>>
             <br>
             <% Group.all.each do |group| %>
               <% group_user = 
@@ -61,7 +62,7 @@
             <% end %>
           </div>
 
-          <div id="team" <%= "style=display:none;" unless ["Leader", "Subleader", "Member"].include? @user.position %>>
+          <div id="team" <%= "style=display:none;" unless ["leader", "subleader", "member"].include? @user.position %>>
             <br>
             <%= select_tag :group_select, options_for_select(Group.all.map { |group| [group.name, group.id] }, @user.team.try(:group).try(:id)) %>
             <%= f.select :team_id, @user.team.nil? ? (Group.first.nil? ? [] : Group.first.teams.map { |team| [team.name, team.id ] }) : @user.team.group.teams.map { |team| [team.name, team.id ] } %>

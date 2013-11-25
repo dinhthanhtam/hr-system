@@ -1,20 +1,20 @@
 id,email,display_name,password,position,team_id
-1,le.van.nghia@framgia.com,Le Van Nghia,123456,Leader,3
-2,le.van.ban@framgia.com,Le Van Ban,123456,Member,3
-3,dinh.thanh.tam@framgia.com,Dinh Thanh Tam,123456,Subleader,3
-4,hoang.van.quan@framgia.com,Hoang Van Quan,123456,Member,3
-5,nguyen.thi.ngoc@framgia.com,Nguyen Thi Ngoc,123456,Member,3
-6,to.duc.thien@framgia.com,To Duc Thien,123456,Member,3
-7,le.dinh.vu@framgia.com,Le Dinh Vu,123456,Leader,2
-8,nguyen.thanh.linh@framgia.com,Nguyen Thanh Linh,123456,Subleader,2
-9,nguyen.dang.huy@framgia.com,Nguyen Dang Huy,123456,Leader,4
-10,tran.duc.thang@framgia.com,Tran Duc Thang,123456,SubLeader,4
-11,le.duy.khanh@framgia.com,Le Duy Khanh,123456,Leader,5
-12,nguyen.anh.tien@framgia.com,Nguyen Anh Tien,123456,Subleader,5
-13,tran.duc.toan@framgia.com,Tran Duc Toan,123456,Leader,6
-14,nguyen.van.tan@framgia.com,Nguyen Van Tan,123456,Subleader,6
-15,tran.thi.ngoc.bich@framgia.com,Tran Thi Ngoc Bich,123456,Leader,7
-16,do.trung.kien@framgia.com,Do Trung Kien,123456,Leader,8
-17,vu.xuan.dung@framgia.com,Vu Xuan Dung,123456,Manager,
-18,nguyen.thi.minh.ngoc@framgia.com,Nguyen Thi Minh Ngoc,123456,Manager,
-19,taihei.kobayashi@framgia.com,Kobayashi Taihei,123456,Manager,
+1,le.van.nghia@framgia.com,Le Van Nghia,123456,leader,3
+2,le.van.ban@framgia.com,Le Van Ban,123456,member,3
+3,dinh.thanh.tam@framgia.com,Dinh Thanh Tam,123456,subleader,3
+4,hoang.van.quan@framgia.com,Hoang Van Quan,123456,member,3
+5,nguyen.thi.ngoc@framgia.com,Nguyen Thi Ngoc,123456,member,3
+6,to.duc.thien@framgia.com,To Duc Thien,123456,member,3
+7,le.dinh.vu@framgia.com,Le Dinh Vu,123456,leader,2
+8,nguyen.thanh.linh@framgia.com,Nguyen Thanh Linh,123456,subleader,2
+9,nguyen.dang.huy@framgia.com,Nguyen Dang Huy,123456,leader,4
+10,tran.duc.thang@framgia.com,Tran Duc Thang,123456,subLeader,4
+11,le.duy.khanh@framgia.com,Le Duy Khanh,123456,leader,5
+12,nguyen.anh.tien@framgia.com,Nguyen Anh Tien,123456,subleader,5
+13,tran.duc.toan@framgia.com,Tran Duc Toan,123456,leader,6
+14,nguyen.van.tan@framgia.com,Nguyen Van Tan,123456,subleader,6
+15,tran.thi.ngoc.bich@framgia.com,Tran Thi Ngoc Bich,123456,leader,7
+16,do.trung.kien@framgia.com,Do Trung Kien,123456,leader,8
+17,vu.xuan.dung@framgia.com,Vu Xuan Dung,123456,manager,
+18,nguyen.thi.minh.ngoc@framgia.com,Nguyen Thi Minh Ngoc,123456,manager,
+19,taihei.kobayashi@framgia.com,Kobayashi Taihei,123456,manager,
