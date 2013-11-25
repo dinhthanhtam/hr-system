@@ -11,7 +11,7 @@
           </div>
         </div>
       </div>
-      <% if @user.is_leader? %>
+      <% if @user.is_leader? && current_user == @user %>
         <div class="border margintop_20px">
           <h2 class="title_div">Team member</h2><br>
           <div class="team">
@@ -28,15 +28,17 @@
     </div>
 
     <div class="right_body">
-      <div class="text border">
-        <h2 class="title_div">Notice from HR</h2><br>
-        <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
-        <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
-        <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
-        <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
-      </div>
-
-      <% if @user.is_leader? %>
+      <% if current_user == @user %>
+        <div class="text border">
+          <h2 class="title_div">Notice from HR</h2><br>
+          <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
+          <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
+          <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
+          <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
+        </div>
+      <% end %>
+    
+      <% if @user.is_leader? && current_user == @user %>
         <div class="text margintop_20px border">
           <h2 class="title_div">Last week didn't write report</h2><br>
           <% @user.team && @user.team.users.not_report_last_week.each do |tem_member| %>
@@ -47,7 +49,7 @@
         </div>
       <% end %>
 
-      <% if @user.is_manager? %>
+      <% if @user.is_manager? && current_user == @user %>
         <div class="group_member border margintop_20px">
           <ul class="title_div nav nav-pills">
             <% @user.groups.each do |group| %>
