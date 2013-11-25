@@ -56,14 +56,11 @@ private
   def create_object
     super
     @cost = @project.costs.build(model_params)
-    
-    date = params[:week].present? ? Date.new(params[:week]) : Date.today
-    @cost.user_id = current_user.id
-    @cost.week = date.cweek
-    @cost.year = date.year
+    @cost.mon_of_week ||= Date.today.monday
+    @cost.user_id = current_user.user_id
   end
   
   def model_params
-    params.require(:cost).permit(:cost, :week, :year, :project_id) if params[:cost]
+    params.require(:cost).permit(:cost, :mon_of_week, :project_id) if params[:cost]
   end
 end

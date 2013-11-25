@@ -6,7 +6,7 @@
     </nav>
   </div>
 
-  <table class="table table-bordered">
+  <table class="itemList">
     <thead>
       <tr>
         <th><%= model.human_attribute_name :project %></th>
@@ -19,8 +19,8 @@
     <% @costs.each do |cost| %>
       <tr>
         <td><%= cost.project.name %></td>
-        <td><%= cost.week %></td>
-        <td><%= cost.year %></td>
+        <td><%= cost.mon_of_week.try(:cweek) %></td>
+        <td><%= cost.mon_of_week.try(:year) %></td>
         <td><%= cost.cost %></td>
         <td>
           <%= link_to t(:button_detail, scope: [:views, :labels]), url_for(action: :show, id: cost.id), class: "btn btn-mini" %>

@@ -18,3 +18,4 @@
 //= require_tree .
 //= require users
 //= require reports
+//= require costs

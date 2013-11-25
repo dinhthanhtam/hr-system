@@ -11,11 +11,11 @@
       </tr>
       <tr>
         <th><%= model.human_attribute_name :week %></th>
-        <td><%= @cost.week %></td>
+        <td><%= @cost.mon_of_week.try(:cweek) %></td>
       </tr>
       <tr>
         <th><%= model.human_attribute_name :year %></th>
-        <td><%= @cost.year %></td>
+        <td><%= @cost.mon_of_week.try(:year) %></td>
       </tr>
       <tr>
         <th><%= model.human_attribute_name :cost %></th>
