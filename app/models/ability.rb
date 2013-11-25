@@ -47,7 +47,7 @@ class Ability
         user.id == report.user_id
       end
       can [:index, :new, :create], Cost
-      can [:edit, :update, :destroy], Cost do |cost|
+      can [:edit, :update, :destroy, :show], Cost do |cost|
         user.id == cost.user_id
       end
     end

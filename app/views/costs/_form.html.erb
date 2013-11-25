@@ -4,8 +4,8 @@
 
   <table class="formTbl contents">
     <tr>
-      <th><%= f.label :week %></th>
-      <td><%= text_field_tag :week , "", class: "datepicker"%></td>
+      <th><%= f.label :mon_of_week %></th>
+      <td><%= f.text_field :mon_of_week , class: "datepicker", id: "only_monday" %></td>
     </tr>
     <tr>
       <th><%= f.label :cost %></th>

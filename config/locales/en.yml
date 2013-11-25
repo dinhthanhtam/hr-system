@@ -50,9 +50,10 @@ en:
         end_date: "End date"
       cost: &cost
         project: "Project"
+        mon_of_week: "Monday of week"
+        cost: "Cost"
         week: "Week"
         year: "Year"
-        cost: "Cost"
   views:
     labels:
       manager: "Manager"
