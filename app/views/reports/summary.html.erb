@@ -1,0 +1,37 @@
+<%= form_for :report, url: {action: :summary}, method: :get do |f| %>
+  <table class="formTbl contents">
+    <tr id = tr_month>
+      <th width= "15%"><%= f.label :report_date_from %></th>
+      <td><input id="report_from" class="datepicker" type="text" name="report_from" value = "<%= params[:report_from] %>"></td>
+      <th width= "15%"><%= label_tag :to %></th>
+      <td><input id="report_to" class="datepicker" type="text" name="report_to" value = "<%= params[:report_to] %>"></td>
+    </tr>
+
+  </table>
+  <div class="form-actions">
+    <%= f.submit :Report, class:"btn btn-primary" %>
+  </div>
+<% end %>
+
+  <table class="table table-bordered" >
+    <tr>
+        <th><%= model.human_attribute_name :name %></th>
+        <th><%= model.human_attribute_name :report_count %></th>
+        <th><%= model.human_attribute_name :sticky_by_user_count %></th>
+        <th><%= model.human_attribute_name :sticky_by_leader_count %></th>
+        <th><%= model.human_attribute_name :report_sticky_count %></th>
+    </tr>
+    <tbody id = "list_summary">
+      <% @list_sumary.each do |summary| %>
+        <tr>
+          <td><%= summary[0] %></td>
+          <td><%= summary[1] %></td>
+          <td><%= summary[2] %></td>
+          <td><%= summary[3] %></td>
+          <td><%= summary[4] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+

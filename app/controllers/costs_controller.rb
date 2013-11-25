@@ -57,7 +57,7 @@ private
     super
     @cost = @project.costs.build(model_params)
     @cost.mon_of_week ||= Date.today.monday
-    @cost.user_id = current_user.user_id
+    @cost.user_id = current_user.id
   end
   
   def model_params

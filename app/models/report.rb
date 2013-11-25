@@ -16,10 +16,13 @@ class Report < ActiveRecord::Base
   scope :in_month, ->(month) { where("MONTH(reports.report_date) = ?", month) }
   scope :in_year, ->(year) { where("YEAR(reports.report_date) = ?",year) }
   scope :in_month_year, ->(month, year) { in_year(year).in_month(month) }
-
   scope :group_by_years, -> { group(:year) }
   scope :group_by_months, ->(year) { in_year(year).group(:month) }
   scope :group_by_weeks, ->(month, year) { in_month_year(month, year).group("WEEK(report_date)") }
+  scope :created_by, ->(user) { where("reports.user_id = ?", user) unless user.nil? }
+  scope :sticked_reports, -> { joins(:stickies).uniq }
+  scope :sticked_by, ->(user) { sticked_reports.where("stickies.user_id = ?", user) unless user.nil? }
+  scope :not_sticked_by, ->(user) { sticked_reports.where("stickies.user_id != ?", user) unless user.nil? }
   
   scope :current_week_reports, -> {
     in_week((week = DateUtils::Week.new).start_day, week.end_day) 
@@ -27,7 +30,9 @@ class Report < ActiveRecord::Base
   scope :last_week_reports, -> {
     in_week((lastweek = DateUtils::Week.new.prev).start_day, lastweek.end_day) 
   }
-  scope :range_of_report, ->(from,to) { where("reports.report_date BETWEEN ? and ?", from, to) }
+  scope :range_of_report, ->(from,to) { range_of_report_from(from).range_of_report_to(to) }
+  scope :range_of_report_from, ->(from) { where("reports.report_date >= ?", from) unless from.blank? }
+  scope :range_of_report_to, ->(to) { where("reports.report_date <= ?", to) unless to.blank? }
 
   accepts_nested_attributes_for :support_users, allow_destroy: true, reject_if: :all_blank
 

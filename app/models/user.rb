@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :group_users
   has_many :groups, through: :group_users
   has_many :teams, through: :groups
-  has_many :favourites
+  has_many :stickies
   has_many :project_users
   has_many :projects, through: :project_users
   mount_uploader :avatar, AvatarUploader
@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
   scope :in_teams, ->(team_ids) { where("users.team_id in (?)", team_ids) unless team_ids.nil? }
   scope :reporters, -> { joins(:user_roles => :role).where("roles.name in (?)", ["Leader", "Member"]).uniq }
   scope :filter_leaders, -> { joins(:user_roles => :role).where("roles.name = ?", "Leader").uniq }
+  scope :in_groups, ->(group_ids) { in_teams(Team.in_groups(group_ids).ids) }
 
   state_machine :position, initial: :member do
     after_transition [:manager, :submanager] => any - [:manager, :submanager] do |user, transition|
