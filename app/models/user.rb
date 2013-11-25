@@ -84,15 +84,15 @@ class User < ActiveRecord::Base
   end
 
   def is_staff?
-    ["Member"].include? position
+    member?
   end
 
   def is_leader?
-    ["Leader", "Subleader"].include? position
+    leader? || subleader?
   end
 
   def is_manager?
-    ["Manager", "Submanager"].include? position
+    manager? || submanager?
   end
 
   def is_hr?

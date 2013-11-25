@@ -1,7 +1,5 @@
 class UsersController < BaseController
 
-  before_filter :check_role_show, only: :show
-
   def index
     respond_to do |format|
       format.html
@@ -80,17 +78,5 @@ private
                                  :cardID, :display_name, :team_id, :position_event, :avatar,
                                  user_roles_attributes: [:id, :user_id, :role_id, :_destroy],
                                  group_users_attributes: [:id, :user_id, :group_id, :_destroy]) if params[:user]
-  end
-
-  def check_role_show
-    if @user != current_user
-      if current_user.is_staff?
-        redirect_to root_path
-      elsif current_user.is_leader?
-        redirect_to root_path unless @user.team_id == current_user.team_id
-      elsif current_user.is_manager?
-        redirect_to root_path unless current_user.teams.map(&:id).include? @user.team_id
-      end
-    end
   end
 end
