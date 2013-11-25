@@ -1,25 +1,29 @@
-<h2></h2>
-<div class="contents">
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-    <table class="formTbl login-form">
-      <tr>
-	<td><%= f.email_field :email, :autofocus => true, placeholder: "Email", class: "text-field" %></td>
-      </tr>
-      <tr>
-	<td><%= f.password_field :password, placeholder: "Password", class: "text-field" %></td>
-      </tr>
-      <tr>
-	<% if devise_mapping.rememberable? -%>
-          <td><%= f.check_box :remember_me %> <%= f.label :remember_me %></td>
-	<% end -%>
-      </tr>
-      <tr>
-	<td><%= f.submit "Sign in", class: "btn btn-warning" %></td>
-      </tr>
-      <tr>
-	<td><%= render "devise/shared/links" %></td>
-      </tr>
-    </table>
-  <% end %>
-</div>
+<div class="block_signin">
+  <div class="head_signin">
+    <image style="margin-top: 5%" src="/assets/logo.png" height="50px">
+  </div>
+  <div class="block_signin_form">
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <div class="input_form">
+        <image src="/assets/icon_user.png" width="34px" height="34px"/>
+        <input placeholder="Email" style="border: none; width: 75%; font-size: 14px" name="user[email]">
+      </div>
 
+      <div class="input_form">
+        <image src="/assets/icon_pass.png" width="34px" height="34px"/>
+        <input placeholder="Password" type="password" style="clear; both; border:none; width:75%; font-size:14px; margin: 0px 0px;" name="user[password]" autocomplete="off">
+      </div>
+      <% if devise_mapping.rememberable? -%>
+        <div class="remember_me">
+          <%= f.check_box :remember_me, style: "width: 20px; height: 20px;"%>
+          <%= f.label :remember_me, style: "font-size:14px; margin: 0px 10px; color: white;"%>
+        </div>
+      <% end -%>
+      <%= f.submit "LOGIN", style: "border: none; background-color: #ff8b75; color: white; font-size: 20px; width: 78%; height: 35px; margin: 15px 15px;" %>
+
+      <div class="margin">
+        <%= render "devise/shared/links" %>
+      </div>
+    <% end %>
+  </div>
+</div>

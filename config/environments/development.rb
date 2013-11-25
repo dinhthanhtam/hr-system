@@ -34,4 +34,9 @@ HrSystem::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Layout for signin
+  config.to_prepare do
+    Devise::SessionsController.layout proc{ |controller| action_name == 'new' ? "signin"   : "application" }
+  end
 end
