@@ -7,5 +7,5 @@ class ApplicationController < ActionController::Base
     flash[:error] = "Access denied."
     redirect_to root_url
   end
-
+  layout Proc.new { |controller| controller.devise_controller? ? 'signin' : 'application' }
 end
