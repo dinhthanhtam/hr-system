@@ -8,7 +8,7 @@ id,email,display_name,password,position,team_id
 7,le.dinh.vu@framgia.com,Le Dinh Vu,123456,leader,2
 8,nguyen.thanh.linh@framgia.com,Nguyen Thanh Linh,123456,subleader,2
 9,nguyen.dang.huy@framgia.com,Nguyen Dang Huy,123456,leader,4
-10,tran.duc.thang@framgia.com,Tran Duc Thang,123456,subLeader,4
+10,tran.duc.thang@framgia.com,Tran Duc Thang,123456,subleader,4
 11,le.duy.khanh@framgia.com,Le Duy Khanh,123456,leader,5
 12,nguyen.anh.tien@framgia.com,Nguyen Anh Tien,123456,subleader,5
 13,tran.duc.toan@framgia.com,Tran Duc Toan,123456,leader,6
