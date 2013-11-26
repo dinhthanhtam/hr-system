@@ -1,49 +1,64 @@
 <selection>
   <div>
     <div class="left_menu" style="">
-      <div class="user_info">
-        <%= link_to image_tag(@user.avatar_url, class: "avatar_main", alt: "No image"), url_for(action: :show) %><br>
-        <div class="information">
-          <p><%= @user.display_name %></p>
-          <p><%= @user.position.humanize %></p>
-          <p><%= "#{@user.team.group.name}-#{@user.team.try(:name)}" if @user.team.try(:name) %></p>
-        </div>
-      </div>
+      <table class = "user_profile">
+        <tr>
+          <th>
+            <%= link_to image_tag(@user.avatar_url, class: "avatar_main", alt: "No image"), url_for(action: :show) %>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <strong><%= @user.display_name %></strong>
+          </td>
+        </tr>
+        <tr>
+          <td class = "item">
+            <i><%= @user.position %></i>
+          </td>
+        </tr>
+        <tr>
+          <td class = "item">
+            <div class = "user_group"><i><%= @user.team.group.name %> - <%= @user.team.name %></i></div>
+          </td>
+        </tr>
+      </table>
       <% if @user.is_leader? && current_user == @user %>
-        <div class="border margintop_20px">
-          <h2 class="title_div">Team member</h2><br>
-          <div class="team">
-            <div style="margin-top: 10px">
-              <% @user.team && @user.team.users.each do |tem_member| %>
-                <div style="display: inline-block">
-                  <%= link_to image_tag(tem_member.avatar_url, class: "avatar", alt: "No image"), url_for(action: :show, id: tem_member.id), data: tem_member.display_name %>
-                </div>
-              <% end %>
-            </div>
-          </div>
+        <div class = "lst_member">
+          Team Group<div><span>13</span></div>
+        </div>
+        <div class = "lst_member_bottom">
+          <% if @user.is_leader? && current_user == @user %>
+                <% @user.team && @user.team.users.each do |tem_member| %>
+                  <div style="display: inline-block" class= "member_item">
+                    <%= link_to image_tag(tem_member.avatar_url, class: "member_avatar", alt: "No image"), url_for(action: :show, id: tem_member.id), data: tem_member.display_name %>
+                  </div>
+                <% end %>
+          <% end %>
         </div>
       <% end %>
     </div>
 
     <div class="right_body">
       <% if current_user == @user %>
-        <div class="text border_notice">
-          <h2 class="title_div">Notice from HR</h2><br>
-          <div class="body_notice">
-          <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
-          <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
-          <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
-          <a>NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE NOTICE</a><br>
-          </div>
+        <div class="notice_top">
+          Notice from HR
+        </div>
+        <div class="notice_content">
+          <div class = "content_item">You have it covered aside form using the wrong property. The scrollbar can be triggers with any property overflow , overflow-x , or overflow-y and</div>
+          <div class = "content_item">You have it covered aside form using the wrong property. The scrollbar can be triggers with any property overflow , overflow-x , or overflow-y and</div>
+
         </div>
       <% end %>
     
       <% if @user.is_leader? && current_user == @user %>
-        <div class="text margintop_20px border">
-          <h2 class="title_div">Last week didn't write report</h2><br>
+        <div class="notice_bottom">
+          Last week didn't write report
+        </div>
+        <div class = "notice_bottom_content">
           <% @user.team && @user.team.users.not_report_last_week.each do |tem_member| %>
-            <div style="display: inline-block;">
-              <%= link_to image_tag(tem_member.avatar_url, class: "avatar", alt: "No image"), url_for(action: :show, id: tem_member.id), data: tem_member.display_name %>
+            <div class = "bottom_item">
+              <%= link_to image_tag(tem_member.avatar_url, class: "thumb_member", alt: "No image"), url_for(action: :show, id: tem_member.id), data: tem_member.display_name %>
             </div>
           <% end %>
         </div>
