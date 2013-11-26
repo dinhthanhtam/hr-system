@@ -1,3 +1,4 @@
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -16,5 +17,5 @@ User.where("position in (?)", ["Leader", "Subleader", "Member"]).each do |user|
 end
 
 User.all.each do |user|
-  user.update_attributes(avatar: (File.new("/home/nghialv/Pictures/avatar/#{user.display_name}.JPG") rescue nil)) if user.avatar.nil?
+  user.update_attributes(avatar: (File.new("/home/nghialv/Pictures/avatar/#{user.display_name}.JPG") rescue nil))
 end
