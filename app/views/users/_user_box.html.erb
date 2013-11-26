@@ -1,10 +1,12 @@
 <a href="<%= user_path(user) %>" class="profile_link">
   <div class="profile">
-    <div class="avatar"><%= image_tag user.avatar_url %></div>
+    <div class="avatar"><%= image_tag user.avatar_url, class: "img-circle" %></div>
     <div class="display_name">
-      <span>
-        <%= user.display_name %>
-      </span>
+      <%= user.display_name %>
     </div>
+    <div class="display_position">
+      <i><%= user.position %></i>
+    </div>
+    
   </div>
 </a>

@@ -8,7 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <header id="pageHeader" class="navbar" style="box-shadow: none; -webkit-box-shadow: none;">
+  <header id="pageHeader" class="navbar navbar-inverse navbar-fixed-top" style="box-shadow: none, border-bottom: 1px solid #eee; -webkit-box-shadow: none;">
     <div class="navbar-inner">
       <div class="logo">
         <%= link_to image_tag("/assets/logo.png"), root_path %>
@@ -39,12 +39,11 @@
     </div>
     <% if current_user %>
       <div>
-        <%= render partial: "layouts/navigation_tab" %>
+        <%#= render partial: "layouts/navigation_tab" %>
       </div>
     <% end %>
   </header>
-
-  <div id="pageBody" >
+  <div id="pageBody" class="bs-header">
 
     <% if flash[:error] %>
       <p class="alert alert-error fade in"><a class="close" data-dismiss="alert" href="javascript:void(0)">×</a><%= flash[:error] %></p>

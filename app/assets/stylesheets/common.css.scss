@@ -230,12 +230,13 @@ select.word{
 
 body{
 	min-width:980px;
+  background-color: #eee;
 }
 
 /* header */
 #pageHeader {
 
-  box-shadow:0 1px 2px rgba(0, 0, 0, 0.6);
+  box-shadow:0 0.5px 2px rgba(0, 0, 0, 0.6);
   -webkit-box-shadow:0 1px 2px rgba(0, 0, 0, 0.6);
   background-color: #FFFFFF;
   .logo{
@@ -402,10 +403,9 @@ body{
 }
 
 #pageBody{
-	background-color:#FFF;
 	width:950px;
 	margin:0 auto;
-	padding:20px 15px 1px;
+	padding:115px 15px 1px;
 }
 
 
@@ -1316,5 +1316,9 @@ footer ul {
 footer ul li {
   float: left;
   margin-left: 10px;
+}
+
+.img-circle {
+  border: solid 3px #eee;
 }
 
