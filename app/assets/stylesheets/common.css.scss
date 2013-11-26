@@ -235,21 +235,47 @@ body{
 
 /* header */
 #pageHeader {
-
+  height: 73px;
   box-shadow:0 0.5px 2px rgba(0, 0, 0, 0.6);
   -webkit-box-shadow:0 1px 2px rgba(0, 0, 0, 0.6);
   background-color: #FFFFFF;
   .logo{
     float: left;
-    display: block;
-    padding: 12px 12px 12px;
+    display: inline-block;
+    padding: 12px 12px 8px;
     line-height: 1;
     font-size: 20px;
     font-weight: 2px;
     img {
-      max-width: none !important;
+      max-width: 170 !important;
       max-height: none !important;
     }
+  }
+
+  ul.dropdown-menu {
+    right: 0;
+    left: auto;
+    padding-top: 0px;
+    border-radius: 0;
+    border-top: solid 1px #FF8B75;
+    border-bottom: solid 1px #FF8B75;
+    border-left: solid 1px #EF4423;
+    border-right: solid 1px #EF4423;
+    li a{
+      &:hover {
+        background-color: #FF8B75;
+        background-image: none;
+      }
+    }
+  }
+
+  .dropdown-menu:before {
+    border-bottom: 7px solid red;
+    left: 139px;
+  }
+
+  .dropdown-menu:after {
+    left: 140px;
   }
 
   &.navbar{
@@ -307,7 +333,7 @@ body{
         &.open, &.active {
           > .dropdown-toggle {
             color: #000000;
-            background-color: rgba(139, 177, 197, 0.54);
+            background-color: white;
             border-radius: 5px;
           }
         }
@@ -345,7 +371,9 @@ body{
   }
   #account{
     float: right;
+    padding: 1.5% 1%;
     height: 45px;
+    display: inline-block;
     display: box;
     display: -webkit-box;
     box-orient: horizontal;
@@ -1322,3 +1350,45 @@ footer ul li {
   border: solid 3px #eee;
 }
 
+@mixin menu_active {
+  border-bottom: solid 3px #EF4423;
+  background: #FF8B75;
+  color: white;
+}
+.menu {
+	float: left;
+  display: inline-block;
+  width: 30%;
+  padding: 0px 12px 12px;
+  font-size: 16px;
+  font-weight: 2px;
+  margin-top: 3%;
+  .menu_active{
+    @include menu_active;
+  }
+	a {
+		text-align: center;
+    background: white;
+    border-top: solid 1px white;
+    color: black;
+    padding-top: 3%;
+    padding-right: 5%;
+    padding-left: 5%;
+    padding-bottom: 8%;
+	}
+  a:hover {
+    @include menu_active;
+  }
+}
+.master_data {
+  display: inline-block;
+  float: right;
+  margin-top: 1.5%;
+  a.logo {
+    font-size: 14px;
+  }
+}
+.img-circle {
+  width: 35px;
+  height: 35px;
+}

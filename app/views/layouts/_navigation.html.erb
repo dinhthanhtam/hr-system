@@ -1,9 +1,9 @@
 <% if current_user && current_user.hr_role? %>
-<div class="nav-collapse">
+<div id="" class="master_data" style="font-size: 12px;">
   <ul class="nav">
     <li class="dropdown">
-      <a class="dropdown-toggle logo" data-toggle="dropdown">
-        <label><%= t(:manager, scope: [:views, :labels]) %></label>
+      <a class="dropdown-toggle logo" data-toggle="dropdown" style="font-size: 12px;">
+        <%= t(:manager, scope: [:views, :labels]) %>
         <b class="caret"></b>
       </a>
       <ul class="dropdown-menu">

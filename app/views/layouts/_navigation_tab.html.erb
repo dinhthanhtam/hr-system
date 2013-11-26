@@ -1,14 +1,8 @@
-<div class="navbar-inner">
-  <div class="menu">
-    <a href="<%= user_path(current_user) %>">
-      <div class="btn btn-menu <%= 'btn-success' if model_name == 'User' && action_name == 'show' %>">
-        Home
-      </div>
-    </a>
-    <a href="<%= url_for(controller: :reports, action: :index) %>">
-      <div class="btn btn-menu <%= 'btn-success' if model_name == 'Report'%> %>">
-        Daily report
-      </div>
-    </a>
-  </div>
+<div class="menu">
+  <a href="<%= user_path(current_user) %>" class="<%= 'menu_active' if model_name == 'User' && action_name == 'show' %>">
+      Home
+  </a>
+  <a href="<%= url_for(controller: :reports, action: :index) %>" class="<%= 'menu_active' if model_name == 'Report'%>">
+      Daily report
+  </a>
 </div>
