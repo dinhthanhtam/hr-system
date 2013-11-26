@@ -10,16 +10,16 @@ module ApplicationHelper
   def puts_name group, count
     result = ""
     if group.children.empty?
-      result += "<li class='item_left_menu' style='margin-top: 10px; margin-left:#{count.to_i * 15}px'><a id='group_#{ group.id }' href='#'>#{ group.name }</a></li>"
+      result += "<tr><th><a id='group_#{ group.id }' href='#'>#{ group.name }</a></th></tr>"
       group.teams.each do |team|
-        result += "<li class='item_left_menu' style='margin-top: 10px; margin-left:#{(count.to_i + 1) * 15}px'><a id='team_#{ team.id }' href='#'>#{ team.name }</a></li>"
+        result += "<tr><td><a id='team_#{ team.id }' href='#'>#{ team.name }</a></td></tr>"
       end
       return result
     else
-      result = "<li class='item_left_menu' style='margin-top: 10px; margin-left:#{count.to_i * 15}px'><a id='group_#{ group.id }' href='#'>#{ group.name }</a></li>"
+      result = "<tr><th><a id='group_#{ group.id }' href='#'>#{ group.name }</a></th></tr>"
       count += 1
       group.teams.each do |team|
-        result += "<li class='item_left_menu' style='margin-top: 10px; margin-left:#{count.to_i * 15}px'><a id='team_#{ team.id }' href='#'>#{ team.name }</a></li>"
+        result += "<tr><td><a id='team_#{ team.id }' href='#'>#{ team.name }</a></td></tr>"
       end
       group.children.each do |child|
         result += puts_name(child, count)
