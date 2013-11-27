@@ -1,17 +1,14 @@
 <% if current_user && current_user.hr_role? %>
-<div id="" class="master_data" style="font-size: 12px;">
-  <ul class="nav">
-    <li class="dropdown">
-      <a class="dropdown-toggle logo" data-toggle="dropdown" style="font-size: 12px;">
+  <ul>
+    <li>
+      <a class="<%= 'selected' if Settings.master_datas.include? controller_name %>">
         <%= t(:manager, scope: [:views, :labels]) %>
-        <b class="caret"></b>
       </a>
-      <ul class="dropdown-menu">
+      <ul>
         <% Settings.master_datas.each do |master_data| %>
         <li><%= link_to master_data.capitalize, url_for(controller: master_data.to_sym, action: :index) %></li>
         <% end %>
       </ul>
     </li>
   </ul>
-</div>
 <% end %>

@@ -371,7 +371,7 @@ body{
   }
   #account{
     float: right;
-    padding: 1.5% 1%;
+    padding: 0% 1%;
     height: 45px;
     display: inline-block;
     display: box;
@@ -1348,38 +1348,11 @@ footer ul li {
 
 .img-circle {
   border: solid 3px #eee;
+  width: 35px;
+  height: 35px;
 }
 
-@mixin menu_active {
-  border-bottom: solid 3px #EF4423;
-  background: #FF8B75;
-  color: white;
-}
-.menu {
-	float: left;
-  display: inline-block;
-  width: 30%;
-  padding: 0px 12px 12px;
-  font-size: 16px;
-  font-weight: 2px;
-  margin-top: 3%;
-  .menu_active{
-    @include menu_active;
-  }
-	a {
-		text-align: center;
-    background: white;
-    border-top: solid 1px white;
-    color: black;
-    padding-top: 3%;
-    padding-right: 5%;
-    padding-left: 5%;
-    padding-bottom: 8%;
-	}
-  a:hover {
-    @include menu_active;
-  }
-}
+
 .master_data {
   display: inline-block;
   float: right;
@@ -1388,7 +1361,92 @@ footer ul li {
     font-size: 14px;
   }
 }
-.img-circle {
-  width: 35px;
-  height: 35px;
+
+.mainmenu{
+  margin-top: 18px;
+}
+
+ul.menu_drop {
+  list-style: none;
+  padding: 0;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+ul.menu_drop:after {
+  content: "";
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+ul.menu_drop li {
+    float: left;
+    position: relative;
+}
+
+ul.menu_drop li a, ul.menu_drop li a:link {
+  color: #333;
+  text-decoration: none;
+  display: block;
+  padding: 11px 15px 22px 15px;
+}
+
+ul.menu_drop li:hover {
+  a:hover {
+    color: #fff;
+    border-bottom: none;
+  }
+  >a{
+    color: #fff;
+  }
+  background:#ff8b75;
+  border-bottom:solid 4px #ef4423;
+}
+
+ul.menu_drop li a.selected, ul.menu_drop li a:active {
+  color: #fff;
+  background:#ff8b75;
+  border-bottom:solid 4px #ef4423;
+}
+
+ul.menu_drop li ul {
+  display: none;
+  border:solid 1px #ef4423;
+}
+
+ul.menu_drop li ul:before {
+  content: " ";
+  position: absolute;
+  display: block;
+  z-index: 1500;
+  left: 0;
+  top: -10px;
+  height: 10px;
+  width: 100%;
+}
+
+ul.menu_drop li:hover ul {
+  position: absolute;
+  display: block;
+  z-index: 1000;
+  left: 0;
+  top: 55px;
+  list-style: none;
+  background: #fff;
+}
+
+ul.menu_drop li ul li {
+  float: none;
+  border-bottom: 1px solid #c8c8c8;
+}
+
+ul.menu_drop li ul li a, ul.menu_drop li ul li a:link {
+  color: #666666;
+  display:inline-block;
+  width:160px;
+  padding: 10px 0px 10px 20px;
+  white-space: nowrap;
 }
