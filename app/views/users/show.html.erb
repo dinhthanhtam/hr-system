@@ -17,11 +17,19 @@
             <i><%= @user.position %></i>
           </td>
         </tr>
-        <tr>
-          <td class = "item">
-            <div class = "user_group"><i><%= @user.team.group.name %> - <%= @user.team.name %></i></div>
-          </td>
-        </tr>
+        <% if @user.is_leader? || @user.is_staff? %>
+          <tr>
+            <td class = "item">
+              <div class = "user_group"><i><%= @user.team.group.name %> - <%= @user.team.name %></i></div>
+            </td>
+          </tr>
+        <% elsif @user.is_manager? %>
+          <tr>
+            <td class = "item">
+              <div class = "user_group"><i><%= @user.groups.first.name %></i></div>
+            </td>
+          </tr>
+        <% end %>
       </table>
       <% if @user.is_leader? && current_user == @user %>
         <div class = "lst_member">
@@ -72,7 +80,7 @@
             <% end %>
           </ul>
           <% @user.groups.each do |group| %>
-            <table style="margin-top: 5px; <%= 'display:none' if group != @user.groups.first %>"class="group_table itemList" id="group_<%= group.id %>">
+            <table style="margin: 5px; <%= 'display:none' if group != @user.groups.first %>"class="group_table itemList" id="group_<%= group.id %>">
               <% group.teams.each do |team| %>
                 <tr>
                   <th width="15%"><%= team.name %></th>
