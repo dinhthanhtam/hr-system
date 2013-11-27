@@ -1,8 +1,11 @@
-<div class="menu">
-  <a href="<%= user_path(current_user) %>" class="<%= 'menu_active' if model_name == 'User' && action_name == 'show' %>">
+<div class="mainmenu">
+  <ul class="menu_drop">
+  <li><a href="<%= user_path(current_user) %>" class="<%= 'selected' if model_name == 'User' && action_name == 'show' %>">
       Home
-  </a>
-  <a href="<%= url_for(controller: :reports, action: :index) %>" class="<%= 'menu_active' if model_name == 'Report'%>">
+  </a></li>
+  <li><a href="<%= url_for(controller: :reports, action: :index) %>" class="<%= 'selected' if model_name == 'Report'%>">
       Daily report
-  </a>
+  </a></li>
+  <%= render partial: "layouts/navigation" %>
+  </ul>
 </div>
