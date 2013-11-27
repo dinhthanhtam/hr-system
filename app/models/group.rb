@@ -21,4 +21,8 @@ class Group < Base
       return result
     end
   end
+
+  def users_number
+    descendant_groups.inject(0) { |result, group| result += group.teams.inject(0) {|count, team| count += team.users.count }}
+  end
 end

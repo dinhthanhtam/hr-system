@@ -1,71 +1,100 @@
 <selection id="groups_index">
-  <% if current_user.is_manager? %>
-    <table class="table itemList">
-      <% current_user.groups.each do |group| %>
-        <% group.teams.each do |team| %>
-          <tr>
-            <% if team == group.teams.first %>
-              <th width="15%" rowspan="<%= group.teams.count %>"><%= group.name %></th>
-            <% end %>
-            <td width="10%"><%= team.name %></td>
-            <td>
+  <div>
+    <div class="left_menu <%= 'scroll' unless current_user.is_hr? %>" style="box-shadow: 0 1px 3px rgba(0,0,0,.5);">
+      <% if current_user.is_manager? && !current_user.is_hr? %>
+        <% current_user.groups.each do |group| %>
+          <div class="lst_member" style="margin-top: 0px;">
+            <%= truncate(group.name, length: 20) %><span><%= group.users_number %></span>
+          </div>
+          <% group.teams.each do |team| %>
+            <div class="team_name"><%= "#{team.name} (#{team.users.count})" %></div>
+            <div class="lst_member_bottom">
               <% team.users.each do |user| %>
                 <a data="<%= user.display_name %>" href="<%= url_for(action: :index, member_id: user.id) %>">
                   <%= image_tag(user.avatar_url, alt: "Errors", width: "50px", height: "50px", class: "avatar #{ 'border_blue' if params[:member_id].to_i == user.id }") %>
                 </a>
               <% end %>
-            </td>
-          </tr>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
-    </table>
-  <% end %>
 
-  <% if current_user.is_leader? %>
-    <table class="table itemList">
-      <tr>
-        <th width="15%" style="font-size: 15px"><%= t(:report_of, scope: [:views, :labels]) %></th>
-        <td>
-          <a data="<%= current_user.display_name %>" href="<%= url_for(action: :index) %>">
-            <%= image_tag(current_user.avatar_url, alt: "Errors", width: "50px", height: "50px", class: "avatar #{ 'border_blue' unless params[:member_id].present? }") %>
-          </a>
-          <% current_user.team && (current_user.team.users - [current_user]).each do |user| %>
-            <a data="<%= user.display_name %>" href="<%= url_for(action: :index, member_id: user.id) %>">
-              <%= image_tag(user.avatar_url, alt: "Errors", width: "50px", height: "50px", class: "avatar #{ 'border_blue' if params[:member_id].to_i == user.id }") %>
-            </a>
+      <% if current_user.is_leader? %>
+        <div class="lst_member" style="margin-top: 0px;">
+          <%= current_user.team.try(:name) %><div><span><%= current_user.team.users.count %></span></div>
+        </div>
+        <div class="lst_member_bottom">
+          <% if current_user.is_leader? %>
+            <% current_user.team && current_user.team.users.each do |tem_member| %>
+              <div style="display: inline-block" class= "member_item">
+                <%= link_to image_tag(tem_member.avatar_url, class: "member_avatar", alt: "No image"), url_for(action: :show, id: tem_member.id), data: tem_member.display_name %>
+              </div>
+            <% end %>
           <% end %>
-        </td>
-      </tr>
-    </table>
-  <% end %>
+        </div>
+      <% end %>
 
-  <% unless current_user.is_hr? || @reports.empty? %>
-    <div class="ctsTit">
-      <h2><%= h2_label %></h2>
-      <nav><%= link_to_if(@current_user.is_leader?, t(:button_charts, scope: [:views, :labels]), url_for(action: :summary), class: "btn btn-warning") {} %></nav>
-    </div>
-  <% end %>
+      <% if current_user.is_staff? %>
+        <table class = "user_profile">
+          <tr>
+            <th style="line-height: 187px">
+              <%= link_to image_tag(current_user.avatar_url, class: "avatar_main", alt: "No image"), url_for(controller: :users, action: :show, id: current_user.id) %>
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <strong><%= current_user.display_name %></strong>
+            </td>
+          </tr>
+          <tr>
+            <td class = "item">
+              <i><%= current_user.position %></i>
+            </td>
+          </tr>
+          <tr>
+            <td class = "item">
+              <div class = "user_group"><i><%= current_user.team.group.name %> - <%= current_user.team.name %></i></div>
+            </td>
+          </tr>
+        </table>
+      <% end %>
 
-  <% if !current_user.is_reporter? && @reports.any? %>
-    <ul id = "head_nav" class="nav nav-tabs">
-      <li class="active"><a href="#search_report" data-toggle="tab">Search</a></li>
-    </ul>
-    <div id="myTabContent" class="tab-content">
-      <div class="tab-pane active" id="search_report"><%= render partial: "search" %></div>
     </div>
-  <% end %>
-  <% if current_user.is_reporter? %>
-    <ul id = "head_nav" class="nav nav-tabs">
-      <li class="<%= 'active' if (params[:commit] == 'Create' || !(params[:clear] || params[:commit])) %>" ><a href="#create_report" data-toggle="tab">New Report</a></li>
-      <li class="<%= 'active' if params[:clear] || params[:commit] == 'Search' %>"><a href="#search_report" data-toggle="tab">Search</a></li>
-    </ul>
+    <div class="right_body" style="margin-left: 20px; width:732px;">
+      <% unless current_user.is_hr? || @reports.empty? %>
+        <div class="report_create" style="<%= 'width:98%' unless current_user.is_leader? %>">Report index</div>
+        <div class="chart"><%= link_to_if(@current_user.is_leader?, t(:button_summary, scope: [:views, :labels]), url_for(action: :summary)) {} %></div>
+      <% end %>
+      
+      <% if !current_user.is_reporter? && @reports.any? %>
+        <div class="form_create">
+          <div class="tab">
+            <ul id = "head_nav" style="border-bottom: solid 1px #d5d5d5;">
+              <li class="active"><a href="#search_report" data-toggle="tab">Search</a></li>
+            </ul>
+            <div id="myTabContent">
+              <div class="tab-pane active" id="search_report"><%= render partial: "search" %></div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% if current_user.is_reporter? %>
+        <div class="form_create">
+          <div class="tab ">
+            <ul id = "head_nav" style="border-bottom: solid 1px #d5d5d5;">
+              <li class="<%= 'active' if (params[:commit] == 'Create' || !(params[:clear] || params[:commit])) %>"><a href="#create_report" data-toggle="tab">New Report</a></li>
+              <li class="<%= 'active' if params[:clear] || params[:commit] == 'Search' %>"><a href="#search_report" data-toggle="tab">Search</a></li>
+            </ul>
 
-    <div id="myTabContent" class="tab-content">
-      <div class="tab-pane  <%= 'active'if (params[:commit] == 'Create' || !(params[:clear] || params[:commit])) %>" id="create_report"><%= render partial: "form" %></div>
-      <div class="tab-pane <%= 'active' if params[:clear] || params[:commit] == 'Search' %>" id="search_report"><%= render partial: "search" %></div>
+            <div id="myTabContent" class="tab-content">
+              <div class="tab-pane  <%= 'active'if (params[:commit] == 'Create' || !(params[:clear] || params[:commit])) %>" id="create_report"><%= render partial: "form" %></div>
+              <div class="tab-pane <%= 'active' if params[:clear] || params[:commit] == 'Search' %>" id="search_report"><%= render partial: "search" %></div>
+            </div>
+          </div>
+        </div>
+      <% end %> 
     </div>
-  <% end %>
-  
+  </div>
   <% unless current_user.is_hr? %>
     <table class="itemList table-bordered" id="list_report">
       <% current_year = nil %>
@@ -152,15 +181,20 @@
 
   <% if current_user.is_hr? %>
     <div class="text border">
-      <h2 class="title_div">Last week didn't write report</h2><br>
+      <div class="ctsTit">
+        <h2><%= t(:dont_write_repost_thw, scope: [:views, :labels]) %></h2>
+      </div>
       <% User.reporters.not_report_last_week.each do |user| %>
         <div style="display: inline-block;">
           <%= link_to image_tag(user.avatar_url, class: "avatar", alt: "No image"), url_for(action: :show, id: user.id), data: user.display_name %>
         </div>
       <% end %>
     </div>
+
     <div class="text margintop_20px border">
-      <h2 class="title_div">This week don't write report</h2><br>
+      <div class="ctsTit">
+        <h2><%= t(:dont_write_repost_lw, scope: [:views, :labels]) %></h2>
+      </div>
       <% User.reporters.not_report_current_week.each do |user| %>
         <div style="display: inline-block;">
           <%= link_to image_tag(user.avatar_url, class: "avatar", alt: "No image"), url_for(action: :show, id: user.id), data: user.display_name %>
@@ -170,4 +204,3 @@
   <% end %>
 
 </selection>
-

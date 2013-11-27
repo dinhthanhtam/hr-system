@@ -2,22 +2,25 @@
 
   <%= render partial: "errors", locals: { object: @report } %>
 
-  <table class="formTbl contents">
+  <table>
     <tr>
-      <th width= "15%"><%= f.label :categoty_id %></th>
-      
+      <td width= "15%" class="td1"><%= f.label :categoty_id %></td>
       <td>
+        <div id="show">
         <% ReportCategory.all.each_with_index do |category, index| %>
           <% if @report.report_category_id.blank? && index ==0 %>
-            <%= f.radio_button :report_category_id, category.id ,checked: true %> &nbsp; <%= f.label "report_category_id_#{category.id}", category.name %>
+            <%= f.radio_button :report_category_id, category.id ,checked: true %>
+            <label for="<%= "report_report_category_id_#{category.id}" %>"><span></span><%= category.name %></label>
           <% else %>
-            <%= f.radio_button :report_category_id, category.id %> &nbsp; <%= f.label "report_category_id_#{category.id}", category.name %>
+            <%= f.radio_button :report_category_id, category.id %>
+            <label for="<%= "report_report_category_id_#{category.id}" %>"><span></span><%= category.name %></label>
           <% end %>
         <% end %>
+        </div>
       </td>
     </tr>
     <tr style= "display:none;" id = "tr_user_support">
-      <th><%= f.label :user_name %></th>
+      <th class="td1"><%= f.label :user_name %></th>
       <td>
         <%= text_field_tag :tags %>
         <div class="tag-badge">
@@ -36,16 +39,16 @@
       </td>
     </tr>
     <tr>
-      <th><%= f.label :report_date %></th>
+      <th class="td1"><%= f.label :report_date %></th>
       <td><%= f.text_field :report_date %></td>
     </tr>
     <tr>
-      <th><%= f.label :title %></th>
-      <td><%= f.text_field :title, style:"width:98.6%" %></td>
+      <th class="td1"><%= f.label :title %></th>
+      <td><%= f.text_field :title %></td>
     </tr>
     <tr>
-      <th><%= f.label :description %></th>
-      <td><%= f.text_area :description, style: "width:100%; height:100px;"  %></td>
+      <th class="td1"><%= f.label :description %></th>
+      <td><%= f.text_area :description  %></td>
     </tr>
     
   </table>

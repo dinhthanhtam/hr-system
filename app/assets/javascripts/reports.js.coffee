@@ -102,3 +102,8 @@ $ ->
     fri = new Date(currDay.setDate(firstDiff + 4))
     $(this).datepicker("setStartDate", mon)
     $(this).datepicker("setEndDate", fri)
+  # Set scroll
+  $('.scroll').slimScroll({
+    height: '500px'
+    width: '194px'
+  });
