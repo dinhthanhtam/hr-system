@@ -1,3 +1,17 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+    $.ajax "/projects/gantt",
+    type: "GET",
+    dataType: "json"
+    success: (data) ->
+      $(".gantt").gantt
+        source: data
+        navigate: "scroll"
+        scale: "weeks"
+        maxScale: "months"
+        minScale: "days"
+        itemsPerPage: 50
+        onItemClick: (data) ->
+
+        onAddClick: (dt, rowId) ->
+
+        onRender: ->

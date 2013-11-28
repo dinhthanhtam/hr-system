@@ -1,0 +1,26 @@
+<%= form_for @project_user, url: {action: @project_user.new_record? ? :create : :update} do |f| %>
+
+  <%= render partial: "errors", locals: {object: @project_user} %>
+
+  <table class="formTbl contents">
+    <tr>
+      <th><%= f.label :join_date %></th>
+      <td><%= f.text_field :join_date, class: "datepicker" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :due_date %></th>
+      <td><%= f.text_field :due_date, class: "datepicker" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :out_date %></th>
+      <td><%= f.text_field :out_date, class: "datepicker" %></td>
+    </tr>
+  </table>
+  <div class="form-actions">
+    <%= f.submit t(:button_update, scope: [:views, :labels]), class: "btn btn-primary" %>
+    <%= f.button t(:button_out, scope: [:views, :labels]), class: "btn btn-warning", name: "#{model_name.underscore}[state_event]", value: "outed" %>
+    <%= link_to t(:button_delete, scope: [:views, :labels]),
+          url_for(action: :destroy, id: @project_user.id), confirm: t(:delete_confirm, scope: [:views, :messages]),
+          method: :delete, class: "btn btn-danger" %>
+  </div>
+<% end %>

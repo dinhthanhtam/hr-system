@@ -12,9 +12,9 @@
       <tr>
         <th><%= model.human_attribute_name :member %></th>
         <td>
-          <% @project.users.each do |user| %>
+          <% @project.project_users.each do |project_user| %>
             <div style="display: inline-block;">
-              <%= link_to image_tag(user.avatar_url, class: "avatar", alt: "No image"), url_for(action: :show, id: user.id), data: user.display_name %>
+              <%= link_to image_tag(project_user.user.avatar_url, class: "avatar", alt: "No image"), url_for(controller: :project_users, action: :edit, id: project_user.id), data: project_user.user.display_name %>
             </div>
           <% end %>
         </td>

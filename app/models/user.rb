@@ -28,8 +28,8 @@ class User < ActiveRecord::Base
   scope :not_report_last_week, -> { where("users.id not in (#{Report.last_week_reports.select('user_id').to_sql})") }
   scope :not_report_current_week, -> { where("users.id not in (#{Report.current_week_reports.select('user_id').to_sql})") }
   scope :in_teams, ->(team_ids) { where("users.team_id in (?)", team_ids) unless team_ids.nil? }
-  scope :reporters, -> { joins(:user_roles => :role).where("roles.name in (?)", ["Leader", "Member"]).uniq }
-  scope :filter_leaders, -> { joins(:user_roles => :role).where("roles.name = ?", "Leader").uniq }
+  scope :reporters, -> { joins(:user_roles => :role).where("roles.name in (?)", ["leader", "member"]).uniq }
+  scope :filter_leaders, -> { joins(:user_roles => :role).where("roles.name = ?", "leader").uniq }
   scope :in_groups, ->(group_ids) { in_teams(Team.in_groups(group_ids).ids) }
 
   state_machine :position, initial: :member do
