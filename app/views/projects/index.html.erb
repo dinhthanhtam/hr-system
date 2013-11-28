@@ -5,36 +5,59 @@
       <%= link_to t(:new, scope: [:views, :pages]), url_for(action: :new), class: "btn btn-small btn-warning" %>
     </nav>
   </div>
-
-  <%= render partial: "search" %>
-
-  <table class="itemList table table-bordered">
-    <thead>
-        <th><%= model.human_attribute_name :name %></th>
-        <th><%= model.human_attribute_name :state %></th>
-        <th><%= model.human_attribute_name :is_publish %></th>
-        <th><%= model.human_attribute_name :start_date %></th>
-        <th><%= model.human_attribute_name :end_date %></th>
-        <th width = "20%"></th>
-    </thead>
-    <tbody>
-      <% @projects.each do |project| %>
-        <tr>
-          <td><%= project.name %></td>
-          <td><%= project.state %></td>
-          <td><%= project.is_publish %></td>
-          <td><%= project.start_date %></td>
-          <td><%= project.end_date || project.due_date %></td>
-          <td>
-            <%= link_to t(:button_detail, scope: [:views, :labels]), url_for(action: :show, id: project.id), class: "btn btn-mini" %>
-            <%= link_to t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: project.id), class: "btn btn-primary btn-mini" %>
-            <%= link_to_if(project.deletable?, t(:button_delete, scope: [:views, :labels]), url_for(action: :destroy, id: project.id), confirm: t(:delete_confirm, scope: [:views, :messages]), method: :delete, class: "btn btn-danger btn-mini") {} %>
-          </td>
-        </tr>
+  
+  <div class = "prepare_pr">
+    <h2>Project Prepare</h2>
+    <ul class="projects root">
+      <% Project.get_project_by_state(Settings.state.prepared).each do |project| %>
+        <li class="root">
+          <div class="root">
+            <%= link_to project.name, url_for(action: :show, id: project.id), class: "project my-project" %>
+            <% if project.description.present? %>
+              <div class="wiki description">
+                <p><%= project.description %></p>
+              </div>
+            <% end %>
+          </div>
+        </li>
       <% end %>
-    </tbody>
-  </table>
-  <div class="pagination">
-    <div class="paginate-box no_print"><%= will_paginate @projects %></div>
+    <ul>
   </div>
+
+  <div class = "prepare_pr">
+    <h2>Project Actived</h2>
+    <ul class="projects root">
+      <% Project.get_project_by_state(Settings.state.actived).each do |project| %>
+        <li class="root">
+          <div class="root">
+            <%= link_to project.name, url_for(action: :show, id: project.id), class: "project my-project" %>
+            <% if project.description.present? %>
+              <div class="wiki description">
+                <p><%= project.description %></p>
+              </div>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    <ul>
+  </div>
+
+  <div class = "prepare_pr">
+    <h2>Project Finished</h2>
+    <ul class="projects root">
+      <% Project.get_project_by_state(Settings.state.finished).each do |project| %>
+        <li class="root">
+          <div class="root">
+            <%= link_to project.name, url_for(action: :show, id: project.id), class: "project my-project" %>
+            <% if project.description.present? %>
+              <div class="wiki description">
+                <p><%= project.description %></p>
+              </div>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    <ul>
+  </div> 
+  
 </selection>

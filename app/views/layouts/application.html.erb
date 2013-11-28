@@ -29,6 +29,11 @@
                 <li><%= link_to "Profile", "#" %></li>
                 <li><%= link_to "Personal Settings", "#" %></li>
                 <li class="divider"></li>
+                <% if current_user.is_manager? %>
+                  <li><%= link_to "Project", url_for(controller: :projects, action: :index) %></li>
+                  <li><%= link_to "Gantt", url_for(controller: :projects, action: :gantt_list) %></li>
+                  <li class="divider"></li>
+                <% end %>
                 <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
               </ul>
             </li>

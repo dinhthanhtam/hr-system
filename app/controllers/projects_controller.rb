@@ -75,7 +75,7 @@ private
         project_user[1].merge!({due_date: params[:project][:due_date], join_date: params[:project][:start_date]})
       end
     end
-    params.require(:project).permit(:name, :description, :is_publish, :url, :start_date, :due_date, :state_event, 
+    params.require(:project).permit(:name, :description, :is_publish, :url, :start_date, :due_date, :end_date, :state_event, 
                                     project_users_attributes: [:id, :user_id, :project_id, :join_date, :due_date, :_destroy]) if params[:project]
   end
 end

@@ -46,6 +46,10 @@
       <th><%= f.label :due_date %></th>
       <td><%= f.text_field :due_date, class: "datepicker" %></td>
     </tr>
+    <tr>
+      <th><%= f.label :end_date %></th>
+      <td><%= f.text_field :end_date, class: "datepicker" %></td>
+    </tr>
   </table>
   <div class="form-actions">
     <% if @project.preparable? %>
