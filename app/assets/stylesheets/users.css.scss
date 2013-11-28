@@ -6,7 +6,7 @@
   display: inline-block;
   margin-left: 5px;
   vertical-align: top;
-  width: 79%;
+  width: 751px;
 }
 .border{
   border: 2px solid #eeeeee;
@@ -61,15 +61,11 @@ a:hover{
   background: white;
   color: black;
 }
-.avatar_main{
-  width: 100px;
-  height: 100px;
-}
+
 .avatar{
   width: 50px;
   height: 50px;
   margin: 2px 2px;
-  margin-left:15px;
 }
 .fix_position{
   position: fixed;
@@ -205,16 +201,15 @@ a.profile_link:active {
   box-shadow: 1px 1px 3px black;
   th {
     line-height: 20px;
-    text-align: left;
-    vertical-align: top;
+    text-align: center;
     font-size: 11px;
     vertical-align: middle;
   }
   img {
-    width:100%;
-    height:100%;
-    max-height:250px;
-    max-width:250px;
+    width: 190px;
+    height: 190px;
+    max-height: 250px;
+    max-width: 250px;
   }
   td {
     line-height: 30px;
@@ -247,16 +242,14 @@ a.profile_link:active {
 }
 
 .lst_member {
-  background-color: #FF7C79;
+  background-color: #ff8b75;
   margin-top:30px;  
   line-height: 40px;
-  text-align: left;
+  text-align: center;
   vertical-align: top;
-  font-size: 13px;
+  font-size: 14px;
   color: #FFFEFF;
   vertical-align: middle;
-  padding-left: 10px;
-
   div {
     float: right;
     line-height: 40px;
@@ -270,13 +263,15 @@ a.profile_link:active {
   span {
     border: 1px solid #FFFEFF;
     border-radius: 4px 4px 4px 4px;
-    padding:2px;
+    padding: 2px;
+    margin-left: 4px;
   }
 }
 
 .lst_member_bottom {
   background-color: #FFFEFF;
   padding: 5px 5px;
+  text-align: center;
   div.member_item {
     padding:3px;
   }
