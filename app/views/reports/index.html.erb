@@ -11,7 +11,8 @@
             <div class="lst_member_bottom">
               <% team.users.each do |user| %>
                 <a data="<%= user.display_name %>" href="<%= url_for(action: :index, member_id: user.id) %>">
-                  <%= image_tag(user.avatar_url, alt: "Errors", width: "50px", height: "50px", class: "avatar #{ 'border_blue' if params[:member_id].to_i == user.id }") %>
+                  <%= image_tag(user.avatar_url, alt: "Errors", width: "50px", height: "50px",
+                    class: "member_avatar #{ 'border_blue' if params[:member_id].to_i == user.id }") %>
                 </a>
               <% end %>
             </div>
@@ -27,7 +28,10 @@
           <% if current_user.is_leader? %>
             <% current_user.team && current_user.team.users.each do |tem_member| %>
               <div style="display: inline-block" class= "member_item">
-                <%= link_to image_tag(tem_member.avatar_url, class: "member_avatar", alt: "No image"), url_for(action: :show, id: tem_member.id), data: tem_member.display_name %>
+                <%= link_to image_tag(tem_member.avatar_url,
+                  class: "member_avatar #{ 'border_blue' if params[:member_id].to_i == tem_member.id }",
+                  alt: "No image"), url_for(action: :index, member_id: tem_member.id),
+                  data: tem_member.display_name %>
               </div>
             <% end %>
           <% end %>
