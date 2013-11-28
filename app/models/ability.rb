@@ -12,6 +12,7 @@ class Ability
       can :manage, Team
       can :manage, Sticky
       can :manage, Report
+      can :manage, ProjectUser
     elsif user.roles.detect{|r|r.name == "HR"}
       can :manage, User
       can :manage, ReportCategory

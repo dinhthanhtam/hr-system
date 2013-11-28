@@ -65,6 +65,7 @@ en:
       button_clear: "Clear"
       button_search: "Search"
       button_index: "Index"
+      button_out: "Out of Project"
       button_list_teams: "List Teams"
       button_report: "Report"
       button_favourites: "Favourite"
@@ -137,6 +138,13 @@ en:
         new: "Cost New"
         update: "Cost Update"
         create: "Cost Create"
+      project_user:
+        index: "Project User Index"
+        show: "Project User Detail"
+        edit: "Project User Edit"
+        new: "Project User New"
+        update: "Project User Update"
+        create: "Project User Create"
   mailers:
     subjects:
       notice_write_report_for_leader: "Notice for member didn't write report last week"

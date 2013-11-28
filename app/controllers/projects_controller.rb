@@ -48,6 +48,25 @@ class ProjectsController < BaseController
     end
   end
 
+  def gantt_list
+    respond_to do |format|
+      format.html
+    end
+  end
+
+
+  def gantt
+    @list_gantt = User.reporters.map do |user|
+      projects = user.project_users.map do |project_user|
+        {from: "/Date(#{project_user.join_date.to_time.to_i*1000})/", to: "/Date(#{project_user.convert_date})/" , label: project_user.project.name, customClass: ["ganttRed","ganttGreen","ganttBlue"].sample }
+      end
+      {:name => user.display_name, values: projects}
+    end
+    respond_to do |format|
+      format.json {render json: @list_gantt}
+    end
+  end
+
 private
   def model_params
     params.require(:project).permit(:name, :description, :is_publish, :url, :start_date, :due_date, :state_event, 

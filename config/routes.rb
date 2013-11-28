@@ -18,8 +18,10 @@ HrSystem::Application.routes.draw do
 
   resources :projects do
     resources :costs
+    get :gantt, on: :collection
+    get :gantt_list, on: :collection
   end
-
+  resources :project_users
   root to: "users#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
