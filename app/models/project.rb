@@ -4,13 +4,9 @@ class Project < Base
   has_many :project_users
   has_many :users, through: :project_users
   has_many :costs
+  scope :get_project_by_state, ->(state) { where("state = ?", state) }
 
   state_machine :state, initial: :prepared do
-    after_transition to: :finished do |project, transition|
-      project.end_date = Date.today
-      project.save
-    end
-
     event :prepare do
       transition :prepared => :prepared
     end

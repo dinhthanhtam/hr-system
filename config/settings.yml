@@ -18,3 +18,8 @@ project:
   states: [["Prepared", "prepared"], ["Actived", "active"], ["Finished", "finish"]]
 
 select_boolean: [["True", 1], ["False", 0]]
+
+state:
+  prepared: "prepared"
+  actived: "actived"
+  finished: "finished"
