@@ -58,7 +58,8 @@ class ProjectsController < BaseController
   def gantt
     @list_gantt = User.reporters.map do |user|
       projects = user.project_users.map do |project_user|
-        {from: "/Date(#{project_user.join_date.to_time.to_i*1000})/", to: "/Date(#{project_user.convert_date})/" , label: project_user.project.name, customClass: ["ganttRed","ganttGreen","ganttBlue"].sample }
+        {from: "/Date(#{project_user.join_date.to_time.to_i*1000})/", to: "/Date(#{project_user.convert_date})/" ,
+         label: project_user.project.name, customClass: ["ganttRed","ganttGreen","ganttBlue"].sample }
       end
       {:name => user.display_name, values: projects}
     end
@@ -69,7 +70,12 @@ class ProjectsController < BaseController
 
 private
   def model_params
+    if params[:project]
+      params[:project][:project_users_attributes].each do |project_user|
+        project_user[1].merge!({due_date: params[:project][:due_date], join_date: params[:project][:start_date]})
+      end
+    end
     params.require(:project).permit(:name, :description, :is_publish, :url, :start_date, :due_date, :state_event, 
-                                    project_users_attributes: [:id, :user_id, :project_id, :_destroy]) if params[:project]
+                                    project_users_attributes: [:id, :user_id, :project_id, :join_date, :due_date, :_destroy]) if params[:project]
   end
 end
