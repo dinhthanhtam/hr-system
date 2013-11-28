@@ -6,6 +6,18 @@
   <li><a href="<%= url_for(controller: :reports, action: :index) %>" class="<%= 'selected' if model_name == 'Report'%>">
       Daily report
   </a></li>
+  <% if current_user.is_manager? %>
+    <li><a href="<%= url_for(controller: :projects, action: :index) %>" class="<%= 'selected' if model_name == 'Report'%>">
+      Project
+      </a>
+      <ul>
+        <li><a href="<%= url_for(controller: :projects, action: :gantt_list) %>" class="<%= 'selected' if model_name == 'Project'%>">
+      Gantt
+          </a>
+        </li>
+      </ul>
+    </li>
+  <% end %>
   <%= render partial: "layouts/navigation" %>
   </ul>
 </div>
