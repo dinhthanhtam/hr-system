@@ -70,7 +70,7 @@ class ProjectsController < BaseController
 
 private
   def model_params
-    if params[:project]
+    if params[:project] && params[:project][:project_users_attributes]
       params[:project][:project_users_attributes].each do |project_user|
         project_user[1].merge!({due_date: params[:project][:due_date], join_date: params[:project][:start_date]})
       end
