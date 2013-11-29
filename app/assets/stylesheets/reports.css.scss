@@ -266,3 +266,47 @@ table.list_report {
   border-radius: 5px;
   background: #000;
 }
+
+.col1, .col2, .list_group {
+  float: right;
+  width: 100%;
+}
+.static {
+    background: none repeat scroll 0 0 #FFFFFF;
+}
+.date_static {
+  background: none repeat scroll 0 0 #FFFFFF;
+  font-weight: bold;
+  padding: 10px 10px;
+}
+.line01 {
+    background: none repeat scroll 0 0 #D5D5D5;
+    height: 1px;
+}
+.table_static {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    color: #666666;
+    font-size: 13px;
+    margin: 15px;
+    width: 100%;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-bottom: 1px solid #D5D5D5;
+  td {
+    padding: 10px;
+    border: 1px solid #D5D5D5;
+  }
+
+}
+
+.ts_td1 {
+    width: 100px;
+}
+
+.ts_td1, .ts_td2, .ts_td3, .ts_td4, .ts_td5 {
+    text-align: center;
+}
+

@@ -1,5 +1,5 @@
 <% if @sticky %>
-  $('#add_sticky_<%= @sticky.report_id %>').attr("src","/assets/ico_fav.png")
+  $('#add_sticky_<%= @sticky.report_id %>').attr("src","/assets/heart_active.png")
   var link_a = $('img#add_sticky_<%= @sticky.report_id %>').parents("a")
   $(link_a).attr("href", "<%= url_for(controller: "stickies", action: :destroy, id: @sticky.id) %>")
   $(link_a).data("method","delete")

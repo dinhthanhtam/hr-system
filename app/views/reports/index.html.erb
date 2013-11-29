@@ -68,8 +68,8 @@
     </div>
     <div class="right_body" style="margin-left: 20px; width:732px;">
       <% unless current_user.is_hr? || @reports.empty? %>
-        <div class="report_create" style="<%= 'width:98%' unless current_user.is_leader? %>">Report index</div>
-        <div class="chart"><%= link_to_if(@current_user.is_leader?, t(:button_summary, scope: [:views, :labels]), url_for(action: :summary)) {} %></div>
+        <div class="report_create" style="<%= 'width:98%' unless current_user.is_leader? || current_user.is_manager? %>">Report index</div>
+        <div class="chart"><%= link_to_if(@current_user.is_leader? || current_user.is_manager?, t(:button_summary, scope: [:views, :labels]), url_for(action: :summary)) {} %></div>
       <% end %>
       
       <% if !current_user.is_reporter? && @reports.any? %>
@@ -102,7 +102,7 @@
     </div>
   </div>
   <% unless current_user.is_hr? %>
-    <table class="itemList table-bordered" id="list_report">
+    <table class="table_static" id="list_report">
       <% current_year = nil %>
       <% current_month = nil %>
       <% current_week = nil %>
@@ -118,26 +118,26 @@
         <% current_day = report.report_date if is_change_day %>
         <% if is_change_year || is_change_month %>
           <tr>
-            <td class="month_div" colspan="8" style="text-align: left;">
+            <td class="date_static" colspan="8" style="text-align: left;">
             <%= "#{Date::MONTHNAMES[report.month]} #{report.year}" %></td>
           </tr>
         <% end %>
         <% if is_change_week %>
           <tr>
-            <td style="border-bottom: none;"></td>
-            <td class="week_div" colspan="5" style="text-align: left;">
+            <td style="border-bottom: none;border-top: none;"></td>
+            <td class="date_static" colspan="5" style="text-align: left;">
             <%= DateUtils::Week.new(report.report_date).to_string %></td>
             <td style="border-bottom: none;"></td>
           </tr>
           <tr>
-            <td style="border-bottom: none;" width="4%"></td>
+            <td style="border-bottom: none;border-top: none;" width="4%"></td>
 
-            <th style="border-left: 1px solid #DDDDDD;" width="4%"></th>
-            <th width="12%"><%= model.human_attribute_name :report_category_id %></th>
-            <th><%= model.human_attribute_name :title %></th>
-            <th><%= model.human_attribute_name :description %></th>
-            <th width = "20%"></th>
-            <td style="border-bottom: none;"></td>
+            <td class = "ts_td1" width="4%"></td>
+            <td class = "ts_td2" width="12%"><%= model.human_attribute_name :report_category_id %></td>
+            <td class = "ts_td3"><%= model.human_attribute_name :title %></td>
+            <td class = "ts_td4" width = "50%"><%= model.human_attribute_name :description %></td>
+            <td class = "ts_td5" width = "4%"></td>
+            <td style="border-bottom: none;border-top: none;"></td>
           </tr>
         <% end %>
         <tr data-id = "<%= report.id %>" <%= "style=color:blue" if report.in_current_week? %>>
@@ -156,7 +156,7 @@
             <%= report.report_category.name %>
           </td>
           <td><%= report.title %></td>
-          <td><a style="color: <%= report.in_current_week? ? :blue : :black %>" href="<%= url_for(action: :show, id: report.id) %>"><%= truncate(report.description, length: 90) %></a></td>
+          <td><a style="color: <%= report.in_current_week? ? :blue : "#666666" %>" href="<%= url_for(action: :show, id: report.id) %>"><%= truncate(report.description, length: 90) %></a></td>
           <td>
             <% if can? :update, report %>
               <%= link_to_if(report.in_current_week?, t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: report.id), class: "btn btn-primary btn-mini") {} %>
@@ -166,16 +166,14 @@
             <% end %>
             
             <% if report.is_stickied?(current_user.id) %>
-              <%= link_to(image_tag("/assets/ico_fav.png", id: "add_sticky_#{report.id}"),
-                url_for(controller: "stickies", action: :destroy, id: report.stickies.try(:first).try(:id)), class: "btn btn-mini" ,
-                method: :delete , remote: true) %>
+              <%= link_to(image_tag("/assets/heart_active.png", id: "add_sticky_#{report.id}"),
+                url_for(controller: "stickies", action: :destroy, id: report.stickies.try(:first).try(:id)), method: :delete , remote: true) %>
             <% else %>
-              <%= link_to(image_tag("/assets/ico_hurt.png", id: "add_sticky_#{report.id}"),
-                url_for(controller: "stickies", action: :create, report_id: report.id, user_id: current_user.id ),
-                class: "btn btn-mini" , method: :post, remote: true) %>
+              <%= link_to(image_tag("/assets/heart.png", id: "add_sticky_#{report.id}"),
+                url_for(controller: "stickies", action: :create, report_id: report.id, user_id: current_user.id ), method: :post, remote: true) %>
             <%end %>
           </td>
-          <td style="border-left: 1px solid #DDDDDD; border-bottom: none; border-top: none;" width="4%"></td>
+          <td style="border-bottom: none; border-top: none;" width="4%"></td>
         </tr>
       <% end %>
     </table>
