@@ -9,17 +9,18 @@
 
   </table>
   <div class="form-actions">
+    <%= link_to t(:button_clear, scope: [:views, :labels]), request.parameters.dup.replace(clear: true), class: "btn" %>
     <%= f.submit :Report, class:"btn btn-primary" %>
   </div>
 <% end %>
 
-  <table class="table table-bordered" >
+  <table class="table table-bordered list_report">
     <tr>
         <th><%= model.human_attribute_name :name %></th>
-        <th><%= model.human_attribute_name :report_count %></th>
-        <th><%= model.human_attribute_name :sticky_by_user_count %></th>
-        <th><%= model.human_attribute_name :sticky_by_leader_count %></th>
-        <th><%= model.human_attribute_name :report_sticky_count %></th>
+        <th><%= model.human_attribute_name :report %></th>
+        <th><%= model.human_attribute_name :user_sticky %></th>
+        <th><%= model.human_attribute_name :leader_sticky %></th>
+        <th><%= model.human_attribute_name :reprot_sticky %></th>
     </tr>
     <tbody id = "list_summary">
       <% @list_sumary.each do |summary| %>

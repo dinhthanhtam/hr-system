@@ -30,6 +30,10 @@ en:
         month: "Month"
         year: "Year"
         title: "Title"
+        name: "Name"
+        user_sticky: "User's sticky"
+        leader_sticky: "Leader's sticky"
+        reprot_sticky: "Report's sticky"
       user: &user
         email: "Email"
         display_name: "User name"
