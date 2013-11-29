@@ -10,19 +10,6 @@ a:hover {
   color: red;
   position: relative;
 }
-a[data]:hover:after {
-  content: attr(data);
-  font-size: 15px;
-  padding: 5px 5px;
-  color: #FFF;
-  position: absolute;
-  left: 0;
-  top: -45px;
-  white-space: nowrap;
-  z-index: 2;
-  border-radius: 5px;
-  background: #000;
-}
 
 .month_div{
   padding: 5px 5px;
@@ -247,6 +234,7 @@ input[type="radio"]:checked + label span {
   border-bottom: solid 1px rgb(230, 115, 61);
   font-size: 13px;
   padding-top: 10px;
+  padding-left: 10px;
 }
 
 table.list_report{
@@ -256,4 +244,25 @@ table.list_report{
   td{
     text-align: center;
   }
+}
+
+table.list_report {
+  th {
+    text-align: center;
+  }
+  td {
+    text-align: center;
+  }
+}
+
+#name_hover{
+  font-size: 15px;
+  padding: 5px 5px;
+  color: #FFF;
+  position: absolute;
+  display: none;
+  white-space: nowrap;
+  z-index: 2;
+  border-radius: 5px;
+  background: #000;
 }

@@ -107,3 +107,17 @@ $ ->
     height: '500px'
     width: '194px'
   });
+
+  $("body").append("<span id='name_hover'>")
+
+  $(document).on "mouseout", ".member_avatar", ->
+    $("#name_hover").hide()
+
+  $(document).on "mouseover", ".member_avatar", ->
+    $a_element = $(this).closest("a")
+    pos = $a_element.position()
+    $span = $("#name_hover")
+    $span.html $a_element.attr("data")
+    $span.css("top", pos.top + 70)
+    $span.css("left", pos.left + 170)
+    $span.show()
