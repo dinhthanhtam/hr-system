@@ -248,3 +248,12 @@ input[type="radio"]:checked + label span {
   font-size: 13px;
   padding-top: 10px;
 }
+
+table.list_report{
+  th{
+    text-align: center;
+  }
+  td{
+    text-align: center;
+  }
+}
