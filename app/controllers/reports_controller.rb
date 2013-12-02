@@ -62,11 +62,16 @@ class ReportsController < BaseController
   def summary
     @users = current_user.is_manager? ? User.in_groups(current_user.groups.map(&:id)) : User.in_teams(current_user.team.id)
     @list_sumary = @users.map do |user|
+      params[:report_to] = Date.today.strftime("%Y-%m-%d") if params[:report_to].blank?
+      params[:report_from] = DateTime.now.beginning_of_year.strftime("%Y-%m-%d") if params[:report_from].blank?
       reports = user.reports.range_of_report(params[:report_from], params[:report_to])
       stickies = reports.sticked_by(user.id).count
       stickies_by_leader = reports.not_sticked_by(user.id).count
       number_of_stikies = reports.sticked_reports.count
-      [user.display_name, reports.count, stickies, stickies_by_leader, number_of_stikies]
+      beginning = DateTime.parse(params[:report_from]).beginning_of_week
+      end_week = DateTime.parse(params[:report_to]).beginning_of_week
+      number_of_weeks = (end_week - beginning).to_i/7 - reports.group_by_years.group_by_weeks_for_summary.count.length
+      [user.display_name, reports.count, stickies, stickies_by_leader, number_of_stikies, number_of_weeks]
     end
     
     respond_to do |format|

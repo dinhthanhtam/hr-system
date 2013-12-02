@@ -34,4 +34,29 @@ ul.projects div.root a.project {
   vertical-align: top;
 }
 
+.splitcontentleft {
+    float: left;
+    width: 49%;
+}
+
+.splitcontentright {
+    float: left;
+    padding-left:19px;
+    width: 49%;
+}
+
+.box {
+    background-color: #F6F6F6;
+    border: 1px solid #E4E4E4;
+    color: #505050;
+    line-height: 1.5em;
+    margin-bottom: 10px;
+    padding: 6px;
+}
+
+ul.circle {
+  list-style-type:circle;
+  padding: 10px;
+}
+
 
