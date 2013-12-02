@@ -33,7 +33,7 @@
       </table>
       <% if @user.is_leader? && current_user == @user %>
         <div class = "lst_member">
-          Team Group<div><span>13</span></div>
+          Team Group<div><span><%= current_user.team.users.count %></span></div>
         </div>
         <div class = "lst_member_bottom">
           <% if @user.is_leader? && current_user == @user %>
