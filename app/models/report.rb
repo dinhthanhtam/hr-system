@@ -16,13 +16,15 @@ class Report < ActiveRecord::Base
   scope :in_month, ->(month) { where("MONTH(reports.report_date) = ?", month) }
   scope :in_year, ->(year) { where("YEAR(reports.report_date) = ?",year) }
   scope :in_month_year, ->(month, year) { in_year(year).in_month(month) }
-  scope :group_by_years, -> { group(:year) }
-  scope :group_by_months, ->(year) { in_year(year).group(:month) }
-  scope :group_by_weeks, ->(month, year) { in_month_year(month, year).group("WEEK(report_date)") }
+  scope :group_by_years, -> { group("YEAR(reports.report_date)") }
+  scope :group_by_months, ->(year) { in_year(year).group("MONTH(reports.report_date)") }
+  scope :group_by_weeks, ->(month, year) { in_month_year(month, year).group("WEEK(reports.report_date)") }
   scope :created_by, ->(user) { where("reports.user_id = ?", user) unless user.nil? }
   scope :sticked_reports, -> { joins(:stickies).uniq }
   scope :sticked_by, ->(user) { sticked_reports.where("stickies.user_id = ?", user) unless user.nil? }
   scope :not_sticked_by, ->(user) { sticked_reports.where("stickies.user_id != ?", user) unless user.nil? }
+
+  scope :group_by_weeks_for_summary, -> { group("WEEK(reports.report_date)") }
   
   scope :current_week_reports, -> {
     in_week((week = DateUtils::Week.new).start_day, week.end_day) 

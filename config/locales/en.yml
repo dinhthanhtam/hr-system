@@ -34,6 +34,7 @@ en:
         user_sticky: "User's sticky"
         leader_sticky: "Leader's sticky"
         reprot_sticky: "Report's sticky"
+        not_report: "Weeks not reported "
       user: &user
         email: "Email"
         display_name: "User name"

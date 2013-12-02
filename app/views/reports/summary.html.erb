@@ -21,6 +21,7 @@
         <th><%= model.human_attribute_name :user_sticky %></th>
         <th><%= model.human_attribute_name :leader_sticky %></th>
         <th><%= model.human_attribute_name :reprot_sticky %></th>
+        <th><%= model.human_attribute_name :not_report %></th>
     </tr>
     <tbody id = "list_summary">
       <% @list_sumary.each do |summary| %>
@@ -30,6 +31,7 @@
           <td><%= summary[2] %></td>
           <td><%= summary[3] %></td>
           <td><%= summary[4] %></td>
+          <td><%= summary[5] %></td>
         </tr>
       <% end %>
     </tbody>
