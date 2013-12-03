@@ -90,6 +90,7 @@ en:
       not_select: "Not select"
       dont_write_repost_lw: "Last week didn't write report"
       dont_write_repost_thw: "This week don't write report"
+      cost: "Cost"
       payslips:
         upload_payslip: Upload payslips
         send_payslip: Send payslips

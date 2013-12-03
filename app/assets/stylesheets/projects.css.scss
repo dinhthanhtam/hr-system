@@ -35,13 +35,14 @@ ul.projects div.root a.project {
 }
 
 .splitcontentleft {
-    float: left;
+    display: inline-block;
     width: 49%;
 }
 
 .splitcontentright {
-    float: left;
-    padding-left:19px;
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 15px;
     width: 49%;
 }
 
@@ -59,4 +60,8 @@ ul.circle {
   padding: 10px;
 }
 
+.old-project {
+    background: url("/assets/star_none.png") no-repeat scroll 0 50% transparent;
+    padding-left: 18px;
+}
 

@@ -1,8 +1,12 @@
 <selection id="project_show">
   <div class="ctsTit">
     <h2><%= h2_label %></h2>
+    <nav>
+      <%= link_to_if((@project.editable? && (current_user.projects.include? @project)),
+          t(:cost, scope: [:views, :labels]), url_for(controller: :costs, action: :new, project_id: 2),
+          class: "btn btn-small btn-warning") {} %>
+    </nav>
   </div>
-
   <div class="splitcontentleft">
     <div class="issues box">
       <h3><%= @project.name %></h3>
@@ -22,16 +26,20 @@
       <h3>Members</h3>
       <% @project.project_users.each do |project_user| %>
             <div style="display: inline-block;">
-              <%= link_to image_tag(project_user.user.avatar_url, class: "avatar", alt: "No image"), url_for(controller: :project_users, action: :edit, id: project_user.id), data: project_user.user.display_name %>
+              <%= link_to image_tag(project_user.user.avatar_url, class: "avatar", alt: "No image"),
+                url_for(controller: :project_users, action: :edit, id: project_user.id), data: project_user.user.display_name %>
             </div>
       <% end %>
     </div>
   </div>
-  
   <div class="form-actions">
-    <%= link_to t(:button_index, scope: [:views, :labels]), url_for(action: :index), class: "btn" %>
-    <%= link_to_if(@project.editable?, t(:button_edit, scope: [:views, :labels]), url_for(action: :edit), class: "btn btn-primary") {} %>
-    <%= link_to_if(@project.deletable?, t(:button_delete, scope: [:views, :labels]), url_for(action: :destroy), confirm: t(:delete_confirm, scope: [:views, :messages]), method: :delete, class: "btn btn-danger") {} %>
+    <%= link_to_if(current_user.is_manager?, t(:button_index, scope: [:views, :labels]),
+        url_for(action: :index), class: "btn") {} %>
+    <%= link_to_if(@project.editable? && current_user.is_manager?, t(:button_edit, scope: [:views, :labels]),
+        url_for(action: :edit), class: "btn btn-primary") {} %>
+    <%= link_to_if(@project.deletable? && current_user.is_manager?, t(:button_delete, scope: [:views, :labels]),
+        url_for(action: :destroy), confirm: t(:delete_confirm, scope: [:views, :messages]), method: :delete,
+        class: "btn btn-danger") {} %>
   </div>
 
 </section>
