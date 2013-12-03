@@ -309,3 +309,16 @@ table.list_report {
     text-align: center;
 }
 
+a[data]:hover:after {
+  content: attr(data);
+  font-size: 15px;
+  padding: 5px 5px;
+  color: #FFF;
+  position: absolute;
+  left: 0;
+  top: -45px;
+  white-space: nowrap;
+  z-index: 2;
+  border-radius: 5px;
+  background: #000;
+}

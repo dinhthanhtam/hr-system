@@ -26,7 +26,7 @@
     <tbody id = "list_summary">
       <% @list_sumary.each do |summary| %>
         <tr>
-          <td><%= summary[0] %></td>
+          <td><%= link_to summary[0], url_for(action: :index, member_id: summary[6]) %></td>
           <td><%= summary[1] %></td>
           <td><%= summary[2] %></td>
           <td><%= summary[3] %></td>
