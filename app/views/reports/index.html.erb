@@ -11,7 +11,7 @@
             <div class="lst_member_bottom">
               <% team.users.each do |user| %>
                 <div style="display: inline-block" class= "member_item">
-                  <a class="test_hover" data="<%= user.display_name %>" href="<%= url_for(action: :index, member_id: user.id) %>">
+                  <a data="<%= user.display_name %>" href="<%= url_for(action: :index, member_id: user.id) %>">
                     <%= image_tag(user.avatar_url, alt: "Errors",
                       class: "member_avatar #{ 'border_blue' if params[:member_id].to_i == user.id }") %>
                   </a>
@@ -72,7 +72,7 @@
         <div class="chart"><%= link_to_if(@current_user.is_leader? || current_user.is_manager?, t(:button_summary, scope: [:views, :labels]), url_for(action: :summary)) {} %></div>
       <% end %>
       
-      <% if !current_user.is_reporter? && @reports.any? %>
+      <% if !current_user.is_reporter? && !current_user.is_hr? %>
         <div class="form_create">
           <div class="tab">
             <ul id = "head_nav" style="border-bottom: solid 1px #d5d5d5;">

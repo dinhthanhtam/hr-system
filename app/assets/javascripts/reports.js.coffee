@@ -113,11 +113,13 @@ $ ->
   $(document).on "mouseout", ".member_avatar", ->
     $("#name_hover").hide()
 
-  $(document).on "mouseover", ".member_avatar", ->
+  $(document).on "mouseover", ".member_avatar", (evt)->
     $a_element = $(this).closest("a")
-    pos = $a_element.position()
+    offset = $a_element.offset()
     $span = $("#name_hover")
     $span.html $a_element.attr("data")
-    $span.css("top", pos.top + 70)
-    $span.css("left", pos.left + 170)
+    top = offset.top - 45
+    left = offset.left
+    $span.css("top", top)
+    $span.css("left", left)
     $span.show()

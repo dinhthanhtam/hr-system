@@ -71,7 +71,7 @@ class ReportsController < BaseController
       beginning = DateTime.parse(params[:report_from]).beginning_of_week
       end_week = DateTime.parse(params[:report_to]).beginning_of_week
       number_of_weeks = (end_week - beginning).to_i/7 - reports.group_by_years.group_by_weeks_for_summary.count.length
-      [user.display_name, reports.count, stickies, stickies_by_leader, number_of_stikies, number_of_weeks]
+      [user.display_name, reports.count, stickies, stickies_by_leader, number_of_stikies, number_of_weeks, user.id]
     end
     
     respond_to do |format|
@@ -81,13 +81,14 @@ class ReportsController < BaseController
 
 private
   def ordering(search)
-    if current_user.is_manager?
+    if current_user.is_manager? && !current_user.is_hr?
        params[:member_id] = User.in_groups(current_user.groups.map(&:id)).first.try(:id) unless params[:member_id]
-       User.find(params[:member_id]).reports.order("report_date DESC")
+       reports = User.find(params[:member_id]).reports.order("report_date DESC")
     else
       params[:member_id] = nil if current_user.is_staff? || current_user.is_hr?
-      (params[:member_id].present? ? User.find(params[:member_id]) : current_user).reports.order("report_date DESC")
+      reports = (params[:member_id].present? ? User.find(params[:member_id]) : current_user).reports.order("report_date DESC")
     end
+    params[:was_sticky] ? reports.sticked_reports : reports
   end
 
   def create_object

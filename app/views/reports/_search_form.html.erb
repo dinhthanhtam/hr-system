@@ -1,7 +1,11 @@
 <table>
   <tr>
     <th class="td1"><%= f.label :category_id %></th>
-    <td style="padding-bottom: 15px;"><%= f.collection_select :report_category_id_eq, ReportCategory.all, :id, :name, include_blank: true %></td>
+    <td style="padding-bottom: 15px;">
+      <%= f.collection_select :report_category_id_eq, ReportCategory.all, :id, :name, include_blank: true %>
+      <%= check_box_tag :was_sticky, 1, params[:was_sticky].present? ? true : false, style: "margin-left: 60px;" %>
+      <label style="font-size: 15px;">Sticky</label>
+    </td>
   </tr>
   <tr>
     <th class="td1"><%= f.label :title %></th>
