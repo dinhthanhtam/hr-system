@@ -105,6 +105,7 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25)
+    mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.8.2)
     mysql2 (0.3.14)
@@ -115,6 +116,8 @@ GEM
     net-ssh (2.7.0)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
     orm_adapter (0.4.0)
     polyamorous (0.6.4)
       activerecord (>= 3.0)
@@ -161,6 +164,8 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    ruby-ole (1.2.11.6)
+    rubyXL (1.2.10)
     rvm-capistrano (1.5.1)
       capistrano (~> 2.15.4)
     sass (3.2.12)
@@ -169,6 +174,8 @@ GEM
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
     slop (3.4.6)
+    spreadsheet (0.8.3)
+      ruby-ole (>= 1.0)
     sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -208,6 +215,7 @@ GEM
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
     will_paginate (3.0.5)
+    zip (2.0.2)
 
 PLATFORMS
   ruby
@@ -231,14 +239,17 @@ DEPENDENCIES
   jquery-ui-rails
   less-rails
   mysql2
+  nokogiri
   pry
   pry-rails
   rails (= 4.0.1)
   rails_config
   ransack
   rspec-rails
+  rubyXL
   rvm-capistrano
   sass-rails
+  spreadsheet
   state_machine
   therubyracer
   twitter-bootstrap-rails
@@ -246,3 +257,4 @@ DEPENDENCIES
   unicorn
   whenever
   will_paginate
+  zip

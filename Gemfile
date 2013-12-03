@@ -75,3 +75,9 @@ gem 'debugger'
 
 # state machine
 gem 'state_machine'
+
+# spreadsheet
+gem 'spreadsheet'
+gem 'nokogiri'
+gem 'zip'
+gem 'rubyXL'
