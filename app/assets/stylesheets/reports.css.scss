@@ -145,6 +145,7 @@ i.cancel_tag {
   text-decoration:none;
   background:#fff;
   padding:20px 25px;
+  font-size: 15px;
 }
 
 .tab ul li.active {
@@ -295,14 +296,11 @@ table.list_report {
     background: none repeat scroll 0 0 #FFFFFF;
     border-bottom: 1px solid #D5D5D5;
   td {
+    text-align: center;
     padding: 10px;
     border: 1px solid #D5D5D5;
   }
 
-}
-
-.ts_td1 {
-    width: 100px;
 }
 
 .ts_td1, .ts_td2, .ts_td3, .ts_td4, .ts_td5 {

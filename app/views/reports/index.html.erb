@@ -133,10 +133,10 @@
             <td style="border-bottom: none;border-top: none;" width="4%"></td>
 
             <td class = "ts_td1" width="4%"></td>
-            <td class = "ts_td2" width="12%"><%= model.human_attribute_name :report_category_id %></td>
+            <td class = "ts_td2" width="15%"><%= model.human_attribute_name :report_category_id %></td>
             <td class = "ts_td3"><%= model.human_attribute_name :title %></td>
-            <td class = "ts_td4" width = "50%"><%= model.human_attribute_name :description %></td>
-            <td class = "ts_td5" width = "4%"></td>
+            <td class = "ts_td4" ><%= model.human_attribute_name :description %></td>
+            <td class = "ts_td5" width="14%"></td>
             <td style="border-bottom: none;border-top: none;"></td>
           </tr>
         <% end %>
@@ -157,7 +157,7 @@
           </td>
           <td><%= report.title %></td>
           <td><a style="color: <%= report.in_current_week? ? :blue : "#666666" %>" href="<%= url_for(action: :show, id: report.id) %>"><%= truncate(report.description, length: 90) %></a></td>
-          <td>
+          <td class="test">
             <% if can? :update, report %>
               <%= link_to_if(report.in_current_week?, t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: report.id), class: "btn btn-primary btn-mini") {} %>
             <% end %>

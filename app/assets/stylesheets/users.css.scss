@@ -144,39 +144,70 @@ a.profile_link:active {
 }
 
 .left_mnu {
+  width: 185px;
   background-color: white;
-  padding: 5px;
+  
   th {
     border-bottom: 1px solid #eeeeee;
     border-top: 1px solid #eeeeee;
     line-height: 20px;
-    padding: 8px;
+    padding: 8px 5px;
     text-align: left;
     vertical-align: top;
     font-size: 13px;
-    text-align: left;
-    vertical-align: middle;
+    &:hover{
+      padding: 8px 0px;
+      background-color:#F5F5F5;
+      line-height: 20px;
+      text-align: left;
+      vertical-align: middle;
+      a{
+        border-left: 3px solid #FF0034;
+        color: red;
+        font-size: 12px;
+        padding: 11px 0px;
+        padding-left: 6px;
+      }
+    }
   }
   td {
-    
+    cursor: pointer;
     line-height: 20px;
     padding: 8px;
     text-align: left;
-    vertical-align: top;
     font-size: 11px;
-    
-    text-align: left;
+    text-decoration: none;
     vertical-align: middle;
+    border-left: none;
+    &:hover{
+      padding: 8px 0px;
+      background-color:#F5F5F5;
+      line-height: 20px;
+      text-align: left;
+      font-size: 11px;
+      vertical-align: middle;
+      a{
+        padding: 11px 0px;
+        padding-left: 6px;
+        border-left: 3px solid #FF0034;
+        color: red;
+      }
+    }
   }
-  td:hover {
+  tr.active {
     background-color:#FF7C79;
+    th{
+      border: none;
+    }
     border-left: 3px solid #FF0034;
     line-height: 20px;
     padding: 8px;
     text-align: left;
-    vertical-align: top;
     font-size: 11px;
     vertical-align: middle;
+    &:hover{
+      border-left: none;
+    }
   }
   a {
     color: #666;
@@ -337,4 +368,8 @@ a.profile_link:active {
     height:120px;
   }
   
+}
+
+.margin a:hover{
+  color: white;
 }

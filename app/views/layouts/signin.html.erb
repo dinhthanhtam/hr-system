@@ -10,10 +10,22 @@
 
   <body id="signin_body" background="/assets/bg.png">
     <div>
-      <% if flash[:error] %>
-        <p class="alert alert-error fade in"><a class="close" data-dismiss="alert" href="javascript:void(0)">×</a><%= flash[:error] %></p>
+      <% if flash[:alert] %>
+        <div id="login_fail_modal" class="modal hide fade">
+          <div class="modal-header">
+            <h3><%= t(:login_fail, scope: [:views, :labels]) %></h3>
+          </div>
+            <div class="modal-body" style="background: #f2dede; padding: 30px; color: red; font-size: 15px;">
+              <p id="error_message"><%= flash[:alert] %></p>
+            </div>
+            <div class="modal-footer" style="text-align: center;">
+              <a href="#" class="btn" data-dismiss="modal">OK</a>
+            </div>
+          </div>
       <% end %>
       <%= yield %>
     </div>
   </body>
+  <script type="text/javascript">
+  </script>
 </html>

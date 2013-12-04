@@ -10,16 +10,16 @@ module ApplicationHelper
   def puts_name group, count
     result = ""
     if group.children.empty?
-      result += "<tr><th class='item_left_menu'><a id='group_#{ group.id }' href='#'>#{ group.name }</a></th></tr>"
+      result += "<tr id='group_#{ group.id }'><th class='item_left_menu'><a href='#'>#{ group.name }</a></th></tr>"
       group.teams.each do |team|
-        result += "<tr><td class='item_left_menu'><a id='team_#{ team.id }' href='#'>#{ team.name }</a></td></tr>"
+        result += "<tr id='team_#{ team.id }'><td class='item_left_menu'><a href='#'>#{ team.name }</a></td></tr>"
       end
       return result
     else
-      result = "<tr><th class='item_left_menu'><a id='group_#{ group.id }' href='#'>#{ group.name }</a></th></tr>"
+      result = "<tr id='group_#{ group.id }'><th class='item_left_menu'><a href='#'>#{ group.name }</a></th></tr>"
       count += 1
       group.teams.each do |team|
-        result += "<tr><td class='item_left_menu'><a id='team_#{ team.id }' href='#'>#{ team.name }</a></td></tr>"
+        result += "<tr id='team_#{ team.id }'><td class='item_left_menu'><a href='#'>#{ team.name }</a></td></tr>"
       end
       group.children.each do |child|
         result += puts_name(child, count)

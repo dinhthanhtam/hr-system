@@ -53,6 +53,6 @@
     
   </table>
   <div class="form-actions">
-    <%= f.submit @report.new_record? ? I18n.t(:button_create, scope: [:views, :labels]) : I18n.t(:button_edit, scope: [:views, :labels]), class:"btn btn-primary" %>
+    <%= f.submit @report.new_record? ? I18n.t(:button_create, scope: [:views, :labels]) : I18n.t(:button_update, scope: [:views, :labels]), class:"btn btn-primary" %>
   </div>
 <% end %>

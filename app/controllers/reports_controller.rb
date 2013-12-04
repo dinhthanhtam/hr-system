@@ -26,7 +26,7 @@ class ReportsController < BaseController
       if @report.save
         format.html { redirect_to reports_path, notice: I18n.t(:create_success, scope: [:views, :messages], model: model_name) }
       else
-        @search = Report.search(params[:q])
+        @search = ordering(nil).search(params[:q])
         @reports = @search.result.paginate(page: params[:page],per_page: params[:per_page])
         format.html { render "index" }
       end
