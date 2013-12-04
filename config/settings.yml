@@ -23,3 +23,6 @@ state:
   prepared: "prepared"
   actived: "actived"
   finished: "finished"
+
+payslip:
+  accessable: ["B120011"]

@@ -1,5 +1,6 @@
 class PayslipsController < BaseController
 
+  before_filter :accessable?
   def index
     respond_to do |format|
       format.html
@@ -39,5 +40,10 @@ class PayslipsController < BaseController
     respond_to do |format|
       format.html { redirect_to payslips_path }
     end
+  end
+
+  private
+  def accessable?
+    redirect_to root_path, notice: "Access denied" unless Settings.payslip.accessable.include?(current_user.uid)
   end
 end

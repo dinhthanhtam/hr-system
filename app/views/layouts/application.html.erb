@@ -32,7 +32,7 @@
                 <% if current_user.is_manager? %>
                   <li><%= link_to "Project", url_for(controller: :projects, action: :index) %></li>
                   <li><%= link_to "Gantt", url_for(controller: :projects, action: :gantt_list) %></li>
-                  <li><%= link_to "Payslip", url_for(controller: :payslips, action: :index) %></li>
+                  <li><%= link_to "Payslip", url_for(controller: :payslips, action: :index) if Settings.payslip.accessable.include? current_user.uid %></li>
                   <li class="divider"></li>
                 <% end %>
                 <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
