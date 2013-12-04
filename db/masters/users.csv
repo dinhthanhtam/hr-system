@@ -7,7 +7,7 @@ id,email,display_name,password,position,team_id,uid
 6,to.duc.thien@framgia.com,To Duc Thien,123456,member,3,B120070
 7,le.dinh.vu@framgia.com,Le Dinh Vu,123456,leader,2,B120005
 8,nguyen.thanh.linh@framgia.com,Nguyen Thanh Linh,123456,subleader,2,B120006
-9,nguyen.dang.huy@framgia.com,Nguyen Dang Huy,123456,leader,4,
+9,nguyen.dang.huy@framgia.com,Nguyen Dang Huy,123456,leader,4,B129999
 10,tran.duc.thang@framgia.com,Tran Duc Thang,123456,subleader,4,B120050
 11,le.duy.khanh@framgia.com,Le Duy Khanh,123456,leader,5,B120012
 12,nguyen.anh.tien@framgia.com,Nguyen Anh Tien,123456,subleader,5,B120051
@@ -41,14 +41,14 @@ id,email,display_name,password,position,team_id,uid
 40,le.duy.vu@framgia.com,Le Duy Vu,123456,member,5,B120039
 41,nguyen.van.giang@framgia.com,Nguyen Van Giang,123456,member,5,B120040
 42,tran.van.luan@framgia.com,Tran Van Luan,123456,member,5,B120061
-43,nguyen.van.cuong@framgia.com,Nguyen Van Cuong,123456,member,5,B120054
+43,nguyen.van.cuong.a@framgia.com,Nguyen Van Cuong A,123456,member,5,B120054
 44,ngo.duy.trung@framgia.com,Ngo Duy Trung,123456,member,5,B120064
 45,nguyen.tuan.anh@framgia.com,Nguyen Tuan Anh,123456,member,5,B120077
 46,bui.quy.duong@framgia.com,Bui Quy Duong,123456,member,6,B120020
 47,nguyen.van.vu@framgia.com,Nguyen Van Vu,123456,member,6,B120031
 48,nguyen.van.ngoc@framgia.com,Nguyen Van Ngoc,123456,member,6,B120017
 49,nguyen.dinh.huan@framgia.com,Nguyen Dinh Huan,123456,member,6,B120028
-50,nguyen.thi.mai@framgia.com,Nguyen Thi Mai,123456,member,7,B120066
+50,nguyen.thu.mai@framgia.com,Nguyen Thu Mai,123456,member,7,B120066
 51,le.thi.hien@framgia.com,Le Thi Hien,123456,member,7,B120067
 52,lai.le.le.linh@framgia.com,Lai Le Le Linh,123456,member,7,B120068
 53,nguyen.khac.tiep@framgia.com,Nguyen Khac Tiep,123456,member,7,B120075
@@ -66,3 +66,30 @@ id,email,display_name,password,position,team_id,uid
 65,nguyen.thi.uoc.mo@framgia.com,Nguyen Thi Uoc Mo,123456,member,10,B120093
 66,tran.thi.trinh@framgia.com,Tran Thi Trinh,123456,member,10,B120096
 67,vu.thi.bich.ngoc@framgia.com,Vu Thi Bich Ngoc,123456,subleader,10,B120056
+68,tran.nam.son@framgia.com,Tran Nam Son,123456,leader,1,B120073
+69,takuma.miyake@framgia.com,Takuma Miyake,123456,manager,,B120034
+70,kazunari.fujimoto@framgia.com,Kazunari Fujimoto,123456,chief,,B120001
+71,pham.xuan.thanh@framgia.com,Pham Xuan Thanh,123456,member,9,B120079
+72,hoang.thi.tuan.dung@framgia.com,Hoang Thi Tuan Dung,123456,member,9,B120080
+73,lai.minh.dao@framgia.com,Lai Minh Dao,123456,member,9,B120081
+75,duong.thi.lan@framgia.com,Duong Thi Lan,123456,member,9,B120083
+76,nguyen.minh.tien@framgia.com,Nguyen Minh Tien,123456,member,9,B120084
+77,nguyen.van.vuong@framgia.com,Nguyen Van Vuong,123456,member,9,B120085
+78,truong.my.hai.ninh@framgia.com,Truong My Hai Ninh,123456,member,9,B120088
+79,dang.quang.minh@framgia.com,Dang Quang Minh,123456,member,9,B120089
+80,nguyen.thi.hue@framgia.com,Nguyen Thi Hue,123456,member,9,B120090
+81,nguyen.manh.ky@framgia.com,Nguyen Manh Ky,123456,member,9,B120091
+82,nguyen.thanh.tung@framgia.com,Nguyen Thanh Tung,123456,member,9,B120092
+83,nguyen.van.mui@framgia.com,Nguyen Van Mui,123456,member,9,B120086
+84,nguyen.van.cuong.b@framgia.com,Nguyen Van Cuong B,123456,member,9,B120087
+85,bui.van.quynh@framgia.com,Bui Van Quynh,123456,member,9,B120094
+86,vu.thi.minh.hang@framgia.com,Vu Thi Minh Hang,123456,member,9,B120095
+87,nguyen.huong.thanh@framgia.com,Nguyen Huong Thanh,123456,member,7,B120097
+88,nguyen.duc.giang@framgia.com,Nguyen Duc Giang,123456,member,9,B120098
+89,nguyen.ngoc.tuan@framgia.com,Nguyen Ngoc Tuan,123456,member,9,B120099
+90,tran.duc.liem@framgia.com,Tran Duc Liem,123456,member,9,B120100
+91,nghiem.hong.thai@framgia.com,Nghiem Hong Thai,123456,member,9,B120101
+92,nguyen.ngoc.tran.canh@framgia.com,Nguyen Ngoc Tran Canh,123456,member,9,B120102
+93,nguyen.van.tung@framgia.com,Nguyen Van Tung,123456,member,9,B120103
+94,le.quoc.tuan@framgia.com,Le Quoc Tuan,123456,member,9,B120105
+96,ngo.thi.kieu.nga@framgia.com,Ngo Thi Kieu Nga,123456,member,10,B120106
