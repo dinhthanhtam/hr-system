@@ -20,6 +20,11 @@ class Payslip < ActiveRecord::Base
     false
   end
 
+  def payslip_fullurl
+    url = Rails.env == "development" ? Rails.root.to_s + "/public" : ""
+    url + payslip_url
+  end
+
   private
   def correct_paymonth 
     if paymonth =~ /\AT([1-9])\.(\d{4})\z/
