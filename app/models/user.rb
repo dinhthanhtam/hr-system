@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   #attr_accessible :email, :password, :password_confirmation, :remember_me, :cardID, :display_name, :team_id, :position, :user_roles_attributes, :group_users_attributes
   # attr_accessible :title, :body
   validates :user_roles, presence: true
+  validates :uid, uniqueness: true, format: { with: /\A(A|B)(\d+)\z/ }
 
   has_many :reports
   has_many :user_roles
@@ -19,6 +20,9 @@ class User < ActiveRecord::Base
   has_many :project_users
   has_many :projects, through: :project_users
   mount_uploader :avatar, AvatarUploader
+  
+  # payslip
+  has_many :payslips
 
   belongs_to :team
 

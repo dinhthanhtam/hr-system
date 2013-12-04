@@ -1,0 +1,56 @@
+<selection>
+  <div>
+    <div class="margin-top10">
+      <%= form_for :payslip, url: payslips_path do |f| %>
+        <table class="table_static">
+          <tr>
+            <td><%= f.label t(:upload_payslip, scope: [:views, :labels, :payslips]) %></td>
+          </tr>
+          <tr>
+            <td>
+              <%= f.file_field :file, accept: ".xlsx" %>
+              <%= f.submit t(:button_import, scope: [:views, :labels]), class: "btn btn-warning" %>
+              <label style="color:red"><%= t(:select_xlsx_notice, scope: [:views, :labels, :payslips])%> </label>
+            </td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+    <div class="margin-top10">
+      <%= form_for :payslip, url: send_payslip_payslips_path do |f| %>
+        <table class="table_static">
+          <tr>
+            <td><%= f.label t(:send_payslip, scope: [:views, :labels, :payslips]) %></td>
+          </tr>
+          <tr>
+            <td>
+              <%= f.select :paymonth, Payslip.paymonths %>
+              <%= f.submit t(:button_send, scope: [:views, :labels]), class: "btn, btn-warning" %>
+            </td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+    <div class="modal hide" id="payslip-modal">
+      <div class="modal-header"></div>
+      <div class="modal-body">this is payslip</div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Confirm</button>
+      </div>
+    </div>
+    <table class="table_static margin-top10">
+      <% User.order(:uid).each do |user| %>
+        <tr>
+          <th width="150px"><%= user.display_name %></th>
+          <td>
+            <% user.payslips.order("created_at DESC").each do |payslip| %>
+              <a href="<%= payslip_path(payslip) %>" data-remote="true">
+                <span class="btn btn-private payslip" data-id="<%= payslip.id %>" style="<%= 'color:red' if payslip.last_month_payslip? %>"><%= payslip.paymonth %></span>
+              </a>
+	    <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</selection>

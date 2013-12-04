@@ -22,6 +22,12 @@ HrSystem::Application.routes.draw do
     get :gantt_list, on: :collection
   end
   resources :project_users
+
+  resources :payslips do
+    get :download, on: :member
+    post :send_payslip, on: :collection
+  end
+
   root to: "users#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.

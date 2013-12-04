@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h2 style="font-size: 3.2em"><%= payslip.user.display_name %> <%= payslip.paymonth %></h2>
+</div>
+<div class="modal-body">
+  <table class="table_static">
+  <% payslipsheet[0].sheet_data.each do |row| %>
+    <tr>
+      <% row.each do |sheet| %>
+        <td><%= sheet.try(:value) %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </table>
+</div>
+<div class="modal-footer">
+  <a href="<%= download_payslip_path(payslip)%>">
+    <span class="btn btn-warning"><%= t(:button_download, scope: [:views, :labels]) %></span>
+  </a>
+  <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
+    <%= t(:button_confirm, scope: [:views, :labels])%>
+  </button>
+</div>

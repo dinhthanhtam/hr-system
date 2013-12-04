@@ -1,0 +1,6 @@
+<h1>Payslips#new</h1>
+<p>Find me in app/views/payslips/new.html.erb</p>
+<%= form_for :payslip, url: payslips_path do |f| %>
+  <%= f.file_field :file %>
+  <%= f.submit t(:button_import, scope: [:views, :labels]), class: "btn btn-warning" %>
+<% end %>

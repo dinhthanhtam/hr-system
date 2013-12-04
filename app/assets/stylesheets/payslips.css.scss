@@ -1,0 +1,14 @@
+// Place all the styles related to the Payslips controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.margin-top10 {
+  margin-top: 10px;
+}
+#payslip-modal {
+  width: 96%;
+  position: fixed;
+  top: 10%;
+  left: 1%;
+  margin: 0 auto;
+  z-index: 1050;
+}

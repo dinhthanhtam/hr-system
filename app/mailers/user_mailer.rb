@@ -18,4 +18,11 @@ class UserMailer < ActionMailer::Base
     @date_string = date_string
     mail to: @user.email, subject: t(:notice_write_report_for_leader, scope: [:mailers, :subjects])
   end
+
+  def send_payslip payslip
+    @payslip = payslip
+    @user = payslip.user
+    attachments["#{@user.display_name} #{payslip.paymonth}.xlsx"] = File.read(Rails.root.to_s + "/public" + payslip.payslip_url)
+    mail to: @user.email, subject: t(:send_payslip, scope: [:mailers, :subjects], month: @payslip.paymonth)
+  end
 end

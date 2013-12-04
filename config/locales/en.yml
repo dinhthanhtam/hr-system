@@ -78,6 +78,10 @@ en:
       button_prepare: "Prepare"
       button_active: "Active"
       button_finish: "Finish"
+      button_import: "Import"
+      button_send: "Send"
+      button_download: Download
+      button_confirm: Confirm
       confirm_delete: "Do you want to delete it ?"
       sticky: "Do you want to sticky it ?"
       unsticky: "Do you want to unsticky it ?"
@@ -86,6 +90,10 @@ en:
       not_select: "Not select"
       dont_write_repost_lw: "Last week didn't write report"
       dont_write_repost_thw: "This week don't write report"
+      payslips:
+        upload_payslip: Upload payslips
+        send_payslip: Send payslips
+        select_xlsx_notice: Please select xlsx file!
     messages:
       delete_confirm: Do you want to delete it?
       create_success: Create %{model} successfully!
@@ -157,6 +165,7 @@ en:
       notice_write_report_for_leader: "Notice for member didn't write report last week"
       notice_write_report: "Notice for writing report at current week"
       welcome_subject: "Welcome to Hr-System"
+      send_payslip: "Payslip %{month}"
   errors:
     messages:
       in_valid: "Invalid"
