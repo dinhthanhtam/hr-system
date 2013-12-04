@@ -36,7 +36,11 @@ class User < ActiveRecord::Base
   scope :reporters, -> { joins(:user_roles => :role).where("roles.name in (?)", ["leader", "member"]).uniq }
   scope :filter_leaders, -> { joins(:user_roles => :role).where("roles.name = ?", "leader").uniq }
   scope :in_groups, ->(group_ids) { in_teams(Team.in_groups(group_ids).ids) }
-
+  
+  scope :find_leaders, -> { where("users.position = ?", "leader") }
+  scope :find_subleaders, -> { where("users.position = ?", "subleader") }
+  scope :find_members, -> { where("users.position = ?", "member") }
+  
   state_machine :position, initial: :member do
     after_transition [:manager, :submanager] => any - [:manager, :submanager] do |user, transition|
       user.group_users.try(:destroy_all)

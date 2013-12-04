@@ -12,6 +12,8 @@ HrSystem::Application.routes.draw do
     get :get_all_user, on: :collection
     get :personal_settings, on: :member
     post :update_profile, on: :collection
+    post :update_user_role, on: :collection
+    get :organizations, on: :collection
   end
   
   resources :groups do
