@@ -97,6 +97,40 @@
           <% end %>
         </div>
       <% end %>
+
+      <!-- Show list project -->
+
+      <div class="<%= current_user == @user ? 'notice_bottom' : 'notice_top' %>">
+        List project
+      </div>
+      <div class="notice_content">
+        <ul class="projects root">
+          <% Project.current_projects(@user.id).each do |project| %>
+            <li class="root">
+              <div class="root">
+                <%= link_to project.name, url_for(controller: :projects, action: :show, id: project.id), class: "project my-project" %>
+                <% if project.description.present? %>
+                  <div class="wiki description">
+                    <p><%= project.description %></p>
+                  </div>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+          <% Project.last_projects(@user.id).each do |project| %>
+            <li class="root">
+              <div class="root">
+                <%= link_to project.name, url_for(controller: :projects, action: :show, id: project.id), class: "project old-project" %>
+                <% if project.description.present? %>
+                  <div class="wiki description">
+                    <p><%= project.description %></p>
+                  </div>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </div>
 </selection>

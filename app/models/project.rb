@@ -4,8 +4,10 @@ class Project < Base
   has_many :project_users
   has_many :users, through: :project_users
   has_many :costs
-  scope :get_project_by_state, ->(state) { where("state = ?", state) }
-
+  scope :get_project_by_state, ->(state) { where("projects.state = ?", state) }
+  scope :project_with_user, ->(user_id) { joins(:project_users).where("project_users.user_id = ?", user_id) unless user_id.nil? }
+  scope :current_projects, ->(user_id) { project_with_user(user_id).get_project_by_state("actived") }
+  scope :last_projects, ->(user_id) { project_with_user(user_id).get_project_by_state("finished") }
   state_machine :state, initial: :prepared do
     event :prepare do
       transition :prepared => :prepared

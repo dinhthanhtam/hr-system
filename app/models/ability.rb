@@ -55,6 +55,9 @@ class Ability
       can [:edit, :update, :destroy, :show], Cost do |cost|
         user.id == cost.user_id
       end
+      can :show, Project do |project|
+        user.projects.include? project
+      end
     end
   end
 end
