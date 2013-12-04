@@ -37,9 +37,10 @@ $ ->
     $(this).addClass("active")
     $(".group_table").hide()
     $("#"+id).show()
-  $(".item_left_menu a").click ->
-    id_element = $(this).attr("id").split("_")[0]
-    id = $(this).attr("id").split("_")[1]
+
+  $(".item_left_menu").click ->
+    id_element = $(this).closest("tr").attr("id").split("_")[0]
+    id = $(this).closest("tr").attr("id").split("_")[1]
     if id_element == "group"
       id_diff = "#team"
     else
@@ -49,8 +50,6 @@ $ ->
     $("#search_by_name_form").submit()
   
   mark_left_menu = ->
-    $all_link = $(".item_left_menu").find("a")
-    $all_link.attr("class", "item_left_menu")
     val_g = $("#group").val()
     val_t = $("#team").val()
     if (val_g != "")
@@ -59,3 +58,5 @@ $ ->
       $("#team_" + val_t).addClass("active")
 
   mark_left_menu()
+
+  $("#login_fail_modal").modal("show") if $("#error_message").html() != ""

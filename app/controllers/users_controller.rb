@@ -66,9 +66,9 @@ class UsersController < BaseController
 private
   def ordering(search)
     if params[:group] && !params[:group].empty?
-      return User.in_teams(Team.in_groups(Group.find(params[:group]).descendant_groups.map(&:id)).map(&:id))
+      return User.in_teams(Team.in_groups(Group.find(params[:group]).descendant_groups.map(&:id)).map(&:id)).order(:uid)
     elsif params[:team] && !params[:team].empty?
-      return Team.find(params[:team]).users
+      return Team.find(params[:team]).users.order(:uid)
     else
       return User.order(:uid)
     end
