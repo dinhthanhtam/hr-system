@@ -1,6 +1,7 @@
 carrierwave:
   storage: :file
   store_dir: uploads
+  file_store_dir: "/usr/local/rails_apps/framgia_hr/shared/uploads"
 links:
   home: http://192.168.1.89
   framgia: https://framgia.com

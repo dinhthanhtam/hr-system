@@ -13,7 +13,7 @@ class PayslipsController < BaseController
   end
 
   def show
-    @payslipsheet = RubyXL::Parser.parse Rails.root.to_s + "/public" + @payslip.payslip_url
+    @payslipsheet = RubyXL::Parser.parse @payslip.payslip_fullurl
     respond_to do |format|
       format.html
       format.js
@@ -23,7 +23,7 @@ class PayslipsController < BaseController
   def create
     payslip_path = "/tmp/payslip.xlsx"
     FileUtils.cp(params[:payslip][:file].tempfile.path, payslip_path)
-    Payslip.import_payslips(payslip_path)
+    Payslip.delay.import_payslips(payslip_path)
     respond_to do |format|
       format.html { redirect_to payslips_path }
     end
@@ -31,7 +31,7 @@ class PayslipsController < BaseController
 
   def download
     payslip = Payslip.where(id: params[:id]).first
-    send_file Rails.root.to_s + "/public" + payslip.payslip_url, type: "application/xlsx", x_sendfile: true if payslip
+    send_file payslip.payslip_fullurl, type: "application/xlsx", x_sendfile: true if payslip
   end
 
   def send_payslip
