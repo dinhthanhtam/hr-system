@@ -1,0 +1,68 @@
+<selection>
+  <div>
+    <div class="left_menu">
+      <table class = "user_profile">
+        <tr>
+          <th style="divne-height: 187px">
+            <%= link_to image_tag(current_user.avatar_url, class: "avatar_main", alt: "No image"), url_for(action: :show) %>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <strong><%= current_user.display_name %></strong>
+          </td>
+        </tr>
+        <tr>
+          <td class = "item">
+            <i><%= current_user.position %></i>
+          </td>
+        </tr>
+      </table>
+    </div>
+    
+    <div class="right_body">
+      <div class="account_settings">
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :display_name %></div>
+          <div class="content_settings bold">
+            <div class="display_settings"><%= current_user.display_name %></div>
+            <%= form_tag url_for(:action => :update_profile), :remote => true do %>
+              <div class="data_settings">
+                <input id="display_name" data-column="display_name" name="user[display_name]" type="text"
+                  placeholder="<%= current_user.display_name %>" value="<%= current_user.display_name %>"><br>
+                <%= submit_tag "OK", class: "btn btn-primary" %>
+                <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+              </div>
+            <% end %>
+          </div>
+          <div class="edit_settings"><a href="#">Edit</a></div>
+        </div>
+
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :email %></div>
+          <div class="content_settings"><%= current_user.email %></div>
+          <div class="edit_settings"></div>
+        </div>
+
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :password %></div>
+          <div class="content_settings">
+            <div class="display_settings"><%= t(:change_password, scope: [:views, :labels]) %></div>
+            <%= form_tag url_for(:action => :update_profile), :remote => true do %>
+              <div class="data_settings">
+                <input id = "password_confirmation" name="user[password]" data-column="password"
+                  type="password" placeholder="New password"><br>
+                <input name="user[password_confirmation]" data-column="password_confirmation"
+                  type="password" placeholder="Password confirmation"><br>
+                <%= submit_tag "OK", class: "btn btn-primary" %>
+                <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+              </div>
+            <% end %>
+          </div>
+          <div class="edit_settings"><a href="#">Edit</a></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</selection>

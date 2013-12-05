@@ -43,7 +43,7 @@ class Ability
       can :manage, Sticky
     else
       can :manage, Sticky
-      can [:index, :edit, :update, :get_all_user], User do |current|
+      can [:index, :edit, :update, :get_all_user, :personal_settings, :update_profile], User do |current|
         user.id == current.id
       end
       can :show, User

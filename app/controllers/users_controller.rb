@@ -51,6 +51,13 @@ class UsersController < BaseController
     end
   end
 
+  def personal_settings
+    @user = User.find(params[:id])
+    respond_to do |format|
+        format.html
+    end
+  end
+
   def get_team
     respond_to do |format|
       format.json { render json: Group.find(params[:group_id]).teams.map { |team| [team.name, team.id] } }
@@ -60,6 +67,19 @@ class UsersController < BaseController
   def get_all_user
     respond_to do |format|
       format.json { render json: User.all }
+    end
+  end
+
+  def update_profile
+    @id = params[:user].keys.last
+    @user = current_user
+    respond_to do |format|
+      if @success = @user.update_attributes(model_params)
+        sign_in(current_user, :bypass => true) if params[:user][:password].present? || params[:user][:password_confirmation].present?
+        format.js
+      else
+        format.js
+      end
     end
   end
 
