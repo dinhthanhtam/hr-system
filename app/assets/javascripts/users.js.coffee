@@ -58,5 +58,3 @@ $ ->
       $("#team_" + val_t).addClass("active")
 
   mark_left_menu()
-
-  $("#login_fail_modal").modal("show") if $("#error_message").html() != ""

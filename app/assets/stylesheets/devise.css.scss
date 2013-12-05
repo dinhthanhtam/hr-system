@@ -43,7 +43,6 @@
 }
 
 .input_form{
-  display:inline-block;
   background-color: white;
   margin: 15px 15px;
   input[type="password"], input[type="password"]:focus {
@@ -66,4 +65,14 @@
   background-image: url(/assets/bg.png);
   background-size: 100%;
   background-repeat: no-repeat;
+}
+
+.block_password{
+  width: 300px;
+  text-align: center;
+  margin: 5% auto;
+}
+#error_explanation, #alert{
+  color: blue;
+  text-align: center;
 }

@@ -1,12 +1,23 @@
-<h2>Forgot your password?</h2>
+<div class="block_password">
+  <div class="head_signin">
+    <image style="margin-top: 5%" src="/assets/logo.png" height="50px">
+  </div>
+  <div class="block_signin_form">
+    <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+      
+      <h2 style="font-size: 15px;">Forgot your password?</h2><br>
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
+      <%= devise_error_messages! %>
+      
+      <div class="input_form">
+        <image src="/assets/icon_user.png" width="34px" height="34px"/>
+        <input placeholder="Email" style="border: none; width: 179px; font-size: 14px" name="user[email]">
+      </div>
+      <%= f.submit "Reset password", style: "border: none; background-color: #ff8b75; color: white; font-size: 20px; width: 78%; height: 35px; margin: 15px 15px;" %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
-
-  <div><%= f.submit "Send me reset password instructions" %></div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+      <div class="margin">
+        <%= render "devise/shared/links" %>
+      </div>
+    <% end %>
+  </div>
+</div>

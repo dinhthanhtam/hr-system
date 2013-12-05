@@ -1,4 +1,5 @@
 $ ->
+  if window.location.pathname == "/projects/gantt_list"
     $.ajax "/projects/gantt",
     type: "GET",
     dataType: "json"

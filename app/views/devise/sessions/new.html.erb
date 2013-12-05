@@ -4,14 +4,15 @@
   </div>
   <div class="block_signin_form">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <div id="alert"><%= flash[:alert] || flash[:notice] %></div>
       <div class="input_form">
         <image src="/assets/icon_user.png" width="34px" height="34px"/>
-        <input placeholder="Email" style="border: none; width: 75%; font-size: 14px" name="user[email]">
+        <input placeholder="Email" style="border: none; width: 179px; font-size: 14px" name="user[email]">
       </div>
 
       <div class="input_form">
         <image src="/assets/icon_pass.png" width="34px" height="34px"/>
-        <input placeholder="Password" type="password" style="clear; both; border:none; width:75%; font-size:14px; margin: 0px 0px;" name="user[password]">
+        <input placeholder="Password" type="password" style="clear; both; border:none; width:179px; font-size:14px; margin: 0px 0px;" name="user[password]">
       </div>
       <% if devise_mapping.rememberable? -%>
         <div class="remember_me">

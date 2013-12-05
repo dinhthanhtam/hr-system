@@ -1,16 +1,30 @@
-<h2>Change your password</h2>
+<div class="block_password">
+  <div class="head_signin">
+    <image style="margin-top: 5%" src="/assets/logo.png" height="50px">
+  </div>
+  <div class="block_signin_form">
+    <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+      <h2 style="font-size: 15px;">Change your password</h2><br>
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+      <%= devise_error_messages! %>
 
-  <div><%= f.label :password, "New password" %><br />
-  <%= f.password_field :password, :autofocus => true %></div>
+      <div class="input_form">
+        <image src="/assets/icon_pass.png" width="34px" height="34px"/>
+        <input placeholder="New password" type="password" style="clear; both; border:none; width:180px; font-size: 14px; margin: 0px 0px;" name="user[password]">
+      </div>
 
-  <div><%= f.label :password_confirmation, "Confirm new password" %><br />
-  <%= f.password_field :password_confirmation %></div>
+      <div class="input_form">
+        <image src="/assets/icon_pass.png" width="34px" height="34px"/>
+        <input placeholder="Password" type="password" style="clear; both; border:none; width: 180px; font-size: 14px; margin: 0px 0px;" name="user[password_confirmation]">
+      </div>
+            <%= f.hidden_field :reset_password_token %>
 
-  <div><%= f.submit "Change my password" %></div>
-<% end %>
+      <%= f.submit "Change my password", style: "border: none; background-color: #ff8b75; color: white; font-size: 17px; width: 78%; height: 35px; margin: 15px 15px;" %>
 
-<%= render "devise/shared/links" %>
+      <div class="margin">
+        <%= render "devise/shared/links" %>
+      </div>
+
+    <% end %>
+  </div>
+</div>
