@@ -3,10 +3,12 @@
   <%= render partial: "errors", locals: {object: @user} %>
 
   <table class="formTbl contents">
-    <tr>
-      <th width="15%"><%= f.label :uid %></th>
-      <td><%= f.text_field :uid %></td>
-    </tr>
+    <% if current_user.hr_role? %>
+      <tr>
+        <th width="15%"><%= f.label :uid %></th>
+        <td><%= f.text_field :uid %></td>
+      </tr>
+    <% end %>
     <tr>
       <th width="15%"><%= f.label :email %></th>
       <td><%= f.text_field :email %></td>
@@ -23,7 +25,7 @@
       <th><%= f.label :avatar %></th>
       <td><%= f.file_field :avatar %></td>
     </tr>
-    <% if current_user.roles.detect{|x|x.name == "HR"} %>
+    <% if current_user.hr_role? %>
     
       <tr>
         <th><%= f.label :role %></th>

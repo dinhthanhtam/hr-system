@@ -13,6 +13,9 @@
   </table>
 </div>
 <div class="modal-footer">
+  <a href="<%= send_payslip_payslips_path(payslip: {paymonth: payslip.paymonth, payslip_id: payslip.id})%>" data-method="POST">
+    <span class="btn btn-warning"><%= t(:button_send, scope: [:views, :labels]) %></span>
+  </a>
   <a href="<%= download_payslip_path(payslip)%>">
     <span class="btn btn-warning"><%= t(:button_download, scope: [:views, :labels]) %></span>
   </a>
