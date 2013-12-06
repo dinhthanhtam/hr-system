@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   has_many :stickies
   has_many :project_users
   has_many :projects, through: :project_users
+  has_many :feedbacks
   mount_uploader :avatar, AvatarUploader
   
   # payslip

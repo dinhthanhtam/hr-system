@@ -59,5 +59,31 @@
     </small>
   </footer>
 
+  <div class="feedback">
+    <a>Feedback</a>
+  </div>
+
+  <div class="form_feedback" id="form_feedback">
+    <div id="title_feedback">
+      <h2>Enter your's feedback</h2>
+    </div>
+    <%= form_tag url_for(controller: :feedbacks, action: :create), :remote => true do %>
+      <div class="content">
+        <div class="title">Title</div><input type="text" name="feedback[title]" class="reset">
+      </div>
+      <div class="content">
+        <div class="title">Content</div><textarea name="feedback[content]" class="reset"></textarea>
+      </div>
+      <input type="text" value="<%= current_user.id %>" name="feedback[user_id]" style="display: none">
+      <div class="button">
+        <%= submit_tag "OK", class: "btn btn-primary" %>
+        <input type="button" class="btn close_feedback" value="Cancel"/>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="feedback_notice">
+    <h2>Thank for your feedback!</h2>
+  </div>
 </body>
 </html>

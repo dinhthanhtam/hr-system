@@ -1,0 +1,6 @@
+<% if @success %>
+  $(".form_feedback").hide(500);
+  $(".feedback_notice").delay(600).show(400);
+  $(".feedback_notice").delay(2000).hide(300);
+  $(".form_feedback .reset").val("");
+<% end %>
