@@ -58,3 +58,21 @@ $ ->
       $("#team_" + val_t).addClass("active")
 
   mark_left_menu()
+
+  $(".attributes").click ->
+    $(".update_errors").remove()
+    $(".data_settings").hide()
+    $(".display_settings").show()
+    $(".attributes").attr("class","attributes")
+    $(this).find(".display_settings").hide()
+    $(this).find(".data_settings").show()
+    $(this).addClass("active")
+
+  $(document).on "click", ".close_div", ->
+    $(".attributes").attr("class","attributes")
+    $(this).parent().hide()
+    display_settings = $(this).closest("form").siblings(".display_settings")
+    $(this).siblings("input[type=text]").val(display_settings.html())
+    display_settings.show()
+    $("input[type=password]").val("")
+

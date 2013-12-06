@@ -92,6 +92,7 @@ en:
       dont_write_repost_thw: "This week don't write report"
       cost: "Cost"
       login_fail: "LOGIN FAIL"
+      change_password: "Change password"
       payslips:
         upload_payslip: Upload payslips
         send_payslip: Send payslips

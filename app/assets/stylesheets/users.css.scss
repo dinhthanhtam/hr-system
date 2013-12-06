@@ -373,3 +373,47 @@ a.profile_link:active {
 .margin a:hover{
   color: white;
 }
+
+.account_settings{
+  background: white;
+  list-style-type: none;
+  border-bottom: 1px solid #AAAAAA;
+  border-top: 1px solid #AAAAAA;
+
+  .attributes {
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 13px;
+    border-top: 1px solid #E9E9E9;
+    &:hover{
+      background: #F2F2F2;
+    }
+  }
+  .title_settings{
+    display: inline-block;
+    width: 175px;
+  }
+  .content_settings{
+    width: 510px;
+    text-align: left;
+    display: inline-block;
+    color: gray;
+  }
+  .edit_settings{
+    display: inline-block;
+    text-align: center;
+  }
+  .bold{
+    font-weight: bold;
+  }
+  .data_settings{
+    display: none;
+  }
+  .btn-cance{
+    margin: 5px;
+  }
+  .active{
+    background: #F2F2F2;
+  }
+}

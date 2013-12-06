@@ -1,0 +1,29 @@
+<selection>
+  <div>
+    <div class="left_menu">
+      <table class = "left_mnu">
+        <% Group.root_groups.each do |group| %>
+          <%= raw puts_name(group, 0) %>
+        <% end %>
+      </table>
+    </div>
+    
+    <div class="right_body">
+      <div class="hed_search">
+        <%= form_for @search, url: users_path, html: {method: :get, id: 'search_by_name_form'} do |f| %>
+          <%= f.text_field :display_name_cont, placeholder: "Input name to search" %>
+          <%= hidden_field_tag :group, params[:group] %>
+          <%= hidden_field_tag :team, params[:team] %>
+        <% end %>
+      </div>
+      <div class="block users">
+        <% @users.each do |user| %>
+          <%= render "user_box", user: user %>
+        <% end %>
+      </div>
+    </div>
+
+    <%= will_paginate @users %>
+
+  </div>
+</selection>
