@@ -92,6 +92,8 @@ private
         reports = reports.sticked_by params[:member_id]
       when Settings.stick_type.all_sticky_report
         reports = reports.sticked_reports
+      else
+        reports
       end
     else
       params[:member_id] = nil if current_user.is_staff? || current_user.is_hr?
