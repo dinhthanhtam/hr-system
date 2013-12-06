@@ -25,7 +25,6 @@ class Report < ActiveRecord::Base
   scope :not_sticked_by, ->(user) { sticked_reports.where("stickies.user_id != ?", user) unless user.nil? }
 
   scope :group_by_weeks_for_summary, -> { group("WEEK(reports.report_date)") }
-  
   scope :current_week_reports, -> {
     in_week((week = DateUtils::Week.new).start_day, week.end_day) 
   }

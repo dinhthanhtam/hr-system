@@ -28,9 +28,9 @@
         <tr>
           <td><%= link_to summary[0], url_for(action: :index, member_id: summary[6]) %></td>
           <td><%= summary[1] %></td>
-          <td><%= summary[2] %></td>
-          <td><%= summary[3] %></td>
-          <td><%= summary[4] %></td>
+          <td><%= link_to summary[2], url_for(action: :index, member_id: summary[6], stick_type: Settings.stick_type.stick_by_user) %></td>
+          <td><%= link_to summary[3], url_for(action: :index, member_id: summary[6], stick_type: Settings.stick_type.stick_by_leader) %></td>
+          <td><%= link_to summary[4], url_for(action: :index, member_id: summary[6], stick_type: Settings.stick_type.all_sticky_report) %></td>
           <td><%= summary[5] %></td>
         </tr>
       <% end %>
