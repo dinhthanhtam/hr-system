@@ -19,11 +19,12 @@ project:
 
 select_boolean: [["True", 1], ["False", 0]]
 
-stick_type_list: [['Stickied by leader', 1], ['Stickied by user', 2], ['Stickied reports', 3]]
+stick_type_list: [['All reports', 0],['by leader', 1], ['by user', 2], ['All stickies', 3]]
 stick_type:
   stick_by_leader: 1
   stick_by_user: 2
   all_sticky_report: 3
+  all_report: 0
 
 state:
   prepared: "prepared"
