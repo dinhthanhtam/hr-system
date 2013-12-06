@@ -67,7 +67,7 @@
 
     </div>
     <div class="right_body" style="margin-left: 20px; width:732px;">
-      <% unless current_user.is_hr? || @reports.empty? %>
+      <% unless current_user.is_hr? %>
         <div class="report_create" style="<%= 'width:98%' unless current_user.is_leader? || current_user.is_manager? %>">Report index</div>
         <div class="chart"><%= link_to_if(@current_user.is_leader? || current_user.is_manager?, t(:button_summary, scope: [:views, :labels]), url_for(action: :summary)) {} %></div>
       <% end %>
