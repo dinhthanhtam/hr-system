@@ -3,7 +3,7 @@ class Ability
 
   def initialize(user)
     user ||= User.new
-
+    can :manage, Feedback
     if user.roles.detect{|r|r.name == "Manager"}
       can :manage, Project
       can :manage, User

@@ -76,3 +76,17 @@ $ ->
     display_settings.show()
     $("input[type=password]").val("")
 
+  $(document).on "click", ".close_feedback", ->
+    $("#form_feedback").hide(500)
+    $("#form_feedback .reset").val("")
+
+  $(document).on "click", "body", ->
+    $("#form_feedback").hide(500)
+    $("#form_feedback .reset").val("")
+
+  $(document).on "click", "#form_feedback", (e)->
+    e.stopPropagation()
+
+  $(".feedback a").click (e)->
+    e.stopPropagation()
+    $("#form_feedback").show(300)

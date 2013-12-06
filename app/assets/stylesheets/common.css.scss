@@ -1450,3 +1450,93 @@ ul.menu_drop li ul li a, ul.menu_drop li ul li a:link {
   padding: 10px 0px 10px 20px;
   white-space: nowrap;
 }
+
+.feedback {
+  position: fixed;
+  padding: 38px 14px 10px;
+  text-transform: uppercase;
+  right: 0;
+  bottom: 308px;
+  z-index: 99999;
+  display: block;
+  border-radius: 5px 0 0 5px;
+  a {
+    cursor: pointer;
+    color: white;
+    &:hover{
+      color: blue;
+    }
+  }
+  background: url("/assets/feedback.png");
+  background-repeat: no-repeat;
+  background-position-x: 30px;
+  background-color: #ef5555;
+}
+.form_feedback{
+  display: none;;
+  width: 400px;
+  height: 250px;
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  z-index: 1001;
+  padding: 10px;
+  _background: transparent;
+  background-color: white;
+  border: 2px solid gray;
+  zoom: 1;
+  -moz-box-shadow: 0px 0px 5px #535455;
+  -webkit-box-shadow: 0px 0px 5px #535455;
+  box-shadow: 0px 0px 5px #535455;
+  #title {
+    background: url("/assets/feedback_title.png");
+    background-repeat: no-repeat;
+    padding-top: 5px;
+  }
+  h2 {
+    color: #555;
+    font-size: 14px;
+    padding-bottom: 15px;
+    margin-left: 30px;
+    background: url("/assets/bg-title-lightbox.jpg");
+    background-repeat: no-repeat;
+  }
+  .title {
+    font-weight: bold;
+    font-size: 13px;
+    color: #555;
+    display: inline-block;
+    width: 60px;
+  }
+  textarea {
+    width: 330px;
+    height: 130px;
+    max-width: 330px;
+    max-height: 130px;
+    font-size: 13px;
+  }
+  .button {
+    text-align: center;
+    padding-top: 10px;
+  }
+}
+
+.feedback_notice {
+  display: none;
+  width: 250px;
+  height: 20px;
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  z-index: 1001;
+  padding: 10px;
+  _background: transparent;
+  background-color: white;
+  border: 2px solid gray;
+  zoom: 1;
+  -moz-box-shadow: 0px 0px 5px #535455;
+  -webkit-box-shadow: 0px 0px 5px #535455;
+  box-shadow: 0px 0px 5px #535455;
+  font-size: 13px;
+  text-align: center;
+}
