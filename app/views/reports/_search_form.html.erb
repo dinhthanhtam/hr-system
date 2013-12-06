@@ -3,14 +3,22 @@
     <th class="td1"><%= f.label :category_id %></th>
     <td style="padding-bottom: 15px;">
       <%= f.collection_select :report_category_id_eq, ReportCategory.all, :id, :name, include_blank: true %>
-      <%= check_box_tag :was_sticky, 1, params[:was_sticky].present? ? true : false, style: "margin-left: 60px;" %>
-      <label style="font-size: 15px;">Sticky</label>
     </td>
   </tr>
-  <% if current_user.is_manager? %>
+  <% if current_user.is_manager? || current_user.is_leader? %>
     <tr>
-      <th class="td1"><%= f.label :stick_type %></th>
-      <td style="padding-bottom: 15px;"><%= select_tag :stick_type, options_for_select(Settings.stick_type_list, params[:stick_type]) %></td>
+      <th class="td1"><%= f.label :sticky %></th>
+      <td style="padding-bottom: 15px;">
+        <% Settings.stick_type_list.each_with_index do |type, index| %>
+          <% if params[:sticky_type].blank? && index == 0 %>
+            <%= radio_button_tag :sticky_type, type[1], true %>
+            <label for= "<%= "sticky_type_#{type[1]}" %>"><span></span><%= type[0] %></label>
+          <% else %>
+            <%= radio_button_tag :sticky_type, type[1], type[1].to_s == params[:sticky_type] ? true : false %>
+            <label for= "<%= "sticky_type_#{type[1]}" %>"><span></span><%= type[0] %></label>
+          <% end %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
   <tr>
