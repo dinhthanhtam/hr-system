@@ -83,8 +83,16 @@ class ReportsController < BaseController
 private
   def ordering(search)
     if current_user.is_manager? && !current_user.is_hr?
-       params[:member_id] = User.in_groups(current_user.groups.map(&:id)).first.try(:id) unless params[:member_id]
-       reports = User.find(params[:member_id]).reports.order("report_date DESC")
+      params[:member_id] = User.in_groups(current_user.groups.map(&:id)).first.try(:id) unless params[:member_id]
+      reports = (params[:member_id].present? ? User.find(params[:member_id]) : current_user).reports.order("report_date DESC")
+      case params[:stick_type].to_i
+      when Settings.stick_type.stick_by_leader
+        reports = reports.not_sticked_by params[:member_id]
+      when Settings.stick_type.stick_by_user
+        reports = reports.sticked_by params[:member_id]
+      when Settings.stick_type.all_sticky_report
+        reports = reports.sticked_reports
+      end
     else
       params[:member_id] = nil if current_user.is_staff? || current_user.is_hr?
       reports = (params[:member_id].present? ? User.find(params[:member_id]) : current_user).reports.order("report_date DESC")

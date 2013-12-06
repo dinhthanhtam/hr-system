@@ -7,6 +7,12 @@
       <label style="font-size: 15px;">Sticky</label>
     </td>
   </tr>
+  <% if current_user.is_manager? %>
+    <tr>
+      <th class="td1"><%= f.label :stick_type %></th>
+      <td style="padding-bottom: 15px;"><%= select_tag :stick_type, options_for_select(Settings.stick_type_list, params[:stick_type]) %></td>
+    </tr>
+  <% end %>
   <tr>
     <th class="td1"><%= f.label :title %></th>
     <td><%= f.text_field :title_cont %></td>
