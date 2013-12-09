@@ -102,7 +102,14 @@
     </div>
   </div>
   <% unless current_user.is_hr? %>
+    <div class="pagination">
+      <div class="paginate-box no_print"><%= will_paginate @reports %></div>
+    </div>
+
     <table class="table_static" id="list_report">
+      <% if @reports.empty? %>
+        <tr><td class="no-result"><%= t(:no_results, scope: [:views, :labels]) %></td></tr>
+      <% end %>
       <% current_year = nil %>
       <% current_month = nil %>
       <% current_week = nil %>
@@ -134,7 +141,7 @@
 
             <td class = "ts_td1" width="4%"></td>
             <td class = "ts_td2" width="15%"><%= model.human_attribute_name :report_category_id %></td>
-            <td class = "ts_td3"><%= model.human_attribute_name :title %></td>
+            <td class = "ts_td3" width="20%"><%= model.human_attribute_name :title %></td>
             <td class = "ts_td4" ><%= model.human_attribute_name :description %></td>
             <td class = "ts_td5" width="14%"></td>
             <td style="border-bottom: none;border-top: none;"></td>
@@ -155,7 +162,7 @@
             </div>
             <%= report.report_category.name %>
           </td>
-          <td><%= report.title %></td>
+          <td><%= truncate(report.title, length: 25) %></td>
           <td><a style="color: <%= report.in_current_week? ? :blue : "#666666" %>" href="<%= url_for(action: :show, id: report.id) %>"><%= truncate(report.description, length: 90) %></a></td>
           <td class="test">
             <% if can? :update, report %>

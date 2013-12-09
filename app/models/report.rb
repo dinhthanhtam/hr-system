@@ -7,7 +7,7 @@ class Report < ActiveRecord::Base
   has_many :support_users
 
   validates :user, :report_category, presence: true
-  validates :title, presence: true
+  validates :title, presence: true, length: { maximum: 30 }
   validates :description, presence: true
   validate :report_date, presence: true
   validate :valid_report_date

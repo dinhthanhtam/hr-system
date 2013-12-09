@@ -165,7 +165,7 @@ i.cancel_tag {
 .td1 {
   font-size: 14px;
   vertical-align: middle ! important;
-  width: 100px;
+  width: 120px;
   vertical-align: text-top;
   text-align: right;
   padding: 0px 30px 15px 30px;
@@ -322,5 +322,17 @@ a[data]:hover:after {
   z-index: 2;
   border-radius: 5px;
   background: #000;
+}
+
+#report_time {
+  font-weight: bold;
+  color: black;
+  font-size: 14px;
+  text-align: center;
+}
+
+.no-result {
+  color: red;
+  font-size: 15px;
 }
 
