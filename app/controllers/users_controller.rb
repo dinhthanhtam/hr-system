@@ -83,6 +83,24 @@ class UsersController < BaseController
     end
   end
 
+  def update_user_role
+    respond_to do |format|
+      @user = User.find params[:user][:id]
+      @user.groups.destroy_all if params[:user][:group_users_attributes].present?
+      if @user.update_attributes(model_params)
+        format.json { render json: "" }
+      else
+        format.json { render json: "" }
+      end
+    end
+  end
+
+  def organizations
+    respond_to do |format|
+      format.html
+    end
+  end
+
 private
   def ordering(search)
     if params[:group] && !params[:group].empty?

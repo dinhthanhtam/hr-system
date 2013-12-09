@@ -1,0 +1,55 @@
+<div class ="parent_scroll">
+  <div id="list_member">
+    <div class="group">
+      <div class="div_manager">Manager</div>
+      <div class="div_manager">Sub Manager</div>
+      <div class="div_leader">Leader</div>
+      <div class="div_manager">Subleader</div>
+      <div class="div_manager">Member</div>
+    </div>
+    <% submanagers = User.where("position = 'submanager'") %>
+    <% User.where("position = 'manager'").each do |user| %>
+      <div class="group" data-group = "<%= user.groups.try(:first).try(:id) %>">
+        <div class="sortable-list" data-id = "manager">
+          <div class="sortable-item" data-id="<%= user.id %>"><%= image_tag(user.avatar_url, class: "thumb_member") %></div>
+        </div>
+       
+        <div class="sortable-list" data-id = "submanager">
+          <% submanagers.map{|s| s if s.groups.first == user.groups.first}.each do |submanager|%>
+            <div class="sortable-item" data-id="<%= user.id %>"><%= image_tag(submanager.try(:avatar_url), class: "thumb_member") %></div>
+          <% end %>
+        </div>
+        <% user.groups.each do |group| %>
+          <% group.teams.each do |team| %>
+            <div class="team" data-team = "<%= team.id %>">
+              <% leaders = team.users.find_leaders %>
+              <div class="sortable-list" data-id = "leader">
+                <% leaders.each do |leader|%>
+                  <div class="sortable-item" data-id="<%= leader.try(:id)%>"><%= image_tag(leader.avatar_url, class: "thumb_member") %></div>
+                <% end %>
+              </div>
+
+              <% subleaders = team.users.find_subleaders %>
+              <div class="sortable-list" data-id = "subleader">
+                <% subleaders.each do |subleader| %>
+                  <div class="sortable-item" data-id="<%= subleader.try(:id)%>"><%= image_tag(subleader.avatar_url, class: "thumb_member") %></div> 
+                <% end %>
+              </div>
+
+              <% members = team.users.find_members %>
+              <div class="sortable-list" data-id = "member">
+                <% members.each do |member|%>
+                  <div class="sortable-item" data-id="<%= member.try(:id)%>"><%= image_tag(member.avatar_url, class: "thumb_member") %></div> 
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+
+      </div>
+    <% end %>
+
+    <div class="clearer">&nbsp;</div>
+  </div>
+</div>
+

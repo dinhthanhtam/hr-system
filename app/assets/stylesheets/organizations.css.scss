@@ -1,0 +1,86 @@
+.sortable-list {
+	background-color: #FFFFFF;
+	list-style: none;
+	margin: 0;
+  min-height: 61px;
+  padding-left:10px;
+  border: 1px solid #EEE;
+}
+
+.sortable-item {
+	background-color: #FFF;
+	cursor: move;
+	display: inline-block;
+	margin: 5px;
+  width: 50px;
+  height: 50px;
+  min-height: 50px;
+  img{
+    width: 50px;
+    height: 50px;
+    min-height: 50px;
+    border-radius: 6px;
+  }
+}
+.column {
+  width:32%;
+  display:inline-block;
+}
+.column.first {margin-left: 0;}
+
+.clear,.clearer {clear: both;}
+.clearer {
+	display: block;
+	font-size: 0;
+	height: 0;
+	line-height: 0;
+}
+
+.placeholder {
+	background-color: #BFB;
+	border: 1px dashed #666;
+	height: 50px;
+	margin: 5px;
+  width: 50px;
+}
+
+.group {
+  text-align: center;
+  display: inline-block;
+  vertical-align:top;
+}
+
+.team {
+  display: inline-block;
+  text-align: center;
+  width: 160px;
+  vertical-align:top;
+}
+
+.parent_scroll{
+  overflow-x:scroll;
+}
+
+#list_member{
+  vertical-align:top;
+  position: relative;
+  width: 2300px;
+}
+
+.div_manager{
+  background-color: #FFFFFF;
+	list-style: none;
+	margin: 0;
+  min-height: 40px;
+  padding:10px;
+  margin:auto;
+}
+
+.div_leader {
+  background-color: #FFFFFF;
+	list-style: none;
+	margin-top: 5px;
+  min-height: 40px;
+  padding:10px;
+}
+

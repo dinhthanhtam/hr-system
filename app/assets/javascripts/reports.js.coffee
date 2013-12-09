@@ -3,7 +3,9 @@ $ ->
   name = []
   mapping = {}
   i = 0
-
+  user_id = ""
+  team = ""
+  group = ""
   $.ajax "/users/get_all_user",
     type: "GET",
     dataType: "json"
@@ -29,9 +31,6 @@ $ ->
       $("#tr_user_support").show()
     else
       $("#tr_user_support").hide()
-
-
-
 
   # don't navigate away from the field on tab when selecting an item
   $("#tags").bind("keydown", (event) ->
@@ -123,3 +122,21 @@ $ ->
     $span.css("top", top)
     $span.css("left", left)
     $span.show()
+
+  $(".sortable-list").sortable
+    connectWith: "#list_member .sortable-list"
+    placeholder: "placeholder"
+    revert: true 
+    receive: (event, ui) -> 
+      role = $(this).data("id")
+      $.ajax "/users/update_user_role",
+        type: "POST",
+        data: {user:{id: user_id, position_event: role, team_id: team, group_users_attributes:{0: {group_id: group}} }}
+        dataType: "json"
+
+  $(".sortable-list").droppable
+    drop: (event, ui) ->
+      user_id = ui.draggable.data("id")
+      team = $(this).parent().data("team")
+      group = $(this).parent().data("group")
+
