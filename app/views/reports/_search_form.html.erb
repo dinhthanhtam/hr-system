@@ -2,7 +2,7 @@
   <tr>
     <th class="td1"><%= f.label :category_id %></th>
     <td style="padding-bottom: 15px;">
-      <%= f.collection_select :report_category_id_eq, ReportCategory.all, :id, :name, include_blank: true %>
+      <%= f.select :report_category_id_eq, include_not_select + ReportCategory.all.collect { |r| [r.name, r.id]} %>
     </td>
   </tr>
   <% if current_user.is_manager? || current_user.is_leader? %>
@@ -30,17 +30,16 @@
     <td><%= f.text_field :description_cont %></td>
   </tr>
   <tr>
-    <th class="td1"><%= f.label :report_date %></th>
-    <td>
-      <%= f.text_field :report_date_gteq, class: "datepicker" %>
-      <%= f.text_field :report_date_lteq, class: "datepicker" %>
+    <th class="td1">
+      <%= select_tag :report_time, options_for_select([["Date", "search_date"], ["Month-Year", "search_month_year"]]) %>
+    </th>
+    <td id="search_date">
+      <%= f.text_field :report_date_gteq, class: "datepicker icon_calendar" %>
+      <%= f.text_field :report_date_lteq, class: "datepicker icon_calendar" %>
     </td>
-  </tr>
-  <tr>
-    <th class="td1"><%= f.label :year %>-<%= f.label :month %></th>
-    <td>
-      <%= f.select :report_date_year_eq, (2012..Time.now.year).to_a, include_blank: true %>
-      <%= f.select :report_date_month_eq, (1..12).to_a, include_blank: true %>
+    <td style="display: none; vertical-align: top;" id="search_month_year">
+      <%= f.select :report_date_year_eq, include_not_select + (2012..Time.now.year).to_a %>
+      <%= f.select :report_date_month_eq, include_not_select + (1..12).to_a %>
     </td>
   </tr>
 </table>

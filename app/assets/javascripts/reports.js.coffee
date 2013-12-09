@@ -140,3 +140,15 @@ $ ->
       team = $(this).parent().data("team")
       group = $(this).parent().data("group")
 
+  $(document).on "change", "#report_time", ->
+    if $(this).val() == "search_date"
+      $("#search_date").show()
+      $("#search_month_year").hide()
+      $("#q_report_date_year_eq").val("")
+      $("#q_report_date_month_eq").val("")
+    else
+      $("#search_date").hide()
+      $("#search_month_year").show()
+      $("#q_report_date_gteq").val("")
+      $("#q_report_date_lteq").val("")
+

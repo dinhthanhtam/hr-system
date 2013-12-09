@@ -93,6 +93,7 @@ en:
       cost: "Cost"
       login_fail: "LOGIN FAIL"
       change_password: "Change password"
+      no_results: "No results found!"
       payslips:
         upload_payslip: Upload payslips
         send_payslip: Send payslips

@@ -5,7 +5,7 @@ require 'bundler/capistrano'
 set :application, "framgia_hr"
 
 # Repository
-set :repository,  "https://github.com/dainghiavotinh/framgia_hr.git"
+set :repository,  "https://github.com/framgia/framgia_hr.git"
 set :scm, :git
 
 # RVM
