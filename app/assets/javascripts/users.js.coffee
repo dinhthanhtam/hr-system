@@ -68,6 +68,9 @@ $ ->
     $(this).find(".data_settings").show()
     $(this).addClass("active")
 
+  $(".attributes input[type!=button]").click (e)->
+    e.stopPropagation()
+
   $(document).on "click", ".close_div", ->
     $(".attributes").attr("class","attributes")
     $(this).parent().hide()
