@@ -16,7 +16,9 @@
        
         <div class="sortable-list" data-id = "submanager">
           <% submanagers.map{|s| s if s.groups.first == user.groups.first}.each do |submanager|%>
-            <div class="sortable-item" data-id="<%= user.id %>"><%= image_tag(submanager.try(:avatar_url), class: "thumb_member") %></div>
+            <% if submanager.present? %>
+              <div class="sortable-item" data-id="<%= submanager.try(:id) %>"><%= image_tag(submanager.try(:avatar_url), class: "thumb_member") %></div>
+            <% end %>
           <% end %>
         </div>
         <% user.groups.each do |group| %>
