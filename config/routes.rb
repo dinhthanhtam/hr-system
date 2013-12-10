@@ -20,8 +20,16 @@ HrSystem::Application.routes.draw do
     resources :teams
   end
 
+  resources :project_users do
+    resources :project_user_roles
+  end
+
   resources :projects do
     resources :costs
+    resources :project_users do
+      get :member_list, on: :collection
+      post :update_roles, on: :collection
+    end
     get :gantt, on: :collection
     get :gantt_list, on: :collection
   end

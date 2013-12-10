@@ -31,7 +31,7 @@ class ProjectsController < BaseController
   def update
     respond_to do |format|
       if @project.update_attributes(model_params)
-        format.html { redirect_to @project, notice: t(:create_success, scope: [:views, :messages]) }
+        format.html { redirect_to @project, notice: t(:update_success, scope: [:views, :messages]) }
       else
         format.html { render action: "new" }
       end

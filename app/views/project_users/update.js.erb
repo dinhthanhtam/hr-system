@@ -1,0 +1,3 @@
+$("#member-<%= @project_user.id %>-roles").html("<%= @project_user.project_roles.map{ |x| x.name }.join(',') %>")
+$(".edit_project_user").hide();
+$("span[id*='member-']").show();

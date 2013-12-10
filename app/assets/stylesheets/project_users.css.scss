@@ -1,3 +1,83 @@
-// Place all the styles related to the project_users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+table.list {
+    border: 1px solid #E4E4E4;
+    border-collapse: collapse;
+    margin-bottom: 4px;
+    width: 100%;
+}
+
+table.list td {
+    vertical-align: top;
+}
+
+table.members td.roles, table.memberships td.roles {
+    width: 45%;
+}
+
+table.list td.buttons {
+    text-align: right;
+    white-space: nowrap;
+    width: 15%;
+}
+table td {
+    padding: 5px;
+}
+
+table th {
+    padding: 5px;
+}
+
+.icon-edit {
+    background-image: url("/assets/edit.png");
+}
+
+.icon-delete {
+    background-image: url("/assets/delete.png");
+}
+.icon {
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+    padding-bottom: 3px;
+    padding-left: 20px;
+    padding-top: 2px;
+}
+
+.odd {
+    background-color: #F6F7F8;
+}
+
+.even {
+    background-color: #FFFFFF;
+}
+.list_member_left{
+    width: 100%;
+    display:inline-block;
+    vertical-align:top;
+}
+
+.list_member_right {
+    background-color: #FFFFFF;
+    border: 1px solid #E4E4E4;
+    display: inline-block;
+    margin-left: 20px;
+    padding: 5px;
+    padding: 10px;
+    vertical-align: top;
+    width: 30%;
+}
+
+#principals{
+    max-height: 400px;
+    overflow: auto;
+}
+
+.list_main {
+  vertical-align:top;
+}
+.list_roles {
+  padding-top: 10px;
+}
+
+div#tab-content-members fieldset, div#tab-content-memberships fieldset, div#tab-content-users fieldset {
+    margin-bottom: 1em;
+    padding: 1em;
+}
