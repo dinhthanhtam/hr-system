@@ -60,13 +60,14 @@ $ ->
   mark_left_menu()
 
   $(".attributes").click ->
-    $(".update_errors").remove()
-    $(".data_settings").hide()
-    $(".display_settings").show()
-    $(".attributes").attr("class","attributes")
-    $(this).find(".display_settings").hide()
-    $(this).find(".data_settings").show()
-    $(this).addClass("active")
+    if $("#is_show_settings").val() == "true"
+      $(".update_errors").remove()
+      $(".data_settings").hide()
+      $(".display_settings").show()
+      $(".attributes").attr("class","attributes")
+      $(this).find(".display_settings").hide()
+      $(this).find(".data_settings").show()
+      $(this).addClass("active")
 
   $(".attributes input[type!=button]").click (e)->
     e.stopPropagation()
@@ -93,3 +94,12 @@ $ ->
   $(".feedback a").click (e)->
     e.stopPropagation()
     $("#form_feedback").show(300)
+
+  $("#avatar_file").change (e)->
+    img = $(this).siblings("img")
+    console.log $(this).files
+    if this.files && this.files[0]
+      reader = new FileReader()
+      reader.onload = (e)->
+        img.attr("src", e.target.result)
+      reader.readAsDataURL(this.files[0])

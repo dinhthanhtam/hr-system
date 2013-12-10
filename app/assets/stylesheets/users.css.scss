@@ -395,7 +395,7 @@ a.profile_link:active {
     width: 175px;
   }
   .content_settings{
-    width: 510px;
+    width: 500px;
     text-align: left;
     display: inline-block;
     color: gray;
@@ -403,12 +403,33 @@ a.profile_link:active {
   .edit_settings{
     display: inline-block;
     text-align: center;
+    float: right;
+    &:hover {
+      a {
+        text-decoration: underline;
+      }
+      .edit_icon {
+        display: inline-block;
+      }
+    }
+    .edit_icon {
+      display: none;
+      padding-right: 5px;
+      background-image: url("/assets/icon_edit.png");
+      background-size: auto;
+      background-repeat: no-repeat;
+      height: 16px;
+      width: 16px;
+    }
   }
   .bold{
     font-weight: bold;
   }
   .data_settings{
     display: none;
+    .member_avatar{
+      line-height: 1em;
+    }
   }
   .btn-cance{
     margin: 5px;
@@ -416,4 +437,8 @@ a.profile_link:active {
   .active{
     background: #F2F2F2;
   }
+}
+
+.gender_radio {
+  display: block;
 }

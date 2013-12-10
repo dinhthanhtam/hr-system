@@ -1,0 +1,397 @@
+<selection>
+  <div>
+    <div class="left_menu">
+      <table class = "user_profile">
+        <tr>
+          <th style="divne-height: 187px">
+            <%= link_to image_tag(@user.avatar_url, class: "avatar_main", alt: "No image"), url_for(action: :show) %>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <strong><%= @user.display_name %></strong>
+          </td>
+        </tr>
+        <tr>
+          <td class = "item">
+            <i><%= @user.position.capitalize %></i>
+          </td>
+        </tr>
+        <% if @user.is_leader? || @user.is_staff? %>
+          <tr>
+            <td class = "item">
+              <div class = "user_group"><i><%= @user.team.group.name %> - <%= @user.team.name %></i></div>
+            </td>
+          </tr>
+        <% elsif @user.is_manager? %>
+          <tr>
+            <td class = "item">
+              <div class = "user_group"><i><%= @user.groups.first.try(:name) %></i></div>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    
+    <% is_show_settings = (@user == current_user || current_user.is_hr?) %>
+    <%= hidden_field_tag :is_show_settings, is_show_settings %>
+    <div class="right_body">
+      <div class="account_settings">
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :display_name %></div>
+          <div class="content_settings bold">
+            <div class="display_settings"><%= @user.display_name %></div>
+            <% if is_show_settings %>
+              <%= form_tag update_profile_user_path(@user), :remote => true do %>
+                <div class="data_settings">
+                  <input id="display_name" data-column="display_name" name="user[display_name]" type="text"
+                    placeholder="<%= @user.display_name %>" value="<%= @user.display_name %>"><br>
+                  <%= submit_tag "OK", class: "btn btn-primary" %>
+                  <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <% if is_show_settings %>
+            <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+          <% end %>
+        </div>
+
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :email %></div>
+          <div class="content_settings"><%= @user.email %></div>
+          <div class="edit_settings"></div>
+        </div>
+
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :avatar %></div>
+          <div class="content_settings bold">
+            <div class="display_settings">
+              <%= image_tag(@user.avatar_url, class: "member_avatar", alt: "No image", style: "width: 70px; height: 70px;") %>
+            </div>
+            <% if is_show_settings %>
+              <%= form_for @user, url: update_profile_user_path(@user) do |f| %>
+                <div class="data_settings">
+                  <%= image_tag(@user.avatar_url, class: "member_avatar", alt: "No image", style: "width: 70px; height: 70px;") %>
+                  <%= f.file_field :avatar, accept: "image/png,image/gif,image/jpeg", id: "avatar_file" %><br><br>
+                  <%= f.submit "OK", class: "btn btn-primary" %>
+                  <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <% if is_show_settings %>
+            <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+          <% end %>
+        </div>
+
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :birthday %></div>
+          <div class="content_settings bold">
+            <div class="display_settings"><%= @user.birthday %></div>
+            <% if is_show_settings %>
+              <%= form_tag update_profile_user_path(@user), :remote => true do %>
+                <div class="data_settings">
+                  <input id="birthday" data-column="birthday" class="datepicker icon_calendar_small" name="user[birthday]" type="text"
+                    placeholder="<%= @user.birthday %>" value="<%= @user.birthday %>"><br>
+                  <%= submit_tag "OK", class: "btn btn-primary" %>
+                  <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <% if is_show_settings %>
+            <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+          <% end %>
+        </div>
+
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :gender %></div>
+          <div class="content_settings bold">
+            <div class="display_settings"><%= @user.gender %></div>
+            <% if is_show_settings %>
+              <%= form_tag update_profile_user_path(@user), :remote => true do %>
+                <div class="data_settings">
+                  <div id="gender" style="display: none;"></div>
+                  <% Settings.users.gender.each do |gender| %>
+                    <%= radio_button_tag "user[gender]", gender, (@user.gender == gender),
+                      style: "display: inline-block;" %>
+                    <label for="<%= "user_gender_#{gender}" %>"><%= gender %></label>&nbsp;&nbsp;
+                  <% end %><br><br>
+                  <%= submit_tag "OK", class: "btn btn-primary" %>
+                  <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <% if is_show_settings %>
+            <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+          <% end %>
+        </div>
+
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :marital_status %></div>
+          <div class="content_settings bold">
+            <div class="display_settings"><%= @user.marital_status %></div>
+            <% if is_show_settings %>
+              <%= form_tag update_profile_user_path(@user), :remote => true do %>
+                <div class="data_settings">
+                  <div id="marital_status" style="display: none;"></div>
+                  <% Settings.users.marital_status.each do |marital_status| %>
+                    <%= radio_button_tag "user[marital_status]", marital_status, (@user.marital_status == marital_status),
+                      style: "display: inline-block;" %>
+                    <label for="<%= "user_marital_status_#{marital_status}" %>"><%= marital_status %></label>&nbsp;&nbsp;
+                  <% end %><br><br>
+                  <%= submit_tag "OK", class: "btn btn-primary" %>
+                  <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <% if is_show_settings %>
+            <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+          <% end %>
+        </div>
+
+        <% if current_user == @user %>
+          <div class="attributes">
+            <div class="title_settings bold"><%= model.human_attribute_name :password %></div>
+            <div class="content_settings">
+              <div class="display_settings"><%= t(:change_password, scope: [:views, :labels]) %></div>
+              <%= form_tag update_profile_user_path(@user), :remote => true do %>
+                <div class="data_settings">
+                  <input id = "password_confirmation" name="user[password]" data-column="password"
+                    type="password" placeholder="New password"><br>
+                  <input name="user[password_confirmation]" data-column="password_confirmation"
+                    type="password" placeholder="Password confirmation"><br>
+                  <%= submit_tag "OK", class: "btn btn-primary" %>
+                  <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                </div>
+              <% end %>
+            </div>
+            <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+          </div>
+        <% end %>
+
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :hometown %></div>
+          <div class="content_settings bold">
+            <div class="display_settings"><%= @user.hometown %></div>
+            <% if is_show_settings %>
+              <%= form_tag update_profile_user_path(@user), :remote => true do %>
+                <div class="data_settings">
+                  <input id="hometown" data-column="hometown" name="user[hometown]" type="text"
+                    placeholder="<%= @user.hometown %>" value="<%= @user.hometown %>"><br>
+                  <%= submit_tag "OK", class: "btn btn-primary" %>
+                  <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <% if is_show_settings %>
+            <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+          <% end %>
+        </div>
+
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :residential_address %></div>
+          <div class="content_settings bold">
+            <div class="display_settings"><%= @user.residential_address %></div>
+            <% if is_show_settings %>
+              <%= form_tag update_profile_user_path(@user), :remote => true do %>
+                <div class="data_settings">
+                  <input id="residential_address" data-column="residential_address" name="user[residential_address]" type="text"
+                    placeholder="<%= @user.residential_address %>" value="<%= @user.residential_address %>"><br>
+                  <%= submit_tag "OK", class: "btn btn-primary" %>
+                  <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <% if is_show_settings %>
+            <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+          <% end %>
+        </div>
+
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :tel %></div>
+          <div class="content_settings bold">
+            <div class="display_settings"><%= @user.tel %></div>
+            <% if is_show_settings %>
+              <%= form_tag update_profile_user_path(@user), :remote => true do %>
+                <div class="data_settings">
+                  <input id="tel" data-column="tel" name="user[tel]" type="text"
+                    placeholder="<%= @user.tel %>" value="<%= @user.tel %>"><br>
+                  <%= submit_tag "OK", class: "btn btn-primary" %>
+                  <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <% if is_show_settings %>
+            <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+          <% end %>
+        </div>
+
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :university %></div>
+          <div class="content_settings bold">
+            <div class="display_settings"><%= @user.university %></div>
+            <% if is_show_settings %>
+              <%= form_tag update_profile_user_path(@user), :remote => true do %>
+                <div class="data_settings">
+                  <input id="university" data-column="university" name="user[university]" type="text"
+                    placeholder="<%= @user.university %>" value="<%= @user.university %>"><br>
+                  <%= submit_tag "OK", class: "btn btn-primary" %>
+                  <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <% if is_show_settings %>
+            <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+          <% end %>
+        </div>
+
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :identity_id %></div>
+          <div class="content_settings bold">
+            <div class="display_settings"><%= @user.identity_id %></div>
+            <% if is_show_settings %>
+              <%= form_tag update_profile_user_path(@user), :remote => true do %>
+                <div class="data_settings">
+                  <input id="identity_id" data-column="identity_id" name="user[identity_id]" type="text"
+                    placeholder="<%= @user.identity_id %>" value="<%= @user.identity_id %>"><br>
+                  <%= submit_tag "OK", class: "btn btn-primary" %>
+                  <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <% if is_show_settings %>
+            <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+          <% end %>
+        </div>
+
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :foreign_language %></div>
+          <div class="content_settings bold">
+            <div class="display_settings"><%= @user.foreign_language %></div>
+            <% if is_show_settings %>
+              <%= form_tag update_profile_user_path(@user), :remote => true do %>
+                <div class="data_settings">
+                  <input id="foreign_language" data-column="foreign_language" name="user[foreign_language]" type="text"
+                    placeholder="<%= @user.foreign_language %>" value="<%= @user.foreign_language %>"><br>
+                  <%= submit_tag "OK", class: "btn btn-primary" %>
+                  <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <% if is_show_settings %>
+            <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+          <% end %>
+        </div>
+
+        <% if is_show_settings %>
+          <div class="attributes">
+            <div class="title_settings bold"><%= model.human_attribute_name :license_plate %></div>
+            <div class="content_settings bold">
+              <div class="display_settings"><%= @user.license_plate %></div>
+              <%= form_tag update_profile_user_path(@user), :remote => true do %>
+                <div class="data_settings">
+                  <input id="license_plate" data-column="license_plate" name="user[license_plate]" type="text"
+                    placeholder="<%= @user.license_plate %>" value="<%= @user.license_plate %>"><br>
+                  <%= submit_tag "OK", class: "btn btn-primary" %>
+                  <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                </div>
+              <% end %>
+            </div>
+            <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+          </div>
+
+          <div class="attributes">
+            <div class="title_settings bold"><%= model.human_attribute_name :ticket %></div>
+            <div class="content_settings bold">
+              <div class="display_settings"><%= @user.ticket %></div>
+              <%= form_tag update_profile_user_path(@user), :remote => true do %>
+                <div class="data_settings">
+                  <input id="ticket" data-column="ticket" name="user[ticket]" type="text"
+                    placeholder="<%= @user.ticket %>" value="<%= @user.ticket %>"><br>
+                  <%= submit_tag "OK", class: "btn btn-primary" %>
+                  <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                </div>
+              <% end %>
+            </div>
+            <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+          </div>
+
+          <div class="attributes">
+            <div class="title_settings bold"><%= model.human_attribute_name :contract_type %></div>
+            <div class="content_settings bold">
+              <div class="display_settings"><%= @user.contract_type %></div>
+              <% if is_show_settings %>
+                <%= form_tag update_profile_user_path(@user), :remote => true do %>
+                  <div class="data_settings">
+                    <div id="contract_type" style="display: none;"></div>
+                    <% Settings.users.contract_types.each do |contract_type| %>
+                      <%= radio_button_tag "user[contract_type]", contract_type, (@user.contract_type == contract_type),
+                        style: "display: inline-block;" %>
+                      <label for="<%= "user_contract_type_#{contract_type.gsub(' ','_')}" %>"><%= contract_type %></label>&nbsp;&nbsp;
+                    <% end %><br><br>
+                    <%= submit_tag "OK", class: "btn btn-primary" %>
+                    <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+            <% if is_show_settings %>
+              <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+            <% end %>
+          </div>
+        <% end %>
+
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :join_date %></div>
+          <div class="content_settings bold">
+            <div class="display_settings"><%= @user.join_date %></div>
+            <% if is_show_settings %>
+              <%= form_tag update_profile_user_path(@user), :remote => true do %>
+                <div class="data_settings">
+                  <input id="join_date" data-column="join_date" class="datepicker icon_calendar_small" name="user[join_date]" type="text"
+                    placeholder="<%= @user.join_date %>" value="<%= @user.join_date %>"><br>
+                  <%= submit_tag "OK", class: "btn btn-primary" %>
+                  <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <% if is_show_settings %>
+            <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+          <% end %>
+        </div>
+
+        <div class="attributes">
+          <div class="title_settings bold"><%= model.human_attribute_name :out_date %></div>
+          <div class="content_settings bold">
+            <div class="display_settings"><%= @user.out_date %></div>
+            <% if is_show_settings %>
+              <%= form_tag update_profile_user_path(@user), :remote => true do %>
+                <div class="data_settings">
+                  <input id="out_date" data-column="out_date" class="datepicker icon_calendar_small" name="user[out_date]" type="text"
+                    placeholder="<%= @user.out_date %>" value="<%= @user.out_date %>"><br>
+                  <%= submit_tag "OK", class: "btn btn-primary" %>
+                  <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <% if is_show_settings %>
+            <div class="edit_settings"><i class="edit_icon"></i><a href="#">Edit</a></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</selection>

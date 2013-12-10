@@ -9,6 +9,12 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   validates :user_roles, presence: true
   validates :uid, uniqueness: true, format: { with: /\A(A|B)(\d+)\z/ }
+  validates :gender, inclusion: { in: %w(Male Female), message: "Invalid" }, allow_nil: true, allow_blank: true
+  validates :marital_status, inclusion: { in: %w(Single Married), message: "Invalid" }, allow_nil: true, allow_blank: true
+  validates :tel, numericality: true, length: { in: 10..11 }, allow_nil: true, allow_blank: true
+  validates :identity_id, uniqueness: true, numericality: true, length: { is: 9 }, allow_nil: true, allow_blank: true
+  validates :contract_type, inclusion: { in: ["Probationary contract", "Apprenticeship contract", "Official contract"] },
+            allow_nil: true, allow_blank: true
 
   has_many :reports
   has_many :user_roles

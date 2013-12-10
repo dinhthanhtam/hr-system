@@ -10,8 +10,9 @@ HrSystem::Application.routes.draw do
   resources :users do
     get :get_team, on: :collection
     get :get_all_user, on: :collection
-    get :personal_settings, on: :member
-    post :update_profile, on: :collection
+    get :profile, on: :member
+    patch :update_profile, on: :member
+    post :update_profile, on: :member
     post :update_user_role, on: :collection
     get :organizations, on: :collection
   end
