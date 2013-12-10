@@ -33,3 +33,7 @@ state:
 
 payslip:
   accessable: ["B120011"]
+users:
+  gender: ["Male", "Female"]
+  marital_status: ["Single", "Married"]
+  contract_types: ["Probationary contract", "Apprenticeship contract", "Official contract"]

@@ -34,7 +34,7 @@ class UsersController < BaseController
   def update
     respond_to do |format|
       if @user.update_attributes(model_params)
-        format.html { redirect_to url_for(action: :show), notice: I18n.t(:update_success, model: model.model_name.human, scope: [:views, :messages]) }
+        format.html { redirect_to url_for(action: :profile), notice: I18n.t(:update_success, model: model.model_name.human, scope: [:views, :messages]) }
       else
         format.html { render action: "edit" }
       end
@@ -51,10 +51,10 @@ class UsersController < BaseController
     end
   end
 
-  def personal_settings
+  def profile
     @user = User.find(params[:id])
     respond_to do |format|
-        format.html
+      format.html
     end
   end
 
@@ -72,12 +72,14 @@ class UsersController < BaseController
 
   def update_profile
     @id = params[:user].keys.last
-    @user = current_user
+    @user = User.find(params[:id])
     respond_to do |format|
-      if @success = @user.update_attributes(model_params)
+      if @success = @user.update_attributes(profile_params)
         sign_in(current_user, :bypass => true) if params[:user][:password].present? || params[:user][:password_confirmation].present?
         format.js
+        format.html { redirect_to action: :profile}
       else
+        format.html { render action: :profile }
         format.js
       end
     end
@@ -111,10 +113,22 @@ private
       return User.order(:uid)
     end
   end
+
   def model_params
     params.require(:user).permit(:uid, :email, :password, :password_confirmation, :remember_me,
-                                 :cardID, :display_name, :team_id, :position_event, :avatar,
-                                 user_roles_attributes: [:id, :user_id, :role_id, :_destroy],
+                                 :cardID, :display_name, :team_id, :position_event, :avatar, :birthday,
+                                 :gender, :marital_status, :hometown, :residential_address, :tel, :identity_id,
+                                 :university, :foreign_language, :contract_type, :license_plate, :ticket,
+                                 :join_date, :out_date, user_roles_attributes: [:id, :user_id, :role_id, :_destroy],
                                  group_users_attributes: [:id, :user_id, :group_id, :_destroy]) if params[:user]
   end
+
+  def profile_params
+    params.require(:user).permit(:password, :password_confirmation, :remember_me,
+                                 :display_name, :avatar, :birthday, :gender, :marital_status, :hometown,
+                                 :residential_address, :tel, :identity_id, :university, :foreign_language,
+                                 :contract_type, :license_plate, :ticket, :join_date, :out_date) if params[:user]
+  end
 end
+
+

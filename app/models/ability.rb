@@ -31,7 +31,7 @@ class Ability
       can [:index, :edit, :update, :get_all_user], User do |current|
         user.id == current.id
       end
-      can :show, User
+      can [:show, :profile], User
 
       can [:index], User do |current|
         user.team_id == current.team.id
@@ -46,7 +46,7 @@ class Ability
       can [:index, :edit, :update, :get_all_user, :personal_settings, :update_profile], User do |current|
         user.id == current.id
       end
-      can :show, User
+      can [:show, :profile], User
       can :manage, Report do |report|
         user.id == report.user_id
       end

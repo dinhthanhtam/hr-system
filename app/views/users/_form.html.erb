@@ -26,7 +26,6 @@
       <td><%= f.file_field :avatar %></td>
     </tr>
     <% if current_user.hr_role? %>
-    
       <tr>
         <th><%= f.label :role %></th>
         <td>
@@ -76,6 +75,77 @@
         </td>
       </tr>
     <% end %>
+    <tr>
+      <th><%= f.label :hometown %></th>
+      <td><%= f.text_field :hometown %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :residential_address %></th>
+      <td><%= f.text_field :residential_address %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :gender %></th>
+      <td>
+        <% Settings.users.gender.each do |gender| %>
+          <%= f.radio_button :gender, gender, style: "display: inline-block;" %>
+          <label for="<%= "user_gender_#{gender.downcase}" %>"><%= gender %></label>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= f.label :marital_status %></th>
+      <td>
+        <% Settings.users.marital_status.each do |marital_status| %>
+          <%= f.radio_button :marital_status, marital_status, style: "display: inline-block;" %>
+          <label for="<%= "user_marital_status_#{marital_status.downcase}" %>"><%= marital_status %></label>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= f.label :contract_type %></th>
+      <td>
+        <% Settings.users.contract_types.each do |contract_type| %>
+          <%= f.radio_button :contract_type, contract_type, style: "display: inline-block;" %>
+          <label for="<%= "user_contract_type_#{contract_type.gsub(" ", "_").downcase}" %>"><%= contract_type %></label>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= f.label :tel %></th>
+      <td><%= f.text_field :tel %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :identity_id %></th>
+      <td><%= f.text_field :identity_id %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :university %></th>
+      <td><%= f.text_field :university %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :foreign_language %></th>
+      <td><%= f.text_field :foreign_language %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :license_plate %></th>
+      <td><%= f.text_field :license_plate %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :ticket %></th>
+      <td><%= f.text_field :ticket %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :birthday %></th>
+      <td><%= f.text_field :birthday, class: "datepicker icon_calendar_small" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :join_date %></th>
+      <td><%= f.text_field :join_date, class: "datepicker icon_calendar_small" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :out_date %></th>
+      <td><%= f.text_field :out_date, class: "datepicker icon_calendar_small" %></td>
+    </tr>
   </table>
   <div class="form-actions">
     <%= link_to t(:button_index, scope: [:views, :labels]), url_for(action: :index), class: "btn" %>

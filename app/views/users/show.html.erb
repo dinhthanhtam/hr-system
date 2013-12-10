@@ -14,7 +14,7 @@
         </tr>
         <tr>
           <td class = "item">
-            <i><%= @user.position %></i>
+            <i><%= @user.position.capitalize %></i>
           </td>
         </tr>
         <% if @user.is_leader? || @user.is_staff? %>
