@@ -82,6 +82,11 @@ en:
       button_send: "Send"
       button_download: Download
       button_confirm: Confirm
+      button_chance: Chance
+      button_cancel: Cancel
+      button_add: Add
+      button_assign: Assign member
+      roles: Update Roles
       confirm_delete: "Do you want to delete it ?"
       sticky: "Do you want to sticky it ?"
       unsticky: "Do you want to unsticky it ?"

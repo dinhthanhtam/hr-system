@@ -23,7 +23,8 @@
 
   <div class="splitcontentright">
     <div class="members box">
-      <h3>Members</h3>
+      <div style= "width:83%;display: inline-block;"><h3>Members</h3></div>
+      <div id = "edit_roles" style="display: inline-block;"><%= link_to t(:roles, scope: [:views, :labels]), project_project_users_path(@project.id) %></div>
       <% @project.project_users.each do |project_user| %>
             <div style="display: inline-block;">
               <%= link_to image_tag(project_user.user.avatar_url, class: "avatar", alt: "No image"),

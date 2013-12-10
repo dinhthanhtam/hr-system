@@ -1,0 +1,63 @@
+<div class = "list_main">
+  <div class = "list_member_left">
+    <div class="ctsTit">
+      <h2><%= h2_label %></h2>
+      <nav>
+        <%= link_to t(:button_assign, scope: [:views, :labels]), url_for(action: :edit, controller: :projects, id: @project.id), class: "btn btn-small btn-warning" %>
+      </nav>
+    </div>
+    <table class="list members">
+      <tr>
+        <th>User</th>
+        <th>Roles</th>
+        <th style="width:15%"></th>
+      </tr>
+
+      <% @project_users.each_with_index do |project_user, index| %>
+        <tr id="member-<%= project_user.id%>" class="<%= index % 2 == 0 ? 'even' : 'odd' %> member">
+          <td class="user">
+            <%= link_to project_user.user.display_name, "#" %>
+          </td>
+          <td class="roles">
+            <span id="member-<%= project_user.id %>-roles" style=""><%= project_user.project_roles.map{ |x| x.name }.join(",") %></span>
+            <%= form_for project_user, html: {style: "display:none;"}, remote: true do |f| %>
+              <div style="margin:0;padding:0;display:inline">
+                <%= f.select "project_role_ids", options_for_select(ProjectRole.all.map{|s| ["#{s.name}",s.id]}, project_user.project_role_ids) , {}, {class: "select option", multiple: true} %>
+                <p>
+                  <%= f.submit t(:button_chance, scope: [:views, :labels]), class: "btn" %>
+                  <%= link_to t(:button_cancel, scope: [:views, :labels]), "#", class: "close_form", data: {id: project_user.id} %>
+                </p>
+              </div>
+            <% end %>
+          </td>
+          <td class="buttons">
+            <%= link_to t(:button_edit, scope: [:views, :labels]), "#", class: "icon icon-edit", data: {id: project_user.id} %>
+            <%= link_to t(:button_delete, scope: [:views, :labels]),
+              url_for(action: :destroy, id: project_user.id), data: {confirm: t(:delete_confirm, scope: [:views, :messages])},
+              method: :delete, class: "icon icon-delete" %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <!--<div class = "list_member_right">
+    <div id = "principals">
+      <% User.all.each do |user| %>
+        <div>
+          <%= check_box_tag "member[]", user.id,false %><%= user.display_name %>
+        </div>
+      <% end %>
+    </div>
+    <div style="margin-top:10px;">
+      <p>Roles:
+        <% ProjectRole.all.each do |role| %>
+          <div>
+            <%= check_box_tag "role[]", role.id,false %><%= role.name %>
+          </div>
+        <% end %>
+      </p>
+    </div>
+    <%= link_to t(:button_add, scope: [:views, :labels]), "#", class: "btn add_member" %>
+  </div>-->
+</div>

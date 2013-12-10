@@ -15,6 +15,10 @@
       <th><%= f.label :out_date %></th>
       <td><%= f.text_field :out_date, class: "datepicker" %></td>
     </tr>
+    <tr>
+      <th><%= f.label :role %></th>
+      <td><%= f.select "project_role_ids", options_for_select(ProjectRole.all.map{|s| ["#{s.name}",s.id]}, @project_user.project_role_ids) , {}, {class: "select option", multiple: true} %></td>
+    </tr>
   </table>
   <div class="form-actions">
     <%= f.submit t(:button_update, scope: [:views, :labels]), class: "btn btn-primary" %>
