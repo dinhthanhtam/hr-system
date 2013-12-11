@@ -44,6 +44,8 @@ class User < ActiveRecord::Base
   scope :in_groups, ->(group_ids) { in_teams(Team.in_groups(group_ids).ids) }
   
   scope :find_leaders, -> { where("users.position = ?", "leader") }
+  scope :find_managers, -> { where("users.position = ?", "manager") }
+  scope :find_submanagers, -> { where("users.position = ?", "submanager") }
   scope :find_subleaders, -> { where("users.position = ?", "subleader") }
   scope :find_members, -> { where("users.position = ?", "member") }
   
