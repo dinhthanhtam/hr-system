@@ -1,6 +1,9 @@
 class ProjectUser < ActiveRecord::Base
   belongs_to :user
   belongs_to :project
+  has_many :project_user_roles, dependent: :destroy
+  has_many :project_roles, through: :project_user_roles, source: :project_role
+  accepts_nested_attributes_for :project_user_roles, allow_destroy: true, reject_if: :all_blank
   validates :join_date, presence: true
   validates :due_date, presence: true
   validates :user_id, uniqueness: { scope: :project_id }

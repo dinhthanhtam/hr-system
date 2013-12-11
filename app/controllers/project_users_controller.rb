@@ -1,4 +1,10 @@
 class ProjectUsersController < BaseController
+  def index
+    respond_to do |format|
+      format.html
+    end
+  end
+
   def edit
     respond_to do |format|
       format.html
@@ -8,9 +14,13 @@ class ProjectUsersController < BaseController
   def update
     respond_to do |format|
       if @project_user.update_attributes(model_params)
-        format.html { redirect_to url_for(controller: :projects, action: :show, id: @project_user.project_id), notice: "Update group successfully!" }
+        if request.xhr?
+          format.js
+        else
+          format.html { redirect_to project_path(@project_user.project_id) }
+        end
       else
-        format.html { render action: "edit" }
+        format { redirect_to action: :edit }
       end
     end
   end
@@ -18,7 +28,7 @@ class ProjectUsersController < BaseController
   def destroy
     respond_to do |format|
       if @project_user.destroy
-        format.html { redirect_to url_for(controller: :projects, action: :show, id: @project_user.project_id) }
+        format.html { redirect_to action: :index }
       else
         format { redirect_to action: :edit }
       end
@@ -26,7 +36,16 @@ class ProjectUsersController < BaseController
   end
 
 private
+  def ordering(search)
+    @project.project_users
+  end
+
+  def create_object
+    super
+    @project_user = @project.project_users.build(model_params)
+  end
+
   def model_params
-    params.require(:project_user).permit(:join_date, :due_date, :out_date, :state_event) if params[:project_user]
+    params.require(:project_user).permit(:join_date, :due_date, :out_date, :state_event, project_role_ids: []) if params[:project_user]
   end
 end
