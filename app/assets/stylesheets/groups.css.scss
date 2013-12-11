@@ -2,8 +2,11 @@
   background-color:#FF8B75;
 }
 .btn-primary{
-  background: #FF8B75;
-  background-image:linear-gradient(#EF5555, #EF4423);
+  background-color: #EF4423;
+  background-image: linear-gradient(to bottom,#FC7676, #ef4423);
+  &:hover {
+    background-color: #EF4423;
+  }
 }
 .btn-warning{
   padding: 6px 20px;

@@ -1,9 +1,11 @@
 <selection id="projects_index">
-  <div class="ctsTit">
-    <h2><%= h2_label %></h2>
-    <nav>
-      <%= link_to t(:new, scope: [:views, :pages]), url_for(action: :new), class: "btn btn-small btn-warning" %>
-    </nav>
+  <div class="link">
+    <a href="<%= url_for(action: :new) %>" class="link-a">
+      <i class="icon_add icon"></i><span><%= t(:button_new, scope: [:views, :labels]) %></span>
+    </a>
+    <a href="<%= url_for(controller: :projects, action: :gantt_list) %>" class="link-a">
+      <i class="icon_chart icon"></i><span><%= t(:button_gantt, scope: [:views, :labels]) %></span>
+    </a>
   </div>
   
   <div class = "prepare_pr">

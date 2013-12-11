@@ -76,6 +76,8 @@ en:
   views:
     labels:
       manager: "Manager"
+      button_new: "New"
+      button_gantt: "Gantt"
       button_create: "Create"
       button_edit: "Edit"
       button_update: "Update"
