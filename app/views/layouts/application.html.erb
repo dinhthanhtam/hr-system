@@ -31,7 +31,6 @@
                 <li class="divider"></li>
                 <% if current_user.is_manager? %>
                   <li><%= link_to "Project", url_for(controller: :projects, action: :index) %></li>
-                  <li><%= link_to "Gantt", url_for(controller: :projects, action: :gantt_list) %></li>
                   <li><%= link_to "Payslip", url_for(controller: :payslips, action: :index) if Settings.payslip.accessable.include? current_user.uid %></li>
                   <li><%= link_to "Organizations", url_for(controller: :users, action: :organizations) %></li>
                   <li class="divider"></li>
