@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <ss:Styles>
+    <ss:Style ss:ID="s1">
+      <ss:Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+      <ss:Font ss:Bold="1"/>
+    </ss:Style>
+    <ss:Style ss:ID="s2">
+      <ss:Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+    </ss:Style>
+    <ss:Style ss:ID="s3">
+      <ss:Interior ss:Color="#83caff" ss:Pattern="Solid"/>
+      <ss:Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+      <ss:Font ss:Bold="1"/>
+    </ss:Style>
+  </ss:Styles>
+  <Worksheet ss:Name="Sheet1">
+    <Table x:FullColumns="1" x:FullRows="1">
+      <Column ss:Width="115" /> 
+      <!-- Draw years -->
+      <Row>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <% @years.each do |year| %>
+          <Cell ss:MergeAcross="<%= year[1] - 1%>" ss:StyleID="s1"><Data ss:Type="String"><%= year[0] %></Data></Cell>
+        <% end %>
+      </Row>
+      <!-- Draw months -->
+      <Row>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <% @months.each do |month| %>
+          <Cell ss:MergeAcross="<%= month[1] - 1%>" ss:StyleID="s1"><Data ss:Type="String"><%= month[0] %></Data></Cell>
+        <% end %>
+      </Row>
+      <!-- Draw weeks -->
+      <Row>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <% @weeks.each do |week| %>
+          <Cell ss:StyleID="s2"><Data ss:Type="String"><%= week[0] %></Data></Cell>
+        <% end %>
+      </Row>
+      <!-- Draw process project with each user -->
+      <% @list_users.each do |user| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= user[0] %></Data></Cell>
+          <% index_in_proj = 0 %>
+          <% length = 0 %>
+          <% project_name = "" %>
+
+          <% @weeks.each_with_index do |week, index| %>
+            <% user[1].each do |u| %>
+              <% if u[1] == index %>
+                <% index_in_proj = 1 %>
+                <% length = u[2] - u[1] %>
+                <% project_name = u[0] %>
+              <% elsif (index > u[1] && index <= u[2]) || index > u[2] %>
+                <% index_in_proj = -1 %>
+              <% else %>
+                <% index_in_proj = 0 %>
+              <% end %>
+              <!-- Draw cell with index -->
+              <% case index_in_proj %>
+              <% when 0 %>
+                <Cell><Data ss:Type="String"></Data></Cell>
+              <% when 1 %>
+                <Cell ss:StyleID="s3" ss:MergeAcross="<%= length %>"><Data ss:Type="String" ><%= project_name %></Data></Cell>
+              <% end %>
+              <!-- Break if drew a cell for project -->
+              <% break if index <= u[2] %>
+            <% end %>
+          <% end %>
+
+        </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

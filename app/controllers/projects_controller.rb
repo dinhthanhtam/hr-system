@@ -68,6 +68,49 @@ class ProjectsController < BaseController
     end
   end
 
+  def export_excel
+    join_dates = ProjectUser.where(user_id: [User.reporters.map(&:id)]).map(&:join_date)
+    out_dates = ProjectUser.where(user_id: [User.reporters.map(&:id)]).map(&:convert_date)
+    out_dates = out_dates.map{ |out_date| Time.at(out_date / 1000).to_date }
+    # Sunday belong to last week
+    firstWedDay = join_dates.min.sunday? ? (join_dates.min - 3) : (join_dates.min + 3 - join_dates.min.wdaya)
+    lastWedDay = firstWedDay
+    @weeks = []
+    while lastWedDay < out_dates.max
+      @weeks << [lastWedDay.cweek, lastWedDay.month, lastWedDay.year]
+      lastWedDay += 7.day
+    end
+    # Get process project for reporters
+    @list_users = User.reporters.map do |user|
+      projects = user.project_users.map do |project_user|
+        # Set join and out date is wednessday same week with join and out date
+        join_date = project_user.join_date
+        join_date = join_date.sunday? ? (join_date - 3) : (join_date + 3 - join_date.wday)
+        out_date = Time.at(project_user.convert_date / 1000).to_date
+        out_date = out_date.sunday? ? (out_date -3) : (out_date + 3 - out_date.wday)
+        [project_user.project.try(:name), @weeks.index([join_date.cweek, join_date.month, join_date.year]),
+          @weeks.index([out_date.cweek, out_date.month, out_date.year])]
+      end
+      # Return name of user and list project with process of user
+      [user.display_name, projects]
+    end
+    # Sort by join date of project
+    @list_users.each do |user|
+      user[1].sort! { |x, y| x[1] <=> y[1] }
+    end
+    # Group and count month with year
+    months = @weeks.map { |week| [week[1], week[2]] }
+    @months = months.uniq
+    @months = @months.map { |month| [Date::MONTHNAMES[month[0]], months.count(month)] }
+    # Group and count year
+    years = @weeks.map { |week| week[2] }
+    @years = years.uniq
+    @years = @years.map { |year| [year, years.count(year)] }
+
+    respond_to do |format|
+      format.xls { headers["Content-Disposition"] = "attachment; filename=projects_gantt.xls" }
+    end
+  end
 private
   def model_params
     if params[:project] && params[:project][:project_users_attributes]
