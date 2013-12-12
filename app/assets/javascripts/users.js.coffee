@@ -103,12 +103,3 @@ $ ->
       reader.onload = (e)->
         img.attr("src", e.target.result)
       reader.readAsDataURL(this.files[0])
-
-  $(".parent_scroll").bind "mousewheel", (event, delta) ->
-    val = @scrollLeft - (delta * 100)
-    jQuery(this).stop().animate
-      scrollLeft: val
-    , 500
-    event.preventDefault()
-
-

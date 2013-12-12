@@ -34,6 +34,7 @@ HrSystem::Application.routes.draw do
     get :gantt, on: :collection
     get :gantt_list, on: :collection
     get :export_excel, on: :collection
+    post :assign_members, on: :collection
   end
   resources :project_users
 
