@@ -73,7 +73,7 @@
       <% end %>
 
       <% if @user.is_manager? && current_user == @user %>
-        <div class="group_member border margintop_20px">
+        <div class="group_member border margintop_20px" style="margin-left: 3px;">
           <ul class="title_div nav nav-pills">
             <% @user.groups.each do |group| %>
               <li class="group <%= 'active' if group == @user.groups.first %>" data-id="group_<%= group.id %>"><a id="a_<%= group.id %>" href="#a_<%= group.id %>"><%= group.name %></a></li>

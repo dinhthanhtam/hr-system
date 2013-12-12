@@ -73,21 +73,21 @@ class ProjectsController < BaseController
     out_dates = ProjectUser.where(user_id: [User.reporters.map(&:id)]).map(&:convert_date)
     out_dates = out_dates.map{ |out_date| Time.at(out_date / 1000).to_date }
     # Sunday belong to last week
-    firstWedDay = join_dates.min.sunday? ? (join_dates.min - 3) : (join_dates.min + 3 - join_dates.min.wdaya)
-    lastWedDay = firstWedDay
+    firstWedDay = join_dates.min.sunday? ? (join_dates.min - 4) : (join_dates.min + 3 - join_dates.min.wday)
+    lastWedDay = out_dates.max.sunday? ? (out_dates.max - 4) : (out_dates.max + 3 - out_dates.max.wday)
     @weeks = []
-    while lastWedDay < out_dates.max
-      @weeks << [lastWedDay.cweek, lastWedDay.month, lastWedDay.year]
-      lastWedDay += 7.day
+    while firstWedDay <= lastWedDay
+      @weeks << [firstWedDay.cweek, firstWedDay.month, firstWedDay.year]
+      firstWedDay += 7.day
     end
     # Get process project for reporters
     @list_users = User.reporters.map do |user|
       projects = user.project_users.map do |project_user|
         # Set join and out date is wednessday same week with join and out date
         join_date = project_user.join_date
-        join_date = join_date.sunday? ? (join_date - 3) : (join_date + 3 - join_date.wday)
+        join_date = join_date.sunday? ? (join_date - 4) : (join_date + 3 - join_date.wday)
         out_date = Time.at(project_user.convert_date / 1000).to_date
-        out_date = out_date.sunday? ? (out_date -3) : (out_date + 3 - out_date.wday)
+        out_date = out_date.sunday? ? (out_date -4) : (out_date + 3 - out_date.wday)
         [project_user.project.try(:name), @weeks.index([join_date.cweek, join_date.month, join_date.year]),
           @weeks.index([out_date.cweek, out_date.month, out_date.year])]
       end
