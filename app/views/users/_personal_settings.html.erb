@@ -3,7 +3,7 @@
     <div class="left_menu">
       <table class = "user_profile">
         <tr>
-          <th style="divne-height: 187px">
+          <th style="line-height: 187px">
             <%= link_to image_tag(@user.avatar_url, class: "avatar_main", alt: "No image"), url_for(action: :show) %>
           </th>
         </tr>
@@ -35,7 +35,7 @@
     
     <% is_show_settings = (@user == current_user || current_user.is_hr?) %>
     <%= hidden_field_tag :is_show_settings, is_show_settings %>
-    <div class="right_body">
+    <div class="right_body" style="margin-left: 20px; width: 734px;">
       <div class="account_settings">
         <div class="attributes">
           <div class="title_settings bold"><%= model.human_attribute_name :display_name %></div>
