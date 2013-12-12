@@ -1,7 +1,7 @@
 <%= form_for @project, url: {action: @project.new_record? ? :create : :update} do |f| %>
 
   <%= render partial: "errors", locals: {object: @project} %>
-
+  <%= f.hidden_field :create_user_id, value: current_user.id %>
   <table class="formTbl contents">
     <tr>
       <th width="15%"><%= f.label :name %></th>
@@ -14,25 +14,6 @@
     <tr>
       <th><%= f.label :url %></th>
       <td><%= f.text_field :url %></td>
-    </tr>
-    <tr>
-      <th><%= f.label :member %></th>
-      <td>
-        <%= text_field_tag :tags %>
-        <div class="tag-badge">
-          <% if @project.project_users.present? %>
-            <% @project.project_users.each do |user| %>
-              <span class="tag-name"><%= User.find(user.user_id).display_name %>&nbsp;<img class="clear_support" src="/assets/ico_tag_delete.png" data-id = "<%= user.user_id %>"></span>
-            <% end %>
-          <% end %>
-        </div>
-        <input id="support_users" data-name_nested_attributes="project[project_users_attributes]" name="project_users" style="display:none;" value="<%= @project.users.map(&:id).join(",") %>">
-        <div id = "div_support_users">
-          <% @project.project_users && @project.project_users.each_with_index do |project_user, i| %>
-            <%= render "project_user_fields", {project_user: project_user, f: f , id: project_user.user_id, time: Time.now.to_i} %>
-          <% end %>
-        </div>
-      </td>
     </tr>
     <tr>
       <th></th>

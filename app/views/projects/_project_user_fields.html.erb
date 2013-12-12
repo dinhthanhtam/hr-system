@@ -1,7 +1,0 @@
-<div id="div_<%= id %>">
-  <%= f.fields_for :project_users, project_user, child_index: id do |project_user_fields| %>
-    <%= project_user_fields.hidden_field :user_id %>
-    <%= project_user_fields.hidden_field :_destroy %>
-  <% end %>
-</div>
-

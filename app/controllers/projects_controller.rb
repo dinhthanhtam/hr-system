@@ -111,14 +111,22 @@ class ProjectsController < BaseController
       format.xls { headers["Content-Disposition"] = "attachment; filename=projects_gantt.xls" }
     end
   end
-private
-  def model_params
-    if params[:project] && params[:project][:project_users_attributes]
-      params[:project][:project_users_attributes].each do |project_user|
-        project_user[1].merge!({due_date: params[:project][:due_date], join_date: params[:project][:start_date]})
+
+  def assign_members
+    @project = Project.find params[:project][:id]
+    respond_to do |format|
+      if @project.update_attributes(model_params)
+        format.js
+      else
+        format.js
       end
     end
-    params.require(:project).permit(:name, :description, :is_publish, :url, :start_date, :due_date, :end_date, :state_event, 
-                                    project_users_attributes: [:id, :user_id, :project_id, :join_date, :due_date, :_destroy]) if params[:project]
+  end
+
+private
+  def model_params
+    params.require(:project).permit(:name, :description, :is_publish, :url, :start_date, :due_date, :end_date, :state_event, :create_user_id,
+                                    project_users_attributes: [:id, :user_id, :project_id, :join_date, :due_date, :_destroy, 
+                                    project_user_roles_attributes: [:id, :project_user_id, :project_role_id, :_destroy]]) if params[:project]
   end
 end

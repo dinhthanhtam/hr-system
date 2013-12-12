@@ -1,10 +1,8 @@
 <div class = "list_main">
   <div class = "list_member_left">
     <div class="ctsTit">
-      <h2><%= h2_label %></h2>
-      <nav>
-        <%= link_to t(:button_assign, scope: [:views, :labels]), url_for(action: :edit, controller: :projects, id: @project.id), class: "btn btn-small btn-warning" %>
-      </nav>
+      <h2>Assign Members</h2>
+      <nav></nav>
     </div>
     <table class="list members">
       <tr>
@@ -16,7 +14,7 @@
       <% @project_users.each_with_index do |project_user, index| %>
         <tr id="member-<%= project_user.id%>" class="<%= index % 2 == 0 ? 'even' : 'odd' %> member">
           <td class="user">
-            <%= link_to project_user.user.display_name, "#" %>
+            <%= project_user.user.display_name %>
           </td>
           <td class="roles">
             <span id="member-<%= project_user.id %>-roles" style=""><%= project_user.project_roles.map{ |x| x.name }.join(",") %></span>
@@ -41,12 +39,18 @@
     </table>
   </div>
 
-  <!--<div class = "list_member_right">
+  <div class = "list_member_right">
+    <div>
+      <label for="principal_search">Search for member:</label>
+      <input id="principal_search" type="text" name="principal_search">
+    </div>
     <div id = "principals">
       <% User.all.each do |user| %>
-        <div>
-          <%= check_box_tag "member[]", user.id,false %><%= user.display_name %>
-        </div>
+        <% unless @project.users.map(&:id).include?(user.id) %>
+          <div class = "user_name" data-id = "<%= user.display_name.downcase %>">
+            <%= check_box_tag "member[]", user.id, false %><%= user.display_name %>
+          </div>
+        <% end %>
       <% end %>
     </div>
     <div style="margin-top:10px;">
@@ -59,5 +63,8 @@
       </p>
     </div>
     <%= link_to t(:button_add, scope: [:views, :labels]), "#", class: "btn add_member" %>
-  </div>-->
+  </div>
+  <%= hidden_field_tag :project_id, @project.id %>
+  <%= hidden_field_tag :start_date, @project.activatable? ? DateTime.now.strftime("%Y-%m-%d") : @project.start_date %>
+  <%= hidden_field_tag :due_date, @project.due_date %>
 </div>

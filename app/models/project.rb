@@ -1,6 +1,7 @@
 class Project < Base
 
   validates :url, format: { with: /\A(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?\z/ix }, allow_nil: true, allow_blank: true
+  after_create :set_manager
   has_many :project_users
   has_many :users, through: :project_users
   has_many :costs
@@ -46,5 +47,11 @@ class Project < Base
 
   def deletable?
     prepared?
+  end
+
+  def set_manager
+    params = {project_users_attributes: {0 => {join_date: start_date, due_date: due_date, user_id: create_user_id,
+               project_user_roles_attributes: {0 => {project_role_id: 1}}}}}
+    update_attributes(params)
   end
 end
