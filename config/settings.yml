@@ -36,4 +36,4 @@ payslip:
 users:
   gender: ["Male", "Female"]
   marital_status: ["Single", "Married"]
-  contract_types: ["Probationary contract", "Apprenticeship contract", "Official contract"]
+  contract_types: ["Probationary", "Apprenticeship", "6 months - 1 year", "3 years", "Indefinite term"]
