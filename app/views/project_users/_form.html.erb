@@ -23,8 +23,5 @@
   <div class="form-actions">
     <%= f.submit t(:button_update, scope: [:views, :labels]), class: "btn btn-primary" %>
     <%= f.button t(:button_out, scope: [:views, :labels]), class: "btn btn-warning", name: "#{model_name.underscore}[state_event]", value: "outed" %>
-    <%= link_to t(:button_delete, scope: [:views, :labels]),
-          url_for(action: :destroy, id: @project_user.id), confirm: t(:delete_confirm, scope: [:views, :messages]),
-          method: :delete, class: "btn btn-danger" %>
   </div>
 <% end %>

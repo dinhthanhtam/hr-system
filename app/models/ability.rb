@@ -28,7 +28,7 @@ class Ability
       can :manage, Report do |report|
         user.id == report.user_id
       end
-      can [:index, :edit, :update, :get_all_user], User do |current|
+      can [:index, :edit, :update, :get_all_user, :update_profile], User do |current|
         user.id == current.id
       end
       can [:show, :profile], User
@@ -43,7 +43,7 @@ class Ability
       can :manage, Sticky
     else
       can :manage, Sticky
-      can [:index, :edit, :update, :get_all_user, :personal_settings, :update_profile], User do |current|
+      can [:index, :edit, :update, :get_all_user, :profile, :update_profile], User do |current|
         user.id == current.id
       end
       can [:show, :profile], User
