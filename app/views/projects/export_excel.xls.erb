@@ -25,14 +25,22 @@
       <Row>
         <Cell><Data ss:Type="String"></Data></Cell>
         <% @years.each do |year| %>
-          <Cell ss:MergeAcross="<%= year[1] - 1%>" ss:StyleID="s1"><Data ss:Type="String"><%= year[0] %></Data></Cell>
+          <% if year[1] > 1 %>
+            <Cell ss:MergeAcross="<%= year[1] - 1 %>" ss:StyleID="s1"><Data ss:Type="String"><%= year[0] %></Data></Cell>
+          <% else %>
+            <Cell ss:StyleID="s1"><Data ss:Type="String"><%= year[0] %></Data></Cell>
+          <% end %>
         <% end %>
       </Row>
       <!-- Draw months -->
       <Row>
         <Cell><Data ss:Type="String"></Data></Cell>
         <% @months.each do |month| %>
-          <Cell ss:MergeAcross="<%= month[1] - 1%>" ss:StyleID="s1"><Data ss:Type="String"><%= month[0] %></Data></Cell>
+          <% if month[1] > 1 %>
+            <Cell ss:MergeAcross="<%= month[1] - 1 %>" ss:StyleID="s1"><Data ss:Type="String"><%= month[0] %></Data></Cell>
+          <% else %>
+            <Cell ss:StyleID="s1"><Data ss:Type="String"><%= month[0] %></Data></Cell>
+          <% end %>
         <% end %>
       </Row>
       <!-- Draw weeks -->
@@ -66,7 +74,11 @@
               <% when 0 %>
                 <Cell><Data ss:Type="String"></Data></Cell>
               <% when 1 %>
-                <Cell ss:StyleID="s3" ss:MergeAcross="<%= length %>"><Data ss:Type="String" ><%= project_name %></Data></Cell>
+                <% if length > 0 %>
+                  <Cell ss:StyleID="s3" ss:MergeAcross="<%= length %>"><Data ss:Type="String" ><%= project_name %></Data></Cell>
+                <% else %>
+                  <Cell ss:StyleID="s3"><Data ss:Type="String" ><%= project_name %></Data></Cell>
+                <% end %>
               <% end %>
               <!-- Break if drew a cell for project -->
               <% break if index <= u[2] %>
