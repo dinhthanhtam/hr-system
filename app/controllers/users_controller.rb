@@ -75,7 +75,7 @@ class UsersController < BaseController
     @user = User.find(params[:id])
     respond_to do |format|
       if @success = @user.update_attributes(profile_params)
-        sign_in(current_user, :bypass => true) if params[:user][:password].present? || params[:user][:password_confirmation].present?
+        sign_in(@user, :bypass => true) if params[:user][:password].present? || params[:user][:password_confirmation].present?
         format.js
         format.html { redirect_to action: :profile}
       else

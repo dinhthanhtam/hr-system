@@ -28,7 +28,7 @@ class ProjectUsersController < BaseController
   def destroy
     respond_to do |format|
       if @project_user.destroy
-        format.html { redirect_to action: :index }
+        format.html { redirect_to project_project_users_path(project_id: @project_user.project_id) }
       else
         format { redirect_to action: :edit }
       end

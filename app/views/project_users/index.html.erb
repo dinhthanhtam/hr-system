@@ -30,9 +30,9 @@
           </td>
           <td class="buttons">
             <%= link_to t(:button_edit, scope: [:views, :labels]), "#", class: "icon icon-edit", data: {id: project_user.id} %>
-            <%= link_to t(:button_delete, scope: [:views, :labels]),
+            <%= link_to_if(@project.create_user_id!= project_user.user.id, t(:button_delete, scope: [:views, :labels]),
               url_for(action: :destroy, id: project_user.id), data: {confirm: t(:delete_confirm, scope: [:views, :messages])},
-              method: :delete, class: "icon icon-delete" %>
+              method: :delete, class: "icon icon-delete") {} %>
           </td>
         </tr>
       <% end %>

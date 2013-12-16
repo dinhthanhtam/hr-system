@@ -3,7 +3,7 @@
     <h2><%= h2_label %></h2>
     <nav>
       <%= link_to_if((@project.editable? && (current_user.projects.include? @project)),
-          t(:cost, scope: [:views, :labels]), url_for(controller: :costs, action: :new, project_id: 2),
+          t(:cost, scope: [:views, :labels]), url_for(controller: :costs, action: :new, project_id: @project),
           class: "btn btn-small btn-warning") {} %>
     </nav>
   </div>
