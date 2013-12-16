@@ -334,11 +334,18 @@
                 <%= form_tag update_profile_user_path(@user), :remote => true do %>
                   <div class="data_settings">
                     <div id="contract_type" style="display: none;"></div>
-                    <% Settings.users.contract_types.each do |contract_type| %>
-                      <%= radio_button_tag "user[contract_type]", contract_type, (@user.contract_type == contract_type),
-                        style: "display: inline-block;" %>
-                      <label for="<%= "user_contract_type_#{contract_type.gsub(' ','_')}" %>"><%= contract_type %></label>&nbsp;&nbsp;
-                    <% end %><br><br>
+                    <table>
+                      <% Settings.users.contract_types.each_with_index do |contract_type, index| %>
+                        <%= "<tr>".html_safe if index % 3 == 0 %>
+                          <td>
+                            <%= radio_button_tag "user[contract_type]", contract_type, (@user.contract_type == contract_type),
+                                style: "display: inline-block;", id: "contract_type#{index}" %>
+                            <label for="<%= 'contract_type' + index.to_s %>"><%= contract_type %></label>
+                          </td>
+                        <%= "</tr>".html_safe if (index + 1) % 3 == 0 %>
+                      <% end %>
+                    </table>
+                    <br>
                     <%= submit_tag "OK", class: "btn btn-primary" %>
                     <input type="button" class="btn btn-cancel close_div" value="Cancel"/>
                   </div>
