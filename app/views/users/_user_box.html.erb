@@ -2,7 +2,7 @@
   <div class="profile">
     <div class="avatar"><%= image_tag user.avatar_url, class: "img-circle" %></div>
     <div class="display_name">
-      <%= user.display_name %>
+      <%= link_to user.display_name, profile_user_path(user) %>
     </div>
     <div class="display_position">
       <i><%= user.position %></i>

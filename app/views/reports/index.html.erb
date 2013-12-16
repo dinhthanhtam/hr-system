@@ -43,13 +43,13 @@
       <% if current_user.is_staff? %>
         <table class = "user_profile">
           <tr>
-            <th style="line-height: 187px">
-              <%= link_to image_tag(current_user.avatar_url, class: "avatar_main", alt: "No image"), url_for(controller: :users, action: :show, id: current_user.id) %>
+            <th style="line-height: 187px; padding: 0px 0px;">
+              <%= link_to image_tag(current_user.avatar_url, class: "avatar_main", alt: "No image", style: "height: 185px; width:185px"), url_for(controller: :users, action: :show, id: current_user.id) %>
             </th>
           </tr>
           <tr>
             <td>
-              <strong><%= current_user.display_name %></strong>
+              <strong><%= link_to current_user.display_name, profile_user_path(current_user) %></strong>
             </td>
           </tr>
           <tr>

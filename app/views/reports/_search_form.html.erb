@@ -37,7 +37,7 @@
       <%= f.text_field :report_date_gteq, class: "datepicker icon_calendar" %>
       <%= f.text_field :report_date_lteq, class: "datepicker icon_calendar" %>
     </td>
-    <td style="display: none; vertical-align: top;" id="search_month_year">
+    <td style="display: none; vertical-align: top; padding-top: 0px;" id="search_month_year">
       <%= f.select :report_date_year_eq, include_not_select + (2012..Time.now.year).to_a %>
       <%= f.select :report_date_month_eq, include_not_select + (1..12).to_a %>
     </td>
