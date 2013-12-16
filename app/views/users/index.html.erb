@@ -11,9 +11,73 @@
     <div class="right_body">
       <div class="hed_search">
         <%= form_for @search, url: users_path, html: {method: :get, id: 'search_by_name_form'} do |f| %>
-          <%= f.text_field :display_name_cont, placeholder: "Input name to search" %>
+          <div>
+            <i class="icon_dropdown" id="addvance_search"></i>
+            <%= f.text_field :display_name_cont, placeholder: "Input name to search", class: "display_name", id: "search_name" %>
+          </div>
+
           <%= hidden_field_tag :group, params[:group] %>
           <%= hidden_field_tag :team, params[:team] %>
+
+          <div class="advance_search">
+            <div class="content_search">
+              <%= f.label :email, class: "title" %><%= f.text_field :email_cont, placeholder: "Email" %>
+            </div>
+            <div class="content_search">
+              <%= f.label :university, class: "title" %><%= f.text_field :university_cont, placeholder: "University" %>
+            </div>
+            <div class="content_search">
+              <%= f.label :foreign_language, class: "title" %><%= f.text_field :foreign_language_cont, placeholder: "Foreign language" %>
+            </div>
+            <div class="content_search">
+              <%= f.label :hometown, class: "title" %><%= f.text_field :hometown_cont, placeholder: "Hometown" %>
+            </div>
+            <div class="content_search">
+              <%= f.label :residential_address, class: "title" %><%= f.text_field :residential_address_cont, placeholder: "Residential address" %>
+            </div>
+            <div class="content_search radio">
+              <%= f.label :gender, class: "title" %>
+              <%= f.radio_button :gender_cont , "", style: "display: block;" %>
+              <label for="q_gender_cont_">All</label>&nbsp;&nbsp;
+              <% Settings.users.gender.each do |gender| %>
+                <%= f.radio_button :gender_cont , gender, style: "display: block;" %>
+                <label for="<%= "q_gender_cont_#{gender.downcase}" %>"><%= gender %></label>&nbsp;&nbsp;
+              <% end %>
+            </div>
+            <div class="content_search radio">
+              <%= f.label :marial_status, class: "title" %>
+              <%= f.radio_button :marital_status_cont , "", style: "display: block;" %>
+              <label for="q_marital_status_cont_">All</label>&nbsp;&nbsp;
+              <% Settings.users.marital_status.each do |marital_status| %>
+                <%= f.radio_button :marital_status_cont, marital_status, style: "display: block;" %>
+                <label for="<%= "q_marital_status_cont_#{marital_status.downcase}" %>"><%= marital_status %></label>&nbsp;&nbsp;
+              <% end %>
+            </div>
+            <div class="content_search radio">
+              <%= f.label :contract_type, class: "title" %>
+              <table>
+                <% ([""] + Settings.users.contract_types).each_with_index do |contract_type, index| %>
+                  <%= "<tr>".html_safe if index % 3 == 0 %>
+                    <td>
+                      <%= f.radio_button :contract_type_cont, contract_type, style: "display: block;", id: "contract_type#{index}" %>
+                      <label for="<%= 'contract_type' + index.to_s %>"><%= contract_type.blank? ? "All" : contract_type %></label>
+                    </td>
+                  <%= "</tr>".html_safe if (index + 1) % 3 == 0 %>
+                <% end %>
+              </table>
+            </div>
+            <div class="content_search">
+              <%= f.label :birthday, class: "title" %>
+              <%= f.text_field :birthday_gteq, class: "datepicker icon_calendar_small" %>...
+              <%= f.text_field :birthday_lteq, class: "datepicker icon_calendar_small" %>
+            </div>
+            <div class="content_search">
+              <%= f.label :join_date, class: "title" %>
+              <%= f.text_field :join_date_gteq, class: "datepicker icon_calendar_small" %>...
+              <%= f.text_field :join_date_lteq, class: "datepicker icon_calendar_small" %>
+            </div>
+            <div class="search"><%= f.submit t(:button_search, scope: [:views, :labels]), class: "btn btn-primary" %></div>
+          </div>
         <% end %>
       </div>
       <div class="block users">
