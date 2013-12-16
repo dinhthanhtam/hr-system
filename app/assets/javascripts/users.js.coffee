@@ -103,3 +103,15 @@ $ ->
       reader.onload = (e)->
         img.attr("src", e.target.result)
       reader.readAsDataURL(this.files[0])
+
+  $(".advance_search").hide()
+
+  $("#addvance_search").click ->
+    if $(".advance_search").is(":visible")
+      $(this).css("background-image", "url('/assets/icon_search.png')")
+    else
+      $(this).css("background-image", "url('/assets/icon_search_hide.png')")
+    $(".advance_search").toggle(100)
+
+  $("#search_name").keypress (e)->
+    $("#search_by_name_form").submit() if (e.which == 13)

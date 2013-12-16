@@ -217,13 +217,70 @@ a.profile_link:active {
 
 .hed_search {
     background-color: #FFFEFF;
-    height: 40px;
+    display: inline-block;
     margin-left: 10px;
     width: 93.3%;
-  input {
+  input.display_name {
     margin: 5px;
+    margin-right: 0px;
     float:right;
     border-radius: 0px;
+    
+  }
+  .content_search{
+    display: inline-block;
+    width: 100%;
+    label.title {
+      width: 20%;
+      float: left;
+      padding-top: 11px;
+      padding-right: 10px;
+      text-align: right;
+    }
+    input {
+      margin: 5px;
+      border-radius: 0px;
+    }
+  }
+  .radio {
+    padding: 8px 0px;
+    .title {
+      padding-top: 4px ! important;
+    }
+    td {
+      padding: 0px;
+    }
+    label{
+      width: auto;
+      float: left;
+      padding-top: 4px;
+      padding-right: 10px;
+      text-align: right;
+    }
+    input {
+      margin: 5px;
+      border-radius: 0px;
+      float: left;
+    }
+  }
+  .search{
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+  }
+  .icon_dropdown{
+    display: inline-block;
+    float: right;
+    margin-top: 5px;
+    margin-right: 5px;
+    padding: 11px 10px;
+    background-image: url("/assets/icon_search.png");
+    background-size: auto;
+    background-repeat: no-repeat;
+    height: 6px;
+    width: 10px;
+    border: 1px solid #cccccc;
+    border-left: none;
   }
 }
 
