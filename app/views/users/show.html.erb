@@ -9,7 +9,7 @@
         </tr>
         <tr>
           <td>
-            <strong><%= @user.display_name %></strong>
+            <strong><%= link_to @user.display_name, profile_user_path(@user) %></strong>
           </td>
         </tr>
         <tr>
