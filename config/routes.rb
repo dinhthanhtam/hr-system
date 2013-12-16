@@ -43,7 +43,9 @@ HrSystem::Application.routes.draw do
     post :send_payslip, on: :collection
   end
 
-  resources :feedbacks
+  resources :feedbacks do
+    get :fixed, on: :member
+  end
 
   root to: "users#index"
   # The priority is based upon order of creation:

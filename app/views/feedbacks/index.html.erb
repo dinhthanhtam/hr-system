@@ -1,39 +1,26 @@
-<asdselection>
-  <div>
-    <div class="left_menu">
-      <table class = "user_profile">
-        <tr>
-          <th style="divne-height: 187px">
-            <%= link_to image_tag(current_user.avatar_url, class: "avatar_main", alt: "No image"), url_for(controller: :users, action: :show, id: current_user.id) %>
-          </th>
-        </tr>
-        <tr>
-          <td>
-            <strong><%= current_user.display_name %></strong>
-          </td>
-        </tr>
-        <tr>
-          <td class = "item">
-            <i><%= current_user.position %></i>
-          </td>
-        </tr>
-      </table>
-    </div>
-    
-    <div class="right_body">
-      <table class="table_static">
-        <tr>
-          <th width="15%">Title</th>
-          <th>Content</th>
-        </tr>
-        <% @feedbacks.each do |feedback| %>
-          <tr>
-            <td><%= feedback.title %></td>
-            <td><%= feedback.content %></td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
-
-  </div>
+<selection>
+  <table class="table_static">
+    <tr>
+      <th width="15%">Title</th>
+      <th width="15%">Name</th>
+      <th>Content</th>
+      <th width="15%"></th>
+    </tr>
+    <% @feedbacks.each do |feedback| %>
+      <tr>
+        <td><%= feedback.title %></td>
+        <td><%= feedback.user.display_name %></td>
+        <td><%= feedback.content %></td>
+        <td>
+        <div class="link">
+          <i class="icon_tick icon" style="display: <%= feedback.fixed ? '' : 'none' %>"></i>
+          <%= link_to_if(!feedback.fixed, "Fixed", fixed_feedback_path(feedback), remote: true, class: "btn btn-primary btn-mini", id: "feedback_#{feedback.id}") {} %>
+          <%= link_to feedback_path(feedback), method: :delete, confirm: t(:confirm_delete, scope: [:views, :labels]) do %>
+            <i class="icon_delete icon"></i>
+          <% end %>
+        </div>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 </selection>
