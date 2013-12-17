@@ -1,0 +1,2 @@
+class CheckpointQuestion < Base
+end

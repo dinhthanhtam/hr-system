@@ -1,0 +1,2 @@
+class UserAnswerComment < Base
+end

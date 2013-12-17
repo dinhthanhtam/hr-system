@@ -1,0 +1,2 @@
+class CheckpointAnswer < Base
+end
