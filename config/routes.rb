@@ -47,6 +47,7 @@ HrSystem::Application.routes.draw do
     get :fixed, on: :member
   end
 
+  resources :checkpoint_questions
   root to: "users#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.

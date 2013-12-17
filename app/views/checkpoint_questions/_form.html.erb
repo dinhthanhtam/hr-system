@@ -1,0 +1,19 @@
+<%= form_for @checkpoint_question, url: {action: @checkpoint_question.new_record? ? :create : :update} do |f| %>
+
+  <%= render partial: "errors", locals: {object: @checkpoint_question} %>
+
+  <table class="formTbl contents">
+    <tr>
+      <th width="15%"><%= f.label :content %></th>
+      <td><%= f.text_area :content, style: "height: 50px; width: 100%;" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :max_point %></th>
+      <td><%= f.text_field :max_point %></td>
+    </tr>
+    
+  </table>
+  <div class="form-actions">
+    <%= f.submit @checkpoint_question.new_record? ? I18n.t(:button_create, scope: [:views, :labels]) : I18n.t(:button_edit, scope: [:views, :labels]), class:"btn btn-primary" %>
+  </div>
+<% end %>
