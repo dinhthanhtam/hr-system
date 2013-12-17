@@ -3,6 +3,7 @@ class CreateCheckpointQuestions < ActiveRecord::Migration
     create_table :checkpoint_questions do |t|
       t.string :content
       t.integer :max_point
+      t.string :type
       t.timestamps
     end
   end

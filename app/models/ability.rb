@@ -13,6 +13,7 @@ class Ability
       can :manage, Sticky
       can :manage, Report
       can :manage, ProjectUser
+      can :manage, Checkpoint
     elsif user.roles.detect{|r|r.name == "HR"}
       can :manage, User
       can :manage, ReportCategory
@@ -22,6 +23,7 @@ class Ability
       can :index, Report
       can :manage, Payslip
       can :manage, CheckpointQuestion
+      can :manage, Checkpoint
     elsif user.roles.detect{|r|r.name == "Leader"}
       can [:index, :show], Report do |report|
         user.team_id == report.user.team.id

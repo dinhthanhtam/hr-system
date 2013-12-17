@@ -1,0 +1,34 @@
+<%= form_tag checkpoints_path, id: "checkpoint_periods" do %>
+  <div class="lst_member_bottom">
+    <table>
+      <tr>
+        <th style="text-align: right; font-size: 15px; font-weight: bold;"><%= model.human_attribute_name :period %></th>
+        <th style="text-align: left;">
+          <%= select_tag :period, options_for_select(CheckpointPeriod.all.map { |period| [period.toString, period.id] }, params[:period]) %>
+        </th>
+        <th style="text-align: right; font-size: 15px; font-weight: bold;"><%= model.human_attribute_name :review %></th>
+        <th style="text-align: left;">
+          <%= select_tag :review, options_for_select(User.find_leaders.map { |leader| [leader.display_name, leader.id] }) %>
+        </th>
+        <th style="text-align: right; font-size: 15px; font-weight: bold;"><%= model.human_attribute_name :approve %></th>
+        <th style="text-align: left;">
+          <%= select_tag :approve, options_for_select(User.find_managers.map { |manager| [manager.display_name, manager.id] }) %>
+        </th>
+      </tr>
+      <% @users.each_with_index do |user, index| %>
+        <%= "<tr>".html_safe if index % 7 == 0 %>
+        <td>
+          <div style="display: inline-block" class= "member_item">
+            <%= link_to image_tag(user.avatar_url, class: "member_avatar #{ 'border_blue' if params[:member_id].to_i == user.id }",
+                  alt: "No image"), url_for(action: :index, member_id: user.id), data: user.display_name %><br>
+            <%= link_to user.display_name, profile_user_path(user.id) %>
+            <br>
+            <%= check_box_tag "user_ids[]", user.id %>
+          </div>
+        </td>
+        <%= "</tr>".html_safe if (index + 1) % 7 == 0 %>
+      <% end %>
+    </table>
+    <%= submit_tag t(:button_checkpoints, scope: [:views, :labels]), class: "btn btn-primary" %>
+  </div>
+<% end %>

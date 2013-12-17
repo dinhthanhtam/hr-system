@@ -48,6 +48,8 @@ HrSystem::Application.routes.draw do
   end
 
   resources :checkpoint_questions
+  resources :checkpoints
+
   root to: "users#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
