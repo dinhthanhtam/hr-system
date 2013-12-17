@@ -26,16 +26,19 @@
               <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to "Profile", url_for(controller: :users, action: :profile, id: current_user.id) %></li>
-                <li><%= link_to "Personal Settings", "#" %></li>
+                <li><%= link_to t(:profile, scope: [:views, :labels, :users]), url_for(controller: :users, action: :profile, id: current_user.id) %></li>
+                <li><%= link_to t(:personal, scope: [:views, :labels, :users]), "#" %></li>
                 <li class="divider"></li>
                 <% if current_user.is_manager? %>
-                  <li><%= link_to "Project", url_for(controller: :projects, action: :index) %></li>
-                  <li><%= link_to "Payslip", url_for(controller: :payslips, action: :index) if Settings.payslip.accessable.include? current_user.uid %></li>
-                  <li><%= link_to "Organizations", url_for(controller: :users, action: :organizations) %></li>
+                  <li><%= link_to t(:project, scope: [:views, :labels, :projects]), url_for(controller: :projects, action: :index) %></li>
+                  <li><%= link_to t(:payslip, scope: [:views, :labels, :payslips]), url_for(controller: :payslips, action: :index) if Settings.payslip.accessable.include? current_user.uid %></li>
+                  <li><%= link_to t(:organizations, scope: [:views, :labels, :users]), url_for(controller: :users, action: :organizations) %></li>
+                  <li class="divider"></li>
+                  <li><%= link_to t(:question, scope: [:views, :labels, :checkpoints]), url_for(controller: :checkpoint_questions, action: :index) %></li>
+                  <li><%= link_to t(:checkpoint, scope: [:views, :labels, :checkpoints]), "#" %></li>
                   <li class="divider"></li>
                 <% end %>
-                <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+                <li><%= link_to t(:logout, scope: [:views, :labels, :users]), destroy_user_session_path, method: :delete %></li>
               </ul>
             </li>
             <%= image_tag(current_user.avatar_url, class: "img-circle") %>

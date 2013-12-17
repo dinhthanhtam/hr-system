@@ -73,6 +73,9 @@ en:
         cost: "Cost"
         week: "Week"
         year: "Year"
+      checkpoint_question: &checkpoint_question
+        content: "Content"
+        max_point: "Max point"
   views:
     labels:
       manager: "Manager"
@@ -119,6 +122,17 @@ en:
         upload_payslip: Upload payslips
         send_payslip: Send payslips
         select_xlsx_notice: Please select xlsx file!
+        payslip: "Payslip"
+      checkpoints:
+        question: "Questions"
+        checkpoint: "Checkpoint"
+      projects:
+        project: "Project"
+      users:
+        organizations: "Organizations"
+        logout: "Logout"
+        profile: "Profile"
+        personal: "Personal Settings"
     messages:
       delete_confirm: Do you want to delete it?
       create_success: Create %{model} successfully!
@@ -185,6 +199,13 @@ en:
         new: "Project User New"
         update: "Project User Update"
         create: "Project User Create"
+      checkpoint_question:
+        index: "Questions Index"
+        show: "Question Detail"
+        edit: "Question Edit"
+        new: "Question New"
+        update: "Question Update"
+        create: "Question Create"
   mailers:
     subjects:
       notice_write_report_for_leader: "Notice for member didn't write report last week"
