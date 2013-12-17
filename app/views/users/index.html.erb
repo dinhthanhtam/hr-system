@@ -12,6 +12,7 @@
       <div class="hed_search">
         <%= form_for @search, url: users_path, html: {method: :get, id: 'search_by_name_form'} do |f| %>
           <div>
+            <div class="result"><%= @users.count == 0 ? t(:no_results, scope: [:views, :labels]) : "#{@users.count} #{t(:results, scope: [:views, :labels])}" %></div>
             <i class="icon_dropdown" id="addvance_search"></i>
             <%= f.text_field :display_name_cont, placeholder: "Input name to search", class: "display_name", id: "search_name" %>
           </div>
@@ -37,20 +38,20 @@
             </div>
             <div class="content_search radio">
               <%= f.label :gender, class: "title" %>
-              <%= f.radio_button :gender_cont , "", style: "display: block;" %>
-              <label for="q_gender_cont_">All</label>&nbsp;&nbsp;
+              <%= f.radio_button :gender_eq , "", style: "display: block;" %>
+              <label for="q_gender_eq_">All</label>&nbsp;&nbsp;
               <% Settings.users.gender.each do |gender| %>
-                <%= f.radio_button :gender_cont , gender, style: "display: block;" %>
-                <label for="<%= "q_gender_cont_#{gender.downcase}" %>"><%= gender %></label>&nbsp;&nbsp;
+                <%= f.radio_button :gender_eq , gender, style: "display: block;" %>
+                <label for="<%= "q_gender_eq_#{gender.downcase}" %>"><%= gender %></label>&nbsp;&nbsp;
               <% end %>
             </div>
             <div class="content_search radio">
               <%= f.label :marial_status, class: "title" %>
-              <%= f.radio_button :marital_status_cont , "", style: "display: block;" %>
-              <label for="q_marital_status_cont_">All</label>&nbsp;&nbsp;
+              <%= f.radio_button :marital_status_eq , "", style: "display: block;" %>
+              <label for="q_marital_status_eq_">All</label>&nbsp;&nbsp;
               <% Settings.users.marital_status.each do |marital_status| %>
-                <%= f.radio_button :marital_status_cont, marital_status, style: "display: block;" %>
-                <label for="<%= "q_marital_status_cont_#{marital_status.downcase}" %>"><%= marital_status %></label>&nbsp;&nbsp;
+                <%= f.radio_button :marital_status_eq, marital_status, style: "display: block;" %>
+                <label for="<%= "q_marital_status_eq_#{marital_status.downcase}" %>"><%= marital_status %></label>&nbsp;&nbsp;
               <% end %>
             </div>
             <div class="content_search radio">
@@ -59,7 +60,7 @@
                 <% ([""] + Settings.users.contract_types).each_with_index do |contract_type, index| %>
                   <%= "<tr>".html_safe if index % 3 == 0 %>
                     <td>
-                      <%= f.radio_button :contract_type_cont, contract_type, style: "display: block;", id: "contract_type#{index}" %>
+                      <%= f.radio_button :contract_type_eq, contract_type, style: "display: block;", id: "contract_type#{index}" %>
                       <label for="<%= 'contract_type' + index.to_s %>"><%= contract_type.blank? ? "All" : contract_type %></label>
                     </td>
                   <%= "</tr>".html_safe if (index + 1) % 3 == 0 %>
