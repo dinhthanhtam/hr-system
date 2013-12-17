@@ -14,6 +14,7 @@ $ ->
       else
         $("#team").hide()
         $("#group").hide()
+
   $("form").on "change", "#group_select", ->
     group_id = $(this).val()
     select_team = $("#user_team_id")
@@ -26,11 +27,22 @@ $ ->
           $.each data, (key, value) ->
             option = "<option value =#{value[1]}>#{value[0]}</option>"
             select_team.append(option)
+
   $.each $(".datepicker"), (index, value) ->
     date_string = $(value).val().substring(0,10)
     date = new Date(date_string)
-    $(value).datepicker format: "yyyy-mm-dd"
-    $(value).datepicker("setDate", date) if date_string != ""
+    today = new Date()
+    todayString = "#{today.getFullYear().toString()}-#{today.getMonth().toString()}-#{today.getDate().toString()}"
+    if date_string == ""
+      if $(value).attr("name").indexOf("birthday") != -1
+        $(value).val("1990-01-01")
+      else
+        $(value).val(todayString)
+    $(value).datepicker
+      format: "yyyy-mm-dd"
+      autoclose: true
+    $(value).val("") if date_string == ""
+
   $("li.group").click ->
     id = $(this).data("id")
     $(this).siblings().attr("class", "group")
