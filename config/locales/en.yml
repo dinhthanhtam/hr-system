@@ -221,3 +221,8 @@ en:
   errors:
     messages:
       in_valid: "Invalid"
+    template:
+      body: "Please check the following items."
+      header:
+        one: ! "There was an error in the%{model}"
+        other: ! "There were %{count} errors in the %{model}"

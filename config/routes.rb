@@ -49,6 +49,7 @@ HrSystem::Application.routes.draw do
 
   resources :checkpoint_questions
   resources :checkpoints
+  resources :checkpoint_periods
 
   root to: "users#index"
   # The priority is based upon order of creation:

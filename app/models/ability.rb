@@ -14,6 +14,7 @@ class Ability
       can :manage, Report
       can :manage, ProjectUser
       can :manage, Checkpoint
+      can :manage, CheckpointPeriod
     elsif user.roles.detect{|r|r.name == "HR"}
       can :manage, User
       can :manage, ReportCategory
@@ -24,6 +25,7 @@ class Ability
       can :manage, Payslip
       can :manage, CheckpointQuestion
       can :manage, Checkpoint
+      can :manage, CheckpointPeriod
     elsif user.roles.detect{|r|r.name == "Leader"}
       can [:index, :show], Report do |report|
         user.team_id == report.user.team.id
