@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   has_many :project_users
   has_many :projects, through: :project_users
   has_many :feedbacks
+  has_many :checkpoints
   mount_uploader :avatar, AvatarUploader
   
   # payslip
@@ -44,6 +45,7 @@ class User < ActiveRecord::Base
   scope :reporters, -> { joins(:user_roles => :role).where("roles.name in (?)", ["leader", "member"]).uniq }
   scope :filter_leaders, -> { joins(:user_roles => :role).where("roles.name = ?", "leader").uniq }
   scope :in_groups, ->(group_ids) { in_teams(Team.in_groups(group_ids).ids) }
+  scope :not_in, ->(user_ids) { where("users.id not in (?)", user_ids) unless  user_ids.nil? }
   
   scope :find_leaders, -> { where("users.position = ?", "leader") }
   scope :find_managers, -> { where("users.position = ?", "manager") }

@@ -76,6 +76,10 @@ en:
       checkpoint_question: &checkpoint_question
         content: "Content"
         max_point: "Max point"
+      checkpoint:
+        period: "Period"
+        review: "Reviewer"
+        approve: "Approve"
   views:
     labels:
       manager: "Manager"
@@ -99,12 +103,13 @@ en:
       button_finish: "Finish"
       button_import: "Import"
       button_send: "Send"
-      button_download: Download
-      button_confirm: Confirm
-      button_chance: Chance
-      button_cancel: Cancel
-      button_add: Add
-      button_assign: Assign member
+      button_download: "Download"
+      button_confirm: "Confirm"
+      button_chance: "Chance"
+      button_cancel: "Cancel"
+      button_add: "Add"
+      button_assign: "Assign member"
+      button_checkpoints: "Create checkpoints"
       roles: Update Roles
       confirm_delete: "Do you want to delete it ?"
       sticky: "Do you want to sticky it ?"
