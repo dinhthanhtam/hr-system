@@ -2,16 +2,11 @@
   <div class="lst_member_bottom">
     <table>
       <tr>
-        <th style="text-align: right; font-size: 15px; font-weight: bold;"><%= model.human_attribute_name :period %></th>
-        <th style="text-align: left;">
+        <th colspan="7" style="text-align: center; font-size: 15px; font-weight: bold;"><%= model.human_attribute_name :period %>
           <%= select_tag :period, options_for_select(CheckpointPeriod.all.map { |period| [period.toString, period.id] }, params[:period]) %>
-        </th>
-        <th style="text-align: right; font-size: 15px; font-weight: bold;"><%= model.human_attribute_name :review %></th>
-        <th style="text-align: left;">
+          <%= model.human_attribute_name :review %>
           <%= select_tag :review, options_for_select(User.find_leaders.map { |leader| [leader.display_name, leader.id] }) %>
-        </th>
-        <th style="text-align: right; font-size: 15px; font-weight: bold;"><%= model.human_attribute_name :approve %></th>
-        <th style="text-align: left;">
+          <%= model.human_attribute_name :approve %>
           <%= select_tag :approve, options_for_select(User.find_managers.map { |manager| [manager.display_name, manager.id] }) %>
         </th>
       </tr>

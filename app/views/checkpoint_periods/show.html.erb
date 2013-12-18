@@ -1,0 +1,27 @@
+<selection id="<%= model_name.underscore %>_show">
+
+  <table class="formTbl contents">
+    <tbody>
+      <tr>
+        <th width="15%"><%= model.human_attribute_name :name %></th>
+        <td><%= @checkpoint_period.name %></td>
+      </tr>
+      <tr>
+        <th><%= model.human_attribute_name :start_date %></th>
+        <td><%= @checkpoint_period.start_date %></td>
+      </tr>
+      <tr>
+        <th><%= model.human_attribute_name :end_date %></th>
+        <td><%= @checkpoint_period.end_date %></td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <div class="form-actions">
+    <%= link_to t(:button_index, scope: [:views, :labels]), url_for(action: :index), class: "btn" %>
+    <%= link_to t(:button_edit, scope: [:views, :labels]), url_for(action: :edit), class: "btn btn-primary" %>
+    <%= link_to t(:button_delete, scope: [:views, :labels]), url_for(action: :destroy), confirm: "Do you want to delete it ?",
+          method: :delete, class: "btn btn-danger"%>
+  </div>
+
+</selection>
