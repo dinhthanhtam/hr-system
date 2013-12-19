@@ -6,6 +6,9 @@ class Checkpoint < Base
   scope :by_periods, ->(period_id) { where("checkpoints.checkpoint_period_id = ?", period_id) unless period_id.nil? }
   scope :by_approve, ->(approve_id) { where("checkpoints.approve_id = ?", approve_id) unless approve_id.nil? }
   scope :by_reviewer, ->(review_id) { where("checkpoints.reviewer_id = ?", review_id) unless review_id.nil? }
+  scope :approve, -> {where state: "approve"}
+  scope :by_rank, ->rank { where("checkpoints.ranking = ?", rank) unless rank.nil? }
+
   has_many :checkpoint_answers, dependent: :destroy
   belongs_to :checkpoint_period
   belongs_to :user

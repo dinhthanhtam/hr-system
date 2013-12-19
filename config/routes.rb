@@ -53,6 +53,7 @@ HrSystem::Application.routes.draw do
 
   resources :checkpoints do
     get :review, on: :member
+    get :ranking, on: :collection
   end
 
   root to: "users#index"
