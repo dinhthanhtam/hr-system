@@ -1,4 +1,13 @@
 class CheckpointsController < BaseController
+  before_filter :check_answers, only: [:edit]
+  before_filter :build_comments, only: [:review]
+  
+  def index
+    respond_to do |format|
+      format.html
+    end
+  end
+
   def new
     params[:period] ||= CheckpointPeriod.first.try(:id)
     checkpoints = Checkpoint.by_periods(params[:period]) unless params[:period].nil?
@@ -8,6 +17,15 @@ class CheckpointsController < BaseController
     else
       @users = User.reporters.not_in(checkpoints.map(&:user_id))
     end
+  end
+
+  def edit
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  def review
     respond_to do |format|
       format.html
     end
@@ -26,5 +44,44 @@ class CheckpointsController < BaseController
     respond_to do |format|
       format.html { redirect_to new_checkpoint_path(period: params[:period]) }
     end
+  end
+ 
+  def update
+    respond_to do |format|
+      if @checkpoint.update_attributes(model_params)
+        format.html { redirect_to @checkpoint, notice: t(:update_success, scope: [:views, :messages]) }
+      else
+        format.html { render action: "edit" }
+      end
+    end
+  end
+
+private
+  def check_answers
+    @checkpoint.build_checkpoint_answers
+  end
+
+  def ordering(search)
+    if current_user.is_staff?
+      checkpoints = current_user.checkpoints
+    elsif current_user.is_leader?
+      checkpoints = current_user.checkpoints
+      review_checkpoint = Checkpoint.all.by_reviewer(current_user.id).order("id DESC")
+    elsif current_user.is_manager?
+      checkpoints = Checkpoint.all.by_approve(current_user.id).order("id DESC")
+    end
+  end
+
+  def build_comments
+    @checkpoint = Checkpoint.find params[:id]
+    if current_user.user_answer_comments.by_checkpoint(@checkpoint.checkpoint_answers.ids).empty?
+      @checkpoint.build_checkpoint_comments(current_user.id)
+    end
+  end
+
+  def model_params
+    params.require(:checkpoint).permit(:checkpoint_period_id, :state_event, :ranking,
+                                    checkpoint_answers_attributes: [:id, :checkpoint_question_id ,:content, :point, :_destroy, 
+                                    user_answer_comments_attributes: [:id, :comment , :user_id, :_destroy]]) if params[:checkpoint]
   end
 end

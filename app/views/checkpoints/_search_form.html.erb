@@ -1,0 +1,23 @@
+<div>
+  <table class="formTbl contents">
+    <tbody>
+      <tr>
+        <th width = "20%"><%= f.label :checkpoint_period_id %></th>
+        <td><%= f.select :checkpoint_period_id_eq, options_for_select(CheckpointPeriod.all.map{|x| [x.name,x.id]}) %></td>
+      </tr>
+      <tr>
+        <th width = "20%"><%= f.label :name %></th>
+        <td><%= f.text_field :user_display_name_cont %></td>
+      </tr>
+      <tr>
+        <th><%= f.label :ranking %></th>
+          <td>
+            <% Settings.users.ranking.each_with_index do |rank, index| %>
+              <%= f.radio_button :ranking_eq, rank, style: "display: inline-block;", id: "ranking#{index}" %>
+              <label for="<%= 'ranking' + index.to_s %>"><%= rank %></label>
+            <% end %>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

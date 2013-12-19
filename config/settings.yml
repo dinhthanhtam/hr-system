@@ -14,6 +14,8 @@ positions: [["Chief", "chief"], ["Manager", "manager"], ["Submanager", "submanag
 
 master_datas: ["groups", "report_categories"]
 
+checkpoint_questions: [["Leader", "leader"], ["Subleader", "subleader"], ["Member", "member"]]
+
 project:
   states: [["Prepared", "prepared"], ["Actived", "active"], ["Finished", "finish"]]
 
@@ -37,3 +39,4 @@ users:
   gender: ["Male", "Female"]
   marital_status: ["Single", "Married"]
   contract_types: ["Probationary", "Apprenticeship", "6 months - 1 year", "3 years", "Indefinite term"]
+  ranking: ["A", "B", "C", "D", "E"]

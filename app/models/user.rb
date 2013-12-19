@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   has_many :projects, through: :project_users
   has_many :feedbacks
   has_many :checkpoints
+  has_many :user_answer_comments
   mount_uploader :avatar, AvatarUploader
   
   # payslip

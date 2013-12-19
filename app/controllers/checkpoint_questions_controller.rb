@@ -49,6 +49,6 @@ class CheckpointQuestionsController < BaseController
 
 private
   def model_params
-    params.require(:checkpoint_question).permit(:content, :max_point) if params[:checkpoint_question]
+    params.require(:checkpoint_question).permit(:content, :max_point, :checkpoint_type, :checkpoint_period_id) if params[:checkpoint_question]
   end
 end
