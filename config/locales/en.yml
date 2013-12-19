@@ -135,6 +135,8 @@ en:
       checkpoints:
         question: "Questions"
         checkpoint: "Checkpoint"
+      rankings:
+        all_periods: "All periods"
       projects:
         project: "Project"
       users:

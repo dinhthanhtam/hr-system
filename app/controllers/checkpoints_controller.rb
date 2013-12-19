@@ -56,6 +56,14 @@ class CheckpointsController < BaseController
     end
   end
 
+  def ranking
+    @q = Checkpoint.search params[:q]
+    @checkpoints = @q.result.approve
+    respond_to do |format|
+      format.html
+    end
+  end
+
 private
   def check_answers
     @checkpoint.build_checkpoint_answers

@@ -1,0 +1,30 @@
+<%= search_form_for @q, url: ranking_checkpoints_path do |f| %>
+  <div class="center">
+    <div class="span9 search-col">
+      <%= f.collection_select :checkpoint_period_id_eq, CheckpointPeriod.all, :id, :name, include_blank: t(:all_periods, scope: [:views, :rankings]) %>
+      <%= f.submit t(:button_search, scope: [:views, :labels]), class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+<div class="lst_member_bottom">
+  <table>
+    <tr>
+      <th>Rank</th>
+      <th>Members</th>
+    </tr>
+    <% Settings.users.ranking.each do |rank| %>
+      <tr>
+        <th><%= rank %></th>
+        <td>
+          <% @checkpoints.by_rank("#{rank}").try(:each) do |checkpoint| %>
+            <div style="display: inline-block" class= "member_item">
+              <%= link_to image_tag(checkpoint.user.avatar_url, class: "member_avatar",
+                alt: "No image"), url_for(action: :index, member_id: checkpoint.user.id), data: checkpoint.user.display_name %><br>
+              <%= link_to checkpoint.user.display_name, profile_user_path(checkpoint.user.id) %>
+            </div>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
