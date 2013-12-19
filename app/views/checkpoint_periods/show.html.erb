@@ -14,7 +14,27 @@
         <th><%= model.human_attribute_name :end_date %></th>
         <td><%= @checkpoint_period.end_date %></td>
       </tr>
-      
+      <% Settings.checkpoint_questions.each do |checkpoint_type| %>
+        <tr>
+          <td colspan="2" style="padding-left: 8%; font-size: 15px; color: red;">
+            <b><%= checkpoint_type[0].upcase %></b>
+          </td>
+        </tr>
+        <% CheckpointQuestion.get_parent.each do |question| %>
+          <tr>
+            <td colspan="2" style="padding-left: 10%;">
+              <b><i><%= question.content %></i></b>
+            </td>
+          </tr>
+          <% @checkpoint_period.period_questions.get_parent_question(question.id).by_type_question(checkpoint_type[1]).each do |period_question| %>
+            <tr>
+              <td colspan="2" style="padding-left: 13%;">
+                <%= period_question.checkpoint_question.content %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      <% end %>
     </tbody>
   </table>
   <div class="form-actions">
