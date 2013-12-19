@@ -1,0 +1,14 @@
+<%= f.fields_for :user_answer_comments, user_answer_comment do |comment| %>
+  <tr>
+    <% if current_user.id == user_answer_comment.user_id %>
+      <td class = "labels">
+        <%= comment.text_area :comment, style: "width: 50%" %>
+        <%= comment.hidden_field :user_id %>
+      </td>
+    <% else %>
+      <td class = "labels">
+        Comment by <%= user_answer_comment.user.display_name %>: <%= user_answer_comment.comment %>
+      </td>
+    <% end %>
+  </tr>
+<% end %>

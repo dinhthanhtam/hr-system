@@ -1,3 +1,24 @@
-// Place all the styles related to the checkpoints controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.survey{
+    background-color: #FFFFFF;
+    border-collapse: separate;
+    border-radius: 4px 4px 4px 4px;
+    width: 100%;
+    td {
+      padding-top: 10px;
+    }
+
+    td.labels{
+      padding-left: 5%;
+    }
+}
+
+.ranking{
+    background-color: #FFFFFF;
+    border-collapse: separate;
+    border-radius: 4px 4px 4px 4px;
+    width: 100%;
+    td {
+      padding-top: 10px;
+    }
+}
+

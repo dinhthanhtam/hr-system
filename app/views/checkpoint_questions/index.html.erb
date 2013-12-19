@@ -11,9 +11,9 @@
   <table class="table table-bordered" style = "background-color:#FFFFFF;">
     <thead>
       <tr>
-        <th><%= model.human_attribute_name :content %></th>
+        <th width = "50%"><%= model.human_attribute_name :content %></th>
         <th><%= model.human_attribute_name :max_point %></th>
-        <th><%= model.human_attribute_name :created_at %></th>
+        <th><%= model.human_attribute_name :checkpoint_type %></th>
         <th width = "20%"></th>
       </tr>
     </thead>
@@ -21,7 +21,7 @@
       <tr>
         <td><%= checkpoint_question.content %></td>
         <td><%= checkpoint_question.max_point %></td>
-        <td><%= checkpoint_question.created_at %></td>
+        <td><%= checkpoint_question.checkpoint_type %></td>
         <td>
           <%= link_to t(:button_detail, scope: [:views, :labels]), url_for(action: :show, id: checkpoint_question.id), class: "btn btn-mini" %>
           <%= link_to t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: checkpoint_question.id), class: "btn btn-primary btn-mini" %>

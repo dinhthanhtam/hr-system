@@ -1,0 +1,17 @@
+<%= form_for @checkpoint, url: {action: @checkpoint.new_record? ? :create : :update} do |f| %>
+
+  <%= render partial: "errors", locals: {object: @checkpoint} %>
+
+  <table class="survey">
+    <% @checkpoint.checkpoint_answers && @checkpoint.checkpoint_answers.each_with_index do |checkpoint_answer, i| %>
+      <%= render "answer_fields", {checkpoint_answer: checkpoint_answer, f: f, i: i } %>
+    <% end %>
+  </table>
+
+  <div class="form-actions" style = "background-color: #FFFFFF;">
+    <% if @checkpoint.waitting?  %>
+      <%= f.button t(:button_finish, scope: [:views, :labels]), class: "btn btn-primary", name: "#{model_name.underscore}[state_event]", value: "reviewing" %>
+    <% end %>
+  </div>
+<% end %>
+

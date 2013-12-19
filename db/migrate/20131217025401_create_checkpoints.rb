@@ -6,6 +6,7 @@ class CreateCheckpoints < ActiveRecord::Migration
       t.integer :reviewer_id
       t.string :ranking
       t.integer :checkpoint_period_id
+      t.string :state
       t.timestamps
     end
   end
