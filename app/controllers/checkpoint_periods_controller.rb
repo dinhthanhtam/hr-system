@@ -50,6 +50,6 @@ class CheckpointPeriodsController < BaseController
   end
 private
   def model_params
-    params.require(:checkpoint_period).permit(:name, :start_date, :end_date) if params[:checkpoint_period]
+    params.require(:checkpoint_period).permit CheckpointPeriod.updatable_attrs if params[:checkpoint_period]
   end
 end

@@ -135,6 +135,7 @@ en:
       checkpoints:
         question: "Questions"
         checkpoint: "Checkpoint"
+        period: "Checkpoint period"
       rankings:
         all_periods: "All periods"
         checkpoint_ranking: "Checkpoint Ranking"
@@ -230,5 +231,5 @@ en:
     template:
       body: "Please check the following items."
       header:
-        one: ! "There was an error in the%{model}"
+        one: ! "There was an error in the %{model}"
         other: ! "There were %{count} errors in the %{model}"

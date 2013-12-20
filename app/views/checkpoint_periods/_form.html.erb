@@ -15,6 +15,31 @@
       <th><%= f.label :end_date %></th>
       <td><%= f.text_field :end_date, class: "datepicker icon_calendar_small" %></td>
     </tr>
+    <% Settings.checkpoint_questions.each do |checkpoint_type| %>
+      <tr>
+        <td colspan="2" style="padding-left: 8%; font-size: 15px; color: red;">
+          <b><%= checkpoint_type[0].upcase %></b>
+        </td>
+      </tr>
+      <% CheckpointQuestion.get_parent.each do |question| %>
+        <tr>
+          <td colspan="2" style="padding-left: 10%;">
+            <b><i><%= question.content %></i></b>
+          </td>
+        </tr>
+        <% question.children.by_type(checkpoint_type[1]).each do |child| %>
+          <%= f.fields_for :period_questions, @checkpoint_period.build_period_question(child.id) do |ff| %>
+            <tr>
+              <td colspan="2" style="padding-left: 13%;">
+                <%= ff.check_box :_destroy, {checked: !ff.object.new_record?},0, 1 %>
+                <%= ff.hidden_field :checkpoint_question_id, value: ff.object.checkpoint_question.id %>
+                <%= ff.object.checkpoint_question.content %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
   </table>
 
   <div class="form-actions">
