@@ -46,7 +46,7 @@ class Ability
         user.id == cost.user_id
       end
       can :manage, Sticky
-      can [:edit, :index, :update], Checkpoint do |checkpoint|
+      can [:edit, :index, :update, :show], Checkpoint do |checkpoint|
         user.id == checkpoint.user_id
       end
       can :review, Checkpoint
@@ -68,7 +68,7 @@ class Ability
       can :show, Project do |project|
         user.projects.include? project
       end
-      can [:edit, :index, :update], Checkpoint do |checkpoint|
+      can [:edit, :index, :update, :show], Checkpoint do |checkpoint|
         user.id == checkpoint.user_id
       end
       

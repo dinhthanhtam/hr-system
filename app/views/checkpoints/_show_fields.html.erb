@@ -1,0 +1,16 @@
+<%= f.fields_for :checkpoint_answers, checkpoint_answer do |answer| %>
+  <tr>
+    <td colspan = 2 style = "padding-left:5%;" ><%= checkpoint_answer.checkpoint_question.content %></td>
+  </tr>
+  <tr>
+    <td class = "labels">
+      <%= checkpoint_answer.content %>
+    </td>
+  </tr>
+  <tr>
+    <td class = "labels">
+      <%= checkpoint_answer.point %>/<%= checkpoint_answer.checkpoint_question.max_point %>
+    </td>
+  </tr>
+<% end %>
+
