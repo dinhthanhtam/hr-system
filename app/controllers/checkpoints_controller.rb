@@ -3,6 +3,10 @@ class CheckpointsController < BaseController
   before_filter :build_comments, only: [:review]
   
   def index
+    if current_user.is_leader?
+      @review_checkpoints = Checkpoint.by_reviewer(current_user.id)
+      @review_checkpoints = @review_checkpoints.paginate(page: params[:page],per_page: params[:per_page])
+    end
     respond_to do |format|
       format.html
     end
@@ -74,9 +78,8 @@ private
       checkpoints = current_user.checkpoints
     elsif current_user.is_leader?
       checkpoints = current_user.checkpoints
-      review_checkpoint = Checkpoint.all.by_reviewer(current_user.id).order("id DESC")
     elsif current_user.is_manager?
-      checkpoints = Checkpoint.all.by_approve(current_user.id).order("id DESC")
+      checkpoints = Checkpoint.by_approve(current_user.id).order("id DESC")
     end
   end
 

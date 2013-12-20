@@ -30,4 +30,32 @@
   <div class="pagination">
     <div class="paginate-box no_print"><%= will_paginate @checkpoints %></div>
   </div>
+
+  <% if @review_checkpoints.present? %>
+    <table class="table table-bordered" style = "background-color: #FFFFFF;">
+      <thead>
+        <tr>
+          <th width = "10%"><%= model.human_attribute_name :period %></th>
+          <th><%= model.human_attribute_name :name %></th>
+          <th><%= model.human_attribute_name :rank %></th>
+          <th width = "20%"></th>
+        </tr>
+      </thead>
+      <% @review_checkpoints.each do |checkpoint| %>
+        <tr>
+          <td><%= checkpoint.checkpoint_period.name %></td>
+          <td><%= checkpoint.user.display_name %></td>
+          <td><%= checkpoint.ranking %></td>
+          <td>
+            <%= link_to_if( checkpoint.new_checkpoint? && checkpoint.user.id == current_user.id, t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: checkpoint.id), class: "btn btn-primary btn-mini") {} %>
+            <%= link_to_if(checkpoint.reviewable? && current_user.is_leader?, t(:button_review, scope: [:views, :labels]), url_for(action: :review, id: checkpoint.id), class: "btn btn-success btn-mini") {} %>
+            <%= link_to_if(checkpoint.approveable? && current_user.is_manager?, t(:button_review, scope: [:views, :labels]), url_for(action: :review, id: checkpoint.id), class: "btn btn-success btn-mini") {} %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <div class="pagination">
+      <div class="paginate-box no_print"><%= will_paginate @review_checkpoints %></div>
+    </div>
+  <% end %>
 </selection>

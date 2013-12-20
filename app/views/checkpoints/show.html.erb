@@ -1,0 +1,31 @@
+<selection id="<%= model_name.underscore %>_review">
+  <%= form_for @checkpoint do |f| %>
+
+    <%= render partial: "errors", locals: {object: @checkpoint} %>
+
+    <table class="survey">
+      <% parent_id = 0 %>
+      <% count = 1 %>
+      <% @checkpoint.checkpoint_answers && @checkpoint.checkpoint_answers.each_with_index do |checkpoint_answer, i| %>
+        <% if checkpoint_answer.checkpoint_question.parent.present? &&
+          parent_id != checkpoint_answer.checkpoint_question.parent.id %>
+          <tr>
+            <td colspan = 2 style = "padding-left:2%;" ><label><%= count %>.
+                <%= checkpoint_answer.checkpoint_question.parent.content %></label></td>
+          </tr>
+          <% parent_id = checkpoint_answer.checkpoint_question.parent.id %>
+          <% count += 1 %>
+        <% end %>
+        <%= render "answer_review_fields", {checkpoint_answer: checkpoint_answer, f: f, i: i } %>
+      <% end %>
+      <table class="ranking">
+        <tr>
+          <th width ="10%"><%= f.label :ranking %></th>
+          <td>
+            <%= @checkpoint.ranking %>
+          </td>
+        </tr>
+      </table>
+    </table>
+  <% end %>
+</selection>
