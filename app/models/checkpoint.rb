@@ -35,8 +35,8 @@ class Checkpoint < Base
 
   def build_checkpoint_answers
     if self.checkpoint_answers.empty?
-      CheckpointQuestion.all.by_type(self.user.position).
-       by_period(self.checkpoint_period_id).each { |question| self.checkpoint_answers.build(checkpoint_question_id: question.id) }
+      self.checkpoint_period.checkpoint_questions.where("checkpoint_questions.parent_id > 0").by_type(self.user.position).
+        order("checkpoint_questions.parent_id").each { |question| self.checkpoint_answers.build(checkpoint_question_id: question.id) }
     end
   end
 

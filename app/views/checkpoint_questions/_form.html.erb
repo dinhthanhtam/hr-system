@@ -16,11 +16,13 @@
       <td><%= f.select :checkpoint_type, options_for_select(Settings.checkpoint_questions, @checkpoint_question.checkpoint_type) %></td>
     </tr>
     <tr>
-      <th><%= f.label :checkpoint_period_id %></th>
-      <td><%= f.select :checkpoint_period_id, options_for_select(CheckpointPeriod.all.map{|x| [x.name,x.id]}, @checkpoint_question.checkpoint_period_id) %></td>
+      <th><%= f.label :parent_id %></th>
+      <td><%= f.select :parent_id, options_for_select(Settings.select_one + CheckpointQuestion.all.where("parent_id = 0").
+        map{|x| [x.content,x.id]}, @checkpoint_question.parent_id) %></td>
     </tr>
   </table>
   <div class="form-actions">
-    <%= f.submit @checkpoint_question.new_record? ? I18n.t(:button_create, scope: [:views, :labels]) : I18n.t(:button_edit, scope: [:views, :labels]), class:"btn btn-primary" %>
+    <%= f.submit @checkpoint_question.new_record? ? I18n.t(:button_create, scope: [:views, :labels]) : I18n.t(:button_edit, scope: [:views, :labels]),
+      class:"btn btn-primary" %>
   </div>
 <% end %>

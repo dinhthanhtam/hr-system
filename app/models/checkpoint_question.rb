@@ -1,5 +1,6 @@
 class CheckpointQuestion < Base
   has_many :checkpoint_answers
+  has_many :children , foreign_key: :parent_id, class_name: CheckpointQuestion.name
+  belongs_to :checkpoint_question, foreign_key: :parent_id, class_name: CheckpointQuestion.name
   scope :by_type, ->(type) { where("checkpoint_questions.checkpoint_type = ?", type) }
-  scope :by_period, ->(period) { where("checkpoint_questions.checkpoint_period_id = ?", period) }
 end

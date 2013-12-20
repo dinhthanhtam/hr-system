@@ -1,0 +1,69 @@
+id,content,max_point,checkpoint_type,parent_id
+1,"Tinh thần trách nhiệm - Responsibility",0,"leader",0
+2,"Bạn có ý thức trách nhiệm đối với lợi ích chung của dự án, công ty và khách hàng chưa? Did you have the responsibility for the common benefit of the project, company and customers?",5,"leader",1
+3,"Bạn có ý thức vượt qua khó khăn trong công việc, khắc phục những khó khăn về vấn đề cá nhân chưa? Did you have consciousness to overcome difficulties in work and personal issues?",5,"leader",1
+4,"Khả năng làm việc theo nhóm - Ability to work in team",0,"leader",0
+5,"Khả năng làm việc trong dự án Ability to work in project ",5,"leader",4
+6,"Khả năng làm việc với dự án khác Ability to work in other projects ",5,"leader",4
+7,"Khả năng làm việc với khách hàng Ability to work with customers",5,"leader",4
+8,"Kết quả công việc - Result of work",0,"leader",0
+9,"Chất lượng công việc Quality of work",5,"leader",8
+10,"Thời hạn hoàn thành công việc Deadline",5,"leader",8
+11,"Kỷ luật lao động - Discipline in work",0,"leader",0
+12,"Đi làm đúng giờ Working on time",0,"leader",11
+13,"Tuân thủ quy trình Process compliance",5,"leader",11
+14,"Tính kỷ luật trong công việc, chấp hành yêu cầu của cấp trên, quy định chung của nhóm và Công ty Discipline in work. Manager/Leader's requirements, Group/Company's general regulations implementation.",5,"leader",11
+15,"Trình độ chuyên môn - Technical skills",0,"leader",0
+16,"Bạn đánh giá như thế nào về trình độ chuyên môn, kỹ thuật của mình? How do you evaluate about your technical skills?",5,"leader",15
+17,"Kế hoạch bạn đưa ra để nâng cao trình độ chuyên môn, kỹ thuật của mình là gì? What will you do to improve your technical skill?",5,"leader",15
+18,"Trình độ ngoại ngữ - Foreign language skills",0,"leader",0
+19,"Bạn biết những ngoại ngữ nào? Bạn đánh giá như thế nào về trình độ ngoại ngữ của mình? How many language you can use? How do you evaluate about your foreign language? ",5,"leader",18
+20,"Kế hoạch bạn đưa ra để nâng cao trình độ ngoại ngữ của mình là gì? What will you do to improve your foreign language skill?",5,"leader",18
+21,"Tham gia hoạt động seminar meeting của Công ty - Participation in Company's seminar meeting",0,"leader",0
+22,"Bạn có thường xuyên tham gia buổi seminar meeting của Công ty không? Do you offten attend seminar meeting of the Company?",5,"leader",21
+23,"Bạn từng thuyết trình bao nhiêu lần trong buổi seminar meeting của Công ty? How many time have you ever presented in Company's seminar meeting?",5,"leader",21
+24,"LONG-TERM GOAL AND SHORT-TERM GOAL",0,"leader",0
+25,"Bạn đặt ra những mục tiêu gì trong 3 tháng tiếp theo? What are your short-term goals in the next 3 months?",0,"leader",24
+26,"Kế hoạch, hành động bạn đưa ra để đạt được những mục tiêu đó là gì? What will you do to reach these goals?",0,"leader",24
+27,"Kế hoạch dài hạn trong năm tiếp theo của bạn là gì? What are your long-term goals in the next year?",0,"leader",24
+28,"Kế hoạch, hành động bạn đưa ra để đạt được những mục tiêu dài hạn đó là gì? What will you do to reach these goals?",0,"leader",24
+29,"Bạn có ý thức trách nhiệm đối với lợi ích chung của dự án, công ty và khách hàng chưa? Did you have the responsibility for the common benefit of the project, company and customers?",5,"subleader",1
+30,"Bạn có ý thức vượt qua khó khăn trong công việc, khắc phục những khó khăn về vấn đề cá nhân chưa? Did you have consciousness to overcome difficulties in work and personal issues?",5,"subleader",1
+31,"Khả năng làm việc trong dự án Ability to work in project ",5,"subleader",4
+32,"Khả năng làm việc với dự án khác Ability to work in other projects ",5,"subleader",4
+33,"Khả năng làm việc với khách hàng Ability to work with customers",5,"subleader",4
+34,"Chất lượng công việc Quality of work",5,"subleader",8
+35,"Thời hạn hoàn thành công việc Deadline",5,"subleader",8
+36,"Đi làm đúng giờ Working on time",0,"subleader",11
+37,"Tuân thủ quy trình Process compliance",5,"subleader",11
+38,"Tính kỷ luật trong công việc, chấp hành yêu cầu của cấp trên, quy định chung của nhóm và Công ty Discipline in work. Manager/Leader's requirements, Group/Company's general regulations implementation.",5,"subleader",11
+39,"Bạn đánh giá như thế nào về trình độ chuyên môn, kỹ thuật của mình? How do you evaluate about your technical skills?",5,"subleader",15
+40,"Kế hoạch bạn đưa ra để nâng cao trình độ chuyên môn, kỹ thuật của mình là gì? What will you do to improve your technical skill?",5,"subleader",15
+41,"Bạn biết những ngoại ngữ nào? Bạn đánh giá như thế nào về trình độ ngoại ngữ của mình? How many language you can use? How do you evaluate about your foreign language? ",5,"subleader",18
+42,"Kế hoạch bạn đưa ra để nâng cao trình độ ngoại ngữ của mình là gì? What will you do to improve your foreign language skill?",5,"subleader",18
+43,"Bạn có thường xuyên tham gia buổi seminar meeting của Công ty không? Do you offten attend seminar meeting of the Company?",5,"subleader",21
+44,"Bạn từng thuyết trình bao nhiêu lần trong buổi seminar meeting của Công ty? How many time have you ever presented in Company's seminar meeting?",5,"subleader",21
+45,"Bạn đặt ra những mục tiêu gì trong 3 tháng tiếp theo? What are your short-term goals in the next 3 months?",0,"subleader",24
+46,"Kế hoạch, hành động bạn đưa ra để đạt được những mục tiêu đó là gì? What will you do to reach these goals?",0,"subleader",24
+47,"Kế hoạch dài hạn trong năm tiếp theo của bạn là gì? What are your long-term goals in the next year?",0,"subleader",24
+48,"Kế hoạch, hành động bạn đưa ra để đạt được những mục tiêu dài hạn đó là gì? What will you do to reach these goals?",0,"subleader",24
+49,"Bạn có ý thức trách nhiệm đối với lợi ích chung của dự án, công ty và khách hàng chưa? Did you have the responsibility for the common benefit of the project, company and customers?",5,"member",1
+50,"Bạn có ý thức vượt qua khó khăn trong công việc, khắc phục những khó khăn về vấn đề cá nhân chưa? Did you have consciousness to overcome difficulties in work and personal issues?",5,"member",1
+51,"Khả năng làm việc trong dự án Ability to work in project ",5,"member",4
+52,"Khả năng làm việc với dự án khác Ability to work in other projects ",5,"member",4
+53,"Khả năng làm việc với khách hàng Ability to work with customers",5,"member",4
+54,"Chất lượng công việc Quality of work",5,"member",8
+55,"Thời hạn hoàn thành công việc Deadline",5,"member",8
+56,"Đi làm đúng giờ Working on time",0,"member",11
+57,"Tuân thủ quy trình Process compliance",5,"member",11
+58,"Tính kỷ luật trong công việc, chấp hành yêu cầu của cấp trên, quy định chung của nhóm và Công ty Discipline in work. Manager/Leader's requirements, Group/Company's general regulations implementation.",5,"member",11
+59,"Bạn đánh giá như thế nào về trình độ chuyên môn, kỹ thuật của mình? How do you evaluate about your technical skills?",5,"member",15
+60,"Kế hoạch bạn đưa ra để nâng cao trình độ chuyên môn, kỹ thuật của mình là gì? What will you do to improve your technical skill?",5,"member",15
+61,"Bạn biết những ngoại ngữ nào? Bạn đánh giá như thế nào về trình độ ngoại ngữ của mình? How many language you can use? How do you evaluate about your foreign language? ",5,"member",18
+62,"Kế hoạch bạn đưa ra để nâng cao trình độ ngoại ngữ của mình là gì? What will you do to improve your foreign language skill?",5,"member",18
+63,"Bạn có thường xuyên tham gia buổi seminar meeting của Công ty không? Do you offten attend seminar meeting of the Company?",5,"member",21
+64,"Bạn từng thuyết trình bao nhiêu lần trong buổi seminar meeting của Công ty? How many time have you ever presented in Company's seminar meeting?",5,"member",21
+65,"Bạn đặt ra những mục tiêu gì trong 3 tháng tiếp theo? What are your short-term goals in the next 3 months?",0,"member",24
+66,"Kế hoạch, hành động bạn đưa ra để đạt được những mục tiêu đó là gì? What will you do to reach these goals?",0,"member",24
+67,"Kế hoạch dài hạn trong năm tiếp theo của bạn là gì? What are your long-term goals in the next year?",0,"member",24
+68,"Kế hoạch, hành động bạn đưa ra để đạt được những mục tiêu dài hạn đó là gì? What will you do to reach these goals?",0,"member",24

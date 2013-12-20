@@ -4,7 +4,18 @@
     <%= render partial: "errors", locals: {object: @checkpoint} %>
 
     <table class="survey">
+      <% parent_id = 0 %>
+      <% count = 1 %>
       <% @checkpoint.checkpoint_answers && @checkpoint.checkpoint_answers.each_with_index do |checkpoint_answer, i| %>
+        <% if checkpoint_answer.checkpoint_question.checkpoint_question.present? &&
+          parent_id != checkpoint_answer.checkpoint_question.checkpoint_question.id %>
+          <tr>
+            <td colspan = 2 style = "padding-left:2%;" ><label><%= count %>.
+            <%= checkpoint_answer.checkpoint_question.checkpoint_question.content %></label></td>
+          </tr>
+          <% parent_id = checkpoint_answer.checkpoint_question.checkpoint_question.id %>
+          <% count += 1 %>
+        <% end %>
         <%= render "answer_review_fields", {checkpoint_answer: checkpoint_answer, f: f, i: i } %>
       <% end %>
     </table>
@@ -23,12 +34,14 @@
       </table>
       <div class="form-actions" style = "background-color: #FFFFFF;">
         <% if @checkpoint.approveable?  %>
-          <%= f.button t(:button_finish, scope: [:views, :labels]), class: "btn btn-primary", name: "#{model_name.underscore}[state_event]", value: "approve" %>
+          <%= f.button t(:button_finish, scope: [:views, :labels]), class: "btn btn-primary", 
+            name: "#{model_name.underscore}[state_event]", value: "approve" %>
         <% end %>
       </div>
     <% else %>
       <div class="form-actions" style = "background-color: #FFFFFF;">
-        <%= f.button t(:button_finish, scope: [:views, :labels]), class: "btn btn-primary", name: "#{model_name.underscore}[state_event]", value: "reviewed" %>
+        <%= f.button t(:button_finish, scope: [:views, :labels]), class: "btn btn-primary",
+          name: "#{model_name.underscore}[state_event]", value: "reviewed" %>
       </div>
     <% end %>
     
