@@ -36,6 +36,7 @@
                   <li class="divider"></li>
                   <li><%= link_to t(:question, scope: [:views, :labels, :checkpoints]), url_for(controller: :checkpoint_questions, action: :index) %></li>
                   <li><%= link_to t(:checkpoint, scope: [:views, :labels, :checkpoints]), url_for(controller: :checkpoints, action: :new) %></li>
+                  <li><%= link_to t(:checkpoint_ranking, scope: [:views, :labels, :rankings]), url_for(controller: :checkpoints, action: :ranking) %></li>
                   <li class="divider"></li>
                 <% end %>
                 <li><%= link_to t(:logout, scope: [:views, :labels, :users]), destroy_user_session_path, method: :delete %></li>
