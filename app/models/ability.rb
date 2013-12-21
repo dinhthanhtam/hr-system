@@ -15,6 +15,8 @@ class Ability
       can :manage, ProjectUser
       can :manage, Checkpoint
       can :manage, CheckpointPeriod
+      can :manage, PickupList
+      can :manage, PickupListUser
     elsif user.roles.detect{|r|r.name == "HR"}
       can :manage, User
       can :manage, ReportCategory

@@ -146,6 +146,8 @@ en:
         logout: "Logout"
         profile: "Profile"
         personal: "Personal Settings"
+      pickup_lists:
+        pickup_list: "Pickup Lists"
     messages:
       delete_confirm: Do you want to delete it?
       create_success: Create %{model} successfully!
@@ -219,6 +221,12 @@ en:
         new: "Question New"
         update: "Question Update"
         create: "Question Create"
+      pickup_list:
+        index: "Pickup List Index"
+        show: "Pickup List Detail"
+        edit: "Pickup List Edit"
+        new: "Pickup List New"
+        create: "Pickup List Create"
   mailers:
     subjects:
       notice_write_report_for_leader: "Notice for member didn't write report last week"

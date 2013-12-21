@@ -30,6 +30,9 @@ class User < ActiveRecord::Base
   has_many :feedbacks
   has_many :checkpoints
   has_many :user_answer_comments
+  has_many :pickup_list_users
+  has_many :pickup_lists, through: :pickup_list_users
+
   mount_uploader :avatar, AvatarUploader
   
   # payslip
