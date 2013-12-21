@@ -56,6 +56,11 @@ HrSystem::Application.routes.draw do
     get :ranking, on: :collection
   end
 
+  resources :pickup_lists do
+    post :assign_members, on: :collection
+    resources :pickup_list_users, only: [:index, :destroy]
+  end
+
   root to: "users#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.

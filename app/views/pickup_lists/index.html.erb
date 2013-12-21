@@ -1,0 +1,24 @@
+<selection>
+  <div class="link">
+    <a href="<%= url_for(action: :new) %>" class="link-a">
+      <i class="icon_add icon"></i><span><%= t(:button_new, scope: [:views, :labels]) %></span>
+    </a>
+  </div>
+
+  <div id="all_lists">
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Created date</th>
+      </tr>
+      <% @pickup_lists.each do |list| %>
+        <tr>
+          <th><%= link_to list.name, list %></th>
+          <th><%= list.description %></th>
+          <th><%= list.created_at %></th>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</selection>

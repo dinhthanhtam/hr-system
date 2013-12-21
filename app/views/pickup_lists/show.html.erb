@@ -1,0 +1,35 @@
+<selection id="pickup_list_show">
+  <div class="ctsTit">
+    <h2><%= h2_label %></h2>
+  </div>
+  <div class="splitcontentleft">
+    <div class="issues box">
+      <h3><%= @pickup_list.name %></h3>
+      <p><%= @pickup_list.description %></p>
+
+      <ul class = "circle">
+        <li><%= model.human_attribute_name :created_at %>: <%= @pickup_list.created_at %></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="splitcontentright">
+    <div class="members box">
+      <div style= "width:76%;display: inline-block;"><h3>Members</h3></div>
+      <div id = "edit_roles" style="display: inline-block;"><%= link_to t(:button_assign, scope: [:views, :labels]), pickup_list_pickup_list_users_path(@pickup_list.id) %></div>
+      <% @pickup_list.pickup_list_users.each do |pickup_list_user| %>
+        <div style="display: inline-block;">
+          <%= link_to image_tag(pickup_list_user.user.avatar_url, class: "avatar", alt: "No image"),
+            url_for(controller: :users, action: :edit, id: pickup_list_user.id), data: pickup_list_user.user.display_name %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= link_to t(:button_index, scope: [:views, :labels]), url_for(action: :index), class: "btn" %>
+    <%= link_to t(:button_edit, scope: [:views, :labels]), url_for(action: :edit), class: "btn btn-primary" %>
+    <%= link_to t(:button_delete, scope: [:views, :labels]),
+      url_for(action: :destroy), confirm: t(:delete_confirm, scope: [:views, :messages]), method: :delete,
+      class: "btn btn-danger" %>
+  </div>
+</section>

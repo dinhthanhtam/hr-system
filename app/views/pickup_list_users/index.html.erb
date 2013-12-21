@@ -1,0 +1,54 @@
+<div class = "list_main">
+  <div class = "list_member_left">
+    <div class="ctsTit">
+      <h2>Assign Members</h2>
+      <nav></nav>
+    </div>
+    <table class="list members">
+      <tr>
+        <th>User</th>
+        <th>Action</th>
+        <th style="width:15%"></th>
+      </tr>
+
+      <%= hidden_field_tag :pickup_list_id, @pickup_list.id %>
+      <% @pickup_list_users.each_with_index do |pickup_list_user, index| %>
+        <tr id="tr-pickup-list-member-<%= pickup_list_user.id%>" class="pickup-list-member">
+          <td class="user">
+            <div style="display: inline-block;">
+              <%= link_to image_tag(pickup_list_user.user.avatar_url, class: "avatar", alt: "No image"),
+                url_for(controller: :users, action: :edit, id: pickup_list_user.id), data: pickup_list_user.user.display_name %><br>
+              <%= pickup_list_user.user.display_name %>
+            </div>
+          </td>
+      
+          <td class="buttons">
+            <% unless @pickup_list.create_user_id == pickup_list_user.user_id %>
+              <%= link_to t(:button_delete, scope: [:views, :labels]),
+                url_for(action: :destroy, id: pickup_list_user.id), data: {confirm: t(:delete_confirm, scope: [:views, :messages])},
+                method: :delete, class: "icon icon-delete delete-user", id: "delete-user-#{pickup_list_user.id}", style:"display:none" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <%= will_paginate @pickup_list_users %>
+  </div>
+
+  <div class = "list_member_right">
+    <div>
+      <label for="principal_search">Search for member:</label>
+      <input id="principal_search" type="text" name="principal_search">
+    </div>
+    <div id = "principals">
+      <% User.all.each do |user| %>
+        <% unless @pickup_list.users.map(&:id).include?(user.id) %>
+          <div class = "user_name" data-id = "<%= user.display_name.downcase %>">
+            <%= check_box_tag "member[]", user.id, false %><%= user.display_name %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <%= link_to t(:button_add, scope: [:views, :labels]), "#", class: "btn add_member_to_list" %>
+  </div>
+</div>
