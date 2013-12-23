@@ -1,14 +1,15 @@
 <selection id="checkpoints_index">
-  <div class="ctsTit">
-    <h2><%= h2_label %></h2>
-    <nav>
-      <%= link_to t(:new, scope: [:views, :labels, :checkpoints]), url_for(action: :new), class: "btn btn-small btn-warning" %>
-    </nav>
-  </div>
+  <% if current_user.is_hr? %>
+    <div class="link" style="margin-bottom: 15px;">
+      <a href="<%= url_for(action: :new) %>" class="link-a">
+        <i class="icon_add icon"></i><span><%= t(:button_new, scope: [:views, :labels]) %></span>
+      </a>
+    </div>
+  <% end %>
 
-  <%= render partial: "search" %>
+  <%= render partial: "search" unless current_user.is_hr? %>
 
-  <table class="table table-bordered" style = "background-color: #FFFFFF;">
+  <table class="itemList" style = "background-color: #FFFFFF;">
     <thead>
       <tr>
         <th width = "10%"><%= model.human_attribute_name :period %></th>
@@ -23,9 +24,14 @@
         <td><%= checkpoint.user.display_name %></td>
         <td><%= checkpoint.ranking %></td>
         <td>
-          <%= link_to_if( checkpoint.new_checkpoint? && checkpoint.user.id == current_user.id, t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: checkpoint.id), class: "btn btn-primary btn-mini") {} %>
-          <%= link_to_if(checkpoint.reviewable? && current_user.is_leader?, t(:button_review, scope: [:views, :labels]), url_for(action: :review, id: checkpoint.id), class: "btn btn-success btn-mini") {} %>
-          <%= link_to_if(checkpoint.approveable? && current_user.is_manager?, t(:button_review, scope: [:views, :labels]), url_for(action: :review, id: checkpoint.id), class: "btn btn-success btn-mini") {} %>
+          <% if current_user.is_hr? %>
+            <%= link_to t(:button_delete, scope: [:views, :labels]), url_for(action: :destroy, id: checkpoint.id),
+                  confirm: "Do you want to delete it ?", method: :delete, class: "btn btn-mini btn-danger" %>
+          <% else %>
+              <%= link_to_if( checkpoint.new_checkpoint? && checkpoint.user.id == current_user.id, t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id: checkpoint.id), class: "btn btn-primary btn-mini") {} %>
+              <%= link_to_if(checkpoint.reviewable? && current_user.is_leader?, t(:button_review, scope: [:views, :labels]), url_for(action: :review, id: checkpoint.id), class: "btn btn-success btn-mini") {} %>
+              <%= link_to_if(checkpoint.approveable? && current_user.is_manager?, t(:button_review, scope: [:views, :labels]), url_for(action: :review, id: checkpoint.id), class: "btn btn-success btn-mini") {} %>
+          <% end %>
         </td>
       </tr>
     <% end %>

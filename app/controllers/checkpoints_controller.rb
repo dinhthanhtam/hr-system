@@ -60,6 +60,16 @@ class CheckpointsController < BaseController
     end
   end
 
+  def destroy
+    respond_to do |format|
+      if @checkpoint.destroy
+        format.html { redirect_to action: :index }
+      else
+        format { redirect_to action: :index, notice: t(:delete_failed, scope: [:views, :messages]) }
+      end
+    end
+  end
+
   def ranking
     @q = Checkpoint.search params[:q]
     @checkpoints = @q.result.approve
@@ -75,11 +85,11 @@ private
 
   def ordering(search)
     if current_user.is_staff?
-      checkpoints = current_user.checkpoints
+      current_user.checkpoints
     elsif current_user.is_leader?
-      checkpoints = current_user.checkpoints
+      current_user.checkpoints
     elsif current_user.is_manager?
-      checkpoints = Checkpoint.by_approve(current_user.id).order("id DESC")
+      current_user.is_hr? ? Checkpoint.all : Checkpoint.by_approve(current_user.id).order("id DESC")
     end
   end
 
