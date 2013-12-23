@@ -52,7 +52,9 @@ class Ability
         user.id == checkpoint.user_id
       end
       can :review, Checkpoint
-      
+      can :show, Project do |project|
+        user.projects.include? project
+      end
     else
       can :manage, Sticky
       can [:index, :edit, :update, :get_all_user, :profile, :update_profile], User do |current|
