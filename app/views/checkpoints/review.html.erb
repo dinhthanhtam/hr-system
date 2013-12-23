@@ -7,13 +7,13 @@
       <% parent_id = 0 %>
       <% count = 1 %>
       <% @checkpoint.checkpoint_answers && @checkpoint.checkpoint_answers.each_with_index do |checkpoint_answer, i| %>
-        <% if checkpoint_answer.checkpoint_question.checkpoint_question.present? &&
-          parent_id != checkpoint_answer.checkpoint_question.checkpoint_question.id %>
+        <% if checkpoint_answer.checkpoint_question.parent.present? &&
+          parent_id != checkpoint_answer.checkpoint_question.parent.id %>
           <tr>
             <td colspan = 2 style = "padding-left:2%;" ><label><%= count %>.
-            <%= checkpoint_answer.checkpoint_question.checkpoint_question.content %></label></td>
+            <%= checkpoint_answer.checkpoint_question.parent.content %></label></td>
           </tr>
-          <% parent_id = checkpoint_answer.checkpoint_question.checkpoint_question.id %>
+          <% parent_id = checkpoint_answer.checkpoint_question.parent.id %>
           <% count += 1 %>
         <% end %>
         <%= render "answer_review_fields", {checkpoint_answer: checkpoint_answer, f: f, i: i } %>

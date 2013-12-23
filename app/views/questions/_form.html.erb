@@ -1,0 +1,30 @@
+<%= form_for @question, url: {action: @question.new_record? ? :create : :update} do |f| %>
+
+  <%= render partial: "errors", locals: {object: @question} %>
+  
+  <table class="formTbl contents">
+    <tr>
+      <th><%= f.label :name %></th>
+      <td><%= f.text_field :name %></th>
+    </tr>
+    <tr>
+      <th width="15%"><%= f.label :content %></th>
+      <td><%= f.text_area :content, style: "height: 50px; width: 100%;" %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :checkpoint_type %></th>
+      <td><%= f.select :checkpoint_type, options_for_select(Settings.questions, @question.checkpoint_type) %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :evaluation %></th>
+      <td>
+        <%= f.radio_button :evaluation, true, :checked => true, style:"display: inline !important" %><%= Settings.evaluation.eval %>
+        <%= f.radio_button :evaluation, false, style:"display: inline !important" %><%= Settings.evaluation.long_sort %>  
+      </td>
+    </tr>
+  </table>
+  <div class="form-actions">
+    <%= f.submit @question.new_record? ? I18n.t(:button_create, scope: [:views, :labels]) : I18n.t(:button_edit, scope: [:views, :labels]),
+      class:"btn btn-primary" %>
+  </div>
+<% end %>

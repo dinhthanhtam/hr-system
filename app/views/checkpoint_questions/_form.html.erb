@@ -13,7 +13,7 @@
     </tr>
     <tr>
       <th><%= f.label :checkpoint_type %></th>
-      <td><%= f.select :checkpoint_type, options_for_select(Settings.checkpoint_questions, @checkpoint_question.checkpoint_type) %></td>
+      <td><%= f.select :checkpoint_type, options_for_select(Settings.questions, @checkpoint_question.checkpoint_type) %></td>
     </tr>
     <tr>
       <th><%= f.label :parent_id %></th>

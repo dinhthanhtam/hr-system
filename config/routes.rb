@@ -49,7 +49,11 @@ HrSystem::Application.routes.draw do
 
   resources :checkpoint_questions
   resources :checkpoint_periods
-
+  resources :questions
+  resources :question_types do
+    post :add_questions, on: :collection
+    resources :question_type_relations
+  end
 
   resources :checkpoints do
     get :review, on: :member

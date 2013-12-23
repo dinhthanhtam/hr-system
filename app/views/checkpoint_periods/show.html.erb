@@ -14,7 +14,7 @@
         <th><%= model.human_attribute_name :end_date %></th>
         <td><%= @checkpoint_period.end_date %></td>
       </tr>
-      <% Settings.checkpoint_questions.each do |checkpoint_type| %>
+      <% Settings.questions.each do |checkpoint_type| %>
         <tr>
           <td colspan="2" style="padding-left: 8%; font-size: 15px; color: red;">
             <b><%= checkpoint_type[0].upcase %></b>

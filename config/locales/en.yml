@@ -116,6 +116,8 @@ en:
       apply_role: "Apply Roles"
       change_role_confirm: "Do you want to change roles ?"
       button_toggle_group: "Toggle Group"
+      button_add_question: "Add Questions"
+      button_new_question: "New Questions"
       roles: Update Roles
       confirm_delete: "Do you want to delete it ?"
       sticky: "Do you want to sticky it ?"
@@ -153,8 +155,13 @@ en:
         all_groups: "All groups"
       pickup_lists:
         pickup_list: "Pickup Lists"
+      questions:
+        question: "Questions"
+      question_types:
+        question_type: "Question Types"
     messages:
       delete_confirm: Do you want to delete it?
+      add_question_success: Add questions successfully!
       create_success: Create %{model} successfully!
       create_user_success: Create user successfully! Password auto sent to email!
       create_failed: Create %{model} failed!
@@ -239,6 +246,22 @@ en:
         new: "Checkpoint New"
         update: "Checkpoint Update"
         create: "Checkpoint Create"
+      question:
+        index: "Questions Index"
+        show: "Question Detail"
+        edit: "Question Edit"
+        new: "Question New"
+        update: "Question Update"
+        create: "Question Create"
+      question_type:
+        index: "Question Types Index"
+        show: "Question Type Detail"
+        edit: "Question Type Edit"
+        new: "Question Type New"
+        update: "Question Type Update"
+        create: "Question Type Create"
+      question_type_relation:
+        index: "Add Questions"
   mailers:
     subjects:
       notice_write_report_for_leader: "Notice for member didn't write report last week"

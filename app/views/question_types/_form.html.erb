@@ -1,0 +1,19 @@
+<%= form_for @question_type, url: {action: @question_type.new_record? ? :create : :update} do |f| %>
+
+  <%= render partial: "errors", locals: {object: @question_type} %>
+  
+  <table class="formTbl contents">
+    <tr>
+      <th><%= f.label :name %></th>
+      <td><%= f.text_field :name %></th>
+    </tr>
+    <tr>
+      <th width="15%"><%= f.label :description %></th>
+      <td><%= f.text_area :description, style: "height: 50px; width: 100%;" %></td>
+    </tr>
+  </table>
+  <div class="form-actions">
+    <%= f.submit @question_type.new_record? ? t(:button_create, scope: [:views, :labels]) : t(:button_edit, scope: [:views, :labels]),
+      class:"btn btn-primary" %>
+  </div>
+<% end %>

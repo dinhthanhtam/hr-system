@@ -1,5 +1,5 @@
 class Checkpoint < Base
-  belongs_to :checkpoint_period
+  belongs_to :checkpoint_period, foreign_key: :checkpoint_period_id
 
   validates :user_id, uniqueness: {scope: :checkpoint_period_id}, presence: true
 
