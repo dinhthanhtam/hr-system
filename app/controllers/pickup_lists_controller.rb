@@ -54,7 +54,7 @@ class PickupListsController < BaseController
       if @pickup_list.update_attributes(model_params)
         format.js
       else
-        format.js
+        format.html { render action: "edit" }
       end
     end
   end
