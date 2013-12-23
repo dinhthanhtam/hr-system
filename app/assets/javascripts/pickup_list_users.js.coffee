@@ -18,10 +18,10 @@ $ ->
         success: (data)->
           window.location.reload()
 
-  $(".pickup-list-member").mouseover ->
-    member_id = this.id.replace("tr-pickup-list-member-", "")
+  $(".member_info").mouseover ->
+    member_id = this.id.replace("member-", "")
     $("#delete-user-" + member_id).css "display", "block"
 
-  $(".pickup-list-member").mouseout ->
-    member_id = this.id.replace("tr-pickup-list-member-", "")
+  $(".member_info").mouseout ->
+    member_id = this.id.replace("member-", "")
     $("#delete-user-" + member_id).css "display", "none"

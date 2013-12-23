@@ -16,8 +16,8 @@ class PickupListUsersController < BaseController
   end
 
 private
-  def ordering(search)
-    @pickup_list.pickup_list_users 
+  def load_objects
+    @pickup_list_users = @pickup_list.pickup_list_users
   end
 
   def create_object
