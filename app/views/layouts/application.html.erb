@@ -36,7 +36,7 @@
                   <li><%= link_to t(:pickup_list, scope: [:views, :labels, :pickup_lists]), url_for(controller: :pickup_lists, action: :index) %></li>
                   <li class="divider"></li>
                   <li><%= link_to t(:question, scope: [:views, :labels, :checkpoints]), url_for(controller: :checkpoint_questions, action: :index) %></li>
-                  <li><%= link_to t(:checkpoint, scope: [:views, :labels, :checkpoints]), url_for(controller: :checkpoints, action: :new) %></li>
+                  <li><%= link_to t(:checkpoint, scope: [:views, :labels, :checkpoints]), url_for(controller: :checkpoints, action: :index) %></li>
                   <li><%= link_to t(:checkpoint_ranking, scope: [:views, :labels, :rankings]), url_for(controller: :checkpoints, action: :ranking) %></li>
                   <li><%= link_to_if(current_user.is_hr?, t(:period, scope: [:views, :labels, :checkpoints]),
                           url_for(controller: :checkpoint_periods, action: :index)) {} %></li>

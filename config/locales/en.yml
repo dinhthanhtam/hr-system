@@ -227,6 +227,13 @@ en:
         edit: "Pickup List Edit"
         new: "Pickup List New"
         create: "Pickup List Create"
+      checkpoint:
+        index: "Checkpoint Index"
+        show: "Checkpoint Detail"
+        edit: "Checkpoint Edit"
+        new: "Checkpoint New"
+        update: "Checkpoint Update"
+        create: "Checkpoint Create"
   mailers:
     subjects:
       notice_write_report_for_leader: "Notice for member didn't write report last week"
