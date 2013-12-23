@@ -30,12 +30,16 @@
                 <li><%= link_to t(:personal, scope: [:views, :labels, :users]), "#" %></li>
                 <li class="divider"></li>
                 <% if current_user.is_manager? %>
-                  <li><%= link_to t(:project, scope: [:views, :labels, :projects]), url_for(controller: :projects, action: :index) %></li>
-                  <li><%= link_to t(:payslip, scope: [:views, :labels, :payslips]), url_for(controller: :payslips, action: :index) if Settings.payslip.accessable.include? current_user.uid %></li>
+                  <li><%= link_to_if(!current_user.is_hr?, t(:project, scope: [:views, :labels, :projects]),
+                            url_for(controller: :projects, action: :index)) {} %></li>
+                  <li><%= link_to_if((Settings.payslip.accessable.include? current_user.uid), t(:payslip, scope: [:views, :labels, :payslips]),
+                            url_for(controller: :payslips, action: :index)) {} %></li>
                   <li><%= link_to t(:organizations, scope: [:views, :labels, :users]), url_for(controller: :users, action: :organizations) %></li>
-                  <li><%= link_to t(:pickup_list, scope: [:views, :labels, :pickup_lists]), url_for(controller: :pickup_lists, action: :index) %></li>
+                  <li><%= link_to_if(!current_user.is_hr?, t(:pickup_list, scope: [:views, :labels, :pickup_lists]),
+                            url_for(controller: :pickup_lists, action: :index)) {} %></li>
                   <li class="divider"></li>
-                  <li><%= link_to t(:question, scope: [:views, :labels, :checkpoints]), url_for(controller: :checkpoint_questions, action: :index) %></li>
+                  <li><%= link_to_if(current_user.is_hr?, t(:question, scope: [:views, :labels, :checkpoints]),
+                            url_for(controller: :checkpoint_questions, action: :index)) {} %></li>
                   <li><%= link_to t(:checkpoint, scope: [:views, :labels, :checkpoints]), url_for(controller: :checkpoints, action: :index) %></li>
                   <li><%= link_to t(:checkpoint_ranking, scope: [:views, :labels, :rankings]), url_for(controller: :checkpoints, action: :ranking) %></li>
                   <li><%= link_to_if(current_user.is_hr?, t(:period, scope: [:views, :labels, :checkpoints]),
