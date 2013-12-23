@@ -5,34 +5,23 @@
       <nav></nav>
     </div>
     <table class="list members">
-      <tr>
-        <th>User</th>
-        <th>Action</th>
-        <th style="width:15%"></th>
-      </tr>
-
       <%= hidden_field_tag :pickup_list_id, @pickup_list.id %>
-      <% @pickup_list_users.each_with_index do |pickup_list_user, index| %>
-        <tr id="tr-pickup-list-member-<%= pickup_list_user.id%>" class="pickup-list-member">
-          <td class="user">
-            <div style="display: inline-block;">
+      <tr>
+        <td class="user">
+          <% @pickup_list_users.each_with_index do |pickup_list_user, index| %>
+            <div style="display: inline-block;", class="member_info" id="member-<%= pickup_list_user.user_id %>">
               <%= link_to image_tag(pickup_list_user.user.avatar_url, class: "avatar", alt: "No image"),
-                url_for(controller: :users, action: :edit, id: pickup_list_user.id), data: pickup_list_user.user.display_name %><br>
-              <%= pickup_list_user.user.display_name %>
+                url_for(controller: :users, action: :edit, id: pickup_list_user.user_id), data: pickup_list_user.user.display_name %><br>
+              <% unless @pickup_list.create_user_id == pickup_list_user.user_id %>
+                <%= link_to image_tag("delete.png", size: "18x18"), url_for(action: :destroy, id: pickup_list_user.id),
+                  data: {confirm: t(:delete_confirm, scope: [:views, :messages])}, method: :delete,
+                  id: "delete-user-#{pickup_list_user.user_id}", style:"display:none;position:absolute;margin-top:-19px;margin-left:36px;" %>
+              <% end %>
             </div>
-          </td>
-      
-          <td class="buttons">
-            <% unless @pickup_list.create_user_id == pickup_list_user.user_id %>
-              <%= link_to t(:button_delete, scope: [:views, :labels]),
-                url_for(action: :destroy, id: pickup_list_user.id), data: {confirm: t(:delete_confirm, scope: [:views, :messages])},
-                method: :delete, class: "icon icon-delete delete-user", id: "delete-user-#{pickup_list_user.id}", style:"display:none" %>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
+          <% end %>
+        </td>
+      </tr>
     </table>
-    <%= will_paginate @pickup_list_users %>
   </div>
 
   <div class = "list_member_right">

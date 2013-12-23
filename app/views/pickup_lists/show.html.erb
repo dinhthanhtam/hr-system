@@ -20,7 +20,7 @@
       <% @pickup_list.pickup_list_users.each do |pickup_list_user| %>
         <div style="display: inline-block;">
           <%= link_to image_tag(pickup_list_user.user.avatar_url, class: "avatar", alt: "No image"),
-            url_for(controller: :users, action: :edit, id: pickup_list_user.id), data: pickup_list_user.user.display_name %>
+            url_for(controller: :users, action: :edit, id: pickup_list_user.user_id), data: pickup_list_user.user.display_name %>
         </div>
       <% end %>
     </div>
