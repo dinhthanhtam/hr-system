@@ -1,4 +1,21 @@
-<div class="left_menu" style= "width:19%;">
+<div class="span9 search-col">
+  <select class="role_select">
+    <option value="all"><%= t(:all_positions, scope: [:views, :labels, :users]) %></option>
+    <%= Settings.positions.each do |position| %>
+      <option value="<%= position[1] %>"><%= position[0] %></option>
+    <% end %>
+  </select>
+
+  <select class="group_select">
+    <option value="all"><%= t(:all_groups, scope: [:views, :labels, :users]) %></option>
+    <%= Group.all.each do |group| %>
+      <option value="<%= group.id %>"><%= group.name %></option>
+    <% end %>
+  </select>
+  <%= button_tag t(:button_toggle_group, scope: [:views, :labels]), type: "button", class: "btn btn-info toggle_group" %>
+</div>
+<div class="left_menu div_roles" style= "width:19%;">
+  <div class="div_chief">Chief</div>
   <div class="div_manager">Manager</div>
   <div class="div_submanager">Sub Manager</div>
   <div class="div_leader">Leader</div>
@@ -6,22 +23,26 @@
   <div class="div_member">Member</div>
 </div>
 
-<div class ="parent_scroll right_body">
+<div class="parent_scroll right_body" style="margin-top:13px;">
   <div id="list_member">
-    
+    <div data-id = "chief" data-role = "chief" style="vertical-align:center;text-align:center" id="chief_list">
+      <% User.find_chiefs.each do |chief| %>
+        <div class="chief_list" data-id="<%= chief.id %>"><%= image_tag(chief.avatar_url, class: "thumb_member") %></div>
+      <% end %>
+    </div>
     <% Group.all.each_with_index do |group, index| %>
       <% style = index % 2 == 0 ? "opp" : "event" %>
       <div class="group <%= style %>" data-group = "<%= group.id %>">
         <div class="group_name" data-id = "name">
           <h3><%= group.name %></h3>
         </div>
-        <div class="sortable-list <%= style %>" data-id = "manager">
+        <div class="sortable-list <%= style %>" data-id = "manager" data-role = "manager">
           <% group.managers.find_managers.each do |user| %>
             <div class="sortable-item" data-id="<%= user.id %>"><%= image_tag(user.avatar_url, class: "thumb_member") %></div>
           <% end %>
         </div>
 
-        <div class="sortable-list <%= style %>" data-id = "submanager">
+        <div class="sortable-list <%= style %>" data-id = "submanager" data-role = "submanager">
           <% group.managers.find_submanagers.each do |submanager| %>
             <% if submanager.present? %>
               <div class="sortable-item" data-id="<%= submanager.try(:id) %>"><%= image_tag(submanager.try(:avatar_url), class: "thumb_member") %></div>
@@ -34,20 +55,20 @@
               <h3><%= team.name %></h3>
             </div>
             <% leaders = team.users.find_leaders %>
-            <div class="sortable-list <%= style %>" data-id = "leader">
+            <div class="sortable-list <%= style %>" data-id = "leader" data-role = "leader">
               <% leaders.each do |leader|%>
                 <div class="sortable-item" data-id="<%= leader.try(:id)%>"><%= image_tag(leader.avatar_url, class: "thumb_member") %></div>
               <% end %>
             </div>
             <% subleaders = team.users.find_subleaders %>
-            <div class="sortable-list <%= style %>" data-id = "subleader">
+            <div class="sortable-list <%= style %>" data-id = "subleader" data-role = "subleader">
               <% subleaders.each do |subleader| %>
                 <div class="sortable-item" data-id="<%= subleader.try(:id)%>"><%= image_tag(subleader.avatar_url, class: "thumb_member") %></div> 
               <% end %>
             </div>
 
             <% members = team.users.find_members %>
-            <div class="sortable-list <%= style %>" data-id = "member">
+            <div class="sortable-list <%= style %>" data-id = "member" data-role = "member">
               <% members.each do |member|%>
                 <div class="sortable-item" data-id="<%= member.try(:id)%>"><%= image_tag(member.avatar_url, class: "thumb_member") %></div> 
               <% end %>

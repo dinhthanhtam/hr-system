@@ -51,6 +51,7 @@ class User < ActiveRecord::Base
   scope :in_groups, ->(group_ids) { in_teams(Team.in_groups(group_ids).ids) }
   scope :not_in, ->(user_ids) { where("users.id not in (?)", user_ids) unless  user_ids.nil? }
   
+  scope :find_chiefs, -> { where("users.position = ?", "chief") }
   scope :find_leaders, -> { where("users.position = ?", "leader") }
   scope :find_managers, -> { where("users.position = ?", "manager") }
   scope :find_submanagers, -> { where("users.position = ?", "submanager") }

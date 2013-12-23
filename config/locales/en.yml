@@ -115,6 +115,7 @@ en:
       button_checkpoints: "Create checkpoints"
       apply_role: "Apply Roles"
       change_role_confirm: "Do you want to change roles ?"
+      button_toggle_group: "Toggle Group"
       roles: Update Roles
       confirm_delete: "Do you want to delete it ?"
       sticky: "Do you want to sticky it ?"
@@ -148,6 +149,8 @@ en:
         logout: "Logout"
         profile: "Profile"
         personal: "Personal Settings"
+        all_positions: "All positions"
+        all_groups: "All groups"
       pickup_lists:
         pickup_list: "Pickup Lists"
     messages:

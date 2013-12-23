@@ -127,3 +127,32 @@ $ ->
 
   $("#search_name").keypress (e)->
     $("#search_by_name_form").submit() if (e.which == 13)
+
+  $(".role_select").change ->
+    role = @value
+    if role == "all"
+      location.reload()
+    else
+      $(".div_roles").children().each ->
+        if $(this).attr("class").indexOf(role) == 4
+          $(this).css("margin-top", "13px").show()
+        else
+          $(this).hide()
+      if role == "chief"
+        $("#chief_list").show()
+        $(".group").hide()
+      else
+        $(".group").show()
+        $("#chief_list").hide()
+        $(".sortable-list").each ->
+          if $(this).attr("data-role") == role
+            $(this).css("margin-top", "13px").show()
+          else
+            $(this).hide()
+
+  $(".toggle_group").click ->
+    if $(".group_select").val() == "all"
+      $(".group").show()
+    $(".group").each ->
+      if $(this).attr("data-group") == $(".group_select").val()
+        $(this).toggle()
