@@ -120,3 +120,14 @@ div.opp {
 .teams{
   display:inline-block;
 }
+
+.change_role {
+    border-radius: 5px 0 0 5px;
+    top: 90px;
+    display: none;
+    padding: 38px 14px 10px;
+    position: fixed;
+    right: 17%;
+    text-transform: uppercase;
+    z-index: 99999;
+}

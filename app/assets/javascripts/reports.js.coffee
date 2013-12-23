@@ -123,22 +123,32 @@ $ ->
     $span.css("left", left)
     $span.show()
 
+  list_users = {}
+  count = 0
+
   $(".sortable-list").sortable
     connectWith: "#list_member .sortable-list"
     placeholder: "placeholder"
     revert: true 
     receive: (event, ui) -> 
+      $(".change_role").show()
       role = $(this).data("id")
-      $.ajax "/users/update_user_role",
-        type: "POST",
-        data: {user:{id: user_id, position_event: role, team_id: team, group_users_attributes:{0: {group_id: group}} }}
-        dataType: "json"
+      team = $(this).parent().data("team")
+      group = $(this).parent().data("group")
+      list_users[user_id] = {position_event: role, team_id: team, group_users_attributes:{0: {group_id: group}} }
+      count++
 
   $(".sortable-list").droppable
     drop: (event, ui) ->
       user_id = ui.draggable.data("id")
-      team = $(this).parent().data("team")
-      group = $(this).parent().data("group")
+
+  $(document).on "click", "#change_role", ->
+    $.ajax "/users/update_user_role",
+      type: "POST",
+      data: {users: list_users},
+      dataType: "json"
+  $(document).on "click", "#btn_cancel", ->
+    window.location.reload()
 
   $(document).on "change", "#report_time", ->
     if $(this).val() == "search_date"

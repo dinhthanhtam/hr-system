@@ -87,9 +87,7 @@ class UsersController < BaseController
 
   def update_user_role
     respond_to do |format|
-      @user = User.find params[:user][:id]
-      @user.groups.destroy_all if params[:user][:group_users_attributes].present?
-      if @user.update_attributes(model_params)
+      if User.update(params[:users].keys,params[:users].values)
         format.json { render json: "" }
       else
         format.json { render json: "" }
