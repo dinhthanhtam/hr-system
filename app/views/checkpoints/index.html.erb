@@ -1,6 +1,9 @@
 <selection id="checkpoints_index">
   <div class="ctsTit">
     <h2><%= h2_label %></h2>
+    <nav>
+      <%= link_to t(:new, scope: [:views, :labels, :checkpoints]), url_for(action: :new), class: "btn btn-small btn-warning" %>
+    </nav>
   </div>
 
   <%= render partial: "search" %>
