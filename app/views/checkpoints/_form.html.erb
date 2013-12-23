@@ -5,24 +5,28 @@
         <th colspan="7" style="text-align: center; font-size: 15px; font-weight: bold;"><%= model.human_attribute_name :period %>
           <%= select_tag :period, options_for_select(CheckpointPeriod.all.map { |period| [period.toString, period.id] }, params[:period]) %>
           <%= model.human_attribute_name :review %>
-          <%= select_tag :review, options_for_select(User.find_leaders.map { |leader| [leader.display_name, leader.id] }) %>
+          <%= select_tag :review, options_for_select(User.find_leaders.map { |leader| [leader.display_name, leader.team_id] }), include_blank: true, id: "leader_select", class: "leaders" %>
           <%= model.human_attribute_name :approve %>
           <%= select_tag :approve, options_for_select(User.find_managers.map { |manager| [manager.display_name, manager.id] }) %>
+          <label for="name_search">Name</label>
+          <input id="name_search" type="text width: 130px" name="name_search" >
         </th>
       </tr>
-      <% @users.each_with_index do |user, index| %>
-        <%= "<tr>".html_safe if index % 7 == 0 %>
-        <td>
-          <div style="display: inline-block" class= "member_item">
-            <%= link_to image_tag(user.avatar_url, class: "member_avatar #{ 'border_blue' if params[:member_id].to_i == user.id }",
-                  alt: "No image"), url_for(action: :index, member_id: user.id), data: user.display_name %><br>
-            <%= link_to user.display_name, profile_user_path(user.id) %>
-            <br>
-            <%= check_box_tag "user_ids[]", user.id %>
-          </div>
+      <tr>
+        <td class="all_member">
+          <% @users.each_with_index do |user, index| %>
+            <div style="display: inline-block; width: 120px;" class= "member_item" data-team = "<%= user.team_id %>">
+              <%= link_to image_tag(user.avatar_url, class: "member_avatar #{ 'border_blue' if params[:member_id].to_i == user.id }",
+                    alt: "No image"), url_for(action: :index, member_id: user.id), data: user.display_name %><br>
+              <div class = "user_name" data-id = "<%= user.display_name.downcase %>">
+                <%= link_to user.display_name, profile_user_path(user.id) %>
+              </div>
+              <br>
+              <%= check_box_tag "user_ids[]", user.id %>
+            </div>
+         <% end %>
         </td>
-        <%= "</tr>".html_safe if (index + 1) % 7 == 0 %>
-      <% end %>
+      </tr>
     </table>
     <%= submit_tag t(:button_checkpoints, scope: [:views, :labels]), class: "btn btn-primary" %>
   </div>
