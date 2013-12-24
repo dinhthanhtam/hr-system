@@ -38,33 +38,48 @@
       <% end %>
     </table>
   </div>
-
   <div class = "list_member_right">
-    <div>
-      <label for="principal_search">Search for member:</label>
-      <input id="principal_search" type="text" name="principal_search">
-    </div>
-    <div id = "principals">
-      <% User.all.each do |user| %>
-        <% unless @project.users.map(&:id).include?(user.id) %>
-          <div class = "user_name" data-id = "<%= user.display_name.downcase %>">
-            <%= check_box_tag "member[]", user.id, false %><%= user.display_name %>
-          </div>
+    <%= form_for @project, url: url_for(controller: :projects, action: :update, id: @project.id) do |f| %>
+      <div>
+        <label for="principal_search">Search for member:</label>
+        <input id="principal_search" type="text" name="principal_search">
+      </div>
+      <div id = "principals">
+        <% User.all.each do |user| %>
+          <%= f.fields_for :project_users, @project.build_project_user(user.id) do |project_user_field| %>
+            <% unless @project.users.map(&:id).include?(user.id) %>
+              <div class = "user_name" data-id = "<%= user.display_name.downcase %>">
+                <div class="project_user">
+                  <%= project_user_field.check_box :_destroy, {class: "project_user_check_box"}, 0, 1 %><%= user.display_name %>
+                  <%= project_user_field.hidden_field :user_id, value: user.id %>
+                  <%= project_user_field.hidden_field :join_date,
+                    value: (@project.activatable? ? DateTime.now.strftime("%Y-%m-%d") : @project.start_date) %>
+                  <%= project_user_field.hidden_field :due_date, value: @project.due_date %>
+                </div>
+                <div style="display: none;" class="project_role">
+                  <% ProjectRole.all.each do |role| %>
+                    <%= project_user_field.fields_for :project_user_roles,
+                      project_user_field.object.build_project_user_role(role.id) do |project_role_field| %>
+                      <%= project_role_field.check_box :_destroy, {class: "project_role_#{role.id}"}, 0, 1 %>
+                      <%= project_role_field.hidden_field :project_role_id, value: role.id %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
-    <div style="margin-top:10px;">
-      <p>Roles:
-        <% ProjectRole.all.each do |role| %>
-          <div>
-            <%= check_box_tag "role[]", role.id,false %><%= role.name %>
-          </div>
-        <% end %>
-      </p>
-    </div>
-    <%= link_to t(:button_add, scope: [:views, :labels]), "#", class: "btn add_member" %>
+      </div>
+      <div style="margin-top:10px;">
+        <p>Roles:
+          <% ProjectRole.all.each do |role| %>
+            <div class="project_user_role">
+              <%= check_box_tag "role[]", role.id, false, class: "project_role_#{role.id}" %><%= role.name %>
+            </div>
+          <% end %>
+        </p>
+      </div>
+      <%= f.submit t(:button_add, scope: [:views, :labels]), class: "btn btn-mini btn-primary" %>
+    <% end %>
   </div>
-  <%= hidden_field_tag :project_id, @project.id %>
-  <%= hidden_field_tag :start_date, @project.activatable? ? DateTime.now.strftime("%Y-%m-%d") : @project.start_date %>
-  <%= hidden_field_tag :due_date, @project.due_date %>
 </div>

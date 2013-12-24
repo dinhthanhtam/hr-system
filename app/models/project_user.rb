@@ -23,4 +23,8 @@ class ProjectUser < ActiveRecord::Base
   def convert_date
     self.out_date.blank? ? self.due_date.to_time.to_i*1000 : self.out_date.to_time.to_i*1000
   end
+
+  def build_project_user_role project_role_id
+    self.project_user_roles.build project_role_id: project_role_id
+  end
 end

@@ -195,7 +195,7 @@
       <div class="ctsTit">
         <h2><%= t(:dont_write_repost_thw, scope: [:views, :labels]) %></h2>
       </div>
-      <% User.reporters.not_report_last_week.each do |user| %>
+      <% User.reporters.not_report_current_week.each do |user| %>
         <div style="display: inline-block;">
           <%= link_to image_tag(user.avatar_url, class: "avatar", alt: "No image"), url_for(action: :show, id: user.id), data: user.display_name %>
         </div>
@@ -206,7 +206,7 @@
       <div class="ctsTit">
         <h2><%= t(:dont_write_repost_lw, scope: [:views, :labels]) %></h2>
       </div>
-      <% User.reporters.not_report_current_week.each do |user| %>
+      <% User.reporters.not_report_last_week.each do |user| %>
         <div style="display: inline-block;">
           <%= link_to image_tag(user.avatar_url, class: "avatar", alt: "No image"), url_for(action: :show, id: user.id), data: user.display_name %>
         </div>
