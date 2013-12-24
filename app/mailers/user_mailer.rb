@@ -25,4 +25,9 @@ class UserMailer < ActionMailer::Base
     attachments["#{@user.display_name} #{payslip.paymonth}.xlsx"] = File.read(Rails.root.to_s + "/public" + payslip.payslip_url)
     mail to: @user.email, subject: t(:send_payslip, scope: [:mailers, :subjects], month: @payslip.paymonth)
   end
+
+  def notice_user_added_to_pickup_list user
+    @user = user
+    mail to: @user.email, subject: t(:notice_user_added_to_pickup_list, scope: [:mailers, :subjects])
+  end
 end

@@ -242,6 +242,7 @@ en:
       notice_write_report: "Notice for writing report at current week"
       welcome_subject: "Welcome to Hr-System"
       send_payslip: "Payslip %{month}"
+      notice_user_added_to_pickup_list: "Framgia added you to a pickup list"
   errors:
     messages:
       in_valid: "Invalid"
