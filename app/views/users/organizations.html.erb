@@ -5,6 +5,7 @@
   <div class="div_subleader">Subleader</div>
   <div class="div_member">Member</div>
 </div>
+
 <div class ="parent_scroll right_body">
   <div id="list_member">
     
@@ -56,8 +57,12 @@
 
       </div>
     <% end %>
-
     <div class="clearer">&nbsp;</div>
   </div>
 </div>
+<div class ="change_role">
+  <%= link_to t(:apply_role, scope: [:views, :labels]) , "#", id: "change_role", class: "btn btn-success", data: {confirm: t(:change_role_confirm, scope: [:views, :labels])}%><br/><br/>
+  <%= link_to t(:button_cancel, scope: [:views, :labels]) , "#", id: "btn_cancel", class: "btn btn-warning" %>
+</div>
+
 
