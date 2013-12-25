@@ -58,4 +58,13 @@ class Project < Base
   def build_project_user user_id
     self.project_users.build user_id: user_id
   end
+
+private
+  class << self
+    def updatable_attrs
+      [:name, :description, :is_publish, :url, :start_date, :due_date, :end_date, :state_event, :create_user_id,
+        project_users_attributes: [:id, :user_id, :project_id, :join_date, :due_date, :_destroy,
+        project_user_roles_attributes: [:id, :project_user_id, :project_role_id, :_destroy]]]
+    end
+  end
 end
