@@ -54,4 +54,8 @@ class Project < Base
                project_user_roles_attributes: {0 => {project_role_id: 1}}}}}
     update_attributes(params)
   end
+
+  def build_project_user user_id
+    self.project_users.build user_id: user_id
+  end
 end

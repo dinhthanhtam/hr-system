@@ -31,7 +31,12 @@ class ProjectsController < BaseController
   def update
     respond_to do |format|
       if @project.update_attributes(model_params)
-        format.html { redirect_to @project, notice: t(:update_success, scope: [:views, :messages]) }
+        if params[:project][:project_users_attributes]
+          format.html { redirect_to url_for(controller: :project_users, action: :index, project_id: @project.id),
+            notice: t(:update_success, scope: [:views, :messages]) }
+        else
+          format.html { redirect_to @project, notice: t(:update_success, scope: [:views, :messages]) }
+        end
       else
         format.html { render action: "new" }
       end
@@ -109,17 +114,6 @@ class ProjectsController < BaseController
 
     respond_to do |format|
       format.xls { headers["Content-Disposition"] = "attachment; filename=projects_gantt.xls" }
-    end
-  end
-
-  def assign_members
-    @project = Project.find params[:project][:id]
-    respond_to do |format|
-      if @project.update_attributes(model_params)
-        format.js
-      else
-        format.js
-      end
     end
   end
 
