@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
   has_many :user_answer_comments
   has_many :pickup_list_users
   has_many :pickup_lists, through: :pickup_list_users
+  has_many :vacations, dependent: :destroy
 
   mount_uploader :avatar, AvatarUploader
   
