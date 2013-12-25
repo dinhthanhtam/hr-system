@@ -5,6 +5,7 @@ HrSystem::Application.routes.draw do
     get :summary, on: :collection
   end
   resources :report_categories
+  resources :vacation_types
   
   resources :stickies
   resources :users do

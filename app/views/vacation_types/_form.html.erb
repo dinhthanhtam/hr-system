@@ -1,0 +1,15 @@
+<%= form_for @vacation_type, url: {action: @vacation_type.new_record? ? :create : :update} do |f| %>
+
+  <%= render partial: "errors", locals: {object: @vacation_type} %>
+
+  <table class="formTbl contents">
+    <tr>
+      <th><%= f.label :name %></th>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    
+  </table>
+  <div class="form-actions">
+    <%= f.submit @vacation_type.new_record? ? I18n.t(:button_create, scope: [:views, :labels]) : I18n.t(:button_edit, scope: [:views, :labels]), class:"btn btn-primary" %>
+  </div>
+<% end %>

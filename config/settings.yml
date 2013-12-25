@@ -12,7 +12,7 @@ role:
 
 positions: [["Chief", "chief"], ["Manager", "manager"], ["Submanager", "submanager"], ["Leader", "leader"], ["Subleader", "subleader"], ["Member", "member"]]
 
-master_datas: ["groups", "report_categories"]
+master_datas: ["groups", "report_categories", "vacation_types"]
 
 questions: [["Leader", "leader"], ["Subleader", "subleader"], ["Member", "member"]]
 
