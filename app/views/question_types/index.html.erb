@@ -1,0 +1,28 @@
+<selection id="questions_index">
+  <div class="ctsTit">
+    <h2><%= h2_label %></h2>
+    <nav>
+      <%= link_to t(:new, scope: [:views, :pages]), url_for(action: :new), class: "btn btn-small btn-warning" %>
+    </nav>
+  </div>
+  <table class="table table-bordered" style = "background-color:#FFFFFF;">
+    <thead>
+      <tr>
+        <th><%= model.human_attribute_name :name %></th>
+        <th width = "50%"><%= model.human_attribute_name :description %></th>
+        <th width = "25%"></th>
+      </tr>
+    </thead>
+    <% @question_types.each do |question_type| %>
+      <tr>
+        <td><%= question_type.name %>
+        <td><%= question_type.description %></td>
+        <td>
+          <%= link_to t(:button_detail, scope: [:views, :labels]), url_for(action: :show, id: question_type.id), class: "btn btn-mini" %>
+          <%= link_to t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id:question_type.id), class: "btn btn-primary btn-mini" %>
+          <%= link_to t(:button_add_question, scope: [:views, :labels]), url_for(controller: :question_type_relations, action: :index, question_type_id: question_type.id), class: "btn btn-primary btn-mini" %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</selection>

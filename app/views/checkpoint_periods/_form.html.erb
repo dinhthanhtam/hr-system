@@ -15,7 +15,7 @@
       <th><%= f.label :end_date %></th>
       <td><%= f.text_field :end_date, class: "datepicker icon_calendar_small" %></td>
     </tr>
-    <% Settings.checkpoint_questions.each do |checkpoint_type| %>
+    <% Settings.questions.each do |checkpoint_type| %>
       <tr>
         <td colspan="2" style="padding-left: 8%; font-size: 15px; color: red;">
           <b><%= checkpoint_type[0].upcase %></b>
