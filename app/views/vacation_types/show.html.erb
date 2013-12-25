@@ -1,0 +1,28 @@
+<selection id="vacation_type_show">
+  <div class="ctsTit">
+    <h2><%= h2_label %></h2>
+  </div>
+
+  <table class="formTbl contents">
+    <tbody>
+      <tr>
+        <th width="15%"><%= model.human_attribute_name :name %></th>
+        <td><%= @vacation_type.name %></td>
+      </tr>
+      <tr>
+        <th><%= model.human_attribute_name :created_at %></th>
+        <td><%= @vacation_type.created_at %></td>
+      </tr>
+      <tr>
+        <th><%= model.human_attribute_name :updated_at %></th>
+        <td><%= @vacation_type.updated_at %></td>
+      </tr>      
+    </tbody>
+  </table>
+  <div class="form-actions">
+    <%= link_to t(:button_index, scope: [:views, :labels]), url_for(action: :index), class: "btn" %>
+    <%= link_to t(:button_edit, scope: [:views, :labels]), url_for(action: :edit), class: "btn btn-primary" %>
+    <%= link_to t(:button_delete, scope: [:views, :labels]), url_for(action: :destroy), confirm: I18n.t(:delete_confirm, scope: [:views, :messages]), method: :delete, class: "btn btn-danger"%>
+  </div>
+
+</section>

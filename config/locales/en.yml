@@ -262,6 +262,13 @@ en:
         create: "Question Type Create"
       question_type_relation:
         index: "Add Questions"
+      vacation_type:
+        index: "Vacation Type Index"
+        show: "Vacation Type Detail"
+        edit: "Vacation Type Edit"
+        new: "Vacation Type New"
+        update: "Vacation Type Update"
+        create: "Vacation Type Create"  
   mailers:
     subjects:
       notice_write_report_for_leader: "Notice for member didn't write report last week"

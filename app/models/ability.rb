@@ -31,6 +31,7 @@ class Ability
       can :manage, Question
       can :manage, QuestionType
       can :manage, QuestionTypeRelation
+      can :manage, VacationType
     elsif user.roles.detect{|r|r.name == "Leader"}
       can [:index, :show], Report do |report|
         user.team_id == report.user.team.id
