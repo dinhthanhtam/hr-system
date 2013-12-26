@@ -1,16 +1,16 @@
 <%= f.fields_for :checkpoint_answers, checkpoint_answer do |checkpoint_answers| %>
   <tr>
-    <td colspan = 2 style = "padding-left:5%;" ><%= checkpoint_answer.checkpoint_question.content %></td>
+    <td colspan = 2 style = "padding-left:5%;" ><%= checkpoint_answer.question.content %></td>
   </tr>
   <tr>
     <td class = "labels">
-      <%= checkpoint_answers.text_area :content, style: "width: 50%" %>(Contents)
+      <%= checkpoint_answers.text_area :content, style: "width: 50%" %>
     </td>
   </tr>
   <tr>
     <td class = "labels">
-      <%= checkpoint_answers.text_field :point %>/(<%= checkpoint_answer.checkpoint_question.max_point %> points)
-      <%= checkpoint_answers.hidden_field :checkpoint_question_id %>
+      <%= checkpoint_answers.text_field :point %>points
+      <%= checkpoint_answers.hidden_field :question_id %>
     </td>
   </tr>
 <% end %>

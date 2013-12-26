@@ -48,7 +48,6 @@ HrSystem::Application.routes.draw do
     get :fixed, on: :member
   end
 
-  resources :checkpoint_questions
   resources :checkpoint_periods
   resources :questions
   resources :question_types do

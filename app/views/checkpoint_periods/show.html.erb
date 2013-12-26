@@ -24,18 +24,20 @@
             <b><%= checkpoint_type[0].upcase %></b>
           </td>
         </tr>
-        <% CheckpointQuestion.get_parent.each do |question| %>
-          <tr>
-            <td colspan="2" style="padding-left: 10%;">
-              <b><i><%= question.content %></i></b>
-            </td>
-          </tr>
-          <% @checkpoint_period.period_questions.get_parent_question(question.id).by_type_question(checkpoint_type[1]).each do |period_question| %>
+        <% QuestionType.all.each do |question_type| %>
+          <% if @checkpoint_period.period_questions.by_type_question(checkpoint_type[1]).count > 0%>
             <tr>
-              <td colspan="2" style="padding-left: 13%;">
-                <%= period_question.checkpoint_question.content %>
+              <td colspan="2" style="padding-left: 10%;">
+                <b><i><%= question_type.name %></i></b>
               </td>
             </tr>
+            <% @checkpoint_period.period_questions.by_type_question(checkpoint_type[1]).each do |period_question| %>
+              <tr>
+                <td colspan="2" style="padding-left: 13%;">
+                  <%= period_question.question.content %>
+                </td>
+              </tr>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>

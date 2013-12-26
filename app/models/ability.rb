@@ -25,7 +25,6 @@ class Ability
       can :manage, Sticky
       can :index, Report
       can :manage, Payslip
-      can :manage, CheckpointQuestion
       can :manage, Checkpoint
       can :manage, CheckpointPeriod
       can :manage, Question
