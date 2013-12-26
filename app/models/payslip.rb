@@ -76,12 +76,12 @@ class Payslip < ActiveRecord::Base
       user.payslips.create paymonth: month, payslip: File.open(payslip_path)
     end
 
-    def send_payslip_mail paymonth, payslip = nil
+    def send_payslip_mail paymonth, payslip = nil, deadline = nil
       if payslip
-        UserMailer.delay.send_payslip(payslip)
+        UserMailer.delay.send_payslip(payslip, deadline)
       elsif paymonth =~ PAYMONTH_REX
         Payslip.by_paymonth(paymonth).each do |payslip|
-          UserMailer.delay.send_payslip(payslip)
+          UserMailer.delay.send_payslip(payslip, deadline)
         end
       end
     end

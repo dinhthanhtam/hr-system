@@ -24,8 +24,26 @@
           </tr>
           <tr>
             <td>
-              <%= f.select :paymonth, Payslip.paymonths %>
-              <%= f.submit t(:button_send, scope: [:views, :labels]), class: "btn, btn-warning" %>
+              <table class="table_static">
+                <tr>
+                  <td><%= f.label :paymonth %></td>
+                  <td><%= f.select :paymonth, Payslip.paymonths %></td>
+                </tr>
+                <tr>
+                  <td><%= f.label :confirm_deadline %></td>
+                  <td>
+                    <div id="datetimepicker" class="input-append date">
+                      <%= f.text_field :deadline, data: {format: "hh:mm yyyy-mm-dd"}, class: "deadline" %>
+                      <span class="add-on">
+                        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2"><%= f.submit t(:button_send, scope: [:views, :labels]), class: "btn btn-warning" %></td>
+                </tr>
+              </table>
             </td>
           </tr>
         </table>

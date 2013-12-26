@@ -38,7 +38,7 @@ class PayslipsController < BaseController
 
   def send_payslip
     payslip = Payslip.where(id: params[:payslip][:payslip_id]).first if params[:payslip][:payslip_id]
-    Payslip.send_payslip_mail(params[:payslip][:paymonth], payslip) unless params[:payslip][:payslip_id] && payslip.nil?
+    Payslip.send_payslip_mail(params[:payslip][:paymonth], payslip, params[:payslip][:deadline]) unless params[:payslip][:payslip_id] && payslip.nil?
     respond_to do |format|
       if params[:payslip] && params[:payslip][:paymonth]
         format.html { redirect_to payslips_path }
