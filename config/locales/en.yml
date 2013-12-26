@@ -169,6 +169,7 @@ en:
       update_failed: Update %{model} failed!
       delete_success: Delete %{model} successfully!
       delete_failed: Delete %{model} failed!
+      choose_member: "Please choose member"
     pages:
       group:
         index: "Group Index"

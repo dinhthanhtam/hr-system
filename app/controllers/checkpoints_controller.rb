@@ -37,23 +37,25 @@ class CheckpointsController < BaseController
 
   def create
     # Create multiple checkpoint with each user_id
-    unless params[:user_ids].blank?
+    if params[:user_ids].present?
       Checkpoint.create(params[:user_ids].map { |user_id| {user_id: user_id} }) do |checkpoint|
         checkpoint.checkpoint_period_id = params[:period]
         checkpoint.reviewer_id = params[:review]
         checkpoint.approve_id = params[:approve]
       end
+      notice = t(:create_success, scope: [:views, :messages], model: model_name)
+    else
+      notice = t(:choose_member, scope: [:views, :messages])
     end
-
     respond_to do |format|
-      format.html { redirect_to new_checkpoint_path(period: params[:period]) }
+      format.html { redirect_to new_checkpoint_path(period: params[:period]), notice: notice }
     end
   end
  
   def update
     respond_to do |format|
       if @checkpoint.update_attributes(model_params)
-        format.html { redirect_to @checkpoint, notice: t(:update_success, scope: [:views, :messages]) }
+        format.html { redirect_to @checkpoint, notice: t(:update_success, scope: [:views, :messages], model: model_name) }
       else
         format.html { render action: "edit" }
       end
