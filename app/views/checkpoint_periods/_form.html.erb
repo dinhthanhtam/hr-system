@@ -25,21 +25,23 @@
           <b><%= checkpoint_type[0].upcase %></b>
         </td>
       </tr>
-      <% CheckpointQuestion.get_parent.each do |question| %>
-        <tr>
-          <td colspan="2" style="padding-left: 10%;">
-            <b><i><%= question.content %></i></b>
-          </td>
-        </tr>
-        <% question.children.by_type(checkpoint_type[1]).each do |child| %>
-          <%= f.fields_for :period_questions, @checkpoint_period.build_period_question(child.id) do |ff| %>
-            <tr>
-              <td colspan="2" style="padding-left: 13%;">
-                <%= ff.check_box :_destroy, {checked: !ff.object.new_record?},0, 1 %>
-                <%= ff.hidden_field :checkpoint_question_id, value: ff.object.checkpoint_question.id %>
-                <%= ff.object.checkpoint_question.content %>
-              </td>
-            </tr>
+      <% QuestionType.all.each do |question_type| %>
+        <% if question_type.questions.by_type(checkpoint_type[1]).count > 0 %>
+          <tr>
+            <td colspan="2" style="padding-left: 10%;">
+              <b><i><%= question_type.name %></i></b>
+            </td>
+          </tr>
+          <% question_type.questions.by_type(checkpoint_type[1]).each do |child| %>
+            <%= f.fields_for :period_questions, @checkpoint_period.build_period_question(child.id) do |ff| %>
+              <tr>
+                <td colspan="2" style="padding-left: 13%;">
+                  <%= ff.check_box :_destroy, {checked: !ff.object.new_record?},0, 1 %>
+                  <%= ff.hidden_field :question_id, value: ff.object.question.id %>
+                  <%= ff.object.question.content %>
+                </td>
+              </tr>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>
