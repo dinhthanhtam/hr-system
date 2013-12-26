@@ -1,5 +1,5 @@
 $ ->
   $("#datetimepicker").datetimepicker({
-    format: "hh:mm dd-mm-yyyy",
+    format: "hh:mm dd-MM-yyyy",
     startDate: new Date()
   });
