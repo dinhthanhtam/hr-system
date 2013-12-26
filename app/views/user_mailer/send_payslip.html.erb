@@ -1,5 +1,9 @@
-<%= @user.display_name %>
-<%= @payslip.paymonth %>
+Dear <%= @user.display_name %><br /></br>
 
-this is test mail.
-Sorry!
+HR Department has sent you the payslip of <%= @payslip.paymonth %><br />
+Please kindly find the attachment in this e-mail and check it carefully.<br /><br />
+
+If you have any feedback, please feel free to contact Mrs NgocNTM at nguyen.thi.minh.ngoc@framgia.com before <%= @deadline %><br />
+
+Thanks and best regards,<br />
+HR Department.<br />
