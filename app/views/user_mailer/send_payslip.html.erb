@@ -1,9 +1,15 @@
-Dear <%= @user.display_name %><br /></br>
+Dear <%= @user.display_name %>,<br /><br />
 
 HR Department has sent you the payslip of <%= @payslip.paymonth %><br />
-Please kindly find the attachment in this e-mail and check it carefully.<br /><br />
+Please kindly find the attachment in this e-mail and check it carefully.<br />
 
-If you have any feedback, please feel free to contact Mrs NgocNTM at nguyen.thi.minh.ngoc@framgia.com before <%= @deadline %><br />
-
+<p style="font-weight:bold;">Do not reply to this automatically-generated email.</p>
+If you have any feedback, please feel free to contact Ms NgocNTM at nguyen.thi.minh.ngoc@framgia.com before <%= @deadline.strftime("%Hh%M %d-%m-%Y") %><br />
+--<br />
 Thanks and best regards,<br />
-HR Department.<br />
+===============================<br />
+HR Department<br />
+Framgia Vietnam Co., Ltd<br />
+9F Viet A Building, Duy Tan street, Cau Giay district, Hanoi, Vietnam<br />
+Mail: hr@framgia.com<br />
+Tel: 84 4 3795 5417<br />

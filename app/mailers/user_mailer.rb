@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default :from => "framgiatest@gmail.com"
+  default :from => "hr@framgia.com"
  
   def sent_password(user, password)
     @user = user
@@ -22,7 +22,7 @@ class UserMailer < ActionMailer::Base
   def send_payslip payslip, deadline
     @payslip = payslip
     @user = payslip.user
-    @deadline = deadline.nil? ? Time.now + 24.hours : deadline
+    @deadline = deadline.nil? ? DateTime.now + 24.hours : DateTime.strptime(deadline, '%H:%M %d-%m-%Y')
     attachments["#{@user.display_name} #{payslip.paymonth}.xlsx"] = File.read(Rails.root.to_s + "/public" + payslip.payslip_url)
     mail to: @user.email, subject: t(:send_payslip, scope: [:mailers, :subjects], month: @payslip.paymonth)
   end
