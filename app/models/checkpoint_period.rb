@@ -6,9 +6,7 @@ class CheckpointPeriod < Base
 
   accepts_nested_attributes_for :period_questions, allow_destroy: true, reject_if: :all_blank
 
-  validates :name, presence: true
-  validates :start_date, presence: true
-  validates :end_date, presence: true
+  validates :name, :description, :start_date, :end_date, presence: true
   validates :period_questions, presence: true
 
   def toString
@@ -22,7 +20,7 @@ class CheckpointPeriod < Base
 private
   class << self
     def updatable_attrs
-      [:name, :start_date, :end_date,
+      [:name, :start_date, :end_date, :description,
         period_questions_attributes: [:id, :_destroy, :checkpoint_question_id, :checkpoint_period_id]]
     end
   end
