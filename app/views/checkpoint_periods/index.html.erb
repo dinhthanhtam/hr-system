@@ -11,6 +11,7 @@
     <thead>
       <tr>
         <th><%= model.human_attribute_name :name %></th>
+        <th><%= model.human_attribute_name :description %></th>
         <th><%= model.human_attribute_name :start_date %></th>
         <th><%= model.human_attribute_name :end_date %></th>
         <th width = "20%"></th>
@@ -19,6 +20,7 @@
     <% @checkpoint_periods.each do |checkpoint_period| %>
       <tr>
         <td><%= checkpoint_period.name %></td>
+        <td><%= checkpoint_period.description %></td>
         <td><%= checkpoint_period.start_date %></td>
         <td><%= checkpoint_period.end_date %></td>
         <td>

@@ -7,6 +7,10 @@
         <td><%= @checkpoint_period.name %></td>
       </tr>
       <tr>
+        <th width="15%"><%= model.human_attribute_name :description %></th>
+        <td><%= @checkpoint_period.description %></td>
+      </tr>
+      <tr>
         <th><%= model.human_attribute_name :start_date %></th>
         <td><%= @checkpoint_period.start_date %></td>
       </tr>
