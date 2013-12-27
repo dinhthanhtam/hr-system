@@ -3,7 +3,7 @@ class Group < Base
   #attr_accessible :name
   has_many :teams
   has_many :users, through: :teams
-  has_many :group_users
+  has_many :group_users, dependent: :destroy
   has_many :managers, through: :group_users, source: :user
   belongs_to :parent, class_name: Group.name
   has_many :children, class_name: Group.name, foreign_key: :parent_id

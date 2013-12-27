@@ -2,9 +2,9 @@ class Project < Base
 
   validates :url, format: { with: /\A(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?\z/ix }, allow_nil: true, allow_blank: true
   after_create :set_manager
-  has_many :project_users
+  has_many :project_users, dependent: :destroy
   has_many :users, through: :project_users
-  has_many :costs
+  has_many :costs, dependent: :destroy
   scope :get_project_by_state, ->(state) { where("projects.state = ?", state) }
   scope :project_with_user, ->(user_id) { joins(:project_users).where("project_users.user_id = ?", user_id) unless user_id.nil? }
   scope :current_projects, ->(user_id) { project_with_user(user_id).get_project_by_state("actived") }

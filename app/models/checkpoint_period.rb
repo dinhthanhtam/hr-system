@@ -1,7 +1,7 @@
 class CheckpointPeriod < Base
   has_many :checkpoints, dependent: :destroy
   has_many :questions
-  has_many :period_questions
+  has_many :period_questions, dependent: :destroy
   has_many :questions, through: :period_questions, source: :question
 
   accepts_nested_attributes_for :period_questions, allow_destroy: true, reject_if: :all_blank

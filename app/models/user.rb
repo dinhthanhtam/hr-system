@@ -18,19 +18,19 @@ class User < ActiveRecord::Base
   validates :contract_type, inclusion: { in: Settings.users.contract_types, message: I18n.t(:in_valid, scope: [:errors, :messages]) },
             allow_nil: true, allow_blank: true
 
-  has_many :reports
-  has_many :user_roles
+  has_many :reports, dependent: :destroy
+  has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
-  has_many :group_users
+  has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
   has_many :teams, through: :groups
-  has_many :stickies
-  has_many :project_users
+  has_many :stickies, dependent: :destroy
+  has_many :project_users, dependent: :destroy
   has_many :projects, through: :project_users
   has_many :feedbacks
-  has_many :checkpoints
-  has_many :user_answer_comments
-  has_many :pickup_list_users
+  has_many :checkpoints, dependent: :destroy
+  has_many :user_answer_comments, dependent: :destroy
+  has_many :pickup_list_users, dependent: :destroy
   has_many :pickup_lists, through: :pickup_list_users
   has_many :vacations, dependent: :destroy
 

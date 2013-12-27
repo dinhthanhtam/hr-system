@@ -1,6 +1,6 @@
 class CheckpointAnswer < Base
   belongs_to :question
   belongs_to :checkpoint
-  has_many :user_answer_comments
+  has_many :user_answer_comments, dependent: :destroy
   accepts_nested_attributes_for :user_answer_comments, allow_destroy: true
 end

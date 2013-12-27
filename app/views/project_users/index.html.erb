@@ -53,7 +53,7 @@
                   <%= project_user_field.check_box :_destroy, {class: "project_user_check_box"}, 0, 1 %><%= user.display_name %>
                   <%= project_user_field.hidden_field :user_id, value: user.id %>
                   <%= project_user_field.hidden_field :join_date,
-                    value: (@project.activatable? ? DateTime.now.strftime("%Y-%m-%d") : @project.start_date) %>
+                    value: (@project.actived? ? DateTime.now.strftime("%Y-%m-%d") : @project.start_date) %>
                   <%= project_user_field.hidden_field :due_date, value: @project.due_date %>
                 </div>
                 <div style="display: none;" class="project_role">

@@ -21,7 +21,7 @@ class ProjectsController < BaseController
   def create
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: t(:create_success, scope: [:views, :messages]) }
+        format.html { redirect_to @project, notice: t(:create_success, scope: [:views, :messages], model: model_name) }
       else
         format.html { render action: "new" }
       end
@@ -33,9 +33,9 @@ class ProjectsController < BaseController
       if @project.update_attributes(model_params)
         if params[:project][:project_users_attributes]
           format.html { redirect_to url_for(controller: :project_users, action: :index, project_id: @project.id),
-            notice: t(:update_success, scope: [:views, :messages]) }
+            notice: t(:update_success, scope: [:views, :messages], model: model_name) }
         else
-          format.html { redirect_to @project, notice: t(:update_success, scope: [:views, :messages]) }
+          format.html { redirect_to @project, notice: t(:update_success, scope: [:views, :messages], model: model_name) }
         end
       else
         format.html { render action: "new" }
