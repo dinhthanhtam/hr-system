@@ -21,7 +21,7 @@ project:
 
 select_boolean: [["True", 1], ["False", 0]]
 select_one: [["Select", 0]]
-
+select_all_questions: "All questions"
 stick_type_list: [['All reports', 0],['by leader', 1], ['by user', 2], ['All stickies', 3]]
 stick_type:
   stick_by_leader: 1

@@ -1,5 +1,8 @@
 class QuestionTypeRelationsController < BaseController
   def index
+    @questions = @question_type.questions.present? ? 
+      Question.question_not_in(@question_type.question_ids) : Question.all
+    @question_relations = @question_type.question_type_relations.paginate page: params[:page]
     respond_to do |format|
       format.html
     end
@@ -16,8 +19,4 @@ class QuestionTypeRelationsController < BaseController
       end
     end
   end
-private
-  def ordering(search)
-    @question_type.questions.present? ? Question.question_not_in(@question_type.question_ids) : Question.all
-   end
 end
