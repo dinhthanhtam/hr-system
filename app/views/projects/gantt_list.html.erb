@@ -1,7 +1,8 @@
 <script src="http://taitems.github.com/UX-Lab/core/js/prettify.js"></script>
 <div class="link">
-  <a href="<%= export_excel_projects_path(format: "xls") %>" class="link-a">
+  <a href="<%= export_excel_projects_path(format: "xls", gantt_scale: params[:gantt_scale]) %>" class="link-a">
     <i class="icon_excel icon"></i><span>Export to excel</span>
   </a>
+  <%= select_tag :gantt_scale, options_for_select(Settings.gantt.scale, params[:gantt_scale]) %>
 </div>
 <div class="gantt"></div>

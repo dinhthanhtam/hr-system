@@ -77,40 +77,28 @@ class ProjectsController < BaseController
     join_dates = ProjectUser.where(user_id: [User.reporters.map(&:id)]).map(&:join_date)
     out_dates = ProjectUser.where(user_id: [User.reporters.map(&:id)]).map(&:convert_date)
     out_dates = out_dates.map{ |out_date| Time.at(out_date / 1000).to_date }
-    # Sunday belong to last week
-    firstWedDay = join_dates.min.sunday? ? (join_dates.min - 4) : (join_dates.min + 3 - join_dates.min.wday)
-    lastWedDay = out_dates.max.sunday? ? (out_dates.max - 4) : (out_dates.max + 3 - out_dates.max.wday)
-    @weeks = []
-    while firstWedDay <= lastWedDay
-      @weeks << [firstWedDay.cweek, firstWedDay.month, firstWedDay.year]
-      firstWedDay += 7.day
-    end
-    # Get process project for reporters
+    @gantt_scale = params[:gantt_scale]
+    date_ranger = DateRanger.new(join_dates.min, out_dates.max, @gantt_scale)
+
     @list_users = User.reporters.map do |user|
       projects = user.project_users.map do |project_user|
-        # Set join and out date is wednessday same week with join and out date
         join_date = project_user.join_date
-        join_date = join_date.sunday? ? (join_date - 4) : (join_date + 3 - join_date.wday)
         out_date = Time.at(project_user.convert_date / 1000).to_date
-        out_date = out_date.sunday? ? (out_date -4) : (out_date + 3 - out_date.wday)
-        [project_user.project.try(:name), @weeks.index([join_date.cweek, join_date.month, join_date.year]),
-          @weeks.index([out_date.cweek, out_date.month, out_date.year])]
+        if @gantt_scale == Settings.gantt.scale_type.weeks
+          [project_user.project.try(:name),
+            [date_ranger.get_week_of_years(join_date), date_ranger.get_month_of_years(join_date), date_ranger.get_year_of_weeks(join_date)],
+            [date_ranger.get_week_of_years(out_date), date_ranger.get_month_of_years(out_date), date_ranger.get_year_of_weeks(out_date)]]
+        else
+          [project_user.project.try(:name), [join_date.day, join_date.month, join_date.year],
+            [out_date.day, out_date.month, out_date.year]]
+        end
       end
       # Return name of user and list project with process of user
       [user.display_name, projects]
     end
-    # Sort by join date of project
-    @list_users.each do |user|
-      user[1].sort! { |x, y| x[1] <=> y[1] }
-    end
-    # Group and count month with year
-    months = @weeks.map { |week| [week[1], week[2]] }
-    @months = months.uniq
-    @months = @months.map { |month| [Date::MONTHNAMES[month[0]], months.count(month)] }
-    # Group and count year
-    years = @weeks.map { |week| week[2] }
-    @years = years.uniq
-    @years = @years.map { |year| [year, years.count(year)] }
+    convert_to_index(@list_users, date_ranger.try(@gantt_scale))
+    sort_by_join_date @list_users
+    @titles = date_ranger.get_titles_array
 
     respond_to do |format|
       format.xls { headers["Content-Disposition"] = "attachment; filename=projects_gantt.xls" }
@@ -119,8 +107,22 @@ class ProjectsController < BaseController
 
 private
   def model_params
-    params.require(:project).permit(:name, :description, :is_publish, :url, :start_date, :due_date, :end_date, :state_event, :create_user_id,
-                                    project_users_attributes: [:id, :user_id, :project_id, :join_date, :due_date, :_destroy, 
-                                    project_user_roles_attributes: [:id, :project_user_id, :project_role_id, :_destroy]]) if params[:project]
+    params.require(:project).permit Project.updatable_attrs if params[:project]
+  end
+
+  def sort_by_join_date list_users
+    list_users.each do |user_project|
+      user_project[1].sort! { |x, y| x[1] <=> y[1] }
+    end
+  end
+
+  def convert_to_index list_users, array_type
+    length = array_type.first.length
+    list_users.each do |user_project|
+      user_project[1].each do |project|
+        project[1] = array_type.index(project[1].last(length))
+        project[2] = array_type.index(project[2].last(length))
+      end
+    end
   end
 end

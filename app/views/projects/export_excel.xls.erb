@@ -21,35 +21,29 @@
   <Worksheet ss:Name="Sheet1">
     <Table x:FullColumns="1" x:FullRows="1">
       <Column ss:Width="115" /> 
-      <!-- Draw years -->
-      <Row>
-        <Cell><Data ss:Type="String"></Data></Cell>
-        <% @years.each do |year| %>
-          <% if year[1] > 1 %>
-            <Cell ss:MergeAcross="<%= year[1] - 1 %>" ss:StyleID="s1"><Data ss:Type="String"><%= year[0] %></Data></Cell>
-          <% else %>
-            <Cell ss:StyleID="s1"><Data ss:Type="String"><%= year[0] %></Data></Cell>
+      <!-- DRAW TITLE -->
+      <% @titles.each do |title| %>
+        <Row>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <% title.each do |item| %>
+            <% if item[1] > 1 %>
+              <Cell ss:MergeAcross="<%= item[1] - 1 %>" ss:StyleID="s1"><Data ss:Type="String"><%= item[0] %></Data></Cell>
+            <% else %>
+              <Cell ss:StyleID="s1"><Data ss:Type="String"><%= item[0] %></Data></Cell>
+            <% end %>
           <% end %>
-        <% end %>
-      </Row>
-      <!-- Draw months -->
-      <Row>
-        <Cell><Data ss:Type="String"></Data></Cell>
-        <% @months.each do |month| %>
-          <% if month[1] > 1 %>
-            <Cell ss:MergeAcross="<%= month[1] - 1 %>" ss:StyleID="s1"><Data ss:Type="String"><%= month[0] %></Data></Cell>
-          <% else %>
-            <Cell ss:StyleID="s1"><Data ss:Type="String"><%= month[0] %></Data></Cell>
+        </Row>  
+      <% end %>
+
+      <% if @gantt_scale == Settings.gantt.scale_type.days %>
+        <Row>
+          <Cell><Data ss:Type="String"></Data></Cell>
+          <% wday = DateTime.new(@titles[0][0][0], Date::MONTHNAMES.index(@titles[1][0][0]), @titles[2][0][0]).wday %>
+          <% @titles.last.length.times do |n| %>
+            <Cell ss:StyleID="s1"><Data ss:Type="String"><%= Settings.gantt.weekdays[(n + wday) % 7] %></Data></Cell>
           <% end %>
-        <% end %>
-      </Row>
-      <!-- Draw weeks -->
-      <Row>
-        <Cell><Data ss:Type="String"></Data></Cell>
-        <% @weeks.each do |week| %>
-          <Cell ss:StyleID="s2"><Data ss:Type="String"><%= week[0] %></Data></Cell>
-        <% end %>
-      </Row>
+        </Row>
+      <% end %>
       <!-- Draw process project with each user -->
       <% @list_users.each do |user| %>
         <Row>
@@ -58,7 +52,7 @@
           <% length = 0 %>
           <% project_name = "" %>
 
-          <% @weeks.each_with_index do |week, index| %>
+          <% @titles.last.each_with_index do |_, index| %>
             <% user[1].each do |u| %>
               <% if u[1] == index %>
                 <% index_in_proj = 1 %>
@@ -84,7 +78,6 @@
               <% break if index <= u[2] %>
             <% end %>
           <% end %>
-
         </Row>
       <% end %>
     </Table>

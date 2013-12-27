@@ -7,12 +7,10 @@ $ ->
       $(".gantt").gantt
         source: data
         navigate: "scroll"
-        scale: "weeks"
-        maxScale: "months"
-        minScale: "days"
+        scale: $("#gantt_scale").val()
         itemsPerPage: 50
         onItemClick: (data) ->
+          alert "Project: " + data
 
-        onAddClick: (dt, rowId) ->
-
-        onRender: ->
+  $("#gantt_scale").change ->
+    window.location.href = window.location.href.split("?")[0] + "?gantt_scale=" + $(this).val()

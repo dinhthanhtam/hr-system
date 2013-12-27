@@ -44,3 +44,11 @@ users:
 evaluation:
   eval: "Evaluation"
   long_sort: "Long And Short Term Goal"
+
+gantt:
+  scale: [["Days", "days"], ["Weeks", "weeks"], ["Months", "months"]]
+  scale_type:
+    "days": "days"
+    "weeks": "weeks"
+    "months": "months"
+  weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
