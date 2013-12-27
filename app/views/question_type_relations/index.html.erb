@@ -4,16 +4,21 @@
       <h2><%= h2_label %></h2>
       <nav></nav>
     </div>
-    <table class="list members">
+    <div class="pagination">
+      <div class="paginate-box no_print"><%= will_paginate @question_relations %></div>
+    </div>
+    <table class="formTbl list members">
       <tr>
         <th><%= model.human_attribute_name :name %></th>
         <th><%= model.human_attribute_name :content %></th>
+        <th><%= model.human_attribute_name :checkpoint_type %></th>
         <th style="width:15%"></th>
       </tr>
-      <% @question_type.question_type_relations.each_with_index do |question_type_relation, index| %>
+      <% @question_relations.each_with_index do |question_type_relation, index| %>
         <tr class="<%= index % 2 == 0 ? 'even' : 'odd' %> member">
           <td><%= question_type_relation.question.name %></td>
           <td><%= question_type_relation.question.content %></td>
+          <td><%= question_type_relation.question.checkpoint_type.capitalize %></td>
           <td class="buttons">
             <%= link_to t(:button_delete, scope: [:views, :labels]),
               url_for(action: :destroy, id: question_type_relation.id), confirm: t(:delete_confirm, scope: [:views, :messages]),
@@ -22,25 +27,28 @@
         </tr>
       <% end %>
     </table>
+    <div class="pagination">
+      <div class="paginate-box no_print"><%= will_paginate @question_relations %></div>
+    </div>
   </div>
   <div class = "list_member_right">
-    <div id = "principals">
-      <% if @question_type_relations.present? %>
+      <% if @questions.present? %>
         <div>
-          <label for="principal_search">Search for name questions </label>
-          <input id="principal_search" type="text" name="principal_search">
+          <label for="questions_search">Search for name questions </label>
+          <input id="questions_search" type="text" name="questions_search">
         </div>
-          <% @question_type_relations.each do |question| %>
-            <div class = "user_name" data-id = "<%= question.name.downcase %>" >
+        <%= select_tag "checkpoint_type", options_for_select(Settings.questions.collect{ |u| [u[0], u[1]]}), prompt: Settings.select_all_questions, style: "width: 150px;" %>
+        <div id = "principals">
+          <% @questions.each do |question| %>
+            <div class = "user-name-1 <%= question.checkpoint_type %>-1" data-id = "<%= question.name.downcase %>" >
               <%= check_box_tag "question_ids[]", question.id, false %><%= question.name %>
             </div>
           <% end %>
-          <%= link_to t(:button_add, scope: [:views, :labels]), "#", class: "btn add_questions" %>
-        </form>
-      <% else %>
-        <%= link_to t(:button_new_question, scope: [:views, :labels]), url_for(controller: :questions, action: :new), class: "btn btn-small btn-warning" %>
-      <% end %>
-      <%= hidden_field_tag :question_type_id, @question_type.id %>
-    </div>
+          <% else %>
+          <%= link_to t(:button_new_question, scope: [:views, :labels]), url_for(controller: :questions, action: :new), class: "btn btn-small btn-warning" %>
+        <% end %>
+        <%= hidden_field_tag :question_type_id, @question_type.id %>
+      </div>
+    <%= link_to t(:button_add, scope: [:views, :labels]), "#", class: "btn add_questions" %>
   </div>
 </div>

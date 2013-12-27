@@ -7,21 +7,21 @@
   </div>
 
   <%= render partial: "search" %>
-
-  <table class="table table-bordered" style = "background-color:#FFFFFF;">
-    <thead>
-      <tr>
-        <th><%= model.human_attribute_name :name %></th>
-        <th width = "30%"><%= model.human_attribute_name :content %></th>
-        <th width = "30%"><%= model.human_attribute_name :checkpoint_type %></th>
-        <th width = "20%"></th>
-      </tr>
-    </thead>
+  <div class="pagination">
+    <div class="paginate-box no_print"><%= will_paginate @questions %></div>
+  </div>
+  <table class="formTbl table table-bordered" style = "background-color:#FFFFFF;">
+    <tr>
+      <th><%= model.human_attribute_name :name %></th>
+      <th width = "40%"><%= model.human_attribute_name :content %></th>
+      <th width = "15%"><%= model.human_attribute_name :checkpoint_type %></th>
+      <th width = "20%"></th>
+    </tr>
     <% @questions.each do |question| %>
       <tr>
         <td><%= question.name %>
         <td><%= question.content %></td>
-        <td><%= question.checkpoint_type %></td>
+        <td><%= question.checkpoint_type.capitalize %></td>
         <td>
           <%= link_to t(:button_detail, scope: [:views, :labels]), url_for(action: :show, id: question.id), class: "btn btn-mini" %>
           <%= link_to t(:button_edit, scope: [:views, :labels]), url_for(action: :edit, id:question.id), class: "btn btn-primary btn-mini" %>
@@ -29,4 +29,7 @@
       </tr>
     <% end %>
   </table>
+  <div class="pagination">
+    <div class="paginate-box no_print"><%= will_paginate @questions %></div>
+  </div>
 </selection>

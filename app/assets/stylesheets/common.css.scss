@@ -1127,6 +1127,9 @@ table.formTbl{
 	> * {
 		&:first-child {
 			tr {
+        th{
+          text-align: center;
+        }
 				&:first-child {
 					> * {
 						border-top: none;
