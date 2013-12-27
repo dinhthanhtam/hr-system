@@ -25,6 +25,11 @@ class Payslip < ActiveRecord::Base
     url + payslip_url
   end
 
+  def paymonth_format format
+    if paymonth =~ PAYMONTH_REX
+      Date.new($2.to_i, $1.to_i, 1).strftime(format)
+    end
+  end
   private
   def correct_paymonth 
     if paymonth =~ /\AT([1-9])\.(\d{4})\z/

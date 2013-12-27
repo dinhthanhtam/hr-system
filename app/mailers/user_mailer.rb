@@ -24,7 +24,7 @@ class UserMailer < ActionMailer::Base
     @user = payslip.user
     @deadline = deadline.nil? ? DateTime.now + 24.hours : DateTime.strptime(deadline, '%H:%M %d-%m-%Y')
     attachments["#{@user.display_name} #{payslip.paymonth}.xlsx"] = File.read(Rails.root.to_s + "/public" + payslip.payslip_url)
-    mail to: @user.email, subject: t(:send_payslip, scope: [:mailers, :subjects], month: @payslip.paymonth)
+    mail to: @user.email, subject: t(:send_payslip, scope: [:mailers, :subjects], month: @payslip.paymonth_format("%b %Y"))
   end
 
   def notice_user_added_to_pickup_list user
